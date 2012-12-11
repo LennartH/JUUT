@@ -1,0 +1,10 @@
+#Unity folders to ignore
+
+Library
+
+.DS_Store
+Temp
+build
+_ReSharper*
+*.user
+*.DotSettings
