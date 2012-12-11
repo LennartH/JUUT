@@ -3,9 +3,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TestJUUT {
     [TestClass]
-    public class UnitTest1 {
+    public class TestAttributes {
         [TestMethod]
-        public void TestMethod1() {
+        public void JUUTTest() {
         }
     }
 }
