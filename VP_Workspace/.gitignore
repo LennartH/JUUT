@@ -1,0 +1,4 @@
+tmp/
+.vpprefdata/
+*.lock
+teamworkUser.xml
