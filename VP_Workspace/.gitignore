@@ -1,3 +1,4 @@
+*.vpp~*
 tmp/
 .vpprefdata/
 *.lock
