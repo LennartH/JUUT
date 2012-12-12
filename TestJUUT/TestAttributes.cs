@@ -46,12 +46,24 @@ namespace TestJUUT {
         [TestMethod]
         public void TestSetUp() {
             List<MethodInfo> testSetUps = GetMethodsOfTypeWithAttribute(typeof(JUUTTestAttributedMock), typeof(TestSetUpAttribute));
-            AssertEx.That(testSetUps.Count, Is.Not(0), "Registered nor test set up method.");
+            AssertEx.That(testSetUps.Count, Is.Not(0), "Registered no test set up method.");
             AssertEx.That(testSetUps.Count, Is.EqualTo(1), "Registered more than one test set up method.");
             AssertEx.That(testSetUps[0].Name, Is.EqualTo("MockTestSetUp"));
 
-            testSetUps = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(ClassTearDownAttribute));
+            testSetUps = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(TestSetUpAttribute));
             AssertEx.That(testSetUps.Count, Is.EqualTo(0), "Registered a test set up method in NotAttributedMock.");
+        }
+
+        [TestMethod]
+        public void TestTearDown() {
+            List<MethodInfo> testTearDowns = GetMethodsOfTypeWithAttribute(typeof(JUUTTestAttributedMock), typeof(TestTearDownAttribute));
+            AssertEx.That(testTearDowns.Count, Is.Not(0), "Registered no test tear down method.");
+            AssertEx.That(testTearDowns.Count, Is.EqualTo(1), "Registered more than one test tear down method.");
+            AssertEx.That(testTearDowns[0].Name, Is.EqualTo("MockTestTearDown"));
+
+            testTearDowns = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(TestTearDownAttribute));
+            AssertEx.That(testTearDowns.Count, Is.EqualTo(0), "Registered a test tear down method in NotAttributedMock.");
+            
         }
 
         private List<MethodInfo> GetMethodsOfTypeWithAttribute(Type type, Type attribute) {
@@ -71,6 +83,10 @@ namespace TestJUUT {
 
             [ClassSetUp]
             public void MockSetUp() { }
+            [TestSetUp]
+            public void MockTestSetUp() { }
+            [TestTearDown]
+            public void MockTestTearDown() { }
             [ClassTearDown]
             public void MockTearDown() { }
             
@@ -79,7 +95,7 @@ namespace TestJUUT {
         private class NotAttributedMock {
 
             public void Foo() {}
-            public void Bar() {}
+            public void Bar() { }
 
         }
     }
