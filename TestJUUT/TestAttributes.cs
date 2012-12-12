@@ -43,6 +43,17 @@ namespace TestJUUT {
             AssertEx.That(classTearDowns.Count, Is.EqualTo(0), "Registered a class tear down method in NotAttributedMock.");
         }
 
+        [TestMethod]
+        public void TestSetUp() {
+            List<MethodInfo> testSetUps = GetMethodsOfTypeWithAttribute(typeof(JUUTTestAttributedMock), typeof(TestSetUpAttribute));
+            AssertEx.That(testSetUps.Count, Is.Not(0), "Registered nor test set up method.");
+            AssertEx.That(testSetUps.Count, Is.EqualTo(1), "Registered more than one test set up method.");
+            AssertEx.That(testSetUps[0].Name, Is.EqualTo("MockTestSetUp"));
+
+            testSetUps = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(ClassTearDownAttribute));
+            AssertEx.That(testSetUps.Count, Is.EqualTo(0), "Registered a test set up method in NotAttributedMock.");
+        }
+
         private List<MethodInfo> GetMethodsOfTypeWithAttribute(Type type, Type attribute) {
             List<MethodInfo> methods = new List<MethodInfo>();
 
