@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Attributes\ClassSetUpAttribute.cs" />
     <Compile Include="Attributes\ClassTearDownAttribute.cs" />
+    <Compile Include="Attributes\SimpleTestAttribute.cs" />
     <Compile Include="Attributes\TestTearDownAttribute.cs" />
     <Compile Include="Attributes\TestSetUpAttribute.cs" />
     <Compile Include="Attributes\JUUTTestAttribute.cs" />
