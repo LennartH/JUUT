@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JUUT.Attributes {
     /// <summary>
@@ -10,6 +6,6 @@ namespace JUUT.Attributes {
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public sealed class JUUTTestAttribute : Attribute {
-        public JUUTTestAttribute() {}
+
     }
 }
