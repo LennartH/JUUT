@@ -111,7 +111,7 @@ namespace TestJUUT {
 
         private class NotAttributedMock {
 
-            public void Foo() {}
+            public void Foo() { }
             public void Bar() { }
 
         }

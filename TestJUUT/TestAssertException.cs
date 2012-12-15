@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Text;
 
 using JUUT;
+
+using NHamcrest;
 
 using Is = NHamcrest.Core.Is;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,17 +15,17 @@ namespace TestJUUT {
     public class TestAssertException {
         [TestMethod]
         public void Creation() {
-            AssertException e = new AssertException();
-            AssertEx.That(e.Message, Is.EqualTo(""));
+            IDescription description = new StringDescription(new StringBuilder("description"));
+            IDescription missmatchDescription = new StringDescription(new StringBuilder("was missmatch"));
 
-            e = new AssertException("Test");
+            AssertException e = new AssertException("Test");
             AssertEx.That(e.Message, Is.EqualTo("Test"));
-            try {
-                throw e;
-                Assert.Fail("This line shouldn't be reached. An exception should be thrown.");
-            } catch (AssertException) {
-                // Do nothing
-            }
+
+            e = new AssertException(description, missmatchDescription);
+            AssertEx.That(e.Message, Is.EqualTo("Expected is description, but was missmatch."));
+
+            e = new AssertException(description, missmatchDescription, "Custom message.");
+            AssertEx.That(e.Message, Is.EqualTo("Custom message.\nExpected: description\nBut was missmatch"));
         }
     }
 }
