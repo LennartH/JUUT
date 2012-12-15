@@ -43,7 +43,7 @@ namespace TestJUUT {
                 JUUTAssert.That("test", Is.EqualTo("Test"));
                 MSTestAssert.Fail("This line shouldn't be reached. An exception should be thrown.");
             } catch (AssertException e) {
-                AssertEx.That(e.Message, Is.EqualTo("Expected was test, but is Test."));
+                AssertEx.That(e.Message, Is.EqualTo("Expected is Test, but was test."));
             }
         }
     }

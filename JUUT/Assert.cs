@@ -20,21 +20,28 @@ namespace JUUT
         }
 
         public static void That<T>(T actual, IMatcher<T> matcher) {
-            That(actual, matcher, "");
+            That(actual, matcher, null);
         }
 
         public static void That<T>(T actual, IMatcher<T> matcher, string message) {
             if (matcher.Matches(actual)) {
                 return;
             }
+            ThrowException(actual, matcher, message);
+        }
 
+        private static void ThrowException<T>(T actual, IMatcher<T> matcher, string message) {
             IDescription description = new StringDescription();
             matcher.DescribeTo(description);
 
             IDescription mismatchDescription = new StringDescription();
             matcher.DescribeMismatch(actual, mismatchDescription);
 
-            throw new AssertException("Expected " + mismatchDescription.ToString() + ", but is " + description.ToString() + ".");
+            if (message == null) {
+                throw new AssertException(description, mismatchDescription);
+            } else {
+                throw new AssertException(description, mismatchDescription, message);
+            }
         }
 
     }
