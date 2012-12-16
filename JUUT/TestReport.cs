@@ -34,6 +34,7 @@ namespace JUUT {
         /// The <seealso cref="TestStatus"/> of the runned test.
         /// </summary>
         public TestStatus TestStatus { get; private set; }
+
         /// <summary>
         /// The summary text of the report.
         /// </summary>
@@ -43,6 +44,7 @@ namespace JUUT {
         /// The exception raised by the test. Can be <code>null</code> if the test passed successfully.
         /// </summary>
         private readonly Exception RaisedException;
+
         /// <summary>
         /// The info of the runned test method.
         /// </summary>
@@ -84,20 +86,20 @@ namespace JUUT {
         /// has to be set before calling this.
         /// </summary>
         private void SetText() {
-            if (RaisedException != null) {
-                switch (TestStatus) {
-                    case TestStatus.Failed:
-                        Text = "The " + TestMethod.Name + "-Test failed: " + RaisedException.Message;
-                        break;
-                    case TestStatus.Error:
-                        Text = "The " + TestMethod.Name + "-Test raised an unexpected exception: " + RaisedException.Message;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            } else {
-                Text = "The " + TestMethod.Name + "-Test passed successfully.";
+            switch (TestStatus) {
+                case TestStatus.Failed:
+                    Text = "The " + TestMethod.Name + "-Test failed: " + RaisedException.Message;
+                    break;
+                case TestStatus.Error:
+                    Text = "The " + TestMethod.Name + "-Test raised an unexpected exception: " + RaisedException.Message;
+                    break;
+                case TestStatus.Passed:
+                    Text = "The " + TestMethod.Name + "-Test passed successfully.";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+
         }
 
     }
