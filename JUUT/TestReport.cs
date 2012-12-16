@@ -80,7 +80,8 @@ namespace JUUT {
 
         /// <summary>
         /// Sets the report text depending on the <seealso cref="TestStatus"/>.<para />
-        /// The status has to be set (see <seealso cref="SetStatus()"/>) before calling this.
+        /// The <seealso cref="TestStatus"/> (see <seealso cref="SetStatus()"/>) and the <seealso cref="TestMethod"/>-Info
+        /// has to be set before calling this.
         /// </summary>
         private void SetText() {
             if (RaisedException != null) {
