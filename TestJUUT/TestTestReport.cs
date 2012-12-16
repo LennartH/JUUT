@@ -19,17 +19,17 @@ namespace TestJUUT {
             MethodInfo testMethod = new DynamicMethod("TestName", null, null);
             Exception raisedException = new AssertException("Exception Text");
 
-            TestReport report = new TestReport(testMethod, raisedException);
+            TestReport report = new SimpleTestReport(testMethod, raisedException);
             AssertEx.That(report.TestStatus, Is.EqualTo(TestStatus.Failed));
 
             raisedException = new NullReferenceException();
-            report = new TestReport(testMethod, raisedException);
+            report = new SimpleTestReport(testMethod, raisedException);
             AssertEx.That(report.TestStatus, Is.EqualTo(TestStatus.Error));
 
-            report = new TestReport(testMethod, null);
+            report = new SimpleTestReport(testMethod, null);
             AssertEx.That(report.TestStatus, Is.EqualTo(TestStatus.Passed));
 
-            AssertEx.That(() => { new TestReport(null, raisedException); }, Throws.An<ArgumentException>());
+            AssertEx.That(() => { new SimpleTestReport(null, raisedException); }, Throws.An<ArgumentException>());
         }
 
         [TestMethod]
@@ -37,14 +37,14 @@ namespace TestJUUT {
             MethodInfo testMethod = new DynamicMethod("TestName", null, null);
             Exception raisedException = new AssertException("Exception Text");
 
-            TestReport report = new TestReport(testMethod, raisedException);
+            TestReport report = new SimpleTestReport(testMethod, raisedException);
             AssertEx.That(report.Text, Is.EqualTo("The TestName-Test failed: Exception Text"));
 
             raisedException = new NullReferenceException("Null reference");
-            report = new TestReport(testMethod, raisedException);
+            report = new SimpleTestReport(testMethod, raisedException);
             AssertEx.That(report.Text, Is.EqualTo("The TestName-Test raised an unexpected exception: " + raisedException.Message));
 
-            report = new TestReport(testMethod, null);
+            report = new SimpleTestReport(testMethod, null);
             AssertEx.That(report.Text, Is.EqualTo("The TestName-Test passed successfully."));
         }
 
