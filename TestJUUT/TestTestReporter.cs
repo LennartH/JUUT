@@ -5,7 +5,9 @@ namespace TestJUUT {
     [TestClass]
     public class TestTestReporter {
         [TestMethod]
-        public void Bhaviour () {
+        public void Behaviour () {
+
+
 
         }
     }
