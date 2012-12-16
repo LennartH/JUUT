@@ -41,14 +41,14 @@ namespace JUUT {
         public string Text { get; private set; }
 
         /// <summary>
+        /// The info of the runned test method.
+        /// </summary>
+        public MethodInfo TestMethod { get; private set; }
+
+        /// <summary>
         /// The exception raised by the test. Can be <code>null</code> if the test passed successfully.
         /// </summary>
         private readonly Exception RaisedException;
-
-        /// <summary>
-        /// The info of the runned test method.
-        /// </summary>
-        private readonly MemberInfo TestMethod;
 
         /// <summary>
         /// Creates a new report for <code>testMethod</code> and it's raised exception or <code>null</code>, if the test passed successfully.

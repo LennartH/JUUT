@@ -21,13 +21,16 @@ namespace TestJUUT {
 
             TestReport report = new SimpleTestReport(testMethod, raisedException);
             AssertEx.That(report.TestStatus, Is.EqualTo(TestStatus.Failed));
+            AssertEx.That(report.TestMethod, Is.EqualTo(testMethod));
 
             raisedException = new NullReferenceException();
             report = new SimpleTestReport(testMethod, raisedException);
             AssertEx.That(report.TestStatus, Is.EqualTo(TestStatus.Error));
+            AssertEx.That(report.TestMethod, Is.EqualTo(testMethod));
 
             report = new SimpleTestReport(testMethod, null);
             AssertEx.That(report.TestStatus, Is.EqualTo(TestStatus.Passed));
+            AssertEx.That(report.TestMethod, Is.EqualTo(testMethod));
 
             AssertEx.That(() => { new SimpleTestReport(null, raisedException); }, Throws.An<ArgumentException>());
         }
