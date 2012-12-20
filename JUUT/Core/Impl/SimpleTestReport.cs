@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace JUUT {
+namespace JUUT.Core.Impl {
 
     /// <summary>
     /// Represents the status of a runned test.

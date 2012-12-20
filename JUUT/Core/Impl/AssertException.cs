@@ -2,7 +2,7 @@
 
 using NHamcrest;
 
-namespace JUUT {
+namespace JUUT.Core.Impl {
 
     /// <summary>
     /// Exception which is thrown by failed assertions.<para />

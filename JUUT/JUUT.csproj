@@ -43,17 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssertException.cs" />
-    <Compile Include="Attributes\ClassSetUpAttribute.cs" />
-    <Compile Include="Attributes\ClassTearDownAttribute.cs" />
-    <Compile Include="Attributes\SimpleTestAttribute.cs" />
-    <Compile Include="Attributes\TestTearDownAttribute.cs" />
-    <Compile Include="Attributes\TestSetUpAttribute.cs" />
-    <Compile Include="Attributes\JUUTTestAttribute.cs" />
-    <Compile Include="Assert.cs" />
+    <Compile Include="Core\Impl\AssertException.cs" />
+    <Compile Include="Core\Impl\Attributes\ClassSetUpAttribute.cs" />
+    <Compile Include="Core\Impl\Attributes\ClassTearDownAttribute.cs" />
+    <Compile Include="Core\Impl\Attributes\SimpleTestAttribute.cs" />
+    <Compile Include="Core\Impl\Attributes\TestTearDownAttribute.cs" />
+    <Compile Include="Core\Impl\Attributes\TestSetUpAttribute.cs" />
+    <Compile Include="Core\Impl\Attributes\JUUTTestAttribute.cs" />
+    <Compile Include="Core\Impl\Assert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimpleTestReport.cs" />
-    <Compile Include="TestReport.cs" />
+    <Compile Include="Core\Impl\SimpleTestReport.cs" />
+    <Compile Include="Core\TestReport.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

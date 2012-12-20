@@ -3,6 +3,8 @@ using System.Reflection;
 using System.Reflection.Emit;
 
 using JUUT;
+using JUUT.Core;
+using JUUT.Core.Impl;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

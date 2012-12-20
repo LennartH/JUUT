@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 
-namespace JUUT {
+using JUUT.Core.Impl;
+
+namespace JUUT.Core {
 
     public interface TestReport {
 

@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 
 using JUUT;
+using JUUT.Core;
 
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

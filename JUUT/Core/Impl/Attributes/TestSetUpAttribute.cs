@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JUUT.Attributes {
+namespace JUUT.Core.Impl.Attributes {
     /// <summary>
     /// Attribute to identify the test initializer of a test class. Is runned every time before a test method is runned.
     /// </summary>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JUUT.Attributes {
+namespace JUUT.Core.Impl.Attributes {
     /// <summary>
     /// Attribute to identify test classes of JUUT. Can't be inherated. 
     /// </summary>

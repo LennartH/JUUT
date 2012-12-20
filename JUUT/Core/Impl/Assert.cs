@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NHamcrest;
 
-using NHamcrest;
-
-namespace JUUT
+namespace JUUT.Core.Impl
 {
     /// <summary>
     /// Class to assert conditions to tests.

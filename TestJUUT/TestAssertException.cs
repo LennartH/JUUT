@@ -2,6 +2,8 @@
 using System.Text;
 
 using JUUT;
+using JUUT.Core;
+using JUUT.Core.Impl;
 
 using NHamcrest;
 

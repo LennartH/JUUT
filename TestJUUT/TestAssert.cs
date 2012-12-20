@@ -1,7 +1,10 @@
 ﻿using System;
 
 using JUUT;
-using JUUTAssert = JUUT.Assert;
+using JUUT.Core;
+using JUUT.Core.Impl;
+
+using JUUTAssert = JUUT.Core.Impl.Assert;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MSTestAssert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
