@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 using JUUT.Core.Impl;
 
@@ -20,6 +21,12 @@ namespace JUUT.Core {
         /// The info of the runned test method.
         /// </summary>
         MethodInfo TestMethod { get; }
+
+        /// <summary>
+        /// The type of the test class, which contains the <seealso cref="TestMethod"/>.<para />
+        /// Can be null, if the method has no declaring type.
+        /// </summary>
+        Type TestClassType { get; }
 
     }
 

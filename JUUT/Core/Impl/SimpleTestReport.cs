@@ -45,6 +45,10 @@ namespace JUUT.Core.Impl {
         /// </summary>
         public MethodInfo TestMethod { get; private set; }
 
+        public Type TestClassType {
+            get { return TestMethod.DeclaringType; }
+        }
+
         /// <summary>
         /// The exception raised by the test. Can be <code>null</code> if the test passed successfully.
         /// </summary>

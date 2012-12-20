@@ -53,6 +53,24 @@ namespace TestJUUT {
             AssertEx.That(report.Text, Is.EqualTo("The TestName-Test passed successfully."));
         }
 
+        [TestMethod]
+        public void TestClassType() {
+            MethodInfo testMethod = new DynamicMethod("TestName", null, null);
+            Exception raisedException = new AssertException("Exception Text");
+            
+            TestReport report = new SimpleTestReport(testMethod, raisedException);
+            AssertEx.That(report.TestClassType, Is.Null());
+
+            report = new SimpleTestReport(typeof(TestOwner).GetMethod("TestName"), raisedException);
+            AssertEx.That(report.TestClassType, Is.EqualTo(typeof(TestOwner)));
+        }
+
+        private class TestOwner {
+
+            public void TestName() { }
+
+        }
+
     }
 
 }
