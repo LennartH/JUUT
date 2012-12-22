@@ -14,7 +14,7 @@ using Is = NHamcrest.Core.Is;
 namespace TestJUUT {
 
     [TestClass]
-    public class TestTestReport {
+    public class TestSimpleTestReport {
 
         [TestMethod]
         public void Creation() {
