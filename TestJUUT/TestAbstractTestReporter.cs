@@ -19,6 +19,24 @@ namespace TestJUUT {
     public class TestAbstractTestReporter {
 
         [TestMethod]
+        public void AddReport() {
+            var alphaReport = new Mock<TestReport>();
+            alphaReport.Setup(alpha => alpha.TestClassType).Returns(typeof(AlphaOwner));
+
+            var nullReporter = new Mock<TestReport>();
+            nullReporter.Setup(alpha => alpha.TestClassType).Returns(default(Type));
+
+            var reporterMock = new Mock<AbstractTestReporter>();
+            TestReporter reporter = reporterMock.Object;
+
+            reporter.AddReport(alphaReport.Object);
+            AssertEx.That(reporter.Reports.Count, Is.EqualTo(1));
+
+            AssertEx.That(() => reporter.AddReport(nullReporter.Object), Throws.An<ArgumentNullException>(),
+                "The reporter has to throw an ArgumentNullException, when a report with a null test class type is added.\n");
+        }
+
+        [TestMethod]
         public void Reports() {
             //Setting up the reports
             var fooReport = new Mock<TestReport>();
