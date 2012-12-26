@@ -13,8 +13,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace TestJUUT {
+
     [TestClass]
     public class TestAssertException {
+
         [TestMethod]
         public void Creation() {
             IDescription description = new StringDescription(new StringBuilder("description"));
@@ -29,5 +31,32 @@ namespace TestJUUT {
             e = new AssertException(description, missmatchDescription, "Custom message.");
             AssertEx.That(e.Message, Is.EqualTo("Custom message.\nExpected: description\nBut was missmatch"));
         }
+
+        [TestMethod]
+        public void EqualsAndHashCode() {
+            AssertException exception = new AssertException("Exception text.");
+
+            //Using IsTrue/IsFalse to cover all paths (aren't covered, when using Equals)
+            //Equal tests
+            Assert.IsTrue(exception.Equals(exception), "An object should allways be equal to itself (reference).");
+            AssertEx.That(exception.GetHashCode(), Is.EqualTo(exception.GetHashCode()), "Equal objects should have equal hashcodes.");
+
+            AssertException equal = new AssertException("Exception text.");
+            Assert.IsTrue(exception.Equals(equal), "An object should be equal to an object with the same attributes.");
+            AssertEx.That(exception.GetHashCode(), Is.EqualTo(equal.GetHashCode()), "Equal objects should have equal hashcodes.");
+
+            //Unequal tests
+            Assert.IsFalse(exception.Equals(null), "An object shouldn't be equal to null.");
+
+            object unequal = new object();
+            Assert.IsFalse(exception.Equals(unequal), "An object shouldn't be equal to an object of an other type.");
+            AssertEx.That(exception.GetHashCode(), Is.Not(unequal.GetHashCode()), "Unequal objects shouldn't have equal hashcodes.");
+
+            unequal = new AssertException("Unequal exception text.");
+            Assert.IsFalse(exception.Equals(unequal), "An object shouldn't be equal to an object of an other type.");
+            AssertEx.That(exception.GetHashCode(), Is.Not(unequal.GetHashCode()), "Unequal objects shouldn't have equal hashcodes.");
+        }
+
     }
+
 }

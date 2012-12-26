@@ -45,5 +45,23 @@ namespace JUUT.Core.Impl {
         /// <param name="message">The message of the exception.</param>
         public AssertException(string message) : base(message) { }
 
+        private bool Equals(AssertException other) {
+            return Message.Equals(other.Message);
+        }
+
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) {
+                return false;
+            }
+            if (ReferenceEquals(this, obj)) {
+                return true;
+            }
+            return obj is AssertException && Equals((AssertException) obj);
+        }
+
+        public override int GetHashCode() {
+            return Message.GetHashCode();
+        }
+
     }
 }

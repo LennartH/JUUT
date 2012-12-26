@@ -106,6 +106,29 @@ namespace JUUT.Core.Impl {
 
         }
 
+        protected bool Equals(SimpleTestReport other) {
+            return RaisedException.Equals(other.RaisedException) && Equals(TestMethod, other.TestMethod);
+        }
+
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) {
+                return false;
+            }
+            if (ReferenceEquals(this, obj)) {
+                return true;
+            }
+            if (obj.GetType() != this.GetType()) {
+                return false;
+            }
+            return Equals((SimpleTestReport) obj);
+        }
+
+        public override int GetHashCode() {
+            unchecked {
+                return (RaisedException.GetHashCode() * 397) ^ (TestMethod != null ? TestMethod.GetHashCode() : 0);
+            }
+        }
+
     }
 
 }
