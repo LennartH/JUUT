@@ -1,15 +1,10 @@
-﻿using System;
+﻿using JUUT.Core.Impl;
 
-using JUUT;
-using JUUT.Core;
-using JUUT.Core.Impl;
-
-using JUUTAssert = JUUT.Core.Impl.Assert;
+using JUUTAssert = JUUT.Core.Assert;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MSTestAssert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using Is = NHamcrest.Core.Is;
-using Throws = NHamcrest.Core.Throws;
 
 namespace TestJUUT {
 

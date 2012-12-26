@@ -1,12 +1,13 @@
-﻿using NHamcrest;
+﻿using JUUT.Core.Impl;
 
-namespace JUUT.Core.Impl
-{
+using NHamcrest;
+
+namespace JUUT.Core {
+
     /// <summary>
     /// Class to assert conditions to tests.
     /// </summary>
-    public class Assert
-    {
+    public class Assert {
 
         /// <summary>
         /// Causes the test to fail without a message.
@@ -68,4 +69,5 @@ namespace JUUT.Core.Impl
         }
 
     }
+
 }

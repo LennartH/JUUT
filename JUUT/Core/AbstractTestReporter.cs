@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace JUUT.Core {
+
     public abstract class AbstractTestReporter : TestReporter {
 
         public Dictionary<Type, IList<TestReport>> Reports { get; private set; }
@@ -25,4 +26,5 @@ namespace JUUT.Core {
         public abstract void PresentReports();
 
     }
+
 }

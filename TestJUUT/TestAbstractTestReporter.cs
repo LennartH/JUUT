@@ -81,7 +81,6 @@ namespace TestJUUT {
         }
 
         private class FooBarOwner { }
-
         private class AlphaOwner { }
 
     }
