@@ -22,7 +22,10 @@ namespace TestJUUT {
             IDescription description = new StringDescription(new StringBuilder("description"));
             IDescription missmatchDescription = new StringDescription(new StringBuilder("was missmatch"));
 
-            AssertException e = new AssertException("Test");
+            AssertException e = new AssertException();
+            AssertEx.That(e.Message, Is.EqualTo(""));
+
+            e = new AssertException("Test");
             AssertEx.That(e.Message, Is.EqualTo("Test"));
 
             e = new AssertException(description, missmatchDescription);

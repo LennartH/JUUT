@@ -30,24 +30,21 @@ namespace JUUT.Core.Impl {
     /// </summary>
     public class SimpleTestReport : TestReport {
 
-        /// <summary>
-        /// The <seealso cref="TestStatus"/> of the runned test.
-        /// </summary>
-        public TestStatus TestStatus { get; private set; }
-
-        /// <summary>
-        /// The summary text of the report.
-        /// </summary>
         public string Text { get; private set; }
-
-        /// <summary>
-        /// The info of the runned test method.
-        /// </summary>
-        public MethodInfo TestMethod { get; private set; }
 
         public Type TestClassType {
             get { return TestMethod.DeclaringType; }
         }
+
+        /// <summary>
+        /// The info of the runned test method.
+        /// </summary>
+        private MethodInfo TestMethod { get; set; }
+
+        /// <summary>
+        /// The <seealso cref="TestStatus"/> of the runned test.
+        /// </summary>
+        private TestStatus TestStatus { get; set; }
 
         /// <summary>
         /// The exception raised by the test. Can be <code>null</code> if the test passed successfully.
@@ -117,7 +114,7 @@ namespace JUUT.Core.Impl {
             if (ReferenceEquals(this, obj)) {
                 return true;
             }
-            if (obj.GetType() != this.GetType()) {
+            if (obj.GetType() != GetType()) {
                 return false;
             }
             return Equals((SimpleTestReport) obj);

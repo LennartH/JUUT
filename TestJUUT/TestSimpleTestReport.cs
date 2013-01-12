@@ -19,21 +19,18 @@ namespace TestJUUT {
 
         [TestMethod]
         public void Creation() {
-            MethodInfo testMethod = new DynamicMethod("TestName", null, null);
+            MethodInfo testMethod = typeof(TestOwner).GetMethod("TestName");
             Exception raisedException = new AssertException("Exception Text");
 
             TestReport report = new SimpleTestReport(testMethod, raisedException);
-            AssertEx.That(report.TestStatus, Is.EqualTo(TestStatus.Failed));
-            AssertEx.That(report.TestMethod, Is.EqualTo(testMethod));
+            AssertEx.That(report.TestClassType, Is.EqualTo(typeof(TestOwner)));
 
             raisedException = new NullReferenceException();
             report = new SimpleTestReport(testMethod, raisedException);
-            AssertEx.That(report.TestStatus, Is.EqualTo(TestStatus.Error));
-            AssertEx.That(report.TestMethod, Is.EqualTo(testMethod));
+            AssertEx.That(report.TestClassType, Is.EqualTo(typeof(TestOwner)));
 
             report = new SimpleTestReport(testMethod, null);
-            AssertEx.That(report.TestStatus, Is.EqualTo(TestStatus.Passed));
-            AssertEx.That(report.TestMethod, Is.EqualTo(testMethod));
+            AssertEx.That(report.TestClassType, Is.EqualTo(typeof(TestOwner)));
 
             AssertEx.That(() => { new SimpleTestReport(null, raisedException); }, Throws.An<ArgumentException>());
         }
