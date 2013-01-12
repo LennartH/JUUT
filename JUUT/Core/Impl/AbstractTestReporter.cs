@@ -9,16 +9,16 @@ namespace JUUT.Core {
 
     public abstract class AbstractTestReporter : TestReporter {
 
-        public Dictionary<Type, IList<TestReport>> Reports { get; private set; }
+        public Dictionary<Type, IList<Report>> Reports { get; private set; }
 
         protected AbstractTestReporter() {
-            Reports = new Dictionary<Type, IList<TestReport>>();
+            Reports = new Dictionary<Type, IList<Report>>();
         }
 
-        public void AddReport(TestReport report) {
+        public void AddReport(Report report) {
             Type testClassType = report.TestClassType;
             if (!Reports.ContainsKey(testClassType)) {
-                Reports[testClassType] = new List<TestReport>();
+                Reports[testClassType] = new List<Report>();
             }
             Reports[testClassType].Add(report);
         }

@@ -5,6 +5,8 @@ using System.Reflection;
 using JUUT.Core;
 using JUUT.Core.Impl;
 using JUUT.Core.Impl.Attributes;
+using JUUT.Core.Impl.Reports;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHamcrest.Core;
 
@@ -49,7 +51,7 @@ namespace TestJUUT {
         [TestMethod]
         public void RunAllTestsOfJUUTTestClass() {
             TestRunner runner = new SimpleTestRunner(typeof(TestClassMock));
-            List<TestReport> resultReports = runner.RunAll();
+            List<Report> resultReports = runner.RunAll();
 
             //Checking that the methods of the test class mock are called correctly
             AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningAllTests();
@@ -57,7 +59,7 @@ namespace TestJUUT {
 
             //Checking the returned test reports
             AssertEx.That(resultReports.Count, Is.EqualTo(2));
-            foreach (TestReport report in resultReports) {
+            foreach (Report report in resultReports) {
                 AssertThatTheReportIsEqualToFooOrBar(report);
             }
         }
@@ -76,9 +78,9 @@ namespace TestJUUT {
             AssertEx.That(ClassTearDownCount, Is.EqualTo(1));
         }
 
-        private void AssertThatTheReportIsEqualToFooOrBar(TestReport report) {
-            TestReport fooReport = new TestMethodTestReport(typeof(TestClassMock).GetMethod("Foo"));
-            TestReport barReport = new TestMethodTestReport(typeof(TestClassMock).GetMethod("Bar"));
+        private void AssertThatTheReportIsEqualToFooOrBar(Report report) {
+            Report fooReport = new TestMethodReport(typeof(TestClassMock).GetMethod("Foo"));
+            Report barReport = new TestMethodReport(typeof(TestClassMock).GetMethod("Bar"));
 
             AssertEx.That(report, Matches.AnyOf(Is.EqualTo(fooReport), Is.EqualTo(barReport)));
         }
@@ -86,15 +88,15 @@ namespace TestJUUT {
         [TestMethod]
         public void RunSpecificTestOfJUUTTestClass() {
             TestRunner runner = new SimpleTestRunner(typeof(TestClassMock));
-            TestReport testReport = runner.Run("Foo");
+            Report report = runner.Run("Foo");
 
             //Checking that the methods of the test class mock are called correctly
             AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningASpecificTest();
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningASpecificTest();
 
             //Checking the returned test report
-            TestReport expectedReport = new TestMethodTestReport(typeof(TestClassMock).GetMethod("Foo"));
-            AssertEx.That(testReport, Is.EqualTo(expectedReport));
+            Report expectedReport = new TestMethodReport(typeof(TestClassMock).GetMethod("Foo"));
+            AssertEx.That(report, Is.EqualTo(expectedReport));
         }
 
         private static void AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningASpecificTest() {
@@ -114,7 +116,7 @@ namespace TestJUUT {
         [TestMethod]
         public void RunTestsOfJUUTTestClassWithFailingClassSetUp() {
             TestRunner runner = new SimpleTestRunner(typeof(TestClassMockWithFailingClassSetUp));
-            //Testing the run of a specific method
+            //Testing the run of a specific testMethod
             runner.Run("Bar");
 
             //Checking that the methods of the test class mock are called correctly
@@ -122,7 +124,7 @@ namespace TestJUUT {
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
 
             //Checking the returned test report
-            //TODO A new TestReport is needed for this case
+            //TODO A new Report is needed for this case
 
             //TODO Implement the same check for running all tests (reset the static variables before)
         }

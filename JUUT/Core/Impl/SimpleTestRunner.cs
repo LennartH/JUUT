@@ -14,14 +14,14 @@ namespace JUUT.Core.Impl {
             TestClassInfo = testClass;
         }
 
-        public List<TestReport> RunAll() {
-            List<TestReport> resultReports = new List<TestReport>();
+        public List<Report> RunAll() {
+            List<Report> resultReports = new List<Report>();
 
             //return resultReports;
             throw new NotImplementedException();
         }
 
-        public TestReport Run(string testMethodName) {
+        public Report Run(string testMethodName) {
             throw new NotImplementedException();
         }
 

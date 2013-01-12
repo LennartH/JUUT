@@ -20,10 +20,10 @@ namespace TestJUUT {
 
         [TestMethod]
         public void AddReport() {
-            var alphaReport = new Mock<TestReport>();
+            var alphaReport = new Mock<Report>();
             alphaReport.Setup(alpha => alpha.TestClassType).Returns(typeof(AlphaOwner));
 
-            var nullReporter = new Mock<TestReport>();
+            var nullReporter = new Mock<Report>();
             nullReporter.Setup(alpha => alpha.TestClassType).Returns(default(Type));
 
             var reporterMock = new Mock<AbstractTestReporter>();
@@ -39,13 +39,13 @@ namespace TestJUUT {
         [TestMethod]
         public void Reports() {
             //Setting up the reports
-            var fooReport = new Mock<TestReport>();
+            var fooReport = new Mock<Report>();
             fooReport.Setup(foo => foo.TestClassType).Returns(typeof (FooBarOwner));
 
-            var barReport = new Mock<TestReport>();
+            var barReport = new Mock<Report>();
             barReport.Setup(bar => bar.TestClassType).Returns(typeof (FooBarOwner));
 
-            var alphaReport = new Mock<TestReport>();
+            var alphaReport = new Mock<Report>();
             alphaReport.Setup(alpha => alpha.TestClassType).Returns(typeof (AlphaOwner));
 
             //Setting up the reporter
@@ -60,11 +60,11 @@ namespace TestJUUT {
             alphaReport.VerifyGet(alpha => alpha.TestClassType, Times.Exactly(1));
 
             //Checking the structure of the reports
-            Dictionary<Type, IList<TestReport>> reports = reporter.Reports;
+            Dictionary<Type, IList<Report>> reports = reporter.Reports;
             int count = 0;
-            foreach (KeyValuePair<Type, IList<TestReport>> reportEntry in reports) {
+            foreach (KeyValuePair<Type, IList<Report>> reportEntry in reports) {
                 //Checking that the reports are mapped by their owner class
-                foreach (TestReport report in reportEntry.Value) {
+                foreach (Report report in reportEntry.Value) {
                     if (reportEntry.Key.Equals(typeof (FooBarOwner))) {
                         AssertEx.That(
                             report, Matches.AnyOf(Is.EqualTo(fooReport.Object), Is.EqualTo(barReport.Object)),

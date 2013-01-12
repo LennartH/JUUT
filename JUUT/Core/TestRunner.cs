@@ -9,9 +9,9 @@ namespace JUUT.Core {
 
         Type TestClassInfo { get; }
 
-        List<TestReport> RunAll();
+        List<Report> RunAll();
 
-        TestReport Run(string testMethodName);
+        Report Run(string testMethodName);
 
     }
 }

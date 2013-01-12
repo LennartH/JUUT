@@ -4,7 +4,7 @@ using JUUT.Core.Impl;
 
 namespace JUUT.Core {
 
-    public interface TestReport {
+    public interface Report {
 
         /// <summary>
         /// The summary text of the report.

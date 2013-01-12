@@ -16,14 +16,14 @@ namespace JUUT.Core {
         /// Adds a new report to the reporter.
         /// </summary>
         /// <param name="report">The new report.</param>
-        void AddReport(TestReport report);
+        void AddReport(Report report);
 
         /// <summary>
         /// The reports contained by the reporter.<para />
         /// The reports are structered by the type of the test class, which owns the test method.
         /// </summary>
         /// <returns>The reports contained by the reporter.</returns>
-        Dictionary<Type, IList<TestReport>> Reports { get; }
+        Dictionary<Type, IList<Report>> Reports { get; }
 
         /// <summary>
         /// Presents the reports contained by the reporter.
