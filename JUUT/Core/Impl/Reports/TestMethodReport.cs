@@ -22,7 +22,7 @@ namespace JUUT.Core.Impl.Reports {
         /// <param name="testMethod">The info of the runned test method.</param>
         /// <param name="raisedException">The raised exception or <code>null</code>, if the test passed successfully.</param>
         public TestMethodReport(MethodInfo testMethod, Exception raisedException)
-            : base(testMethod) {
+            : base(testMethod, ReportRange.TestMethod) {
             if (testMethod.GetCustomAttribute(typeof(SimpleTestMethodAttribute)) == null) {
                 throw new ArgumentException("Methods of a TestMethodReport have to have the SimpleTestMethod-Attribute.");
             }

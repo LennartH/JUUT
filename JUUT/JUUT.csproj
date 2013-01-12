@@ -48,6 +48,7 @@
     <Compile Include="Core\Impl\Attributes\TestSetUpAttribute.cs" />
     <Compile Include="Core\Impl\Attributes\JUUTTestClassAttribute.cs" />
     <Compile Include="Core\Assert.cs" />
+    <Compile Include="Core\Impl\Reports\TestClassReport.cs" />
     <Compile Include="Core\Impl\SimpleTestRunner.cs" />
     <Compile Include="Core\TestReporter.cs" />
     <Compile Include="Core\TestRunner.cs" />

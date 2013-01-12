@@ -11,6 +11,8 @@ namespace JUUT.Core.Impl.Reports {
             get { return RunnedMethod.DeclaringType; }
         }
 
+        public ReportRange Range { get; private set; }
+
         /// <summary>
         /// The info of the runned method.
         /// </summary>
@@ -20,12 +22,14 @@ namespace JUUT.Core.Impl.Reports {
         /// Creates a new report for the given <code>method</code>.<para />
         /// Throws an <code>ArgumentException</code>, when the method is null.
         /// </summary>
-        /// <param name="runnedMethod"></param>
-        protected AbstractReport(MethodInfo runnedMethod) {
+        /// <param name="runnedMethod">The runned method this report is about. Can't be null.</param>
+        /// <param name="range">The range this report is about.</param>
+        protected AbstractReport(MethodInfo runnedMethod, ReportRange range) {
             if (runnedMethod == null) {
                 throw new ArgumentException("The test method of a test report can't be null.");
             }
 
+            Range = range;
             RunnedMethod = runnedMethod;
         }
 
