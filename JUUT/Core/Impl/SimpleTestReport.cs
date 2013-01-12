@@ -4,28 +4,6 @@ using System.Reflection;
 namespace JUUT.Core.Impl {
 
     /// <summary>
-    /// Represents the status of a runned test.
-    /// </summary>
-    public enum TestStatus {
-
-        /// <summary>
-        /// The test failed because of a failed assertion.
-        /// </summary>
-        Failed,
-
-        /// <summary>
-        /// The test failed because an unexpected exception was thrown.
-        /// </summary>
-        Error,
-
-        /// <summary>
-        /// The test passed successfully.
-        /// </summary>
-        Passed
-
-    }
-
-    /// <summary>
     /// Represents a report of a runned test.
     /// </summary>
     public class SimpleTestReport : TestReport {
@@ -42,16 +20,6 @@ namespace JUUT.Core.Impl {
         private MethodInfo TestMethod { get; set; }
 
         /// <summary>
-        /// The <seealso cref="TestStatus"/> of the runned test.
-        /// </summary>
-        private TestStatus TestStatus { get; set; }
-
-        /// <summary>
-        /// The exception raised by the test. Can be <code>null</code> if the test passed successfully.
-        /// </summary>
-        private readonly Exception RaisedException;
-
-        /// <summary>
         /// Creates a new report for <code>testMethod</code> and it's raised exception or <code>null</code>, if the test passed successfully.
         /// </summary>
         /// <param name="testMethod">The info of the runned test method.</param>
@@ -61,24 +29,8 @@ namespace JUUT.Core.Impl {
                 throw new ArgumentException("The test method of a test report can't be null.");
             }
 
-            RaisedException = raisedException;
             TestMethod = testMethod;
-
-            SetStatus();
-            SetText();
-        }
-
-        /// <summary>
-        /// Sets the status depending on the raised exception.
-        /// </summary>
-        private void SetStatus() {
-            if (RaisedException == null) {
-                TestStatus = TestStatus.Passed;
-            } else if (RaisedException is AssertException) {
-                TestStatus = TestStatus.Failed;
-            } else {
-                TestStatus = TestStatus.Error;
-            }
+            SetText(raisedException);
         }
 
         /// <summary>
@@ -86,25 +38,18 @@ namespace JUUT.Core.Impl {
         /// The <seealso cref="TestStatus"/> (see <seealso cref="SetStatus()"/>), the <seealso cref="TestMethod"/>-Info
         /// and the <seealso cref="RaisedException"/> has to be set before calling this.
         /// </summary>
-        private void SetText() {
-            switch (TestStatus) {
-                case TestStatus.Failed:
-                    Text = "The " + TestMethod.Name + "-Test failed: " + RaisedException.Message;
-                    break;
-                case TestStatus.Error:
-                    Text = "The " + TestMethod.Name + "-Test raised an unexpected exception: " + RaisedException.Message;
-                    break;
-                case TestStatus.Passed:
-                    Text = "The " + TestMethod.Name + "-Test passed successfully.";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+        private void SetText(Exception raisedException) {
+            if (raisedException == null) {
+                Text = "The " + TestMethod.Name + "-Test passed successfully.";
+            } else if (raisedException is AssertException) {
+                Text = "The " + TestMethod.Name + "-Test failed: " + raisedException.Message;
+            } else {
+                Text = "The " + TestMethod.Name + "-Test raised an unexpected exception: " + raisedException.Message;
             }
-
         }
 
         private bool Equals(SimpleTestReport other) {
-            return RaisedException.Equals(other.RaisedException) && Equals(TestMethod, other.TestMethod);
+            return string.Equals(Text, other.Text) && TestMethod.Equals(other.TestMethod);
         }
 
         public override bool Equals(object obj) {
@@ -122,7 +67,7 @@ namespace JUUT.Core.Impl {
 
         public override int GetHashCode() {
             unchecked {
-                return (RaisedException.GetHashCode() * 397) ^ (TestMethod != null ? TestMethod.GetHashCode() : 0);
+                return (Text.GetHashCode() * 397) ^ TestMethod.GetHashCode();
             }
         }
 
