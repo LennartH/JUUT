@@ -5,7 +5,7 @@ namespace JUUT.Core.Impl.Attributes {
     /// Attribute to identify test classes of JUUT. Can't be inherated. 
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public sealed class JUUTTestAttribute : Attribute {
+    public sealed class JUUTTestClassAttribute : Attribute {
 
     }
 }

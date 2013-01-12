@@ -14,10 +14,10 @@ namespace TestJUUT {
 
         [TestMethod]
         public void JUUTTest() {
-            Attribute JUUTTest = typeof (AttributedMock).GetCustomAttribute(typeof (JUUTTestAttribute), true);
+            Attribute JUUTTest = typeof (AttributedMock).GetCustomAttribute(typeof (JUUTTestClassAttribute), true);
             AssertEx.That(JUUTTest, Is.NotNull());
 
-            JUUTTest = typeof(NotAttributedMock).GetCustomAttribute(typeof(JUUTTestAttribute), true);
+            JUUTTest = typeof(NotAttributedMock).GetCustomAttribute(typeof(JUUTTestClassAttribute), true);
             AssertEx.That(JUUTTest, Is.Null());
         }
 
@@ -67,13 +67,13 @@ namespace TestJUUT {
 
         [TestMethod]
         public void SimpleTestMethod() {
-            List<MethodInfo> simpleTests = GetMethodsOfTypeWithAttribute(typeof (AttributedMock), typeof (SimpleTestAttribute));
+            List<MethodInfo> simpleTests = GetMethodsOfTypeWithAttribute(typeof (AttributedMock), typeof (SimpleTestMethodAttribute));
             AssertEx.That(simpleTests.Count, Is.Not(0), "No simple test methods found in " + typeof(AttributedMock).Name + ".");
             foreach (MethodInfo simpleTest in simpleTests) {
                 AssertEx.That(simpleTest.Name, Matches.AnyOf(Is.EqualTo("FirstTestMethod"), Is.EqualTo("SecondTestMethod")));
             }
 
-            simpleTests = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(SimpleTestAttribute));
+            simpleTests = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(SimpleTestMethodAttribute));
             AssertEx.That(simpleTests.Count, Is.EqualTo(0), "Found a simple test method in " + typeof(NotAttributedMock).Name + ".");
         }
 
@@ -89,7 +89,7 @@ namespace TestJUUT {
             return methods;
         }
 
-        [JUUTTest]
+        [JUUTTestClass]
         private class AttributedMock {
 
             [ClassSetUp]
@@ -97,9 +97,9 @@ namespace TestJUUT {
             [TestSetUp]
             public void MockTestSetUp() { }
 
-            [SimpleTest]
+            [SimpleTestMethod]
             public void FirstTestMethod() { }
-            [SimpleTest]
+            [SimpleTestMethod]
             public void SecondTestMethod() { }
 
             [TestTearDown]

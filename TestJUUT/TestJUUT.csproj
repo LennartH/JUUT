@@ -66,6 +66,7 @@
     <Compile Include="TestAssertException.cs" />
     <Compile Include="TestSimpleTestReport.cs" />
     <Compile Include="TestAbstractTestReporter.cs" />
+    <Compile Include="TestTestClassRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JUUT\JUUT.csproj">

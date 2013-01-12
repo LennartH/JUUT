@@ -106,7 +106,7 @@ namespace JUUT.Core.Impl {
 
         }
 
-        protected bool Equals(SimpleTestReport other) {
+        private bool Equals(SimpleTestReport other) {
             return RaisedException.Equals(other.RaisedException) && Equals(TestMethod, other.TestMethod);
         }
 
