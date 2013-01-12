@@ -77,8 +77,8 @@ namespace TestJUUT {
         }
 
         private void AssertThatTheReportIsEqualToFooOrBar(TestReport report) {
-            TestReport fooReport = new SimpleTestReport(typeof(TestClassMock).GetMethod("Foo"), null);
-            TestReport barReport = new SimpleTestReport(typeof(TestClassMock).GetMethod("Bar"), null);
+            TestReport fooReport = new TestMethodTestReport(typeof(TestClassMock).GetMethod("Foo"));
+            TestReport barReport = new TestMethodTestReport(typeof(TestClassMock).GetMethod("Bar"));
 
             AssertEx.That(report, Matches.AnyOf(Is.EqualTo(fooReport), Is.EqualTo(barReport)));
         }
@@ -93,7 +93,7 @@ namespace TestJUUT {
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningASpecificTest();
 
             //Checking the returned test report
-            TestReport expectedReport = new SimpleTestReport(typeof(TestClassMock).GetMethod("Foo"), null);
+            TestReport expectedReport = new TestMethodTestReport(typeof(TestClassMock).GetMethod("Foo"));
             AssertEx.That(testReport, Is.EqualTo(expectedReport));
         }
 

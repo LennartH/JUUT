@@ -6,7 +6,7 @@ namespace JUUT.Core.Impl {
     /// <summary>
     /// Represents a report of a runned test.
     /// </summary>
-    public class SimpleTestReport : TestReport {
+    public class TestMethodTestReport : TestReport {
 
         public string Text { get; private set; }
 
@@ -20,23 +20,29 @@ namespace JUUT.Core.Impl {
         private MethodInfo TestMethod { get; set; }
 
         /// <summary>
-        /// Creates a new report for <code>testMethod</code> and it's raised exception or <code>null</code>, if the test passed successfully.
+        /// Creates a new report for the <code>testedMethod</code>, which passed successfully.
         /// </summary>
-        /// <param name="testMethod">The info of the runned test method.</param>
+        /// <param name="testedMethod">The info of the runned test method.</param>
+        public TestMethodTestReport(MethodInfo testedMethod) : this(testedMethod, null) { }
+
+        /// <summary>
+        /// Creates a new report for the <code>testedMethod</code> and it's raised exception or <code>null</code>, if the test passed successfully.
+        /// </summary>
+        /// <param name="testedMethod">The info of the runned test method.</param>
         /// <param name="raisedException">The raised exception or <code>null</code>, if the test passed successfully.</param>
-        public SimpleTestReport(MethodInfo testMethod, Exception raisedException) {
-            if (testMethod == null) {
+        public TestMethodTestReport(MethodInfo testedMethod, Exception raisedException) {
+            if (testedMethod == null) {
                 throw new ArgumentException("The test method of a test report can't be null.");
             }
 
-            TestMethod = testMethod;
+            TestMethod = testedMethod;
             SetText(raisedException);
         }
 
         /// <summary>
-        /// Sets the report text depending on the <seealso cref="TestStatus"/>.<para />
-        /// The <seealso cref="TestStatus"/> (see <seealso cref="SetStatus()"/>), the <seealso cref="TestMethod"/>-Info
-        /// and the <seealso cref="RaisedException"/> has to be set before calling this.
+        /// Sets the report text depending on the given exception.<para />
+        /// The <seealso cref="TestMethod"/>-Info has to be set before calling this.
+        /// <param name="raisedException">The exception raised by the tested method. Can be null.</param>
         /// </summary>
         private void SetText(Exception raisedException) {
             if (raisedException == null) {
@@ -48,7 +54,7 @@ namespace JUUT.Core.Impl {
             }
         }
 
-        private bool Equals(SimpleTestReport other) {
+        private bool Equals(TestMethodTestReport other) {
             return string.Equals(Text, other.Text) && TestMethod.Equals(other.TestMethod);
         }
 
@@ -62,7 +68,7 @@ namespace JUUT.Core.Impl {
             if (obj.GetType() != GetType()) {
                 return false;
             }
-            return Equals((SimpleTestReport) obj);
+            return Equals((TestMethodTestReport) obj);
         }
 
         public override int GetHashCode() {
