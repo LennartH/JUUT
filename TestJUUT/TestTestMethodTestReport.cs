@@ -4,6 +4,7 @@ using System.Reflection.Emit;
 
 using JUUT.Core;
 using JUUT.Core.Impl;
+using JUUT.Core.Impl.Attributes;
 using JUUT.Core.Impl.Reports;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -25,16 +26,21 @@ namespace TestJUUT {
             Report report = new TestMethodReport(testMethod, raisedException);
             AssertEx.That(report.TestClassType, Is.EqualTo(typeof(TestOwner)));
 
-            //This allows to 
+            //This allows to create a test method report without a raised exception
             report = new TestMethodReport(testMethod);
             AssertEx.That(report.TestClassType, Is.EqualTo(typeof(TestOwner)));
 
+            testMethod = new DynamicMethod("Foo", null, null);
+            AssertEx.That(() => { new TestMethodReport(testMethod, raisedException); }, Throws.An<ArgumentException>());
+            AssertEx.That(() => { new TestMethodReport(testMethod); }, Throws.An<ArgumentException>());
+
             AssertEx.That(() => { new TestMethodReport(null, raisedException); }, Throws.An<ArgumentException>());
+            AssertEx.That(() => { new TestMethodReport(null); }, Throws.An<ArgumentException>());
         }
 
         [TestMethod]
         public void Output() {
-            MethodInfo testMethod = new DynamicMethod("TestName", null, null);
+            MethodInfo testMethod = typeof(TestOwner).GetMethod("TestName");
             Exception raisedException = new AssertException("Exception Text");
 
             Report report = new TestMethodReport(testMethod, raisedException);
@@ -50,13 +56,10 @@ namespace TestJUUT {
 
         [TestMethod]
         public void TestClassType() {
-            MethodInfo testMethod = new DynamicMethod("TestName", null, null);
+            MethodInfo testMethod = typeof(TestOwner).GetMethod("TestName");
             Exception raisedException = new AssertException("Exception Text");
-            
-            Report report = new TestMethodReport(testMethod, raisedException);
-            AssertEx.That(report.TestClassType, Is.Null());
 
-            report = new TestMethodReport(typeof(TestOwner).GetMethod("TestName"), raisedException);
+            Report report = new TestMethodReport(typeof(TestOwner).GetMethod("TestName"), raisedException);
             AssertEx.That(report.TestClassType, Is.EqualTo(typeof(TestOwner)));
         }
 
@@ -91,7 +94,9 @@ namespace TestJUUT {
 
         private class TestOwner {
 
+            [SimpleTestMethod]
             public void TestName() { }
+            [SimpleTestMethod]
             public void UnequalMethod() { }
 
         }
