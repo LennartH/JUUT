@@ -64,6 +64,51 @@ namespace TestJUUT {
             }
         }
 
+        [TestMethod]
+        public void RunSpecificTestOfJUUTTestClass() {
+            TestRunner runner = new SimpleTestRunner(typeof(TestClassMock));
+            Report report = runner.Run("Foo");
+
+            //Checking that the methods of the test class mock are called correctly
+            AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningASpecificTest();
+            AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningASpecificTest();
+
+            //Checking the returned test report
+            Report expectedReport = new TestMethodReport(typeof(TestClassMock).GetMethod("Foo"));
+            AssertEx.That(report, Is.EqualTo(expectedReport));
+        }
+
+        [TestMethod]
+        public void RunTestsOfJUUTTestClassWithFailingClassSetUp() {
+            TestRunner runner = new SimpleTestRunner(typeof(TestClassMockWithFailingClassSetUp));
+            
+            //Testing the run of a specific testMethod
+            Report returnedReport = runner.Run("Bar");
+
+            //Checking that the methods of the test class mock are called correctly
+            AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningATestWithFailingClassSetUp();
+            AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
+
+            //Checking the returned test report
+            Report expectedReport = new TestClassReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), new InvalidOperationException());
+            AssertEx.That(returnedReport, Is.EqualTo(expectedReport));
+
+            //Testing the run of all tests
+            ResetMethodCountersAndTheMethodCallOrder();
+            List<Report> reports = runner.RunAll();
+
+            //Checking that the methods of the test class mock are called correctly
+            AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningATestWithFailingClassSetUp();
+            AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
+
+            //Checking the returned test reports
+            expectedReport = new TestClassReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), new InvalidOperationException());
+            AssertEx.That(reports.Count, Is.EqualTo(1));
+            AssertEx.That(reports[0], Is.EqualTo(expectedReport));
+        }
+
+        //TODO Implement tests for test classes which fail in the other methods
+
         private static void AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningAllTests() {
             List<string> expectedMethodCallOrder = new List<string> { "ClassSetUp", "SetUp", "Foo", "TearDown", "SetUp", "Bar", "TearDown", "ClassTearDown" };
             AssertEx.That(MethodCallOrder, Is.EqualTo(expectedMethodCallOrder));
@@ -85,20 +130,6 @@ namespace TestJUUT {
             AssertEx.That(report, Matches.AnyOf(Is.EqualTo(fooReport), Is.EqualTo(barReport)));
         }
 
-        [TestMethod]
-        public void RunSpecificTestOfJUUTTestClass() {
-            TestRunner runner = new SimpleTestRunner(typeof(TestClassMock));
-            Report report = runner.Run("Foo");
-
-            //Checking that the methods of the test class mock are called correctly
-            AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningASpecificTest();
-            AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningASpecificTest();
-
-            //Checking the returned test report
-            Report expectedReport = new TestMethodReport(typeof(TestClassMock).GetMethod("Foo"));
-            AssertEx.That(report, Is.EqualTo(expectedReport));
-        }
-
         private static void AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningASpecificTest() {
             AssertEx.That(ClassSetUpCount, Is.EqualTo(1));
             AssertEx.That(SetUpCount, Is.EqualTo(1));
@@ -112,24 +143,6 @@ namespace TestJUUT {
             List<string> expectedMethodCallOrder = new List<string> { "ClassSetUp", "SetUp", "Foo", "TearDown", "ClassTearDown" };
             AssertEx.That(MethodCallOrder, Is.EqualTo(expectedMethodCallOrder));
         }
-
-        [TestMethod]
-        public void RunTestsOfJUUTTestClassWithFailingClassSetUp() {
-            TestRunner runner = new SimpleTestRunner(typeof(TestClassMockWithFailingClassSetUp));
-            //Testing the run of a specific testMethod
-            runner.Run("Bar");
-
-            //Checking that the methods of the test class mock are called correctly
-            AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningATestWithFailingClassSetUp();
-            AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
-
-            //Checking the returned test report
-            //TODO A new Report is needed for this case
-
-            //TODO Implement the same check for running all tests (reset the static variables before)
-        }
-
-        //TODO Implement tests for test classes which fail in the other methods
 
         private static void AssertThatTheMethodsAreCalledForTheCorrectTimesAfterRunningATestWithFailingClassSetUp() {
             AssertEx.That(ClassSetUpCount, Is.EqualTo(1));

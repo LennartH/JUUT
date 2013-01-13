@@ -65,6 +65,7 @@
     <Compile Include="TestAssert.cs" />
     <Compile Include="TestAssertException.cs" />
     <Compile Include="TestTestClassReport.cs" />
+    <Compile Include="TestTestClassScanner.cs" />
     <Compile Include="TestTestMethodTestReport.cs" />
     <Compile Include="TestAbstractTestReporter.cs" />
     <Compile Include="TestTestClassRunner.cs" />
