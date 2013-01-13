@@ -35,7 +35,7 @@ namespace JUUT.Core {
         /// The type of the test class, which contains the <seealso cref="TestMethod"/>.<para />
         /// Can be null, if the method has no declaring type.
         /// </summary>
-        Type TestClassType { get; }
+        Type TestClass { get; }
 
         /// <summary>
         /// The range the report is about. See <seealso cref="ReportRange"/> for more information.

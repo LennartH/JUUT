@@ -7,7 +7,7 @@ namespace JUUT.Core.Impl.Reports {
 
         public string Text { get; protected set; }
 
-        public Type TestClassType {
+        public Type TestClass {
             get { return RunnedMethod.DeclaringType; }
         }
 

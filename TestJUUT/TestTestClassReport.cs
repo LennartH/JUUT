@@ -19,8 +19,8 @@ namespace TestJUUT {
 
         private MethodInfo ClassSetUp;
         private MethodInfo ClassTearDown;
-        private MethodInfo SetUp;
-        private MethodInfo TearDown;
+        private MethodInfo TestSetUp;
+        private MethodInfo TestTearDown;
 
         [TestInitialize]
         public void InitializeTheMethodInfos() {
@@ -28,8 +28,8 @@ namespace TestJUUT {
 
             ClassSetUp = testOwnerMock.GetMethod("ClassSetUp");
             ClassTearDown = testOwnerMock.GetMethod("ClassTearDown");
-            SetUp = testOwnerMock.GetMethod("SetUp");
-            TearDown = testOwnerMock.GetMethod("TearDown");
+            TestSetUp = testOwnerMock.GetMethod("SetUp");
+            TestTearDown = testOwnerMock.GetMethod("TearDown");
         }
 
         [TestMethod]
@@ -37,16 +37,39 @@ namespace TestJUUT {
             Exception raisedException = new NullReferenceException("Exception text");
 
             Report report = new TestClassReport(ClassSetUp, raisedException);
-            AssertEx.That(report.TestClassType, Is.EqualTo(typeof(TestOwnerMock)));
+            AssertEx.That(report.TestClass, Is.EqualTo(typeof(TestOwnerMock)));
             AssertEx.That(report.Range, Is.EqualTo(ReportRange.TestClass));
 
             //Test for illegal null arguments
             AssertEx.That(() => { new TestClassReport(null, raisedException); }, Throws.An<ArgumentException>());
             AssertEx.That(() => { new TestClassReport(ClassTearDown, null); }, Throws.An<ArgumentException>());
 
-            //Test that a TestClassReport can only be initiated with a method with the ClassSetUp, TestSetUp, TestTearDown or ClassTearDown attribute.
+            //Test that a TestClassReport can only be initiated with a method with the ClassSetUp, TestSetUp,
+            //TestTearDown or ClassTearDown attribute.
             MethodInfo illegalMethod = new DynamicMethod("MethodWithoutAttribute", null, null);
             AssertEx.That(() => { new TestClassReport(illegalMethod, raisedException); }, Throws.An<ArgumentException>());
+        }
+
+        [TestMethod]
+        public void MessageCreation() {
+            Exception raisedException = new NullReferenceException("Exception text");
+            string testClassName = typeof(TestOwnerMock).Name;
+
+            Report report = new TestClassReport(ClassSetUp, raisedException);
+            AssertEx.That(report.Text, Is.EqualTo("The ClassSetUp-Method " + ClassSetUp.Name + " of the test class " +
+                                                  testClassName + " raised an exception: " + raisedException.Message));
+
+            report = new TestClassReport(TestSetUp, raisedException);
+            AssertEx.That(report.Text, Is.EqualTo("The TestSetUp-Method " + TestSetUp.Name + " of the test class " + testClassName +
+                                                  " raised an exception: " + raisedException.Message));
+
+            report = new TestClassReport(TestTearDown, raisedException);
+            AssertEx.That(report.Text, Is.EqualTo("The TestTearDown-Method " + TestTearDown.Name + " of the test class " + testClassName +
+                                                  " raised an exception: " + raisedException.Message));
+
+            report = new TestClassReport(ClassTearDown, raisedException);
+            AssertEx.That(report.Text, Is.EqualTo("The ClassTearDown-Method " + ClassTearDown.Name + " of the test class " + testClassName +
+                                                  " raised an exception: " + raisedException.Message));
         }
 
         [JUUTTestClass]
