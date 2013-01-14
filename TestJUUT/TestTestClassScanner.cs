@@ -30,6 +30,21 @@ namespace TestJUUT {
             AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithClassSetUpWithParameters)), Throws.An<ArgumentException>());
             AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithMoreThanOneClassSetUps)), Throws.An<ArgumentException>());
         }
+        
+        [TestMethod]
+        public void GetTestSetUp() {
+            MethodInfo testSetUpMethod = TestClassScanner.GetTestSetUpOfTest(typeof(TestClassWithNoOrganizeMethods));
+            AssertEx.That(testSetUpMethod, Is.Null());
+            
+            testSetUpMethod = TestClassScanner.GetTestSetUpOfTest(typeof(TestClass));
+            AssertEx.That(testSetUpMethod, Is.EqualTo(typeof(TestClass).GetMethod("SetUp")));
+
+            AssertEx.That(() => TestClassScanner.GetTestSetUpOfTest(null), Throws.An<ArgumentNullException>());
+            
+            AssertEx.That(() => TestClassScanner.GetTestSetUpOfTest(typeof(ClassWithNoTests)), Throws.An<ArgumentException>());
+            AssertEx.That(() => TestClassScanner.GetTestSetUpOfTest(typeof(TestClassWithClassSetUpWithParameters)), Throws.An<ArgumentException>());
+            AssertEx.That(() => TestClassScanner.GetTestSetUpOfTest(typeof(TestClassWithMoreThanOneClassSetUps)), Throws.An<ArgumentException>());
+        }
 
         [JUUTTestClass]
         private class TestClass {
@@ -64,6 +79,8 @@ namespace TestJUUT {
 
             [ClassSetUp]
             public static void ClassSetUp(object parameter) { }
+            [TestSetUp]
+            public static void SetUp(object parameter) { }
 
         }
 
@@ -74,6 +91,11 @@ namespace TestJUUT {
             public static void ClassSetUp1() { }
             [ClassSetUp]
             public static void ClassSetUp2() { }
+            
+            [TestSetUp]
+            public void SetUp1() { }
+            [TestSetUp]
+            public void SetUp2() { }
 
         }
 
