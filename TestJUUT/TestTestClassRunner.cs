@@ -45,7 +45,7 @@ namespace TestJUUT {
         [TestMethod]
         public void Creation() {
             TestRunner runner = new SimpleTestRunner(typeof(TestClassMock));
-            AssertEx.That(runner.TestClassInfo, Is.EqualTo(typeof(TestClassMock)));
+            AssertEx.That(runner.TestClass, Is.EqualTo(typeof(TestClassMock)));
         }
 
         [TestMethod]
@@ -76,10 +76,13 @@ namespace TestJUUT {
             //Checking the returned test report
             Report expectedReport = new TestMethodReport(typeof(TestClassMock).GetMethod("Foo"));
             AssertEx.That(report, Is.EqualTo(expectedReport));
+
+            //TODO Test what happens if you give the name of a method that doesn't exist in the test class.
         }
 
         [TestMethod]
         public void RunTestsOfJUUTTestClassWithFailingClassSetUp() {
+            Exception raisedException = new InvalidOperationException("Failing class set up.");
             TestRunner runner = new SimpleTestRunner(typeof(TestClassMockWithFailingClassSetUp));
             
             //Testing the run of a specific testMethod
@@ -90,7 +93,7 @@ namespace TestJUUT {
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
 
             //Checking the returned test report
-            Report expectedReport = new TestClassReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), new InvalidOperationException());
+            Report expectedReport = new TestClassReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), raisedException);
             AssertEx.That(returnedReport, Is.EqualTo(expectedReport));
 
             //Testing the run of all tests
@@ -102,7 +105,7 @@ namespace TestJUUT {
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
 
             //Checking the returned test reports
-            expectedReport = new TestClassReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), new InvalidOperationException());
+            expectedReport = new TestClassReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), raisedException);
             AssertEx.That(reports.Count, Is.EqualTo(1));
             AssertEx.That(reports[0], Is.EqualTo(expectedReport));
         }
@@ -154,8 +157,22 @@ namespace TestJUUT {
         }
 
         private static void AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp() {
-            List<string> expectedMethodCallOrder = new List<string> { "ClassSetUp" };
-            AssertEx.That(MethodCallOrder, Is.EqualTo(expectedMethodCallOrder));
+            AssertEx.That(MethodCallOrderToString(MethodCallOrder), Is.EqualTo(MethodCallOrderToString(new List<string> { "ClassSetUp" })));
+        }
+
+        private static string MethodCallOrderToString(List<string> methodCallOrder) {
+            bool first = true;
+            
+            string result = "empty";
+            foreach (string method in methodCallOrder) {
+                if (first) {
+                    result = method;
+                    first = false;
+                } else {
+                    result += " " + method;
+                }
+            }
+            return result;
         }
 
         [JUUTTestClass]
@@ -204,7 +221,7 @@ namespace TestJUUT {
             public new static void ClassSetUp() {
                 ClassSetUpCount++;
                 MethodCallOrder.Add("ClassSetUp");
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Failing class set up.");
             }
 
         }

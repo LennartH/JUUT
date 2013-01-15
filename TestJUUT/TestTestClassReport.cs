@@ -79,6 +79,8 @@ namespace TestJUUT {
             AssertEx.That(report.ToString(), Is.EqualTo("Class wide report of " + typeof(TestOwnerMock).Name + ": " + report.Text));
         }
 
+        //TODO add test for hash code and equals
+
         [JUUTTestClass]
         private class TestOwnerMock {
 

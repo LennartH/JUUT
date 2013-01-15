@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace JUUT.Core {
     public interface TestRunner {
 
-        Type TestClassInfo { get; }
+        Type TestClass { get; }
 
         List<Report> RunAll();
 
