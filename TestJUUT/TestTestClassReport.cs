@@ -72,6 +72,13 @@ namespace TestJUUT {
                                                   " raised an exception: " + raisedException.Message));
         }
 
+        [TestMethod]
+        public void ReportToString() {
+            Exception raisedException = new NullReferenceException("Exception text");
+            Report report = new TestClassReport(ClassSetUp, raisedException);
+            AssertEx.That(report.ToString(), Is.EqualTo("Class wide report of " + typeof(TestOwnerMock).Name + ": " + report.Text));
+        }
+
         [JUUTTestClass]
         private class TestOwnerMock {
 

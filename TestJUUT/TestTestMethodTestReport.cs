@@ -57,6 +57,13 @@ namespace TestJUUT {
         }
 
         [TestMethod]
+        public void ReportToString() {
+            Exception raisedException = new NullReferenceException("Exception text");
+            Report report = new TestMethodReport(typeof(TestOwner).GetMethod("TestName"), raisedException);
+            AssertEx.That(report.ToString(), Is.EqualTo("Test wide report of " + typeof(TestOwner).Name + ": " + report.Text));
+        }
+
+        [TestMethod]
         public void EqualsAndHashCode() {
             Report report = new TestMethodReport(typeof(TestOwner).GetMethod("TestName"), new AssertException("Exception test."));
 

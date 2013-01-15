@@ -33,6 +33,21 @@ namespace JUUT.Core.Impl.Reports {
             RunnedMethod = runnedMethod;
         }
 
+        public override string ToString() {
+            return RangeAsText() + " wide report of " + TestClass.Name + ": " + Text;
+        }
+
+        private string RangeAsText() {
+            switch (Range) {
+                case ReportRange.TestMethod:
+                    return "Test";
+                case ReportRange.TestClass:
+                    return "Class";
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
         private bool Equals(AbstractReport other) {
             return string.Equals(Text, other.Text) && RunnedMethod.Equals(other.RunnedMethod);
         }
