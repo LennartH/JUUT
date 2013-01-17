@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace JUUT.Core {
 
         List<Report> RunAll();
 
-        Report Run(string testMethodName);
+        Report Run(MethodInfo testMethod);
 
     }
 }

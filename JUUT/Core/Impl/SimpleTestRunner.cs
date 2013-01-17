@@ -35,15 +35,29 @@ namespace JUUT.Core.Impl {
         /// <summary>TODO Was passiert wenns es keine Methode mit diesem namen gibt?
         /// Runs the test with the given name and returns the reports of the run.
         /// </summary>
-        /// <param name="testMethodName">The name of the testmethod, that should be runned.</param>
+        /// <param name="testMethod"></param>
         /// <returns>Report of the runned test.</returns>
-        public Report Run(string testMethodName) {
+        public Report Run(MethodInfo testMethod) {
             Report report = RunClassSetUp();
             if (report != null) {
                 return report;
             }
 
+            report = RunTest(testMethod);
+            if (report != null) {
+                return report;
+            }
+
             return report;
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="testMethod"></param>
+        /// <returns></returns>
+        private Report RunTest(MethodInfo testMethod) {
+            throw new NotImplementedException();
         }
 
         /// <summary>
