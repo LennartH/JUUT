@@ -4,7 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 
 using JUUT.Core;
-using JUUT.Core.Impl.Attributes;
+using JUUT.Core.Attributes;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

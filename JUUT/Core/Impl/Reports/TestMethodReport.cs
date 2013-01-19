@@ -1,7 +1,7 @@
-﻿using JUUT.Core.Impl.Attributes;
-
-using System;
+﻿using System;
 using System.Reflection;
+
+using JUUT.Core.Attributes;
 
 namespace JUUT.Core.Impl.Reports {
 

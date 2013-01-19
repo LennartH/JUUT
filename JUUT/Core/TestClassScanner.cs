@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-using JUUT.Core.Impl.Attributes;
+using JUUT.Core.Attributes;
 
 namespace JUUT.Core {
 

@@ -38,15 +38,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Attributes\ClassSetUpAttribute.cs" />
+    <Compile Include="Core\Attributes\ClassTearDownAttribute.cs" />
+    <Compile Include="Core\Attributes\JUUTAttribute.cs" />
+    <Compile Include="Core\Attributes\JUUTTestClassAttribute.cs" />
+    <Compile Include="Core\Attributes\SimpleTestMethodAttribute.cs" />
+    <Compile Include="Core\Attributes\TestSetUpAttribute.cs" />
+    <Compile Include="Core\Attributes\TestTearDownAttribute.cs" />
     <Compile Include="Core\Impl\Reports\AbstractReport.cs" />
     <Compile Include="Core\Impl\AbstractTestReporter.cs" />
     <Compile Include="Core\Impl\AssertException.cs" />
-    <Compile Include="Core\Impl\Attributes\ClassSetUpAttribute.cs" />
-    <Compile Include="Core\Impl\Attributes\ClassTearDownAttribute.cs" />
-    <Compile Include="Core\Impl\Attributes\SimpleTestMethodAttribute.cs" />
-    <Compile Include="Core\Impl\Attributes\TestTearDownAttribute.cs" />
-    <Compile Include="Core\Impl\Attributes\TestSetUpAttribute.cs" />
-    <Compile Include="Core\Impl\Attributes\JUUTTestClassAttribute.cs" />
     <Compile Include="Core\Assert.cs" />
     <Compile Include="Core\Impl\Reports\TestClassReport.cs" />
     <Compile Include="Core\Impl\SimpleTestRunner.cs" />

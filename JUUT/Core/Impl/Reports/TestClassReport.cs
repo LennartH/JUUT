@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-using JUUT.Core.Impl.Attributes;
+using JUUT.Core.Attributes;
 
 namespace JUUT.Core.Impl.Reports {
 
@@ -18,16 +18,16 @@ namespace JUUT.Core.Impl.Reports {
             if (raisedException == null) {
                 throw new ArgumentException("The exception of a TestClassReport can't be null.");
             }
-            if (IsMethodNotSetUpAndNotTearDown()) {
+            if (!IsMethodSetUpOrTearDown()) {
                 throw new ArgumentException("The method of a TestClassReport has to have the ClassSetUp-, TestSetUp-, TestTearDown- or ClassTearDown-Attribute.");
             }
         }
 
-        private bool IsMethodNotSetUpAndNotTearDown() {
-            return RunnedMethod.GetCustomAttribute(typeof(ClassSetUpAttribute)) == null &&
-                   RunnedMethod.GetCustomAttribute(typeof(TestSetUpAttribute)) == null &&
-                   RunnedMethod.GetCustomAttribute(typeof(TestTearDownAttribute)) == null &&
-                   RunnedMethod.GetCustomAttribute(typeof(ClassTearDownAttribute)) == null;
+        private bool IsMethodSetUpOrTearDown() {
+            return RunnedMethod.GetCustomAttribute(typeof(ClassSetUpAttribute)) != null ||
+                   RunnedMethod.GetCustomAttribute(typeof(TestSetUpAttribute)) != null ||
+                   RunnedMethod.GetCustomAttribute(typeof(TestTearDownAttribute)) != null ||
+                   RunnedMethod.GetCustomAttribute(typeof(ClassTearDownAttribute)) != null;
         }
 
         private void SetText(Exception raisedException) {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using JUUT.Core;
+using JUUT.Core.Attributes;
 using JUUT.Core.Impl;
-using JUUT.Core.Impl.Attributes;
 using JUUT.Core.Impl.Reports;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
