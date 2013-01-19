@@ -24,33 +24,14 @@ namespace JUUT.Core.Impl.Reports {
         }
 
         private bool IsMethodSetUpOrTearDown() {
-            return RunnedMethod.GetCustomAttribute(typeof(ClassSetUpAttribute)) != null ||
-                   RunnedMethod.GetCustomAttribute(typeof(TestSetUpAttribute)) != null ||
-                   RunnedMethod.GetCustomAttribute(typeof(TestTearDownAttribute)) != null ||
-                   RunnedMethod.GetCustomAttribute(typeof(ClassTearDownAttribute)) != null;
+            JUUTAttribute attribute = RunnedMethod.GetCustomAttribute<JUUTAttribute>();
+            return attribute != null && attribute.IsSetUpOrTearDown;
         }
 
         private void SetText(Exception raisedException) {
-            Text = "The " + GetAttributeName() + "-Method " + RunnedMethod.Name +
+            Text = "The " + RunnedMethod.GetCustomAttribute<JUUTAttribute>().Name + "-Method " + RunnedMethod.Name +
                    " of the test class " + TestClass.Name +
                    " raised an exception: " + raisedException.Message;
-        }
-
-        private string GetAttributeName() {
-            if (RunnedMethod.GetCustomAttribute(typeof(ClassSetUpAttribute)) != null) {
-                return "ClassSetUp";
-            }
-            if (RunnedMethod.GetCustomAttribute(typeof(TestSetUpAttribute)) != null) {
-                return "TestSetUp";
-            }
-            if (RunnedMethod.GetCustomAttribute(typeof(TestTearDownAttribute)) != null) {
-                return "TestTearDown";
-            }
-            if (RunnedMethod.GetCustomAttribute(typeof(ClassTearDownAttribute)) != null) {
-                return "ClassTearDown";
-            }
-
-            throw new NotImplementedException("The attribute of the runned method isn't supported.");
         }
 
     }
