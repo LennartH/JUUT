@@ -26,8 +26,8 @@ namespace TestJUUT {
             JUUTAttribute JUUTTest = typeof(AttributedMock).GetCustomAttribute<JUUTTestClassAttribute>();
             AssertEx.That(JUUTTest, Is.NotNull());
 
-            AssertEx.That(JUUTTest.GetName(), Is.EqualTo("JUUTTestClass"));
-            AssertEx.That(JUUTTest.IsSetUpOrTearDown(), Is.False());
+            AssertEx.That(JUUTTest.Name, Is.EqualTo("JUUTTestClass"));
+            AssertEx.That(JUUTTest.IsSetUpOrTearDown, Is.False());
 
             JUUTTest = typeof(NotAttributedMock).GetCustomAttribute<JUUTTestClassAttribute>();
             AssertEx.That(JUUTTest, Is.Null());
@@ -41,8 +41,8 @@ namespace TestJUUT {
             AssertEx.That(classSetUps[0], Is.EqualTo(typeof(AttributedMock).GetMethod("MockSetUp")));
 
             JUUTAttribute classSetUp = classSetUps[0].GetCustomAttribute<ClassSetUpAttribute>();
-            AssertEx.That(classSetUp.GetName(), Is.EqualTo("ClassSetUp"));
-            AssertEx.That(classSetUp.IsSetUpOrTearDown(), Is.True());
+            AssertEx.That(classSetUp.Name, Is.EqualTo("ClassSetUp"));
+            AssertEx.That(classSetUp.IsSetUpOrTearDown, Is.True());
 
             classSetUps = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(ClassSetUpAttribute));
             AssertEx.That(classSetUps.Count, Is.EqualTo(0), "Registered a class set up method in NotAttributedMock.");
@@ -56,8 +56,8 @@ namespace TestJUUT {
             AssertEx.That(classTearDowns[0], Is.EqualTo(typeof(AttributedMock).GetMethod("MockTearDown")));
 
             JUUTAttribute classTearDown = classTearDowns[0].GetCustomAttribute<ClassTearDownAttribute>();
-            AssertEx.That(classTearDown.GetName(), Is.EqualTo("ClassTearDown"));
-            AssertEx.That(classTearDown.IsSetUpOrTearDown(), Is.True());
+            AssertEx.That(classTearDown.Name, Is.EqualTo("ClassTearDown"));
+            AssertEx.That(classTearDown.IsSetUpOrTearDown, Is.True());
 
             classTearDowns = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(ClassTearDownAttribute));
             AssertEx.That(classTearDowns.Count, Is.EqualTo(0), "Registered a class tear down method in NotAttributedMock.");
@@ -71,8 +71,8 @@ namespace TestJUUT {
             AssertEx.That(testSetUps[0], Is.EqualTo(typeof(AttributedMock).GetMethod("MockTestSetUp")));
 
             JUUTAttribute testSetUp = testSetUps[0].GetCustomAttribute<TestSetUpAttribute>();
-            AssertEx.That(testSetUp.GetName(), Is.EqualTo("TestSetUp"));
-            AssertEx.That(testSetUp.IsSetUpOrTearDown(), Is.True());
+            AssertEx.That(testSetUp.Name, Is.EqualTo("TestSetUp"));
+            AssertEx.That(testSetUp.IsSetUpOrTearDown, Is.True());
 
             testSetUps = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(TestSetUpAttribute));
             AssertEx.That(testSetUps.Count, Is.EqualTo(0), "Registered a test set up method in NotAttributedMock.");
@@ -86,8 +86,8 @@ namespace TestJUUT {
             AssertEx.That(testTearDowns[0], Is.EqualTo(typeof(AttributedMock).GetMethod("MockTestTearDown")));
 
             JUUTAttribute testTearDown = testTearDowns[0].GetCustomAttribute<TestTearDownAttribute>();
-            AssertEx.That(testTearDown.GetName(), Is.EqualTo("TestTearDown"));
-            AssertEx.That(testTearDown.IsSetUpOrTearDown(), Is.True());
+            AssertEx.That(testTearDown.Name, Is.EqualTo("TestTearDown"));
+            AssertEx.That(testTearDown.IsSetUpOrTearDown, Is.True());
 
             testTearDowns = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(TestTearDownAttribute));
             AssertEx.That(testTearDowns.Count, Is.EqualTo(0), "Registered a test tear down method in NotAttributedMock.");
@@ -103,8 +103,8 @@ namespace TestJUUT {
             }
 
             JUUTAttribute testTearDown = simpleTests[0].GetCustomAttribute<SimpleTestMethodAttribute>();
-            AssertEx.That(testTearDown.GetName(), Is.EqualTo("SimpleTestMethod"));
-            AssertEx.That(testTearDown.IsSetUpOrTearDown(), Is.False());
+            AssertEx.That(testTearDown.Name, Is.EqualTo("SimpleTestMethod"));
+            AssertEx.That(testTearDown.IsSetUpOrTearDown, Is.False());
 
             simpleTests = GetMethodsOfTypeWithAttribute(typeof(NotAttributedMock), typeof(SimpleTestMethodAttribute));
             AssertEx.That(simpleTests.Count, Is.EqualTo(0), "Found a simple test method in " + typeof(NotAttributedMock).Name + ".");

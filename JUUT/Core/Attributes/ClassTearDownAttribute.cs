@@ -7,13 +7,7 @@ namespace JUUT.Core.Attributes {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public sealed class ClassTearDownAttribute : JUUTAttribute {
 
-        public override string GetName() {
-            return "ClassTearDown";
-        }
-
-        public override bool IsSetUpOrTearDown() {
-            return true;
-        }
+        public ClassTearDownAttribute() : base(true, "ClassTearDown") { }
 
     }
 }

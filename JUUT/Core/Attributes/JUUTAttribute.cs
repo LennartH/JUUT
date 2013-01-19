@@ -10,14 +10,19 @@ namespace JUUT.Core.Attributes {
         /// <summary>
         /// Returns the name of the attribute.
         /// </summary>
-        /// <returns></returns>
-        public abstract string GetName();
+        /// <value></value>
+        public string Name { get; private set; }
 
         /// <summary>
         /// Returns true, if the attribute is ClassSetUp, TestSetUp, TestTearDown or TestSetUp.
         /// </summary>
-        /// <returns></returns>
-        public abstract bool IsSetUpOrTearDown();
+        /// <value></value>
+        public bool IsSetUpOrTearDown { get; private set; }
+
+        protected JUUTAttribute(bool isSetUpOrTearDown, string name) {
+            Name = name;
+            IsSetUpOrTearDown = isSetUpOrTearDown;
+        }
 
     }
 }
