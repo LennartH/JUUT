@@ -1,25 +1,8 @@
 ﻿using System;
 
-using JUUT.Core.Impl;
+using JUUT.Core.Impl.Reports;
 
 namespace JUUT.Core {
-
-    /// <summary>
-    /// Enum for the different ranges reports can be about.
-    /// </summary>
-    public enum ReportRange {
-
-        /// <summary>
-        /// This indicates, that the report is about a test method.
-        /// </summary>
-        TestMethod,
-
-        /// <summary>
-        /// This indicates, that the report is about a test class.
-        /// </summary>
-        TestClass
-
-    }
 
     /// <summary>
     /// Interface for reports, that are created during the run of tests.
@@ -32,7 +15,7 @@ namespace JUUT.Core {
         string Text { get; }
 
         /// <summary>
-        /// The type of the test class, which contains the <seealso cref="TestMethod"/>.<para />
+        /// The type of the test class, which refers to the report.<para />
         /// Can be null, if the method has no declaring type.
         /// </summary>
         Type TestClass { get; }

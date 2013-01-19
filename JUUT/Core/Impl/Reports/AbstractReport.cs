@@ -34,18 +34,7 @@ namespace JUUT.Core.Impl.Reports {
         }
 
         public override string ToString() {
-            return RangeAsText() + " wide report of " + TestClass.Name + ": " + Text;
-        }
-
-        private string RangeAsText() {
-            switch (Range) {
-                case ReportRange.TestMethod:
-                    return "Test";
-                case ReportRange.TestClass:
-                    return "Class";
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            return Range.Name + " wide report of " + TestClass.Name + ": " + Text;
         }
 
         private bool Equals(AbstractReport other) {

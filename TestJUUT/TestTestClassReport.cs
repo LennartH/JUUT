@@ -76,7 +76,7 @@ namespace TestJUUT {
         public void ReportToString() {
             Exception raisedException = new NullReferenceException("Exception text");
             Report report = new TestClassReport(ClassSetUp, raisedException);
-            AssertEx.That(report.ToString(), Is.EqualTo("Class wide report of " + typeof(TestOwnerMock).Name + ": " + report.Text));
+            AssertEx.That(report.ToString(), Is.EqualTo("TestClass wide report of " + typeof(TestOwnerMock).Name + ": " + report.Text));
         }
 
         //TODO add test for hash code and equals

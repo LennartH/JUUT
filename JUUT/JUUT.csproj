@@ -49,6 +49,7 @@
     <Compile Include="Core\Impl\AbstractTestReporter.cs" />
     <Compile Include="Core\Impl\AssertException.cs" />
     <Compile Include="Core\Assert.cs" />
+    <Compile Include="Core\Impl\Reports\ReportRange.cs" />
     <Compile Include="Core\Impl\Reports\TestClassReport.cs" />
     <Compile Include="Core\Impl\SimpleTestRunner.cs" />
     <Compile Include="Core\TestClassScanner.cs" />

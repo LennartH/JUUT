@@ -8,6 +8,7 @@ namespace JUUT.Core.Impl {
     /// Exception which is thrown by failed assertions.<para />
     /// See <seealso cref="Assert" /> for more information how to assert conditions.
     /// </summary>
+    [Serializable]
     public sealed class AssertException : Exception {
 
         /// <summary>
