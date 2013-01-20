@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
 
-namespace JUUT.Core {
+namespace JUUT.Core.Impl {
 
     /// <summary>
     /// Static class to scan JUUT-Tests for methods with the JUUT attributes.

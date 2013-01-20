@@ -9,5 +9,9 @@ namespace JUUT.Core.Attributes {
 
         public TestSetUpAttribute() : base(true, "TestSetUp") { }
 
+        protected override AttributeMemberValidator GetValidator() {
+            throw new NotImplementedException();
+        }
+
     }
 }

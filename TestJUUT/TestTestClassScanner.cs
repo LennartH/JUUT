@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 using JUUT.Core;
 using JUUT.Core.Attributes;
+using JUUT.Core.Impl;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

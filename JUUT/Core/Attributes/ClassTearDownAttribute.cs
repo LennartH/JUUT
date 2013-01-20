@@ -9,5 +9,9 @@ namespace JUUT.Core.Attributes {
 
         public ClassTearDownAttribute() : base(true, "ClassTearDown") { }
 
+        protected override AttributeMemberValidator GetValidator() {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -9,5 +9,9 @@ namespace JUUT.Core.Attributes {
 
         public SimpleTestMethodAttribute() : base(false, "SimpleTestMethod") { }
 
+        protected override AttributeMemberValidator GetValidator() {
+            throw new NotImplementedException();
+        }
+
     }
 }

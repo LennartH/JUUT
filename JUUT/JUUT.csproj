@@ -52,7 +52,7 @@
     <Compile Include="Core\Impl\Reports\ReportRange.cs" />
     <Compile Include="Core\Impl\Reports\TestClassReport.cs" />
     <Compile Include="Core\Impl\SimpleTestRunner.cs" />
-    <Compile Include="Core\TestClassScanner.cs" />
+    <Compile Include="Core\Impl\TestClassScanner.cs" />
     <Compile Include="Core\TestReporter.cs" />
     <Compile Include="Core\TestRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

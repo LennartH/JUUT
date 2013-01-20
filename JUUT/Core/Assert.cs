@@ -7,7 +7,7 @@ namespace JUUT.Core {
     /// <summary>
     /// Class to assert conditions to tests.
     /// </summary>
-    public class Assert {
+    public static class Assert {
 
         /// <summary>
         /// Causes the test to fail without a message.
