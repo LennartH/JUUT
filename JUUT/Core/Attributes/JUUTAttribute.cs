@@ -12,20 +12,15 @@ namespace JUUT.Core.Attributes {
         /// Returns the name of the attribute.
         /// </summary>
         /// <value></value>
-        public string Name { get; private set; }
+        public abstract string Name { get; }
 
         /// <summary>
         /// Returns true, if the attribute is ClassSetUp, TestSetUp, TestTearDown or TestSetUp.
         /// </summary>
         /// <value></value>
-        public bool IsSetUpOrTearDown { get; private set; }
+        public abstract bool IsSetUpOrTearDown { get; }
 
         protected delegate bool AttributeMemberValidator(MemberInfo member);
-
-        protected JUUTAttribute(bool isSetUpOrTearDown, string name) {
-            Name = name;
-            IsSetUpOrTearDown = isSetUpOrTearDown;
-        }
 
         /// <summary>
         /// Returns true, if the given member is valid for the given attribute.<para />

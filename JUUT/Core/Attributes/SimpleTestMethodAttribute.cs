@@ -7,7 +7,13 @@ namespace JUUT.Core.Attributes {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public sealed class SimpleTestMethodAttribute : JUUTAttribute {
 
-        public SimpleTestMethodAttribute() : base(false, "SimpleTestMethod") { }
+        public override string Name {
+            get { return "SimpleTestMethod"; }
+        }
+
+        public override bool IsSetUpOrTearDown {
+            get { return false; }
+        }
 
         protected override AttributeMemberValidator GetValidator() {
             throw new NotImplementedException();

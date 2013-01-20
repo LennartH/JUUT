@@ -8,7 +8,13 @@ namespace JUUT.Core.Attributes {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public sealed class JUUTTestClassAttribute : JUUTAttribute {
 
-        public JUUTTestClassAttribute() : base(false, "JUUTTestClass") { }
+        public override string Name {
+            get { return "JUUTTestClass"; }
+        }
+
+        public override bool IsSetUpOrTearDown {
+            get { return false; }
+        }
 
         protected override AttributeMemberValidator GetValidator() {
             return delegate(MemberInfo member) {

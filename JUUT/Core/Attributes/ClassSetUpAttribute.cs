@@ -7,7 +7,13 @@ namespace JUUT.Core.Attributes {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public sealed class ClassSetUpAttribute : JUUTAttribute {
 
-        public ClassSetUpAttribute() : base(true, "ClassSetUp") { }
+        public override string Name {
+            get { return "ClassSetUp"; }
+        }
+
+        public override bool IsSetUpOrTearDown {
+            get { return true; }
+        }
 
         protected override AttributeMemberValidator GetValidator() {
             throw new NotImplementedException();
