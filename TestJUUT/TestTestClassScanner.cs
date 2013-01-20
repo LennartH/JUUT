@@ -11,6 +11,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using NHamcrest.Core;
 
+using TestJUUT.Util;
+
 namespace TestJUUT {
 
     [TestClass]
@@ -64,24 +66,6 @@ namespace TestJUUT {
             public void TearDown() { }
             [ClassTearDown]
             public static void ClassTearDown() { }
-
-        }
-
-        [JUUTTestClass]
-        private class TestClassWithNonStaticClassSetUp {
-
-            [ClassSetUp]
-            public void ClassSetUp() { }
-
-        }
-
-        [JUUTTestClass]
-        private class TestClassWithOrganizeMethodsWithParameters {
-
-            [ClassSetUp]
-            public static void ClassSetUp(object parameter) { }
-            [TestSetUp]
-            public static void SetUp(object parameter) { }
 
         }
 

@@ -21,7 +21,7 @@ namespace JUUT.Core.Impl {
         /// <param name="testClass">The test class that is scanned for a ClassSetUp-Method. Can't be null.</param>
         /// <returns>Returns the ClassSetUp-Method or null, if there is none.</returns>
         public static MethodInfo GetClassSetUpOfTest(Type testClass) {
-            EnsureThatTheClassIsValid(testClass);
+            JUUTAttribute.IsMemberValidFor(typeof(JUUTTestClassAttribute), testClass);
 
             MethodInfo classSetUp = null;
             foreach (MethodInfo method in testClass.GetMethods()) {
@@ -44,7 +44,7 @@ namespace JUUT.Core.Impl {
         /// <param name="testClass">The test class that is scanned for a TestSetUp-Method. Can't be null.</param>
         /// <returns>Returns the TestSetUp-Method or null, if there is none.</returns>
         public static MethodInfo GetTestSetUpOfTest(Type testClass) {
-            EnsureThatTheClassIsValid(testClass);
+            JUUTAttribute.IsMemberValidFor(typeof(JUUTTestClassAttribute), testClass);
 
             MethodInfo testSetUp = null;
             foreach (MethodInfo method in testClass.GetMethods()) {
@@ -57,20 +57,6 @@ namespace JUUT.Core.Impl {
                 }
             }
             return testSetUp;
-        }
-
-        /// <summary>
-        /// Checks that the given class isn't null and has the JUUTTestClass-Attribute.<para />
-        /// Throws an ArgumentNullException, if the given class is null and an ArgumentException if it doesn't have the JUUTTestClass-Attribute.
-        /// </summary>
-        /// <param name="testClass"></param>
-        private static void EnsureThatTheClassIsValid(Type testClass) {
-            if (testClass == null) {
-                throw new ArgumentNullException();
-            }
-            if (testClass.GetCustomAttribute(typeof(JUUTTestClassAttribute)) == null) {
-                throw new ArgumentException("The class " + testClass.Name + " doesn't have the JUUTTestClass-Attribute.");
-            }
         }
 
         /// <summary>

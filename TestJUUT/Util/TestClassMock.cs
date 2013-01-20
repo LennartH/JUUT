@@ -6,7 +6,7 @@ namespace TestJUUT.Util {
     internal class TestClassMock {
 
         [ClassSetUp]
-        public void MockSetUp() { }
+        public static void MockSetUp() { }
         [TestSetUp]
         public void MockTestSetUp() { }
 
@@ -18,7 +18,7 @@ namespace TestJUUT.Util {
         [TestTearDown]
         public void MockTestTearDown() { }
         [ClassTearDown]
-        public void MockTearDown() { }
+        public static void MockTearDown() { }
             
     }
 

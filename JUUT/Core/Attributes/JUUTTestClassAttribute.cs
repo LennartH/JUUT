@@ -18,6 +18,9 @@ namespace JUUT.Core.Attributes {
 
         protected override AttributeMemberValidator GetValidator() {
             return delegate(MemberInfo member) {
+                if (member == null) {
+                    throw new ArgumentNullException();
+                }
                 if (!(member is Type)) {
                     throw new ArgumentException("The given member is no class.");
                 }
