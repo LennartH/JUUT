@@ -19,11 +19,7 @@ namespace JUUT.Core.Attributes {
 
         protected override AttributeMemberValidator GetValidator() {
             return delegate(MemberInfo member) {
-                if (!(member is MethodInfo)) {
-                    throw new ArgumentException("The given member is no method");
-                }
-
-                MethodInfo method = member as MethodInfo;
+                MethodInfo method = (MethodInfo) member;
                 if (member.GetCustomAttribute<ClassSetUpAttribute>() != null) {
                     if (!method.IsStatic) {
                         throw new ArgumentException("The method " + method.Name + " isn't static.");

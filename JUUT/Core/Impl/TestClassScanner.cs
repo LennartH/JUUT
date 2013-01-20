@@ -25,7 +25,7 @@ namespace JUUT.Core.Impl {
 
             MethodInfo classSetUp = null;
             foreach (MethodInfo method in testClass.GetMethods()) {
-                if (IsMethodAValidClassSetUp(method)) {
+                if (JUUTAttribute.IsMemberValidFor(typeof(ClassSetUpAttribute), method)) {
                     if (classSetUp != null) {
                         throw new ArgumentException("The class " + testClass.Name + " has more than one ClassSetUp-Methods.");
                     }
@@ -57,16 +57,6 @@ namespace JUUT.Core.Impl {
                 }
             }
             return testSetUp;
-        }
-
-        /// <summary>
-        /// Checks that the given method has the ClassSetUp-Attribute, that it is static and it has no parameters.<para />
-        /// Throws an ArgumentException, if the given method isn't static or has parameters.
-        /// </summary>
-        /// <param name="method">The method to check, that it is a ClassSetUp-Method.</param>
-        /// <returns>True, if the method is a valid ClassSetUp-Method.</returns>
-        private static bool IsMethodAValidClassSetUp(MethodInfo method) {
-            return EnsureThat(method, hasThe: typeof(ClassSetUpAttribute), andIsStatic: true, andHasNoParameters: true);
         }
 
         /// <summary>

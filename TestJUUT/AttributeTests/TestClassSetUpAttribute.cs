@@ -29,8 +29,8 @@ namespace TestJUUT.AttributeTests {
             classSetUp = typeof(TestClassMock).GetMethod("MockSetUp");
             AssertEx.That(JUUTAttribute.IsMemberValidFor(typeof(ClassSetUpAttribute), classSetUp), Is.True());
 
-            classSetUp = typeof(TestClassMock);
-            AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(ClassSetUpAttribute), classSetUp), Throws.An<ArgumentException>());
+            Type classType = typeof(TestClassMock);
+            AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(ClassSetUpAttribute), classType), Throws.An<InvalidCastException>());
             classSetUp = typeof(TestClassWithNonStaticClassSetUp).GetMethod("ClassSetUp");
             AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(ClassSetUpAttribute), classSetUp), Throws.An<ArgumentException>());
             classSetUp = typeof(TestClassWithOrganizeMethodsWithParameters).GetMethod("ClassSetUp");
