@@ -3,10 +3,12 @@
 namespace TestJUUT.Util {
 
     [JUUTTestClass]
-    internal class TestClassWithNonStaticClassSetUp {
+    internal class TestClassWithNonStaticClassOrganizeMethods {
 
         [ClassSetUp]
         public void ClassSetUp() { }
+        [ClassTearDown]
+        public void ClassTearDown() { }
 
     }
 

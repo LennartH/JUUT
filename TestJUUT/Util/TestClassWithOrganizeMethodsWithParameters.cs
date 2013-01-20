@@ -10,6 +10,9 @@ namespace TestJUUT.Util {
         [TestSetUp]
         public static void SetUp(object parameter) { }
 
+        [ClassSetUp]
+        public static void ClassTearDown(object parameter) { }
+
     }
 
 }

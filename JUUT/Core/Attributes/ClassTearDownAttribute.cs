@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Reflection;
 
 namespace JUUT.Core.Attributes {
     /// <summary>
@@ -16,7 +18,20 @@ namespace JUUT.Core.Attributes {
         }
 
         protected override AttributeMemberValidator GetValidator() {
-            throw new NotImplementedException();
+            return delegate(MemberInfo member) {
+                MethodInfo method = (MethodInfo) member;
+                if (method.GetCustomAttribute<ClassTearDownAttribute>() != null) {
+                    if (!method.IsStatic) {
+                        throw new ArgumentException("The method " + method.Name + " isn't static.");
+                    }
+                    if (method.GetParameters().Count() != 0) {
+                        throw new ArgumentException("The method " + method.Name + " has parameters.");
+                    }
+
+                    return true;
+                }
+                return false;
+            };
         }
 
     }

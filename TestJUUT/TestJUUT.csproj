@@ -78,7 +78,7 @@
     <Compile Include="TestAbstractTestReporter.cs" />
     <Compile Include="TestTestClassRunner.cs" />
     <Compile Include="TestReportRange.cs" />
-    <Compile Include="Util\TestClassWithNonStaticClassSetUp.cs" />
+    <Compile Include="Util\TestClassWithNonStaticClassOrganizeMethods.cs" />
     <Compile Include="Util\TestClassWithOrganizeMethodsWithParameters.cs" />
   </ItemGroup>
   <ItemGroup>

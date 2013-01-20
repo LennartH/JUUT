@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
@@ -19,6 +20,21 @@ namespace TestJUUT.AttributeTests {
             JUUTAttribute classTearDown = new ClassTearDownAttribute();
             AssertEx.That(classTearDown.Name, Is.EqualTo("ClassTearDown"));
             AssertEx.That(classTearDown.IsSetUpOrTearDown, Is.True());
+        }
+
+        [TestMethod]
+        public void MemberValidation() {
+            MethodInfo classTearDown = typeof(NotAttributedMock).GetMethod("Foo");
+            AssertEx.That(JUUTAttribute.IsMemberValidFor(typeof(ClassTearDownAttribute), classTearDown), Is.False());
+            classTearDown = typeof(TestClassMock).GetMethod("MockTearDown");
+            AssertEx.That(JUUTAttribute.IsMemberValidFor(typeof(ClassTearDownAttribute), classTearDown), Is.True());
+
+            Type classType = typeof(TestClassMock);
+            AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(ClassTearDownAttribute), classType), Throws.An<InvalidCastException>());
+            classTearDown = typeof(TestClassWithNonStaticClassOrganizeMethods).GetMethod("ClassTearDown");
+            AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(ClassTearDownAttribute), classTearDown), Throws.An<ArgumentException>());
+            classTearDown = typeof(TestClassWithOrganizeMethodsWithParameters).GetMethod("ClassTearDown");
+            AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(ClassTearDownAttribute), classTearDown), Throws.An<ArgumentException>());
         }
 
     }

@@ -29,7 +29,7 @@ namespace TestJUUT {
             AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(null), Throws.An<ArgumentNullException>());
 
             AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(NotAJUUTTest)), Throws.An<ArgumentException>());
-            AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithNonStaticClassSetUp)), Throws.An<ArgumentException>());
+            AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithNonStaticClassOrganizeMethods)), Throws.An<ArgumentException>());
             AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithOrganizeMethodsWithParameters)), Throws.An<ArgumentException>());
             AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithMoreThanOneOrganizeMethod)), Throws.An<ArgumentException>());
         }
