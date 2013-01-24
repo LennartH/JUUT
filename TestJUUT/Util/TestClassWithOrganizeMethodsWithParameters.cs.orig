@@ -10,9 +10,13 @@ namespace TestJUUT.Util {
         [TestSetUp]
         public static void SetUp(object parameter) { }
 
+<<<<<<< HEAD
+        [ClassSetUp]
+=======
         [TestTearDown]
         public static void TearDown(object parameter) { }
         [ClassTearDown]
+>>>>>>> Implemented validation delegate of ClassTearDownAttribute.
         public static void ClassTearDown(object parameter) { }
 
     }

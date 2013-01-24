@@ -30,7 +30,7 @@ namespace TestJUUT {
 
             AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(NotAJUUTTest)), Throws.An<ArgumentException>());
             AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithNonStaticClassOrganizeMethods)), Throws.An<ArgumentException>());
-            AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithOrganizeMethodsWithParameters)), Throws.An<ArgumentException>());
+            AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithMethodsWithParameters)), Throws.An<ArgumentException>());
             AssertEx.That(() => TestClassScanner.GetClassSetUpOfTest(typeof(TestClassWithMoreThanOneOrganizeMethod)), Throws.An<ArgumentException>());
         }
         
@@ -45,7 +45,7 @@ namespace TestJUUT {
             AssertEx.That(() => TestClassScanner.GetTestSetUpOfTest(null), Throws.An<ArgumentNullException>());
             
             AssertEx.That(() => TestClassScanner.GetTestSetUpOfTest(typeof(NotAJUUTTest)), Throws.An<ArgumentException>());
-            AssertEx.That(() => TestClassScanner.GetTestSetUpOfTest(typeof(TestClassWithOrganizeMethodsWithParameters)), Throws.An<ArgumentException>());
+            AssertEx.That(() => TestClassScanner.GetTestSetUpOfTest(typeof(TestClassWithMethodsWithParameters)), Throws.An<ArgumentException>());
             AssertEx.That(() => TestClassScanner.GetTestSetUpOfTest(typeof(TestClassWithMoreThanOneOrganizeMethod)), Throws.An<ArgumentException>());
         }
 

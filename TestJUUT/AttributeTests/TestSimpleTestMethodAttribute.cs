@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
@@ -19,6 +19,19 @@ namespace TestJUUT.AttributeTests {
             JUUTAttribute testTearDown = new SimpleTestMethodAttribute();
             AssertEx.That(testTearDown.Name, Is.EqualTo("SimpleTestMethod"));
             AssertEx.That(testTearDown.IsSetUpOrTearDown, Is.False());
+        }
+
+        [TestMethod]
+        public void MemberValidation() {
+            MethodInfo simpleTestMethod = typeof(NotAttributedMock).GetMethod("Foo");
+            AssertEx.That(JUUTAttribute.IsMemberValidFor(typeof(SimpleTestMethodAttribute), simpleTestMethod), Is.False());
+            simpleTestMethod = typeof(TestClassMock).GetMethod("FirstTestMethod");
+            AssertEx.That(JUUTAttribute.IsMemberValidFor(typeof(SimpleTestMethodAttribute), simpleTestMethod), Is.True());
+
+            Type classType = typeof(TestClassMock);
+            AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(SimpleTestMethodAttribute), classType), Throws.An<InvalidCastException>());
+            simpleTestMethod = typeof(TestClassWithMethodsWithParameters).GetMethod("TestMethod");
+            AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(SimpleTestMethodAttribute), simpleTestMethod), Throws.An<ArgumentException>());
         }
 
     }

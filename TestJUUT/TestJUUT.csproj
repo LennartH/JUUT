@@ -79,7 +79,7 @@
     <Compile Include="TestTestClassRunner.cs" />
     <Compile Include="TestReportRange.cs" />
     <Compile Include="Util\TestClassWithNonStaticClassOrganizeMethods.cs" />
-    <Compile Include="Util\TestClassWithOrganizeMethodsWithParameters.cs" />
+    <Compile Include="Util\TestClassWithMethodsWithParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JUUT\JUUT.csproj">

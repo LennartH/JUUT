@@ -33,7 +33,7 @@ namespace TestJUUT.AttributeTests {
             AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(ClassSetUpAttribute), classType), Throws.An<InvalidCastException>());
             classSetUp = typeof(TestClassWithNonStaticClassOrganizeMethods).GetMethod("ClassSetUp");
             AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(ClassSetUpAttribute), classSetUp), Throws.An<ArgumentException>());
-            classSetUp = typeof(TestClassWithOrganizeMethodsWithParameters).GetMethod("ClassSetUp");
+            classSetUp = typeof(TestClassWithMethodsWithParameters).GetMethod("ClassSetUp");
             AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(ClassSetUpAttribute), classSetUp), Throws.An<ArgumentException>());
         }
 
