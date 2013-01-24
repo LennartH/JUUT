@@ -16,20 +16,18 @@ namespace JUUT.Core.Attributes {
             get { return false; }
         }
 
-        protected override AttributeMemberValidator GetValidator() {
-            return delegate(MemberInfo member) {
-                if (member == null) {
-                    throw new ArgumentNullException();
-                }
-                if (!(member is Type)) {
-                    throw new ArgumentException("The given member is no class.");
-                }
+        protected override bool Validate(MemberInfo member) {
+            if (member == null) {
+                throw new ArgumentNullException();
+            }
+            if (!(member is Type)) {
+                throw new ArgumentException("The given member is no class.");
+            }
 
-                if (member.GetCustomAttribute<JUUTTestClassAttribute>() != null) {
-                    return true;
-                }
-                throw new ArgumentException("The class " + member.Name + " doesn't have the JUUTTestClass-Attribute.");
-            };
+            if (member.GetCustomAttribute<JUUTTestClassAttribute>() != null) {
+                return true;
+            }
+            throw new ArgumentException("The class " + member.Name + " doesn't have the JUUTTestClass-Attribute.");
         }
 
     }

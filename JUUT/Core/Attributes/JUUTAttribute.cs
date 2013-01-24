@@ -30,11 +30,10 @@ namespace JUUT.Core.Attributes {
         /// <param name="memberToCheck">The member to check.</param>
         /// <returns></returns>
         public static bool IsMemberValidFor(Type attribute, MemberInfo memberToCheck) {
-            AttributeMemberValidator validator = ((JUUTAttribute) Activator.CreateInstance(attribute)).GetValidator();
-            return validator(memberToCheck);
+            return ((JUUTAttribute) Activator.CreateInstance(attribute)).Validate(memberToCheck);
         }
 
-        protected abstract AttributeMemberValidator GetValidator();
+        protected abstract bool Validate(MemberInfo member);
 
     }
 }

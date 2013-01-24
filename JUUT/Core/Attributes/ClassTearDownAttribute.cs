@@ -17,21 +17,19 @@ namespace JUUT.Core.Attributes {
             get { return true; }
         }
 
-        protected override AttributeMemberValidator GetValidator() {
-            return delegate(MemberInfo member) {
-                MethodInfo method = (MethodInfo) member;
-                if (method.GetCustomAttribute<ClassTearDownAttribute>() != null) {
-                    if (!method.IsStatic) {
-                        throw new ArgumentException("The method " + method.Name + " isn't static.");
-                    }
-                    if (method.GetParameters().Count() != 0) {
-                        throw new ArgumentException("The method " + method.Name + " has parameters.");
-                    }
-
-                    return true;
+        protected override bool Validate(MemberInfo member) {
+            MethodInfo method = (MethodInfo) member;
+            if (method.GetCustomAttribute<ClassTearDownAttribute>() != null) {
+                if (!method.IsStatic) {
+                    throw new ArgumentException("The method " + method.Name + " isn't static.");
                 }
-                return false;
-            };
+                if (method.GetParameters().Count() != 0) {
+                    throw new ArgumentException("The method " + method.Name + " has parameters.");
+                }
+
+                return true;
+            }
+            return false;
         }
 
     }

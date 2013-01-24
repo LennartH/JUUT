@@ -17,18 +17,16 @@ namespace JUUT.Core.Attributes {
             get { return false; }
         }
 
-        protected override AttributeMemberValidator GetValidator() {
-            return delegate(MemberInfo member) {
-                MethodInfo method = (MethodInfo) member;
-                if (method.GetCustomAttribute<SimpleTestMethodAttribute>() != null) {
-                    if (method.GetParameters().Count() != 0) {
-                        throw new ArgumentException("The method " + method.Name + " has parameters.");
-                    }
-
-                    return true;
+        protected override bool Validate(MemberInfo member) {
+            MethodInfo method = (MethodInfo) member;
+            if (method.GetCustomAttribute<SimpleTestMethodAttribute>() != null) {
+                if (method.GetParameters().Count() != 0) {
+                    throw new ArgumentException("The method " + method.Name + " has parameters.");
                 }
-                return false;
-            };
+
+                return true;
+            }
+            return false;
         }
 
     }
