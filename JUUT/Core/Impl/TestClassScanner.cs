@@ -18,7 +18,7 @@ namespace JUUT.Core.Impl {
         /// </summary>
         /// <param name="testClass">The test class that is scanned for a ClassSetUp-Method. Can't be null.</param>
         /// <returns>Returns the ClassSetUp-Method or null, if there is none.</returns>
-        public static MethodInfo GetClassSetUpOfTest(Type testClass) {
+        public static MethodInfo GetClassSetUpOfTestClass(Type testClass) {
             return GetOrganizeMethodOfTest(typeof(ClassSetUpAttribute), testClass);
         }
 
@@ -29,8 +29,30 @@ namespace JUUT.Core.Impl {
         /// </summary>
         /// <param name="testClass">The test class that is scanned for a TestSetUp-Method. Can't be null.</param>
         /// <returns>Returns the TestSetUp-Method or null, if there is none.</returns>
-        public static MethodInfo GetTestSetUpOfTest(Type testClass) {
+        public static MethodInfo GetTestSetUpOfTestClass(Type testClass) {
             return GetOrganizeMethodOfTest(typeof(TestSetUpAttribute), testClass);
+        }
+
+        /// <summary>
+        /// Scans the given class for a TestTearDown-Method (identified with the TestTearDown-Attribute) and returns it or null, if there is none.<para />
+        /// Throws an ArgumentNullException, if the given class is null and an ArgumentException if it doesn't have the JUUTTestClass-Attribute.<para />
+        /// Throws an ArgumentException, if there are more than one TestTearDown-Methods or if the method has parameters.
+        /// </summary>
+        /// <param name="testClass">The test class that is scanned for a TestTearDown-Method. Can't be null.</param>
+        /// <returns>Returns the TestTearDown-Method or null, if there is none.</returns>
+        public static MethodInfo GetTestTearDownOfTestClass(Type testClass) {
+            return GetOrganizeMethodOfTest(typeof(TestTearDownAttribute), testClass);
+        }
+
+        /// <summary>
+        /// Scans the given class for a ClassTearDown-Method (identified with the ClassTearDown-Attribute) and returns it or null, if there is none.<para />
+        /// Throws an ArgumentNullException, if the given class is null and an ArgumentException if it doesn't have the JUUTTestClass-Attribute.<para />
+        /// Throws an ArgumentException, if there are more than one ClassTearDown-Methods or if the method has parameters.
+        /// </summary>
+        /// <param name="testClass">The test class that is scanned for a ClassTearDown-Method. Can't be null.</param>
+        /// <returns>Returns the ClassTearDown-Method or null, if there is none.</returns>
+        public static MethodInfo GetClassTearDownMethodOfClass(Type testClass) {
+            return GetOrganizeMethodOfTest(typeof(ClassTearDownAttribute), testClass);
         }
 
         /// <summary>

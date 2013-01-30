@@ -61,11 +61,7 @@ namespace JUUT.Core {
             IDescription mismatchDescription = new StringDescription();
             matcher.DescribeMismatch(actual, mismatchDescription);
 
-            if (message == null) {
-                return new AssertException(description, mismatchDescription);
-            } else {
-                return new AssertException(description, mismatchDescription, message);
-            }
+            return message == null ? new AssertException(description, mismatchDescription) : new AssertException(description, mismatchDescription, message);
         }
 
     }

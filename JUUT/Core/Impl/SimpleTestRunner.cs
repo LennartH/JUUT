@@ -67,12 +67,12 @@ namespace JUUT.Core.Impl {
         /// <returns>A report if an exception is thrown. Otherwhise null.</returns>
         private TestClassReport RunClassSetUp() {
             try {
-                TestClassScanner.GetClassSetUpOfTest(TestClass).Invoke(null, null);
+                TestClassScanner.GetClassSetUpOfTestClass(TestClass).Invoke(null, null);
             } catch (Exception raisedException) {
                 if (raisedException is TargetInvocationException) {
                     raisedException = raisedException.InnerException;
                 }
-                return new TestClassReport(TestClassScanner.GetClassSetUpOfTest(TestClass), raisedException);
+                return new TestClassReport(TestClassScanner.GetClassSetUpOfTestClass(TestClass), raisedException);
             }
 
             return null;

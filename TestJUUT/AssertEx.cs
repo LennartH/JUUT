@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace TestJUUT
 {
-    public class AssertEx
+    public static class AssertEx
     {
         public static void That<T>(T actual, IMatcher<T> matcher)
         {
