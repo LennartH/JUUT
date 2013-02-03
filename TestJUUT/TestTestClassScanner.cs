@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
@@ -17,7 +18,7 @@ namespace TestJUUT {
 
         [TestMethod]
         public void GetClassSetUp() {
-            MethodInfo classSetUpMethod = TestClassScanner.GetClassSetUpOfTestClass(typeof(TestClassWithNoOrganizeMethods));
+            MethodInfo classSetUpMethod = TestClassScanner.GetClassSetUpOfTestClass(typeof(TestClassWithNoJUUTMethods));
             AssertEx.That(classSetUpMethod, Is.Null());
 
             classSetUpMethod = TestClassScanner.GetClassSetUpOfTestClass(typeof(TestClassMock));
@@ -33,7 +34,7 @@ namespace TestJUUT {
         
         [TestMethod]
         public void GetTestSetUp() {
-            MethodInfo testSetUpMethod = TestClassScanner.GetTestSetUpOfTestClass(typeof(TestClassWithNoOrganizeMethods));
+            MethodInfo testSetUpMethod = TestClassScanner.GetTestSetUpOfTestClass(typeof(TestClassWithNoJUUTMethods));
             AssertEx.That(testSetUpMethod, Is.Null());
 
             testSetUpMethod = TestClassScanner.GetTestSetUpOfTestClass(typeof(TestClassMock));
@@ -48,7 +49,7 @@ namespace TestJUUT {
 
         [TestMethod]
         public void GetTestTearDown() {
-            MethodInfo testTearDownMethod = TestClassScanner.GetTestTearDownOfTestClass(typeof(TestClassWithNoOrganizeMethods));
+            MethodInfo testTearDownMethod = TestClassScanner.GetTestTearDownOfTestClass(typeof(TestClassWithNoJUUTMethods));
             AssertEx.That(testTearDownMethod, Is.Null());
 
             testTearDownMethod = TestClassScanner.GetTestTearDownOfTestClass(typeof(TestClassMock));
@@ -63,7 +64,7 @@ namespace TestJUUT {
 
         [TestMethod]
         public void GetClassTearDown() {
-            MethodInfo classTearDownMethod = TestClassScanner.GetClassTearDownMethodOfClass(typeof(TestClassWithNoOrganizeMethods));
+            MethodInfo classTearDownMethod = TestClassScanner.GetClassTearDownMethodOfClass(typeof(TestClassWithNoJUUTMethods));
             AssertEx.That(classTearDownMethod, Is.Null());
 
             classTearDownMethod = TestClassScanner.GetClassTearDownMethodOfClass(typeof(TestClassMock));
@@ -74,6 +75,23 @@ namespace TestJUUT {
             AssertEx.That(() => TestClassScanner.GetClassTearDownMethodOfClass(typeof(NotAJUUTTest)), Throws.An<ArgumentException>());
             AssertEx.That(() => TestClassScanner.GetClassTearDownMethodOfClass(typeof(TestClassWithMethodsWithParameters)), Throws.An<ArgumentException>());
             AssertEx.That(() => TestClassScanner.GetClassTearDownMethodOfClass(typeof(TestClassWithMoreThanOneOrganizeMethod)), Throws.An<ArgumentException>());
+        }
+
+        [TestMethod]
+        public void GetSimpleTestMethods() {
+            List<MethodInfo> simpleTestMethods = TestClassScanner.GetSimpleTestMethodsOfClass(typeof(TestClassWithNoJUUTMethods));
+            AssertEx.That(simpleTestMethods.Count == 0, Is.True(), "The amount of test methods should be 0.");
+
+            simpleTestMethods = TestClassScanner.GetSimpleTestMethodsOfClass(typeof(TestClassMock));
+            foreach (MethodInfo testMethod in simpleTestMethods) {
+                AssertEx.That(testMethod, Matches.AnyOf(Is.EqualTo(typeof(TestClassMock).GetMethod("FirstTestMethod")),
+                                                        Is.EqualTo(typeof(TestClassMock).GetMethod("SecondTestMethod"))));
+            }
+
+            AssertEx.That(() => TestClassScanner.GetSimpleTestMethodsOfClass(null), Throws.An<ArgumentNullException>());
+
+            AssertEx.That(() => TestClassScanner.GetSimpleTestMethodsOfClass(typeof(NotAJUUTTest)), Throws.An<ArgumentException>());
+            AssertEx.That(() => TestClassScanner.GetSimpleTestMethodsOfClass(typeof(TestClassWithMethodsWithParameters)), Throws.An<ArgumentException>());
         }
 
         [JUUTTestClass]
@@ -102,7 +120,7 @@ namespace TestJUUT {
         }
 
         [JUUTTestClass]
-        private class TestClassWithNoOrganizeMethods {
+        private class TestClassWithNoJUUTMethods {
             
         }
 
