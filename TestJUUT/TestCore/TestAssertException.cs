@@ -1,17 +1,17 @@
-﻿using System;
 using System.Text;
 
-using JUUT;
 using JUUT.Core;
 
-using NHamcrest;
-
-using Is = NHamcrest.Core.Is;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using NHamcrest;
+using NHamcrest.Core;
+
+using TestJUUT.Util;
 
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace TestJUUT {
+namespace TestJUUT.TestCore {
 
     [TestClass]
     public class TestAssertException {

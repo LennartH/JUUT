@@ -1,8 +1,10 @@
-﻿using System.IO;
+using System.IO;
+
 using NHamcrest;
+
 using NUnit.Framework;
 
-namespace TestJUUT
+namespace TestJUUT.Util
 {
     public static class AssertEx
     {

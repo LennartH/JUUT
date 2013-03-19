@@ -1,10 +1,7 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using System.Collections.Generic;
 
-using JUUT.Core;
 using JUUT.Core.Attributes;
 using JUUT.Core.Reports;
 
@@ -12,7 +9,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using NHamcrest.Core;
 
-namespace TestJUUT {
+using TestJUUT.Util;
+
+namespace TestJUUT.TestReports {
 
     [TestClass]
     public class TestTestClassReport {

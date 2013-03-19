@@ -1,12 +1,12 @@
-﻿using System;
-
 using JUUT.Core.Reports;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using NHamcrest.Core;
 
-namespace TestJUUT {
+using TestJUUT.Util;
+
+namespace TestJUUT.TestReports {
 
     [TestClass]
     public class TestReportRange {

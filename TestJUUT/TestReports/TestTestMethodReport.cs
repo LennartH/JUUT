@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
@@ -7,15 +7,17 @@ using JUUT.Core.Attributes;
 using JUUT.Core.Reports;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+using NHamcrest.Core;
+
+using TestJUUT.Util;
+
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-using Throws = NHamcrest.Core.Throws;
-using Is = NHamcrest.Core.Is;
-
-namespace TestJUUT {
+namespace TestJUUT.TestReports {
 
     [TestClass]
-    public class TestTestMethodTestReport {
+    public class TestTestMethodReport {
 
         [TestMethod]
         public void Creation() {

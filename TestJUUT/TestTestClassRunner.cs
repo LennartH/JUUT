@@ -10,6 +10,8 @@ using JUUT.Core.Runners;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHamcrest.Core;
 
+using TestJUUT.Util;
+
 namespace TestJUUT {
 
     [TestClass]
