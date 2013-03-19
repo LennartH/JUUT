@@ -1,8 +1,6 @@
-﻿using System;
+using System;
 
-using JUUT.Core.Impl.Reports;
-
-namespace JUUT.Core {
+namespace JUUT.Core.Reports {
 
     /// <summary>
     /// Interface for reports, that are created during the run of tests.

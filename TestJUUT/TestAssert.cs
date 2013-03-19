@@ -1,4 +1,4 @@
-﻿using JUUT.Core.Impl;
+﻿using JUUT.Core;
 
 using JUUTAssert = JUUT.Core.Assert;
 

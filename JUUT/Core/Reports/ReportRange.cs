@@ -1,4 +1,4 @@
-﻿namespace JUUT.Core.Impl.Reports {
+namespace JUUT.Core.Reports {
 
     /// <summary>
     /// Class for the different ranges reports can be about.

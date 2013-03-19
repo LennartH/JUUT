@@ -38,6 +38,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\AssertException.cs" />
     <Compile Include="Core\Attributes\ClassSetUpAttribute.cs" />
     <Compile Include="Core\Attributes\ClassTearDownAttribute.cs" />
     <Compile Include="Core\Attributes\JUUTAttribute.cs" />
@@ -45,19 +46,18 @@
     <Compile Include="Core\Attributes\SimpleTestMethodAttribute.cs" />
     <Compile Include="Core\Attributes\TestSetUpAttribute.cs" />
     <Compile Include="Core\Attributes\TestTearDownAttribute.cs" />
-    <Compile Include="Core\Impl\Reports\AbstractReport.cs" />
-    <Compile Include="Core\Impl\AbstractTestReporter.cs" />
-    <Compile Include="Core\Impl\AssertException.cs" />
     <Compile Include="Core\Assert.cs" />
-    <Compile Include="Core\Impl\Reports\ReportRange.cs" />
-    <Compile Include="Core\Impl\Reports\TestClassReport.cs" />
-    <Compile Include="Core\Impl\SimpleTestRunner.cs" />
-    <Compile Include="Core\Impl\TestClassScanner.cs" />
-    <Compile Include="Core\TestReporter.cs" />
-    <Compile Include="Core\TestRunner.cs" />
+    <Compile Include="Core\Reporters\AbstractTestReporter.cs" />
+    <Compile Include="Core\Reporters\TestReporter.cs" />
+    <Compile Include="Core\Reports\AbstractReport.cs" />
+    <Compile Include="Core\Reports\Report.cs" />
+    <Compile Include="Core\Reports\ReportRange.cs" />
+    <Compile Include="Core\Reports\TestClassReport.cs" />
+    <Compile Include="Core\Reports\TestMethodReport.cs" />
+    <Compile Include="Core\Runners\SimpleTestRunner.cs" />
+    <Compile Include="Core\Runners\TestRunner.cs" />
+    <Compile Include="Core\Scanners\TestClassScanner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\Impl\Reports\TestMethodReport.cs" />
-    <Compile Include="Core\Report.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

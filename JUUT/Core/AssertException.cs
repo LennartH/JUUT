@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 using NHamcrest;
 
-namespace JUUT.Core.Impl {
+namespace JUUT.Core {
 
     /// <summary>
     /// Exception which is thrown by failed assertions.<para />

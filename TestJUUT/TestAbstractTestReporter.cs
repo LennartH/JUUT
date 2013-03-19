@@ -5,6 +5,8 @@ using System.Reflection.Emit;
 
 using JUUT;
 using JUUT.Core;
+using JUUT.Core.Reporters;
+using JUUT.Core.Reports;
 
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

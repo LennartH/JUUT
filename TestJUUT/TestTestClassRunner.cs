@@ -4,8 +4,8 @@ using System.Reflection;
 
 using JUUT.Core;
 using JUUT.Core.Attributes;
-using JUUT.Core.Impl;
-using JUUT.Core.Impl.Reports;
+using JUUT.Core.Reports;
+using JUUT.Core.Runners;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHamcrest.Core;

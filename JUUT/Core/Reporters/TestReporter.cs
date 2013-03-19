@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace JUUT.Core {
+using JUUT.Core.Reports;
+
+namespace JUUT.Core.Reporters {
     
     /// <summary>
     /// Interface which defines the methods of a test reporter.<para />

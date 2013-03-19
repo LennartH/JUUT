@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Reflection;
 
-namespace JUUT.Core.Impl.Reports {
+namespace JUUT.Core.Reports {
 
     public abstract class AbstractReport : Report {
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-using JUUT.Core.Impl.Reports;
+using JUUT.Core.Reports;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
 
-namespace JUUT.Core.Impl.Reports {
+namespace JUUT.Core.Reports {
 
     public class TestClassReport : AbstractReport {
 

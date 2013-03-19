@@ -1,6 +1,4 @@
-﻿using JUUT.Core.Impl;
-
-using NHamcrest;
+﻿using NHamcrest;
 
 namespace JUUT.Core {
 
