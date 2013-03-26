@@ -1,7 +1,5 @@
 using System;
 
-using JUUT.Core.Reports.Status;
-
 namespace JUUT.Core.Reports {
 
     /// <summary>

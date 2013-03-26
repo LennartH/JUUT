@@ -1,7 +1,7 @@
 ﻿using System;
 
 using JUUT.Core;
-using JUUT.Core.Reports.Status;
+using JUUT.Core.Reports;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -18,15 +18,15 @@ namespace TestJUUT.TestReports {
         public void Creation() {
             Exception raisedException = null;
             ReportStatus status = ReportStatus.Create(raisedException);
-            AssertEx.That(status is ReportStatusSuccess, Is.True());
+            AssertEx.That(status is ReportStatus.Success, Is.True());
 
             raisedException = new AssertException("Assert Exception");
             status = ReportStatus.Create(raisedException);
-            AssertEx.That(status is ReportStatusFailed, Is.True());
+            AssertEx.That(status is ReportStatus.Failed, Is.True());
 
             raisedException = new NullReferenceException("Other Exception");
             status = ReportStatus.Create(raisedException);
-            AssertEx.That(status is ReportStatusError, Is.True());
+            AssertEx.That(status is ReportStatus.Error, Is.True());
         }
 
         [TestMethod]

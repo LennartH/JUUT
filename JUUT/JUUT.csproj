@@ -50,10 +50,7 @@
     <Compile Include="Core\Reporters\AbstractTestReporter.cs" />
     <Compile Include="Core\Reporters\TestReporter.cs" />
     <Compile Include="Core\Reports\Report.cs" />
-    <Compile Include="Core\Reports\Status\ReportStatus.cs" />
-    <Compile Include="Core\Reports\Status\ReportStatusError.cs" />
-    <Compile Include="Core\Reports\Status\ReportStatusFailed.cs" />
-    <Compile Include="Core\Reports\Status\ReportStatusSuccess.cs" />
+    <Compile Include="Core\Reports\ReportStatus.cs" />
     <Compile Include="Core\Reports\TestMethodReport.cs" />
     <Compile Include="Core\Runners\SimpleTestRunner.cs" />
     <Compile Include="Core\Runners\TestRunner.cs" />

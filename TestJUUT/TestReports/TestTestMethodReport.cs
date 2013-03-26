@@ -5,7 +5,6 @@ using System.Reflection.Emit;
 using JUUT.Core;
 using JUUT.Core.Attributes;
 using JUUT.Core.Reports;
-using JUUT.Core.Reports.Status;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -27,12 +26,12 @@ namespace TestJUUT.TestReports {
 
             Report report = new TestMethodReport(testMethod, raisedException);
             AssertEx.That(report.TestClass, Is.EqualTo(typeof(TestOwner)));
-            AssertEx.That(report.Status is ReportStatusFailed, Is.True());
+            AssertEx.That(report.Status is ReportStatus.Failed, Is.True());
 
             //This allows to create a test method report without a raised exception
             report = new TestMethodReport(testMethod);
             AssertEx.That(report.TestClass, Is.EqualTo(typeof(TestOwner)));
-            AssertEx.That(report.Status is ReportStatusSuccess, Is.True());
+            AssertEx.That(report.Status is ReportStatus.Success, Is.True());
 
             testMethod = new DynamicMethod("Foo", null, null);
             AssertEx.That(() => { new TestMethodReport(testMethod, raisedException); }, Throws.An<ArgumentException>());
