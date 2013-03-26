@@ -28,26 +28,32 @@ namespace JUUT.Core.Reports {
             return Name;
         }
 
+        #region Error
         /// <summary>
         /// The test raised an unexpected exception.
         /// </summary>
         public class Error : ReportStatus {
             internal Error() : base("Error") { }
         }
+        #endregion
 
+        #region Failed
         /// <summary>
         /// The test raised an AssertException.
         /// </summary>
         public class Failed : ReportStatus {
             internal Failed() : base("Failed") { }
         }
+        #endregion
 
+        #region Success
         /// <summary>
         /// The test was successful.
         /// </summary>
         public class Success : ReportStatus {
             internal Success() : base("Success") { }
         }
+        #endregion
 
     }
 

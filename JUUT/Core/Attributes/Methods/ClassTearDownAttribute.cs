@@ -2,24 +2,27 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace JUUT.Core.Attributes {
+namespace JUUT.Core.Attributes.Methods {
     /// <summary>
-    /// Attribute to identify test methods of JUUT. Can't be inherated. 
+    /// Attribute to identify the class cleaner of a test. Is runned once after all the test methods are runned.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    public sealed class SimpleTestMethodAttribute : JUUTAttribute {
+    public sealed class ClassTearDownAttribute : JUUTMethodAttribute {
 
         public override string Name {
-            get { return "SimpleTestMethod"; }
+            get { return "ClassTearDown"; }
         }
 
         public override bool IsSetUpOrTearDown {
-            get { return false; }
+            get { return true; }
         }
 
         protected override bool Validate(MemberInfo member) {
             MethodInfo method = (MethodInfo) member;
-            if (method.GetCustomAttribute<SimpleTestMethodAttribute>() != null) {
+            if (method.GetCustomAttribute<ClassTearDownAttribute>() != null) {
+                if (!method.IsStatic) {
+                    throw new ArgumentException("The method " + method.Name + " isn't static.");
+                }
                 if (method.GetParameters().Count() != 0) {
                     throw new ArgumentException("The method " + method.Name + " has parameters.");
                 }

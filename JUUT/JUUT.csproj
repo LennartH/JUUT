@@ -39,13 +39,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\AssertException.cs" />
-    <Compile Include="Core\Attributes\ClassSetUpAttribute.cs" />
-    <Compile Include="Core\Attributes\ClassTearDownAttribute.cs" />
     <Compile Include="Core\Attributes\JUUTAttribute.cs" />
+    <Compile Include="Core\Attributes\JUUTMethodAttribute.cs" />
     <Compile Include="Core\Attributes\JUUTTestClassAttribute.cs" />
-    <Compile Include="Core\Attributes\SimpleTestMethodAttribute.cs" />
-    <Compile Include="Core\Attributes\TestSetUpAttribute.cs" />
-    <Compile Include="Core\Attributes\TestTearDownAttribute.cs" />
+    <Compile Include="Core\Attributes\Methods\ClassSetUpAttribute.cs" />
+    <Compile Include="Core\Attributes\Methods\ClassTearDownAttribute.cs" />
+    <Compile Include="Core\Attributes\Methods\SimpleTestMethodAttribute.cs" />
+    <Compile Include="Core\Attributes\Methods\TestSetUpAttribute.cs" />
+    <Compile Include="Core\Attributes\Methods\TestTearDownAttribute.cs" />
     <Compile Include="Core\Assert.cs" />
     <Compile Include="Core\Reporters\AbstractTestReporter.cs" />
     <Compile Include="Core\Reporters\TestReporter.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
+using JUUT.Core.Attributes.Methods;
 using JUUT.Core.Scanners;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

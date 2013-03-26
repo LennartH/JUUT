@@ -1,4 +1,5 @@
 ﻿using JUUT.Core.Attributes;
+using JUUT.Core.Attributes.Methods;
 
 namespace TestJUUT.Util {
 

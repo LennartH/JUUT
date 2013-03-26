@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JUUT.Core.Attributes {
+
     public abstract class JUUTAttribute : Attribute {
 
         /// <summary>
@@ -36,4 +33,5 @@ namespace JUUT.Core.Attributes {
         protected abstract bool Validate(MemberInfo member);
 
     }
+
 }

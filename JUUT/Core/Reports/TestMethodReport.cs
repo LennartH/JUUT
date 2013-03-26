@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
+using JUUT.Core.Attributes.Methods;
 
 namespace JUUT.Core.Reports {
 

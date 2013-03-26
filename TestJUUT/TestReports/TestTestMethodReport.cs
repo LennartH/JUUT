@@ -4,6 +4,7 @@ using System.Reflection.Emit;
 
 using JUUT.Core;
 using JUUT.Core.Attributes;
+using JUUT.Core.Attributes.Methods;
 using JUUT.Core.Reports;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -2,15 +2,15 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace JUUT.Core.Attributes {
+namespace JUUT.Core.Attributes.Methods {
     /// <summary>
-    /// Attribute to identify the class initializer of a test class. Is runned once before the test methods are runned.
+    /// Attribute to identify the test cleaner of a test class. Is runned every time after a test method is runned.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
-    public sealed class ClassSetUpAttribute : JUUTAttribute {
+    public sealed class TestTearDownAttribute : JUUTMethodAttribute {
 
         public override string Name {
-            get { return "ClassSetUp"; }
+            get { return "TestTearDown"; }
         }
 
         public override bool IsSetUpOrTearDown {
@@ -19,10 +19,7 @@ namespace JUUT.Core.Attributes {
 
         protected override bool Validate(MemberInfo member) {
             MethodInfo method = (MethodInfo) member;
-            if (member.GetCustomAttribute<ClassSetUpAttribute>() != null) {
-                if (!method.IsStatic) {
-                    throw new ArgumentException("The method " + method.Name + " isn't static.");
-                }
+            if (method.GetCustomAttribute<TestTearDownAttribute>() != null) {
                 if (method.GetParameters().Count() != 0) {
                     throw new ArgumentException("The method " + method.Name + " has parameters.");
                 }
