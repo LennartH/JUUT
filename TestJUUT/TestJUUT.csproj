@@ -68,7 +68,6 @@
     <Compile Include="AttributeTests\TestJUUTTestClass.cs" />
     <Compile Include="TestCore\TestAssert.cs" />
     <Compile Include="TestCore\TestAssertException.cs" />
-    <Compile Include="TestReports\TestReportRange.cs" />
     <Compile Include="TestReports\TestTestClassReport.cs" />
     <Compile Include="TestReports\TestTestMethodReport.cs" />
     <Compile Include="Util\AssertEx.cs" />

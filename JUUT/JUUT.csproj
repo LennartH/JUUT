@@ -50,7 +50,6 @@
     <Compile Include="Core\Reporters\AbstractTestReporter.cs" />
     <Compile Include="Core\Reporters\TestReporter.cs" />
     <Compile Include="Core\Reports\Report.cs" />
-    <Compile Include="Core\Reports\ReportRange.cs" />
     <Compile Include="Core\Reports\TestMethodReport.cs" />
     <Compile Include="Core\Runners\SimpleTestRunner.cs" />
     <Compile Include="Core\Runners\TestRunner.cs" />
