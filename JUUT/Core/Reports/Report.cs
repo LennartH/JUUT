@@ -18,11 +18,6 @@ namespace JUUT.Core.Reports {
         /// </summary>
         Type TestClass { get; }
 
-        /// <summary>
-        /// The range the report is about. See <seealso cref="ReportRange"/> for more information.
-        /// </summary>
-        ReportRange Range { get; }
-
     }
 
 }

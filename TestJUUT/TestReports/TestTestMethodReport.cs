@@ -26,12 +26,10 @@ namespace TestJUUT.TestReports {
 
             Report report = new TestMethodReport(testMethod, raisedException);
             AssertEx.That(report.TestClass, Is.EqualTo(typeof(TestOwner)));
-            AssertEx.That(report.Range, Is.EqualTo(ReportRange.TestMethod));
 
             //This allows to create a test method report without a raised exception
             report = new TestMethodReport(testMethod);
             AssertEx.That(report.TestClass, Is.EqualTo(typeof(TestOwner)));
-            AssertEx.That(report.Range, Is.EqualTo(ReportRange.TestMethod));
 
             testMethod = new DynamicMethod("Foo", null, null);
             AssertEx.That(() => { new TestMethodReport(testMethod, raisedException); }, Throws.An<ArgumentException>());
@@ -61,7 +59,7 @@ namespace TestJUUT.TestReports {
         public void ReportToString() {
             Exception raisedException = new NullReferenceException("Exception text");
             Report report = new TestMethodReport(typeof(TestOwner).GetMethod("TestName"), raisedException);
-            AssertEx.That(report.ToString(), Is.EqualTo("TestMethod wide report of " + typeof(TestOwner).Name + ": " + report.Text));
+            AssertEx.That(report.ToString(), Is.EqualTo(report.Text));
         }
 
         [TestMethod]
