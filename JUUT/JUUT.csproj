@@ -50,12 +50,17 @@
     <Compile Include="Core\Reporters\AbstractTestReporter.cs" />
     <Compile Include="Core\Reporters\TestReporter.cs" />
     <Compile Include="Core\Reports\Report.cs" />
+    <Compile Include="Core\Reports\Status\ReportStatus.cs" />
+    <Compile Include="Core\Reports\Status\ReportStatusError.cs" />
+    <Compile Include="Core\Reports\Status\ReportStatusFailed.cs" />
+    <Compile Include="Core\Reports\Status\ReportStatusSuccess.cs" />
     <Compile Include="Core\Reports\TestMethodReport.cs" />
     <Compile Include="Core\Runners\SimpleTestRunner.cs" />
     <Compile Include="Core\Runners\TestRunner.cs" />
     <Compile Include="Core\Scanners\TestClassScanner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

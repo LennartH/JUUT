@@ -70,6 +70,7 @@
     <Compile Include="TestCore\TestAssertException.cs" />
     <Compile Include="TestReports\TestTestClassReport.cs" />
     <Compile Include="TestReports\TestTestMethodReport.cs" />
+    <Compile Include="TestReports\TestReportStatus.cs" />
     <Compile Include="Util\AssertEx.cs" />
     <Compile Include="Util\TestClassMock.cs" />
     <Compile Include="Util\NotAttributedMock.cs" />
