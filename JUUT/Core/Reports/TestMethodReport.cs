@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
+using JUUT.Core.Reports.Status;
 
 namespace JUUT.Core.Reports {
 
@@ -15,6 +16,8 @@ namespace JUUT.Core.Reports {
         public Type TestClass {
             get { return TestMethod.DeclaringType; }
         }
+
+        public ReportStatus Status { get; private set; }
 
         /// <summary>
         /// The info of the runned method.
@@ -42,6 +45,7 @@ namespace JUUT.Core.Reports {
             }
 
             TestMethod = testMethod;
+            Status = ReportStatus.Create(raisedException);
             Text = GenerateText(TestMethod, raisedException);
         }
 

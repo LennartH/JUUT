@@ -1,5 +1,7 @@
 using System;
 
+using JUUT.Core.Reports.Status;
+
 namespace JUUT.Core.Reports {
 
     /// <summary>
@@ -17,6 +19,12 @@ namespace JUUT.Core.Reports {
         /// Can be null, if the method has no declaring type.
         /// </summary>
         Type TestClass { get; }
+
+        /// <summary>
+        /// The status of the report, which represents the status of the runned test.<para />
+        /// If there could be more than one status, than it's the worst.
+        /// </summary>
+        ReportStatus Status { get; }
 
     }
 
