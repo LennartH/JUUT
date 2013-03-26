@@ -47,7 +47,7 @@ namespace TestJUUT {
         //[TestMethod]
         //public void Creation() {
         //    TestRunner runner = new SimpleTestRunner(typeof(TestClassMock));
-        //    AssertEx.That(runner.TestClass, Is.EqualTo(typeof(TestClassMock)));
+        //    AssertEx.That(runner.ClassType, Is.EqualTo(typeof(TestClassMock)));
         //}
 
         //[TestMethod]

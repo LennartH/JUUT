@@ -16,7 +16,7 @@ namespace JUUT.Core.Reports {
         /// The type of the test class, which refers to the report.<para />
         /// Can be null, if the method has no declaring type.
         /// </summary>
-        Type TestClass { get; }
+        Type ClassType { get; }
 
         /// <summary>
         /// The status of the report, which represents the status of the runned test.<para />

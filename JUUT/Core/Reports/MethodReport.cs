@@ -13,7 +13,7 @@ namespace JUUT.Core.Reports {
 
         public string Text { get; private set; }
 
-        public Type TestClass {
+        public Type ClassType {
             get { return Method.DeclaringType; }
         }
 

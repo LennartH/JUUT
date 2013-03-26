@@ -25,10 +25,10 @@ namespace TestJUUT {
         [TestMethod]
         public void AddReport() {
             var alphaReport = new Mock<Report>();
-            alphaReport.Setup(alpha => alpha.TestClass).Returns(typeof(AlphaOwner));
+            alphaReport.Setup(alpha => alpha.ClassType).Returns(typeof(AlphaOwner));
 
             var nullReporter = new Mock<Report>();
-            nullReporter.Setup(alpha => alpha.TestClass).Returns(default(Type));
+            nullReporter.Setup(alpha => alpha.ClassType).Returns(default(Type));
 
             var reporterMock = new Mock<AbstractTestReporter>();
             TestReporter reporter = reporterMock.Object;
@@ -44,24 +44,24 @@ namespace TestJUUT {
         public void Reports() {
             //Setting up the reports
             var fooReport = new Mock<Report>();
-            fooReport.Setup(foo => foo.TestClass).Returns(typeof (FooBarOwner));
+            fooReport.Setup(foo => foo.ClassType).Returns(typeof (FooBarOwner));
 
             var barReport = new Mock<Report>();
-            barReport.Setup(bar => bar.TestClass).Returns(typeof (FooBarOwner));
+            barReport.Setup(bar => bar.ClassType).Returns(typeof (FooBarOwner));
 
             var alphaReport = new Mock<Report>();
-            alphaReport.Setup(alpha => alpha.TestClass).Returns(typeof (AlphaOwner));
+            alphaReport.Setup(alpha => alpha.ClassType).Returns(typeof (AlphaOwner));
 
             //Setting up the reporter
             var reporterMock = new Mock<AbstractTestReporter>();
             TestReporter reporter = reporterMock.Object;
 
             reporter.AddReport(fooReport.Object);
-            fooReport.VerifyGet(foo => foo.TestClass, Times.Exactly(1));
+            fooReport.VerifyGet(foo => foo.ClassType, Times.Exactly(1));
             reporter.AddReport(barReport.Object);
-            barReport.VerifyGet(bar => bar.TestClass, Times.Exactly(1));
+            barReport.VerifyGet(bar => bar.ClassType, Times.Exactly(1));
             reporter.AddReport(alphaReport.Object);
-            alphaReport.VerifyGet(alpha => alpha.TestClass, Times.Exactly(1));
+            alphaReport.VerifyGet(alpha => alpha.ClassType, Times.Exactly(1));
 
             //Checking the structure of the reports
             Dictionary<Type, IList<Report>> reports = reporter.Reports;

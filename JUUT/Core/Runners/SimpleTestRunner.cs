@@ -9,10 +9,10 @@ namespace JUUT.Core.Runners {
 
     public class SimpleTestRunner {// : TestRunner {
 
-        //public Type TestClass { get; private set; }
+        //public Type ClassType { get; private set; }
 
         //public SimpleTestRunner(Type testClass) {
-        //    TestClass = testClass;
+        //    ClassType = testClass;
         //}
 
         ///// <summary>
@@ -65,12 +65,12 @@ namespace JUUT.Core.Runners {
         ///// <returns>A report if an exception is thrown. Otherwhise null.</returns>
         //private TestClassReport RunClassSetUp() {
         //    try {
-        //        TestClassScanner.GetClassSetUpOfTestClass(TestClass).Invoke(null, null);
+        //        TestClassScanner.GetClassSetUpOfTestClass(ClassType).Invoke(null, null);
         //    } catch (Exception raisedException) {
         //        if (raisedException is TargetInvocationException) {
         //            raisedException = raisedException.InnerException;
         //        }
-        //        return new TestClassReport(TestClassScanner.GetClassSetUpOfTestClass(TestClass), raisedException);
+        //        return new TestClassReport(TestClassScanner.GetClassSetUpOfTestClass(ClassType), raisedException);
         //    }
 
         //    return null;

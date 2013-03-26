@@ -8,6 +8,7 @@ namespace JUUT.Core.Reports {
         /// Creates the correct status for the given exception.
         /// </summary>
         /// <param name="raisedException">The raised exception. Can be null.</param>
+        /// <returns>Returns Success, Failed or Error, depending on the exception.</returns>
         public static ReportStatus Create(Exception raisedException) {
             if (raisedException == null) {
                 return new Success();
@@ -52,6 +53,15 @@ namespace JUUT.Core.Reports {
         /// </summary>
         public class Success : ReportStatus {
             internal Success() : base("Success") { }
+        }
+        #endregion
+
+        #region Not Runned
+        /// <summary>
+        /// The status for a method or class, which wasn't run.
+        /// </summary>
+        public class NotRunned : ReportStatus {
+            public NotRunned() : base("Not Runned") { }
         }
         #endregion
 
