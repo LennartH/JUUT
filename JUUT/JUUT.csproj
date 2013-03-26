@@ -52,7 +52,7 @@
     <Compile Include="Core\Reporters\TestReporter.cs" />
     <Compile Include="Core\Reports\Report.cs" />
     <Compile Include="Core\Reports\ReportStatus.cs" />
-    <Compile Include="Core\Reports\TestMethodReport.cs" />
+    <Compile Include="Core\Reports\MethodReport.cs" />
     <Compile Include="Core\Runners\SimpleTestRunner.cs" />
     <Compile Include="Core\Runners\TestRunner.cs" />
     <Compile Include="Core\Scanners\TestClassScanner.cs" />
