@@ -25,6 +25,8 @@ namespace JUUT.Core.Reports {
             Name = name;
         }
 
+        public abstract bool IsWorseThan(ReportStatus status);
+
         public override string ToString() {
             return Name;
         }
@@ -34,7 +36,11 @@ namespace JUUT.Core.Reports {
         /// The test raised an unexpected exception.
         /// </summary>
         public class Error : ReportStatus {
-            internal Error() : base("Error") { }
+            public Error() : base("Error") { }
+            public override bool IsWorseThan(ReportStatus status) {
+                return GetType() == status.GetType();
+            }
+
         }
         #endregion
 
@@ -43,7 +49,11 @@ namespace JUUT.Core.Reports {
         /// The test raised an AssertException.
         /// </summary>
         public class Failed : ReportStatus {
-            internal Failed() : base("Failed") { }
+            public Failed() : base("Failed") { }
+            public override bool IsWorseThan(ReportStatus status) {
+                return GetType() != status.GetType() && !(status is Error);
+            }
+
         }
         #endregion
 
@@ -52,7 +62,11 @@ namespace JUUT.Core.Reports {
         /// The test was successful.
         /// </summary>
         public class Success : ReportStatus {
-            internal Success() : base("Success") { }
+            public Success() : base("Success") { }
+            public override bool IsWorseThan(ReportStatus status) {
+                return false;
+            }
+
         }
         #endregion
 
@@ -62,6 +76,10 @@ namespace JUUT.Core.Reports {
         /// </summary>
         public class NotRunned : ReportStatus {
             public NotRunned() : base("Not Runned") { }
+            public override bool IsWorseThan(ReportStatus status) {
+                return status is Success;
+            }
+
         }
         #endregion
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
@@ -7,7 +8,19 @@ namespace JUUT.Core.Reports {
 
     public class ClassReport : Report {
 
-        public string Text { get; private set; }
+        public string Text {
+            get {
+                if (FailedTests == 0 && SucceededTests == 0 && NotRunnedTests == 0) {
+                    return "No tests have been runned.";
+                }
+                return "";
+            }
+        }
+
+        private Dictionary<MethodInfo, MethodReport> Reports; 
+        private int FailedTests;
+        private int SucceededTests;
+        private int NotRunnedTests;
 
         public Type ClassType { get; private set; }
 
@@ -21,8 +34,13 @@ namespace JUUT.Core.Reports {
                 throw new ArgumentException("The class needs the JUUTTestClass-Attribute.");
             }
 
+            Reports = new Dictionary<MethodInfo, MethodReport>();
             ClassType = classType;
             Status = new ReportStatus.NotRunned();
+        }
+
+        public void Add(MethodReport report) {
+            Status = report.Status.IsWorseThan(Status) ? report.Status : Status;
         }
 
     }
