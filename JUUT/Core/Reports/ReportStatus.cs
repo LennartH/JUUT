@@ -31,27 +31,14 @@ namespace JUUT.Core.Reports {
             return Name;
         }
 
-        #region Error
+        #region Not Runned
         /// <summary>
-        /// The test raised an unexpected exception.
+        /// The status for a method or class, which wasn't run.
         /// </summary>
-        public class Error : ReportStatus {
-            public Error() : base("Error") { }
+        public class NotRunned : ReportStatus {
+            public NotRunned() : base("Not Runned") { }
             public override bool IsWorseThan(ReportStatus status) {
-                return !(status is Error);
-            }
-
-        }
-        #endregion
-
-        #region Failed
-        /// <summary>
-        /// The test raised an AssertException.
-        /// </summary>
-        public class Failed : ReportStatus {
-            public Failed() : base("Failed") { }
-            public override bool IsWorseThan(ReportStatus status) {
-                return GetType() != status.GetType() && !(status is Error);
+                return false;
             }
 
         }
@@ -64,20 +51,33 @@ namespace JUUT.Core.Reports {
         public class Success : ReportStatus {
             public Success() : base("Success") { }
             public override bool IsWorseThan(ReportStatus status) {
-                return false;
+                return status is NotRunned;
             }
 
         }
         #endregion
 
-        #region Not Runned
+        #region Failed
         /// <summary>
-        /// The status for a method or class, which wasn't run.
+        /// The test raised an AssertException.
         /// </summary>
-        public class NotRunned : ReportStatus {
-            public NotRunned() : base("Not Runned") { }
+        public class Failed : ReportStatus {
+            public Failed() : base("Failed") { }
             public override bool IsWorseThan(ReportStatus status) {
-                return status is Success;
+                return !(status is Failed) && !(status is Error);
+            }
+
+        }
+        #endregion
+
+        #region Error
+        /// <summary>
+        /// The test raised an unexpected exception.
+        /// </summary>
+        public class Error : ReportStatus {
+            public Error() : base("Error") { }
+            public override bool IsWorseThan(ReportStatus status) {
+                return !(status is Error);
             }
 
         }
