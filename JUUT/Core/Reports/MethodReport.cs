@@ -22,7 +22,7 @@ namespace JUUT.Core.Reports {
         /// <summary>
         /// The info of the runned method.
         /// </summary>
-        private MethodInfo Method { get; set; }
+        internal MethodInfo Method { get; private set; }
 
         /// <summary>
         /// Creates a new report for the <code>method</code>, which passed successfully.

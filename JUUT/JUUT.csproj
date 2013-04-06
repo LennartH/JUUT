@@ -51,6 +51,7 @@
     <Compile Include="Core\Reporters\AbstractTestReporter.cs" />
     <Compile Include="Core\Reporters\TestReporter.cs" />
     <Compile Include="Core\Reports\ClassReport.cs" />
+    <Compile Include="Core\Reports\SimpleClassReport.cs" />
     <Compile Include="Core\Reports\Report.cs" />
     <Compile Include="Core\Reports\ReportStatus.cs" />
     <Compile Include="Core\Reports\MethodReport.cs" />
