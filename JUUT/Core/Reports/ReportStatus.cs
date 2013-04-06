@@ -38,7 +38,7 @@ namespace JUUT.Core.Reports {
         public class Error : ReportStatus {
             public Error() : base("Error") { }
             public override bool IsWorseThan(ReportStatus status) {
-                return GetType() == status.GetType();
+                return !(status is Error);
             }
 
         }
