@@ -27,6 +27,9 @@ namespace JUUT.Core.Reports {
 
         public abstract bool IsWorseThan(ReportStatus status);
 
+        public abstract void IncrementCounterFor(ClassReport classReport);
+        public abstract void DecrementCounterFor(ClassReport classReport);
+
         public override string ToString() {
             return Name;
         }
@@ -37,8 +40,17 @@ namespace JUUT.Core.Reports {
         /// </summary>
         public class NotRunned : ReportStatus {
             public NotRunned() : base("Not Runned") { }
+
             public override bool IsWorseThan(ReportStatus status) {
                 return false;
+            }
+
+            public override void IncrementCounterFor(ClassReport classReport) {
+                classReport.NotRunnedTests++;
+            }
+
+            public override void DecrementCounterFor(ClassReport classReport) {
+                classReport.NotRunnedTests--;
             }
 
         }
@@ -50,8 +62,19 @@ namespace JUUT.Core.Reports {
         /// </summary>
         public class Success : ReportStatus {
             public Success() : base("Success") { }
+
             public override bool IsWorseThan(ReportStatus status) {
                 return status is NotRunned;
+            }
+
+            public override void IncrementCounterFor(ClassReport classReport) {
+                classReport.SucceededTests++;
+                classReport.NotRunnedTests--;
+            }
+
+            public override void DecrementCounterFor(ClassReport classReport) {
+                classReport.SucceededTests--;
+                classReport.NotRunnedTests++;
             }
 
         }
@@ -63,8 +86,19 @@ namespace JUUT.Core.Reports {
         /// </summary>
         public class Failed : ReportStatus {
             public Failed() : base("Failed") { }
+
             public override bool IsWorseThan(ReportStatus status) {
                 return !(status is Failed) && !(status is Error);
+            }
+
+            public override void IncrementCounterFor(ClassReport classReport) {
+                classReport.FailedTests++;
+                classReport.NotRunnedTests--;
+            }
+
+            public override void DecrementCounterFor(ClassReport classReport) {
+                classReport.FailedTests--;
+                classReport.NotRunnedTests++;
             }
 
         }
@@ -76,8 +110,19 @@ namespace JUUT.Core.Reports {
         /// </summary>
         public class Error : ReportStatus {
             public Error() : base("Error") { }
+
             public override bool IsWorseThan(ReportStatus status) {
                 return !(status is Error);
+            }
+
+            public override void IncrementCounterFor(ClassReport classReport) {
+                classReport.FailedTests++;
+                classReport.NotRunnedTests--;
+            }
+
+            public override void DecrementCounterFor(ClassReport classReport) {
+                classReport.FailedTests--;
+                classReport.NotRunnedTests++;
             }
 
         }

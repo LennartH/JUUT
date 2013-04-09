@@ -21,9 +21,9 @@ namespace JUUT.Core.Reports {
         public int RunnedTests {
             get { return FailedTests + SucceededTests; }
         }
-        public int FailedTests { get; private set; }
-        public int SucceededTests { get; private set; }
-        public int NotRunnedTests { get; private set; }
+        public int FailedTests { get; set; }
+        public int SucceededTests { get; set; }
+        public int NotRunnedTests { get; set; }
 
         public Type ClassType { get; private set; }
 
@@ -54,41 +54,17 @@ namespace JUUT.Core.Reports {
 
         private void AdjustCounters(MethodReport newReport) {
             if (Reports.ContainsKey(newReport.Method)) {
-                DecrementCounterFor(Reports[newReport.Method].Status);
+                DecrementCountersFor(Reports[newReport.Method]);
             }
-            IncrementCounterFor(newReport.Status);
+            IncrementCountersFor(newReport);
         }
 
-        private void IncrementCounterFor(ReportStatus status) {
-            //if (status is ReportStatus.NotRunned) {
-            //    NotRunnedTests++;
-            //    return;
-            //}
-
-            if (status is ReportStatus.Success) {
-                SucceededTests++;
-                //NotRunnedTests--;
-            }
-            if (status is ReportStatus.Failed || status is ReportStatus.Error) {
-                FailedTests++;
-                //NotRunnedTests--;
-            }
+        private void IncrementCountersFor(MethodReport report) {
+            report.Status.IncrementCounterFor(this);
         }
 
-        private void DecrementCounterFor(ReportStatus status) {
-            //if (status is ReportStatus.NotRunned) {
-            //    NotRunnedTests--;
-            //    return;
-            //}
-
-            if (status is ReportStatus.Success) {
-                SucceededTests--;
-                //NotRunnedTests++;
-            }
-            if (status is ReportStatus.Failed || status is ReportStatus.Error) {
-                FailedTests--;
-                //NotRunnedTests++;
-            }
+        private void DecrementCountersFor(MethodReport report) {
+            report.Status.DecrementCounterFor(this);
         }
 
     }
