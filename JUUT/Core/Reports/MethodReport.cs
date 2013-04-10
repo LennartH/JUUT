@@ -69,6 +69,22 @@ namespace JUUT.Core.Reports {
         }
 
         ////////////////////////////////////////////////////////
+        // Factory Methods                                    //
+        ////////////////////////////////////////////////////////
+
+        public static MethodReport CreateSuccededReport(MethodInfo method) {
+            return new MethodReport(method);
+        }
+
+        public static MethodReport CreateNotRunnedReport(MethodInfo method) {
+            return new MethodReport(method) { Status = new ReportStatus.NotRunned() };
+        }
+
+        public static MethodReport CreateFailedReport(MethodInfo method, Exception raisedException) {
+            return new MethodReport(method, raisedException);
+        }
+
+        ////////////////////////////////////////////////////////
         // Generated GetHashCode and Equals                   //
         ////////////////////////////////////////////////////////
 

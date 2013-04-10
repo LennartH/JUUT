@@ -69,7 +69,7 @@ namespace JUUT.Core.Reports {
 
             public override void IncrementCounterFor(ClassReport classReport) {
                 classReport.SucceededTests++;
-                classReport.NotRunnedTests--;
+                //classReport.NotRunnedTests--;
             }
 
             public override void DecrementCounterFor(ClassReport classReport) {
@@ -93,7 +93,7 @@ namespace JUUT.Core.Reports {
 
             public override void IncrementCounterFor(ClassReport classReport) {
                 classReport.FailedTests++;
-                classReport.NotRunnedTests--;
+                //classReport.NotRunnedTests--;
             }
 
             public override void DecrementCounterFor(ClassReport classReport) {
@@ -117,7 +117,7 @@ namespace JUUT.Core.Reports {
 
             public override void IncrementCounterFor(ClassReport classReport) {
                 classReport.FailedTests++;
-                classReport.NotRunnedTests--;
+                //classReport.NotRunnedTests--;
             }
 
             public override void DecrementCounterFor(ClassReport classReport) {

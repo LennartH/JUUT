@@ -46,7 +46,7 @@ namespace JUUT.Core.Reports {
 
         private void InitializeReports() {
             foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(ClassType)) {
-                Add(new MethodReport(test) {Status = new ReportStatus.NotRunned()});
+                Add(MethodReport.CreateNotRunnedReport(test));
             }
         }
 

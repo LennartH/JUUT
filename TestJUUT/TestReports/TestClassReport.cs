@@ -37,21 +37,21 @@ namespace TestJUUT.TestReports {
             MethodInfo succeededMethod = type.GetMethod("TestName");
             MethodInfo failedMethod = type.GetMethod("SecondTest");
             ClassReport report = new SimpleClassReport(type);
-            //AssertEx.That(report.NotRunnedTests, Is.EqualTo(2));
+            AssertEx.That(report.NotRunnedTests, Is.EqualTo(2));
 
             MethodReport methodReport1 = new MethodReport(succeededMethod);
             report.Add(methodReport1);
             AssertEx.That(report.Status is ReportStatus.Success, Is.True());
             AssertEx.That(report.SucceededTests, Is.EqualTo(1));
             AssertEx.That(report.RunnedTests, Is.EqualTo(1));
-            //AssertEx.That(report.NotRunnedTests, Is.EqualTo(1));
+            AssertEx.That(report.NotRunnedTests, Is.EqualTo(1));
 
             MethodReport methodReport2 = new MethodReport(failedMethod, new AssertException("Exception Text"));
             report.Add(methodReport2);
             AssertEx.That(report.Status is ReportStatus.Failed, Is.True());
             AssertEx.That(report.FailedTests, Is.EqualTo(1));
             AssertEx.That(report.RunnedTests, Is.EqualTo(2));
-            //AssertEx.That(report.NotRunnedTests, Is.EqualTo(0));
+            AssertEx.That(report.NotRunnedTests, Is.EqualTo(0));
 
             //This tests, that new reports of the same method will be replaced
             MethodReport methodReport3 = new MethodReport(succeededMethod, new NullReferenceException());
@@ -59,6 +59,7 @@ namespace TestJUUT.TestReports {
             AssertEx.That(report.Status is ReportStatus.Error, Is.True());
             AssertEx.That(report.FailedTests, Is.EqualTo(2));
             AssertEx.That(report.RunnedTests, Is.EqualTo(2));
+            AssertEx.That(report.NotRunnedTests, Is.EqualTo(0));
 
             //Reports for methods of another class aren't allowed
             MethodInfo methodInfo = typeof(AnotherTestClass).GetMethod("AnotherTest");
