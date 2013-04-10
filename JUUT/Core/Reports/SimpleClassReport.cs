@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
+using JUUT.Core.Scanners;
 
 namespace JUUT.Core.Reports {
 
@@ -40,6 +41,13 @@ namespace JUUT.Core.Reports {
             Reports = new Dictionary<MethodInfo, MethodReport>();
             ClassType = classType;
             Status = new ReportStatus.NotRunned();
+            InitializeReports();
+        }
+
+        private void InitializeReports() {
+            foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(ClassType)) {
+                Add(new MethodReport(test) {Status = new ReportStatus.NotRunned()});
+            }
         }
 
         public void Add(MethodReport report) {
