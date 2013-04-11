@@ -25,7 +25,6 @@ namespace TestJUUT.TestReports {
             Report report = new SimpleClassReport(type);
             AssertEx.That(report.ClassType, Is.EqualTo(typeof(TestClass)));
             AssertEx.That(report.Status is ReportStatus.NotRunned, Is.True());
-            AssertEx.That(report.Text, Is.EqualTo("No tests have been runned."));
 
             AssertEx.That(() => new SimpleClassReport(null), Throws.An<ArgumentException>());
             AssertEx.That(() => new SimpleClassReport(typeof(NotATestClass)), Throws.An<ArgumentException>());
@@ -65,7 +64,30 @@ namespace TestJUUT.TestReports {
 
         [TestMethod]
         public void TextCreation() {
-            throw new NotImplementedException();
+            Type type = typeof(TestClass);
+            MethodInfo succeededMethod = type.GetMethod("TestName");
+            MethodInfo failedMethod = type.GetMethod("SecondTest");
+            ClassReport report = new SimpleClassReport(type);
+
+            AssertEx.That(report.Text, Is.EqualTo("No tests have been runned."));
+
+            MethodReport methodReport1 = new MethodReport(succeededMethod);
+            report.Add(methodReport1);
+            AssertEx.That(report.Text, Is.EqualTo("1 test runned: 0 failed, 1 succeeded"));
+
+            MethodReport methodReport2 = new MethodReport(failedMethod, new AssertException("Exception Text"));
+            report.Add(methodReport2);
+            AssertEx.That(report.Text, Is.EqualTo("2 test runned: 1 failed, 1 succeeded\n" +
+                                                  "\n" +
+                                                  "SecondTest-Method failed."));
+
+            MethodReport methodReport3 = new MethodReport(succeededMethod, new NullReferenceException());
+            report.Add(methodReport3);
+            AssertEx.That(report.Text, Is.EqualTo("2 test runned: 2 failed, 0 succeeded\n" +
+                                                  "\n" +
+                                                  "SecondTest-Method failed.\n" +
+                                                  "\n" +
+                                                  "TestName-Test threw an unexpected exception."));
         }
 
         [JUUTTestClass]

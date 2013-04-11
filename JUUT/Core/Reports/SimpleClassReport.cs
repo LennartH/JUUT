@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 
 using JUUT.Core.Attributes;
 
@@ -13,7 +14,14 @@ namespace JUUT.Core.Reports {
                 if (RunnedTests == 0) {
                     return "No tests have been runned.";
                 }
-                return "";
+
+                StringBuilder builder = new StringBuilder(RunnedTests + " tests runned: " +
+                                                          FailedTests + " failed, " + SucceededTests + " succeeded");
+                foreach (MethodReport report in Reports.Values) {
+                    builder.Append("\n\n");
+                    builder.Append(report.Text);
+                }
+                return builder.ToString();
             }
         }
 

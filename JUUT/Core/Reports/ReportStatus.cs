@@ -45,11 +45,8 @@ namespace JUUT.Core.Reports {
                 return false;
             }
 
-            public override void IncrementCounterFor(ClassReport classReport) {
-            }
-
-            public override void DecrementCounterFor(ClassReport classReport) {
-            }
+            public override void IncrementCounterFor(ClassReport classReport) { }
+            public override void DecrementCounterFor(ClassReport classReport) { }
 
         }
         #endregion
