@@ -11,23 +11,25 @@ namespace JUUT.Core.Reports {
 
         public string Text {
             get {
-                if (FailedTests == 0 && SucceededTests == 0 && NotRunnedTests == 0) {
+                if (RunnedTests == 0) {
                     return "No tests have been runned.";
                 }
                 return "";
             }
         }
 
-        private readonly Dictionary<MethodInfo, MethodReport> Reports;
         public int RunnedTests {
             get { return FailedTests + SucceededTests; }
         }
+        public int NotRunnedTests {
+            get { return NumberOfTests - RunnedTests; }
+        }
         public int FailedTests { get; set; }
         public int SucceededTests { get; set; }
-        public int NotRunnedTests { get; set; }
 
         public Type ClassType { get; private set; }
-
+        private int NumberOfTests;
+        private readonly Dictionary<MethodInfo, MethodReport> Reports;
         public ReportStatus Status { get; private set; }
 
         public SimpleClassReport(Type classType) {
@@ -45,9 +47,10 @@ namespace JUUT.Core.Reports {
         }
 
         private void InitializeReports() {
-            foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(ClassType)) {
-                Add(MethodReport.CreateNotRunnedReport(test));
-            }
+            //foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(ClassType)) {
+            //    Add(MethodReport.CreateNotRunnedReport(test));
+            //}
+            NumberOfTests = TestClassScanner.GetSimpleTestMethodsOfClass(ClassType).Count;
         }
 
         public void Add(MethodReport report) {

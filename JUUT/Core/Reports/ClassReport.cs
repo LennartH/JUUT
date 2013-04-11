@@ -7,6 +7,10 @@ namespace JUUT.Core.Reports {
         /// </summary>
         int RunnedTests { get; }
         /// <summary>
+        /// The number of tests that weren't run.
+        /// </summary>
+        int NotRunnedTests { get; }
+        /// <summary>
         /// The number of tests, that failed. Can have status Failed or Error.
         /// </summary>
         int FailedTests { get; set; }
@@ -14,10 +18,6 @@ namespace JUUT.Core.Reports {
         /// The number of succeeded tests.
         /// </summary>
         int SucceededTests { get; set; }
-        /// <summary>
-        /// The number of tests that weren't run.
-        /// </summary>
-        int NotRunnedTests { get; set; }
 
         /// <summary>
         /// Adds the report to the class report.<para />
