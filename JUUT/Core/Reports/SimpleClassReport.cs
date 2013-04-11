@@ -19,7 +19,7 @@ namespace JUUT.Core.Reports {
                                                           FailedTests + " failed, " + SucceededTests + " succeeded");
                 foreach (MethodReport report in Reports.Values) {
                     builder.Append("\n\n");
-                    builder.Append(report.Text);
+                    builder.Append(report.ShortText);
                 }
                 return builder.ToString();
             }

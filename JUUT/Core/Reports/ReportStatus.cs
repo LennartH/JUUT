@@ -21,8 +21,11 @@ namespace JUUT.Core.Reports {
 
         public string Name { get; private set; }
 
-        private ReportStatus(string name) {
+        public string DescribingText { get; private set; }
+
+        private ReportStatus(string name, string describingText) {
             Name = name;
+            DescribingText = describingText;
         }
 
         public abstract bool IsWorseThan(ReportStatus status);
@@ -39,7 +42,7 @@ namespace JUUT.Core.Reports {
         /// The status for a method or class, which wasn't run.
         /// </summary>
         public class NotRunned : ReportStatus {
-            public NotRunned() : base("Not Runned") { }
+            public NotRunned() : base("Not Runned", "wasn't run") { }
 
             public override bool IsWorseThan(ReportStatus status) {
                 return false;
@@ -56,7 +59,7 @@ namespace JUUT.Core.Reports {
         /// The test was successful.
         /// </summary>
         public class Success : ReportStatus {
-            public Success() : base("Success") { }
+            public Success() : base("Success", "passed successfully") { }
 
             public override bool IsWorseThan(ReportStatus status) {
                 return status is NotRunned;
@@ -78,7 +81,7 @@ namespace JUUT.Core.Reports {
         /// The test raised an AssertException.
         /// </summary>
         public class Failed : ReportStatus {
-            public Failed() : base("Failed") { }
+            public Failed() : base("Failed", "failed") { }
 
             public override bool IsWorseThan(ReportStatus status) {
                 return !(status is Failed) && !(status is Error);
@@ -100,7 +103,7 @@ namespace JUUT.Core.Reports {
         /// The test raised an unexpected exception.
         /// </summary>
         public class Error : ReportStatus {
-            public Error() : base("Error") { }
+            public Error() : base("Error", "threw an unexcepcted exception") { }
 
             public override bool IsWorseThan(ReportStatus status) {
                 return !(status is Error);

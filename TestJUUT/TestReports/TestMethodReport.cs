@@ -51,14 +51,30 @@ namespace TestJUUT.TestReports {
             Exception raisedException = new AssertException("Exception Text");
 
             Report report = new MethodReport(testMethod, raisedException);
-            AssertEx.That(report.Text, Is.EqualTo("The TestName-Method failed: Exception Text"));
+            AssertEx.That(report.Text, Is.EqualTo("The TestName-Method failed: " + raisedException.Message));
 
             raisedException = new NullReferenceException("Null reference");
             report = new MethodReport(testMethod, raisedException);
-            AssertEx.That(report.Text, Is.EqualTo("The TestName-Method raised an unexpected exception: " + raisedException.Message));
+            AssertEx.That(report.Text, Is.EqualTo("The TestName-Method threw an unexpected exception: " + raisedException.Message));
 
             report = new MethodReport(testMethod);
             AssertEx.That(report.Text, Is.EqualTo("The TestName-Method passed successfully."));
+        }
+
+        [TestMethod]
+        public void ShortMessageCreation() {
+            MethodInfo testMethod = typeof(TestClass).GetMethod("TestName");
+            Exception raisedException = new AssertException("Exception Text");
+
+            MethodReport report = new MethodReport(testMethod, raisedException);
+            AssertEx.That(report.ShortText, Is.EqualTo("The TestName-Method failed."));
+
+            raisedException = new NullReferenceException("Null reference");
+            report = new MethodReport(testMethod, raisedException);
+            AssertEx.That(report.ShortText, Is.EqualTo("The TestName-Method threw an unexpected exception."));
+
+            report = new MethodReport(testMethod);
+            AssertEx.That(report.ShortText, Is.EqualTo("The TestName-Method passed successfully."));
         }
 
         [TestMethod]

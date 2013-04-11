@@ -11,6 +11,10 @@ namespace JUUT.Core.Reports {
     public class MethodReport : Report {
 
         public string Text { get; private set; }
+        /// <summary>
+        /// Short information about the report status as text.
+        /// </summary>
+        public string ShortText { get; private set; }
 
         public Type ClassType {
             get { return Method.DeclaringType; }
@@ -45,22 +49,16 @@ namespace JUUT.Core.Reports {
 
             Method = method;
             Status = ReportStatus.Create(raisedException);
-            Text = GenerateText(Method, raisedException);
+            InitializeTexts(Method, Status, raisedException);
         }
 
         /// <summary>
-        /// Generates the text for the given information.
-        /// <param name="raisedException">The exception raised by the tested method. Can be null.</param>
+        /// Initializes the values for Text and ShortText.
         /// </summary>
-        private static string GenerateText(MethodInfo testMethod, Exception raisedException) {
-            if (raisedException == null) {
-                return "The " + testMethod.Name + "-Method passed successfully.";
-            }
-            if (raisedException is AssertException) {
-                return "The " + testMethod.Name + "-Method failed: " + raisedException.Message;
-            }
-
-            return "The " + testMethod.Name + "-Method raised an unexpected exception: " + raisedException.Message;
+        private void InitializeTexts(MethodInfo method, ReportStatus status, Exception raisedException) {
+            string commonText = "The " + method.Name + "-Method " + status.DescribingText;
+            ShortText = commonText + ".";
+            Text = commonText + ": " + raisedException.Message;
         }
 
         public override string ToString() {

@@ -42,6 +42,24 @@ namespace TestJUUT.TestReports {
             raisedException = new NullReferenceException("Other Exception");
             status = ReportStatus.Create(raisedException);
             AssertEx.That(status.Name, Is.EqualTo("Error"));
+
+            status = new ReportStatus.NotRunned();
+            AssertEx.That(status.Name, Is.EqualTo("Not Runned"));
+        }
+
+        [TestMethod]
+        public void DescribingText() {
+            ReportStatus status = new ReportStatus.NotRunned();
+            AssertEx.That(status.DescribingText, Is.EqualTo("wasn't run"));
+
+            status = new ReportStatus.Success();
+            AssertEx.That(status.DescribingText, Is.EqualTo("passed successfully"));
+
+            status = new ReportStatus.Failed();
+            AssertEx.That(status.DescribingText, Is.EqualTo("failed"));
+
+            status = new ReportStatus.Error();
+            AssertEx.That(status.DescribingText, Is.EqualTo("threw an unexpected exception"));
         }
 
         [TestMethod]
