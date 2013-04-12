@@ -23,7 +23,7 @@ namespace TestJUUT.TestReports {
             Type type = typeof(TestClass);
 
             Report report = new SimpleClassReport(type);
-            AssertEx.That(report.ClassType, Is.EqualTo(typeof(TestClass)));
+            AssertEx.That(report.TestClass, Is.EqualTo(typeof(TestClass)));
             AssertEx.That(report.Status is ReportStatus.NotRunned, Is.True());
 
             AssertEx.That(() => new SimpleClassReport(null), Throws.An<ArgumentException>());

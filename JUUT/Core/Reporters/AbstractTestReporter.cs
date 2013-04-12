@@ -14,7 +14,7 @@ namespace JUUT.Core.Reporters {
         }
 
         public void AddReport(Report report) {
-            Type testClassType = report.ClassType;
+            Type testClassType = report.TestClass;
             if (!Reports.ContainsKey(testClassType)) {
                 Reports[testClassType] = new List<Report>();
             }

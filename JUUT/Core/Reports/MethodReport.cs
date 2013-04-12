@@ -16,7 +16,7 @@ namespace JUUT.Core.Reports {
         /// </summary>
         public string ShortText { get; private set; }
 
-        public Type ClassType {
+        public Type TestClass {
             get { return Method.DeclaringType; }
         }
 

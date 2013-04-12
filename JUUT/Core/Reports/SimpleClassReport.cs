@@ -31,25 +31,25 @@ namespace JUUT.Core.Reports {
         public int FailedTests { get; set; }
         public int SucceededTests { get; set; }
 
-        public Type ClassType { get; private set; }
+        public Type TestClass { get; private set; }
         private readonly Dictionary<MethodInfo, MethodReport> Reports;
         public ReportStatus Status { get; private set; }
 
-        public SimpleClassReport(Type classType) {
-            if (classType == null) {
-                throw new ArgumentException("The class type of a SimpleClassReport mustn't be null.");
+        public SimpleClassReport(Type testClass) {
+            if (testClass == null) {
+                throw new ArgumentException("The test class of a SimpleClassReport mustn't be null.");
             }
-            if (classType.GetCustomAttribute<JUUTTestClassAttribute>() == null) {
-                throw new ArgumentException("The class needs the JUUTTestClass-Attribute.");
+            if (testClass.GetCustomAttribute<JUUTTestClassAttribute>() == null) {
+                throw new ArgumentException("The test class of a SimpleClassReport needs the JUUTTestClass-Attribute.");
             }
 
             Reports = new Dictionary<MethodInfo, MethodReport>();
-            ClassType = classType;
+            TestClass = testClass;
             Status = new ReportStatus.NotRunned();
         }
 
         public void Add(MethodReport report) {
-            if (report.ClassType != ClassType) {
+            if (report.TestClass != TestClass) {
                 throw new ArgumentException("The declaring type of the given report isn't equal to the declaring type of this class report.");
             }
 

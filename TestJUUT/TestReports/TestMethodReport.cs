@@ -26,7 +26,7 @@ namespace TestJUUT.TestReports {
             Exception raisedException = new AssertException("Exception Text");
 
             Report report = new MethodReport(testMethod, raisedException);
-            AssertEx.That(report.ClassType, Is.EqualTo(typeof(TestClass)));
+            AssertEx.That(report.TestClass, Is.EqualTo(typeof(TestClass)));
             AssertEx.That(report.Status is ReportStatus.Failed, Is.True());
 
             //Check that a report can be created with other JUUTMethodAttributes
@@ -34,7 +34,7 @@ namespace TestJUUT.TestReports {
 
             //This allows to create a test method report without a raised exception
             report = new MethodReport(testMethod);
-            AssertEx.That(report.ClassType, Is.EqualTo(typeof(TestClass)));
+            AssertEx.That(report.TestClass, Is.EqualTo(typeof(TestClass)));
             AssertEx.That(report.Status is ReportStatus.Success, Is.True());
 
             testMethod = new DynamicMethod("Foo", null, null);
