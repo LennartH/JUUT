@@ -58,7 +58,7 @@ namespace JUUT.Core.Reports {
         private void InitializeTexts(MethodInfo method, ReportStatus status, Exception raisedException) {
             string commonText = "The " + method.Name + "-Method " + status.DescribingText;
             ShortText = commonText + ".";
-            Text = commonText + ": " + raisedException.Message;
+            Text = commonText + ( raisedException == null ? "." : ": " + raisedException.Message);
         }
 
         public override string ToString() {

@@ -103,7 +103,7 @@ namespace JUUT.Core.Reports {
         /// The test raised an unexpected exception.
         /// </summary>
         public class Error : ReportStatus {
-            public Error() : base("Error", "threw an unexcepcted exception") { }
+            public Error() : base("Error", "threw an unexpected exception") { }
 
             public override bool IsWorseThan(ReportStatus status) {
                 return !(status is Error);
