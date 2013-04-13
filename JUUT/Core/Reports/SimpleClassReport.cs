@@ -15,11 +15,13 @@ namespace JUUT.Core.Reports {
                     return "No tests have been runned.";
                 }
 
-                StringBuilder builder = new StringBuilder(RunnedTests + " tests runned: " +
+                StringBuilder builder = new StringBuilder(RunnedTests + " test" + (RunnedTests > 1 ? "s" : "") + " runned: " +
                                                           FailedTests + " failed, " + SucceededTests + " succeeded");
                 foreach (MethodReport report in Reports.Values) {
-                    builder.Append("\n\n");
-                    builder.Append(report.ShortText);
+                    if (report.Status.IsWorseThan(new ReportStatus.Success())) {
+                        builder.Append("\n\n");
+                        builder.Append(report.ShortText);
+                    }
                 }
                 return builder.ToString();
             }

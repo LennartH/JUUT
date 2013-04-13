@@ -77,17 +77,17 @@ namespace TestJUUT.TestReports {
 
             MethodReport methodReport2 = new MethodReport(failedMethod, new AssertException("Exception Text"));
             report.Add(methodReport2);
-            AssertEx.That(report.Text, Is.EqualTo("2 test runned: 1 failed, 1 succeeded\n" +
+            AssertEx.That(report.Text, Is.EqualTo("2 tests runned: 1 failed, 1 succeeded\n" +
                                                   "\n" +
                                                   "The SecondTest-Method failed."));
 
             MethodReport methodReport3 = new MethodReport(succeededMethod, new NullReferenceException());
             report.Add(methodReport3);
-            AssertEx.That(report.Text, Is.EqualTo("2 test runned: 2 failed, 0 succeeded\n" +
+            AssertEx.That(report.Text, Is.EqualTo("2 tests runned: 2 failed, 0 succeeded\n" +
                                                   "\n" +
-                                                  "The SecondTest-Method failed.\n" +
+                                                  "The TestName-Method threw an unexpected exception.\n" +
                                                   "\n" +
-                                                  "The TestName-Method threw an unexpected exception."));
+                                                  "The SecondTest-Method failed."));
         }
 
         [JUUTTestClass]
