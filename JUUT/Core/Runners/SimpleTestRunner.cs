@@ -12,6 +12,8 @@ namespace JUUT.Core.Runners {
 
         public Type TestClass { get; private set; }
 
+        public ClassReport Report { get; private set; }
+
         public SimpleTestRunner(Type testClass) {
             if (testClass == null) {
                 throw new ArgumentException("The test class of a TestRunner mustn't be null.");
@@ -21,21 +23,21 @@ namespace JUUT.Core.Runners {
             }
 
             TestClass = testClass;
+            Report = new SimpleClassReport(TestClass);
         }
 
         /// <summary>
         /// Runs all tests and returns the reports of the runned tests.
         /// </summary>
         /// <returns>The reports of the runned tests.</returns>
-        public List<Report> RunAll() {
-            List<Report> resultReports = new List<Report>();
-            Report report = RunClassSetUp();
-            if (report != null) {
-                resultReports.Add(report);
-                return resultReports;
+        public void RunAll() {
+            RunClassSetUp();
+            foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(TestClass)) {
+                RunTestSetUp();
+                RunTest(test);
+                RunTestTearDown();
             }
-
-            return resultReports;
+            RunClassTearDown();
         }
 
         /// <summary>TODO Was passiert wenns es keine Methode mit diesem namen gibt?
@@ -43,18 +45,16 @@ namespace JUUT.Core.Runners {
         /// </summary>
         /// <param name="testMethod"></param>
         /// <returns>Report of the runned test.</returns>
-        public Report Run(MethodInfo testMethod) {
-            Report report = RunClassSetUp();
-            if (report != null) {
-                return report;
-            }
+        public void Run(MethodInfo testMethod) {
+            //TODO If test not in class throw/return?
 
-            report = RunTest(testMethod);
-            if (report != null) {
-                return report;
-            }
+            RunClassSetUp();
 
-            return report;
+            RunTestSetUp();
+            RunTest(testMethod);
+            RunTestTearDown();
+
+            RunClassTearDown();
         }
 
         /// <summary>
@@ -62,26 +62,39 @@ namespace JUUT.Core.Runners {
         /// </summary>
         /// <param name="testMethod"></param>
         /// <returns></returns>
-        private Report RunTest(MethodInfo testMethod) {
+        private void RunTest(MethodInfo testMethod) {
+            throw new NotImplementedException();
+        }
+
+        private void RunClassTearDown() {
+            throw new NotImplementedException();
+        }
+
+        private void RunTestTearDown() {
+            throw new NotImplementedException();
+        }
+
+        private void RunTestSetUp() {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Runs the class set up method of the test class and returns a report, if an exception is thrown.
-        /// If no exception is thrown, null is returned.
+        /// Runs the class set up method of the test class and adds adjusts the report, if an exception is thrown.
         /// </summary>
-        /// <returns>A report if an exception is thrown. Otherwhise null.</returns>
-        private TestClassReport RunClassSetUp() {
+        private void RunClassSetUp() {
+            MethodInfo classSetUp = TestClassScanner.GetClassSetUpOfTestClass(TestClass);
+            if (classSetUp == null) {
+                return;
+            }
+
             try {
-                TestClassScanner.GetClassSetUpOfTestClass(ClassType).Invoke(null, null);
+                classSetUp.Invoke(null, null);
             } catch (Exception raisedException) {
                 if (raisedException is TargetInvocationException) {
                     raisedException = raisedException.InnerException;
                 }
-                return new TestClassReport(TestClassScanner.GetClassSetUpOfTestClass(ClassType), raisedException);
+                Report.Add(new MethodReport(classSetUp, raisedException));
             }
-
-            return null;
         }
 
     }

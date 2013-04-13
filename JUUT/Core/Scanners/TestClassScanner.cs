@@ -96,18 +96,18 @@ namespace JUUT.Core.Scanners {
         private static MethodInfo GetOrganizeMethodOfTestClass(Type organizeAttribute, Type testClass) {
             JUUTAttribute.IsMemberValidFor(typeof(JUUTTestClassAttribute), testClass);
 
-            MethodInfo classSetUp = null;
+            MethodInfo organizeMethod = null;
             foreach (MethodInfo method in testClass.GetMethods()) {
                 if (JUUTAttribute.IsMemberValidFor(organizeAttribute, method)) {
-                    if (classSetUp != null) {
+                    if (organizeMethod != null) {
                         JUUTAttribute attribute = (JUUTAttribute) method.GetCustomAttribute(organizeAttribute);
                         throw new ArgumentException("The class " + testClass.Name + " has more than one " + attribute.Name + "-Methods.");
                     }
 
-                    classSetUp = method;
+                    organizeMethod = method;
                 }
             }
-            return classSetUp;
+            return organizeMethod;
         }
 
     }

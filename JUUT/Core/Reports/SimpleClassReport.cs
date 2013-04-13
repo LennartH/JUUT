@@ -27,6 +27,10 @@ namespace JUUT.Core.Reports {
             }
         }
 
+        public ICollection<MethodReport> MethodReports {
+            get { return Reports.Values; }
+        }
+
         public int RunnedTests {
             get { return FailedTests + SucceededTests; }
         }

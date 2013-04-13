@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace JUUT.Core.Reports {
 
     public interface ClassReport : Report {
@@ -14,6 +16,11 @@ namespace JUUT.Core.Reports {
         /// The number of succeeded tests.
         /// </summary>
         int SucceededTests { get; set; }
+
+        /// <summary>
+        /// The method reports contained by this class report.
+        /// </summary>
+        ICollection<MethodReport> MethodReports { get; }
 
         /// <summary>
         /// Adds the report to the class report.<para />

@@ -61,12 +61,12 @@ namespace TestJUUT {
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningASpecificTest();
 
             //Checking the returned test report
-            Report report = runner.Report.MethodsReport[0];
+            Report report = GetFirstMethodReportFrom(runner.Report.MethodReports);
             Report expectedReport = new MethodReport(typeof(TestClassMock).GetMethod("Foo"));
             AssertEx.That(report, Is.EqualTo(expectedReport));
 
             //Checking the reaction for a method name, that doesn't exist
-            runner.Run(typeof(OtherTestClassMock).GetMethod("TestMethod"));
+            AssertEx.That(() => runner.Run(typeof(OtherTestClassMock).GetMethod("TestMethod")), Throws.An<ArgumentException>());
             //TODO What happens if you give the name of a method that doesn't exist in the test class.
         }
 
@@ -79,7 +79,7 @@ namespace TestJUUT {
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
 
             //Checking the returned test report
-            Report report = runner.Report.MethodsReport[0];
+            Report report = GetFirstMethodReportFrom(runner.Report.MethodReports);
             Exception raisedException = new NullReferenceException("Failing class set up.");
             Report expectedReport = new MethodReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), raisedException);
             AssertEx.That(report, Is.EqualTo(expectedReport));
@@ -90,11 +90,11 @@ namespace TestJUUT {
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
 
             //Checking the returned test reports
-            List<Report> reports = runner.Report.MethodsReport;
+            ICollection<MethodReport> reports = runner.Report.MethodReports;
             raisedException = new NullReferenceException("Failing class set up.");
             expectedReport = new MethodReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), raisedException);
             AssertEx.That(reports.Count, Is.EqualTo(1));
-            AssertEx.That(reports[0], Is.EqualTo(expectedReport));
+            AssertEx.That(GetFirstMethodReportFrom(reports), Is.EqualTo(expectedReport));
         }
 
         [TestMethod]
@@ -106,7 +106,7 @@ namespace TestJUUT {
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingTestSetUp();
 
             //Checking the returned test report
-            Report returnedReport = runner.Report.MethodsReport[0];
+            Report returnedReport = GetFirstMethodReportFrom(runner.Report.MethodReports);
             Exception raisedException = new NullReferenceException("Failing class set up.");
             Report expectedReport = new MethodReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), raisedException);
             AssertEx.That(returnedReport, Is.EqualTo(expectedReport));
@@ -117,13 +117,14 @@ namespace TestJUUT {
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingTestSetUp();
 
             //Checking the returned test reports
-            List<Report> reports = runner.Report.MethodsReport;
+            ICollection<MethodReport> reports = runner.Report.MethodReports;
             raisedException = new NullReferenceException("Failing class set up.");
             expectedReport = new MethodReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), raisedException);
             AssertEx.That(reports.Count, Is.EqualTo(1));
-            AssertEx.That(reports[0], Is.EqualTo(expectedReport));
+            AssertEx.That(GetFirstMethodReportFrom(reports), Is.EqualTo(expectedReport));
         }
 
+        //TODO What happens when you run a specific test and then all tests? (ClassSetUp/TearDown twice?)
         //TODO Implement tests for test classes which fail in the other methods
 
         #region HelperMethods
@@ -152,6 +153,12 @@ namespace TestJUUT {
             Report barReport = new MethodReport(typeof(TestClassMock).GetMethod("Bar"));
 
             AssertEx.That(report, Matches.AnyOf(Is.EqualTo(fooReport), Is.EqualTo(barReport)));
+        }
+
+        private static Report GetFirstMethodReportFrom(ICollection<MethodReport> reportCollection) {
+            IEnumerator<MethodReport> enumerator = reportCollection.GetEnumerator();
+            enumerator.MoveNext();
+            return enumerator.Current;
         }
         #endregion
 
