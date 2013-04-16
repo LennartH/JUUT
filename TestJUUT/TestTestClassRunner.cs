@@ -107,8 +107,8 @@ namespace TestJUUT {
 
             //Checking the returned test report
             Report returnedReport = GetFirstMethodReportFrom(runner.Report.MethodReports);
-            Exception raisedException = new NullReferenceException("Failing class set up.");
-            Report expectedReport = new MethodReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), raisedException);
+            Exception raisedException = new NullReferenceException("Failing test set up.");
+            Report expectedReport = new MethodReport(typeof(TestClassMockWithFailingTestSetUp).GetMethod("SetUp"), raisedException);
             AssertEx.That(returnedReport, Is.EqualTo(expectedReport));
 
             //Testing the run of all tests
@@ -118,8 +118,8 @@ namespace TestJUUT {
 
             //Checking the returned test reports
             ICollection<MethodReport> reports = runner.Report.MethodReports;
-            raisedException = new NullReferenceException("Failing class set up.");
-            expectedReport = new MethodReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("ClassSetUp"), raisedException);
+            raisedException = new NullReferenceException("Failing test set up.");
+            expectedReport = new MethodReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("SetUp"), raisedException);
             AssertEx.That(reports.Count, Is.EqualTo(1));
             AssertEx.That(GetFirstMethodReportFrom(reports), Is.EqualTo(expectedReport));
         }

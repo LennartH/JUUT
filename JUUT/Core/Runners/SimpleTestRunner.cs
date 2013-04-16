@@ -31,12 +31,29 @@ namespace JUUT.Core.Runners {
         /// </summary>
         /// <returns>The reports of the runned tests.</returns>
         public void RunAll() {
-            RunClassSetUp();
-            foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(TestClass)) {
-                RunTestSetUp();
-                RunTest(test);
-                RunTestTearDown();
+            try {
+                RunClassSetUp();
+            } catch (Exception) {
+                return;
             }
+
+            object testInstance = Activator.CreateInstance(TestClass);
+            foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(TestClass)) {
+                try {
+                    RunTestSetUp(testInstance);
+                } catch (Exception) {
+                    return;
+                }
+
+                RunTest(testInstance, test);
+
+                try {
+                    RunTestTearDown(testInstance);
+                } catch (Exception) {
+                    return;
+                }
+            }
+
             RunClassTearDown();
         }
 
@@ -48,38 +65,27 @@ namespace JUUT.Core.Runners {
         public void Run(MethodInfo testMethod) {
             //TODO If test not in class throw/return?
 
-            RunClassSetUp();
+            object testInstance = Activator.CreateInstance(TestClass);
 
-            RunTestSetUp();
-            RunTest(testMethod);
-            RunTestTearDown();
+            try {
+                RunClassSetUp();
+                RunTestSetUp(testInstance);
+            } catch (Exception) {
+                return;
+            }
 
-            RunClassTearDown();
+            RunTest(testInstance, testMethod);
+
+            try {
+                RunTestTearDown(testInstance);
+                RunClassTearDown();
+            } catch (Exception) {
+                return;
+            }
         }
 
         /// <summary>
-        /// TODO
-        /// </summary>
-        /// <param name="testMethod"></param>
-        /// <returns></returns>
-        private void RunTest(MethodInfo testMethod) {
-            throw new NotImplementedException();
-        }
-
-        private void RunClassTearDown() {
-            throw new NotImplementedException();
-        }
-
-        private void RunTestTearDown() {
-            throw new NotImplementedException();
-        }
-
-        private void RunTestSetUp() {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Runs the class set up method of the test class and adds adjusts the report, if an exception is thrown.
+        /// Runs the class set up method of the test class and adjusts the report, if an exception is thrown.
         /// </summary>
         private void RunClassSetUp() {
             MethodInfo classSetUp = TestClassScanner.GetClassSetUpOfTestClass(TestClass);
@@ -87,14 +93,86 @@ namespace JUUT.Core.Runners {
                 return;
             }
 
+            RunStaticOrganizeMethod(classSetUp);
+        }
+
+        /// <summary>
+        /// Runs the test set up method for the given test class instance and adjusts the report, if an exception is thrown.
+        /// </summary>
+        private void RunTestSetUp(object testInstance) {
+            MethodInfo testSetUp = TestClassScanner.GetTestSetUpOfTestClass(TestClass);
+            if (testSetUp == null) {
+                return;
+            }
+
+            RunInstanceMethod(testInstance, testSetUp, false);
+        }
+
+        /// <summary>
+        /// Runs the test method for the given test class instance and adjusts the report.
+        /// </summary>
+        private void RunTest(object testInstance, MethodInfo testMethod) {
+            RunInstanceMethod(testInstance, testMethod, true);
+        }
+
+        /// <summary>
+        /// Runs the test tear down method for the given test class instance and adjusts the report, if an exception is thrown.
+        /// </summary>
+        private void RunTestTearDown(object testInstance) {
+            MethodInfo testTearDown = TestClassScanner.GetTestTearDownOfTestClass(TestClass);
+            if (testTearDown == null) {
+                return;
+            }
+
+            RunInstanceMethod(testInstance, testTearDown, false);
+        }
+
+        /// <summary>
+        /// Runs the class tear down method of the test class and adjusts the report, if an exception is thrown.
+        /// </summary>
+        private void RunClassTearDown() {
+            MethodInfo classTearDown = TestClassScanner.GetClassTearDownOfClass(TestClass);
+            if (classTearDown == null) {
+                return;
+            }
+
+            RunStaticOrganizeMethod(classTearDown);
+        }
+
+        /// <summary>
+        /// Runs the given static organize method and adjusts the report, if an exception is thrown.
+        /// </summary>
+        /// <param name="staticOrganizeMethod"></param>
+        private void RunStaticOrganizeMethod(MethodInfo staticOrganizeMethod) {
             try {
-                classSetUp.Invoke(null, null);
+                staticOrganizeMethod.Invoke(null, null);
             } catch (Exception raisedException) {
                 if (raisedException is TargetInvocationException) {
                     raisedException = raisedException.InnerException;
                 }
-                Report.Add(new MethodReport(classSetUp, raisedException));
+                Report.Add(new MethodReport(staticOrganizeMethod, raisedException));
+                throw;
             }
+        }
+
+        /// <summary>
+        /// Runs the method (test, test set up or test tear down) for the given test class instance and
+        /// adjusts the report, if an exception is thrown or allwaysReport is true.
+        /// </summary>
+        private void RunInstanceMethod(object testInstance, MethodInfo method, bool allwaysReport) {
+            try {
+                method.Invoke(testInstance, null);
+                if (allwaysReport) {
+                    Report.Add(new MethodReport(method));
+                }
+            } catch (Exception raisedException) {
+                if (raisedException is TargetInvocationException) {
+                    raisedException = raisedException.InnerException;
+                }
+                Report.Add(new MethodReport(method, raisedException));
+                throw;
+            }
+
         }
 
     }

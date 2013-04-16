@@ -65,17 +65,17 @@ namespace TestJUUT {
 
         [TestMethod]
         public void GetClassTearDown() {
-            MethodInfo classTearDownMethod = TestClassScanner.GetClassTearDownMethodOfClass(typeof(TestClassWithNoJUUTMethods));
+            MethodInfo classTearDownMethod = TestClassScanner.GetClassTearDownOfClass(typeof(TestClassWithNoJUUTMethods));
             AssertEx.That(classTearDownMethod, Is.Null());
 
-            classTearDownMethod = TestClassScanner.GetClassTearDownMethodOfClass(typeof(TestClassMock));
+            classTearDownMethod = TestClassScanner.GetClassTearDownOfClass(typeof(TestClassMock));
             AssertEx.That(classTearDownMethod, Is.EqualTo(typeof(TestClassMock).GetMethod("MockTearDown")));
 
-            AssertEx.That(() => TestClassScanner.GetClassTearDownMethodOfClass(null), Throws.An<ArgumentNullException>());
+            AssertEx.That(() => TestClassScanner.GetClassTearDownOfClass(null), Throws.An<ArgumentNullException>());
 
-            AssertEx.That(() => TestClassScanner.GetClassTearDownMethodOfClass(typeof(NotAJUUTTest)), Throws.An<ArgumentException>());
-            AssertEx.That(() => TestClassScanner.GetClassTearDownMethodOfClass(typeof(TestClassWithMethodsWithParameters)), Throws.An<ArgumentException>());
-            AssertEx.That(() => TestClassScanner.GetClassTearDownMethodOfClass(typeof(TestClassWithMoreThanOneOrganizeMethod)), Throws.An<ArgumentException>());
+            AssertEx.That(() => TestClassScanner.GetClassTearDownOfClass(typeof(NotAJUUTTest)), Throws.An<ArgumentException>());
+            AssertEx.That(() => TestClassScanner.GetClassTearDownOfClass(typeof(TestClassWithMethodsWithParameters)), Throws.An<ArgumentException>());
+            AssertEx.That(() => TestClassScanner.GetClassTearDownOfClass(typeof(TestClassWithMoreThanOneOrganizeMethod)), Throws.An<ArgumentException>());
         }
 
         [TestMethod]

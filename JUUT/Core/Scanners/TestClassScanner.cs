@@ -52,7 +52,7 @@ namespace JUUT.Core.Scanners {
         /// </summary>
         /// <param name="testClass">The test class that is scanned for a ClassTearDown-Method. Can't be null.</param>
         /// <returns>Returns the ClassTearDown-Method or null, if there is none.</returns>
-        public static MethodInfo GetClassTearDownMethodOfClass(Type testClass) {
+        public static MethodInfo GetClassTearDownOfClass(Type testClass) {
             return GetOrganizeMethodOfTestClass(typeof(ClassTearDownAttribute), testClass);
         }
 
