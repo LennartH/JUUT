@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
-using System.Reflection;
 
-using JUUT.Core;
 using JUUT.Core.Attributes;
 using JUUT.Core.Attributes.Methods;
 using JUUT.Core.Reports;
@@ -67,7 +64,6 @@ namespace TestJUUT {
 
             //Checking the reaction for a method name, that doesn't exist
             AssertEx.That(() => runner.Run(typeof(OtherTestClassMock).GetMethod("TestMethod")), Throws.An<ArgumentException>());
-            //TODO What happens if you give the name of a method that doesn't exist in the test class.
         }
 
         [TestMethod]
@@ -119,12 +115,11 @@ namespace TestJUUT {
             //Checking the returned test reports
             ICollection<MethodReport> reports = runner.Report.MethodReports;
             raisedException = new NullReferenceException("Failing test set up.");
-            expectedReport = new MethodReport(typeof(TestClassMockWithFailingClassSetUp).GetMethod("SetUp"), raisedException);
+            expectedReport = new MethodReport(typeof(TestClassMockWithFailingTestSetUp).GetMethod("SetUp"), raisedException);
             AssertEx.That(reports.Count, Is.EqualTo(1));
             AssertEx.That(GetFirstMethodReportFrom(reports), Is.EqualTo(expectedReport));
         }
 
-        //TODO What happens when you run a specific test and then all tests? (ClassSetUp/TearDown twice?)
         //TODO Implement tests for test classes which fail in the other methods
 
         #region HelperMethods
@@ -204,6 +199,9 @@ namespace TestJUUT {
                 throw new NullReferenceException("Failing class set up.");
             }
 
+            [SimpleTestMethod]
+            public void Bar() { }
+
         }
 
         [JUUTTestClass]
@@ -219,6 +217,9 @@ namespace TestJUUT {
                 MethodCallOrder.Add("SetUp");
                 throw new NullReferenceException("Failing test set up.");
             }
+
+            [SimpleTestMethod]
+            public void Foo() { }
 
         }
 

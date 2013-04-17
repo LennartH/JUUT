@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
@@ -29,7 +28,6 @@ namespace JUUT.Core.Runners {
         /// <summary>
         /// Runs all tests and returns the reports of the runned tests.
         /// </summary>
-        /// <returns>The reports of the runned tests.</returns>
         public void RunAll() {
             try {
                 RunClassSetUp();
@@ -57,13 +55,14 @@ namespace JUUT.Core.Runners {
             RunClassTearDown();
         }
 
-        /// <summary>TODO Was passiert wenns es keine Methode mit diesem namen gibt?
-        /// Runs the test with the given name and returns the reports of the run.
+        /// <summary>
+        /// Runs the test with the given name and returns the reports of the run.<para />
+        /// Throws an exception, if the given method isn't a member of the test class.
         /// </summary>
-        /// <param name="testMethod"></param>
-        /// <returns>Report of the runned test.</returns>
         public void Run(MethodInfo testMethod) {
-            //TODO If test not in class throw/return?
+            if (testMethod.DeclaringType != TestClass) {
+                throw new ArgumentException("The given method isn't a member of the test class.");
+            }
 
             object testInstance = Activator.CreateInstance(TestClass);
 
@@ -83,6 +82,8 @@ namespace JUUT.Core.Runners {
                 return;
             }
         }
+
+        #region Helper Methods
 
         /// <summary>
         /// Runs the class set up method of the test class and adjusts the report, if an exception is thrown.
@@ -174,6 +175,8 @@ namespace JUUT.Core.Runners {
             }
 
         }
+
+        #endregion
 
     }
 
