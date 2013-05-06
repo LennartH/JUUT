@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 using JUUT.Core.Attributes;
+using JUUT.Core.Attributes.Methods;
 using JUUT.Core.Reports;
 using JUUT.Core.Scanners;
 
@@ -10,8 +12,10 @@ namespace JUUT.Core.Runners {
     public class SimpleTestRunner : TestRunner {
 
         public Type TestClass { get; private set; }
-
         public ClassReport Report { get; private set; }
+        private readonly HashSet<MethodInfo> TestsToRun;
+
+        private object TestInstance;
 
         public SimpleTestRunner(Type testClass) {
             if (testClass == null) {
@@ -23,64 +27,52 @@ namespace JUUT.Core.Runners {
 
             TestClass = testClass;
             Report = new SimpleClassReport(TestClass);
+            TestsToRun = new HashSet<MethodInfo>();
+        }
+
+        public void AddAll() {
+            foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(TestClass)) {
+                TestsToRun.Add(test);
+            }
+        }
+
+        public void Add(MethodInfo test) {
+            if (test.GetCustomAttribute<SimpleTestMethodAttribute>() == null) {
+                throw new ArgumentException("Tests to be added to a TestRunner needs a TestMethod-Attribute.");
+            }
+            if (test.DeclaringType != TestClass) {
+                throw new ArgumentException("The given method isn't a member of the test class.");
+            }
+            TestsToRun.Add(test);
         }
 
         /// <summary>
         /// Runs all tests and returns the reports of the runned tests.
         /// </summary>
-        public void RunAll() {
+        public void Run() {
             try {
                 RunClassSetUp();
             } catch (Exception) {
                 return;
             }
 
-            object testInstance = Activator.CreateInstance(TestClass);
-            foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(TestClass)) {
+            TestInstance = Activator.CreateInstance(TestClass);
+            foreach (MethodInfo test in TestsToRun) {
                 try {
-                    RunTestSetUp(testInstance);
-                } catch (Exception) {
-                    return;
-                }
-
-                RunTest(testInstance, test);
-
-                try {
-                    RunTestTearDown(testInstance);
+                    Run(test);
                 } catch (Exception) {
                     return;
                 }
             }
 
             RunClassTearDown();
+            TestInstance = null;
         }
 
-        /// <summary>
-        /// Runs the test with the given name and returns the reports of the run.<para />
-        /// Throws an exception, if the given method isn't a member of the test class.
-        /// </summary>
-        public void Run(MethodInfo testMethod) {
-            if (testMethod.DeclaringType != TestClass) {
-                throw new ArgumentException("The given method isn't a member of the test class.");
-            }
-
-            object testInstance = Activator.CreateInstance(TestClass);
-
-            try {
-                RunClassSetUp();
-                RunTestSetUp(testInstance);
-            } catch (Exception) {
-                return;
-            }
-
-            RunTest(testInstance, testMethod);
-
-            try {
-                RunTestTearDown(testInstance);
-                RunClassTearDown();
-            } catch (Exception) {
-                return;
-            }
+        private void Run(MethodInfo testMethod) {
+            RunTestSetUp(TestInstance);
+            RunTest(TestInstance, testMethod);
+            RunTestTearDown(TestInstance);
         }
 
         #region Helper Methods

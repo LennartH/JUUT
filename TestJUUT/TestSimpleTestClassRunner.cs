@@ -40,7 +40,8 @@ namespace TestJUUT {
         [TestMethod]
         public void RunAllTestsOfJUUTTestClass() {
             TestRunner runner = new SimpleTestRunner(typeof(TestClassMock));
-            runner.RunAll();
+            runner.AddAll();
+            runner.Run();
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningAllTests();
 
             //Checking the created test reports
@@ -54,7 +55,8 @@ namespace TestJUUT {
         [TestMethod]
         public void RunSpecificTestOfJUUTTestClass() {
             TestRunner runner = new SimpleTestRunner(typeof(TestClassMock));
-            runner.Run(typeof(TestClassMock).GetMethod("Foo"));
+            runner.Add(typeof(TestClassMock).GetMethod("Foo"));
+            runner.Run();
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningASpecificTest();
 
             //Checking the returned test report
@@ -63,7 +65,7 @@ namespace TestJUUT {
             AssertEx.That(report, Is.EqualTo(expectedReport));
 
             //Checking the reaction for a method name, that doesn't exist
-            AssertEx.That(() => runner.Run(typeof(OtherTestClassMock).GetMethod("TestMethod")), Throws.An<ArgumentException>());
+            AssertEx.That(() => runner.Add(typeof(OtherTestClassMock).GetMethod("TestMethod")), Throws.An<ArgumentException>());
         }
 
         [TestMethod]
@@ -71,7 +73,8 @@ namespace TestJUUT {
             TestRunner runner = new SimpleTestRunner(typeof(TestClassMockWithFailingClassSetUp));
 
             //Testing the run of a specific testMethod
-            runner.Run(typeof(TestClassMockWithFailingClassSetUp).GetMethod("Bar"));
+            runner.Add(typeof(TestClassMockWithFailingClassSetUp).GetMethod("Bar"));
+            runner.Run();
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
 
             //Checking the returned test report
@@ -82,7 +85,8 @@ namespace TestJUUT {
 
             //Testing the run of all tests
             ResetMethodCountersAndTheMethodCallOrder();
-            runner.RunAll();
+            runner.AddAll();
+            runner.Run();
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
 
             //Checking the returned test reports
@@ -98,7 +102,8 @@ namespace TestJUUT {
             TestRunner runner = new SimpleTestRunner(typeof(TestClassMockWithFailingTestSetUp));
 
             //Testing the run of a specific testMethod
-            runner.Run(typeof(TestClassMockWithFailingTestSetUp).GetMethod("Foo"));
+            runner.Add(typeof(TestClassMockWithFailingTestSetUp).GetMethod("Foo"));
+            runner.Run();
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingTestSetUp();
 
             //Checking the returned test report
@@ -109,7 +114,8 @@ namespace TestJUUT {
 
             //Testing the run of all tests
             ResetMethodCountersAndTheMethodCallOrder();
-            runner.RunAll();
+            runner.AddAll();
+            runner.Run();
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingTestSetUp();
 
             //Checking the returned test reports

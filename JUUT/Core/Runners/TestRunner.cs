@@ -18,15 +18,19 @@ namespace JUUT.Core.Runners {
         ClassReport Report { get; }
 
         /// <summary>
-        /// Runs all tests of the test class.
+        /// Adds all tests of the test class to the runner.
         /// </summary>
-        void RunAll();
+        void AddAll();
 
         /// <summary>
-        /// Runs the the given test method.<para />
-        /// Has to be a member of the test class.
+        /// Adds the given test to the runner. This test has to be a member of the test class and needs a TestMethod Attribute.
         /// </summary>
-        void Run(MethodInfo testMethod);
+        void Add(MethodInfo test);
+
+        /// <summary>
+        /// Runs all tests added to the test class.
+        /// </summary>
+        void Run();
 
     }
 }
