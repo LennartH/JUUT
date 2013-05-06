@@ -21,10 +21,6 @@ namespace TestJUUT {
 
         [TestInitialize]
         public void InitializeMethodCountersAndTheMethodCallOrder() {
-            ResetMethodCountersAndTheMethodCallOrder();
-        }
-
-        private static void ResetMethodCountersAndTheMethodCallOrder() {
             MethodCallOrder = new List<string>();
         }
 
@@ -84,7 +80,7 @@ namespace TestJUUT {
             AssertEx.That(report, Is.EqualTo(expectedReport));
 
             //Testing the run of all tests
-            ResetMethodCountersAndTheMethodCallOrder();
+            MethodCallOrder = new List<string>();
             runner.AddAll();
             runner.Run();
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingClassSetUp();
@@ -113,7 +109,7 @@ namespace TestJUUT {
             AssertEx.That(returnedReport, Is.EqualTo(expectedReport));
 
             //Testing the run of all tests
-            ResetMethodCountersAndTheMethodCallOrder();
+            MethodCallOrder = new List<string>();
             runner.AddAll();
             runner.Run();
             AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningATestWithFailingTestSetUp();

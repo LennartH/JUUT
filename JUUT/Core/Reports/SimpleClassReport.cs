@@ -79,6 +79,29 @@ namespace JUUT.Core.Reports {
             report.Status.DecrementCounterFor(this);
         }
 
+        #region HashCode and Equals
+        private bool Equals(SimpleClassReport other) {
+            return TestClass.Equals(other.TestClass);
+        }
+
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) {
+                return false;
+            }
+            if (ReferenceEquals(this, obj)) {
+                return true;
+            }
+            if (obj.GetType() != this.GetType()) {
+                return false;
+            }
+            return Equals((SimpleClassReport) obj);
+        }
+
+        public override int GetHashCode() {
+            return TestClass.GetHashCode();
+        }
+        #endregion
+
     }
 
 }

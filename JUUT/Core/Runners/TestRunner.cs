@@ -28,7 +28,7 @@ namespace JUUT.Core.Runners {
         void Add(MethodInfo test);
 
         /// <summary>
-        /// Runs all tests added to the test class.
+        /// Runs all tests added to the runner.
         /// </summary>
         void Run();
 

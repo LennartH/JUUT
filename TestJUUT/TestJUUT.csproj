@@ -71,6 +71,7 @@
     <Compile Include="TestReports\TestClassReport.cs" />
     <Compile Include="TestReports\TestMethodReport.cs" />
     <Compile Include="TestReports\TestReportStatus.cs" />
+    <Compile Include="TestTestSuite.cs" />
     <Compile Include="Util\AssertEx.cs" />
     <Compile Include="Util\TestClassMock.cs" />
     <Compile Include="Util\NotAttributedMock.cs" />

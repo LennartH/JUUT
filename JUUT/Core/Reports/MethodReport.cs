@@ -27,6 +27,8 @@ namespace JUUT.Core.Reports {
         /// </summary>
         internal MethodInfo Method { get; private set; }
 
+        private readonly Exception RaisedException;
+
         /// <summary>
         /// Creates a new report for the <code>method</code>, which passed successfully.
         /// </summary>
@@ -49,7 +51,8 @@ namespace JUUT.Core.Reports {
 
             Method = method;
             Status = ReportStatus.Create(raisedException);
-            InitializeTexts(Method, Status, raisedException);
+            RaisedException = raisedException;
+            InitializeTexts(Method, Status, RaisedException);
         }
 
         /// <summary>
@@ -70,7 +73,7 @@ namespace JUUT.Core.Reports {
         ////////////////////////////////////////////////////////
 
         private bool Equals(MethodReport other) {
-            return string.Equals(Text, other.Text) && Method.Equals(other.Method);
+            return Status.Equals(other.Status) && Method.Equals(other.Method) && RaisedException.Equals(other.RaisedException);
         }
 
         public override bool Equals(object obj) {

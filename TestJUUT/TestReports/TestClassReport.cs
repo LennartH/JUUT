@@ -13,6 +13,8 @@ using NHamcrest.Core;
 
 using TestJUUT.Util;
 
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+
 namespace TestJUUT.TestReports {
 
     [TestClass]
@@ -88,6 +90,31 @@ namespace TestJUUT.TestReports {
                                                   "The TestName-Method threw an unexpected exception.\n" +
                                                   "\n" +
                                                   "The SecondTest-Method failed."));
+        }
+
+        [TestMethod]
+        public void EqualsAndHashCode() {
+            Report report = new SimpleClassReport(typeof(TestClass));
+
+            //Using IsTrue/IsFalse to cover all paths (aren't covered, when using Equals)
+            //Equal tests
+            Assert.IsTrue(report.Equals(report), "An object should allways be equal to itself (reference).");
+            AssertEx.That(report.GetHashCode(), Is.EqualTo(report.GetHashCode()), "Equal objects should have equal hashcodes.");
+
+            Report equal = new SimpleClassReport(typeof(TestClass));
+            Assert.IsTrue(report.Equals(equal), "An object should be equal to an object with the same attributes.");
+            AssertEx.That(report.GetHashCode(), Is.EqualTo(equal.GetHashCode()), "Equal objects should have equal hashcodes.");
+
+            //Not equal tests
+            Assert.IsFalse(report.Equals(null), "An object shouldn't be equal to null.");
+
+            object unequal = new object();
+            Assert.IsFalse(report.Equals(unequal), "An object shouldn't be equal to an object of an other type.");
+            AssertEx.That(report.GetHashCode(), Is.Not(unequal.GetHashCode()), "Unequal objects shouldn't have equal hashcodes.");
+
+            unequal = new SimpleClassReport(typeof(AnotherTestClass));
+            Assert.IsFalse(report.Equals(unequal), "An object shouldn't be equal to an object of an other type.");
+            AssertEx.That(report.GetHashCode(), Is.Not(unequal.GetHashCode()), "Unequal objects shouldn't have equal hashcodes.");
         }
 
         [JUUTTestClass]

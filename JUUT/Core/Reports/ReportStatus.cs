@@ -120,6 +120,31 @@ namespace JUUT.Core.Reports {
         }
         #endregion
 
+        #region HashCode and Equals
+        private bool Equals(ReportStatus other) {
+            return string.Equals(Name, other.Name) && string.Equals(DescribingText, other.DescribingText);
+        }
+
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) {
+                return false;
+            }
+            if (ReferenceEquals(this, obj)) {
+                return true;
+            }
+            if (obj.GetType() != GetType()) {
+                return false;
+            }
+            return Equals((ReportStatus) obj);
+        }
+
+        public override int GetHashCode() {
+            unchecked {
+                return (Name.GetHashCode() * 397) ^ DescribingText.GetHashCode();
+            }
+        }
+        #endregion
+
     }
 
 }
