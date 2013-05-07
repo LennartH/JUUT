@@ -7,18 +7,14 @@ namespace JUUT.Core.Reporters {
 
     public abstract class AbstractTestReporter : TestReporter {
 
-        public Dictionary<Type, IList<Report>> Reports { get; private set; }
+        public HashSet<ClassReport> Reports { get; private set; }
 
         protected AbstractTestReporter() {
-            Reports = new Dictionary<Type, IList<Report>>();
+            Reports = new HashSet<ClassReport>();
         }
 
-        public void AddReport(Report report) {
-            Type testClassType = report.TestClass;
-            if (!Reports.ContainsKey(testClassType)) {
-                Reports[testClassType] = new List<Report>();
-            }
-            Reports[testClassType].Add(report);
+        public void AddReport(ClassReport report) {
+            Reports.Add(report);
         }
 
         public abstract void PresentReports();

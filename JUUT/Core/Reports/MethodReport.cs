@@ -73,7 +73,7 @@ namespace JUUT.Core.Reports {
         ////////////////////////////////////////////////////////
 
         private bool Equals(MethodReport other) {
-            return Status.Equals(other.Status) && Method.Equals(other.Method) && RaisedException.Equals(other.RaisedException);
+            return Status.Equals(other.Status) && Method.Equals(other.Method);
         }
 
         public override bool Equals(object obj) {
@@ -91,7 +91,9 @@ namespace JUUT.Core.Reports {
 
         public override int GetHashCode() {
             unchecked {
-                return (Text.GetHashCode() * 397) ^ Method.GetHashCode();
+                int hashCode = Status.GetHashCode();
+                hashCode = (hashCode * 397) ^ Method.GetHashCode();
+                return hashCode;
             }
         }
 

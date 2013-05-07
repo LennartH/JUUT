@@ -111,10 +111,6 @@ namespace TestJUUT.TestReports {
             unequal = new MethodReport(typeof(TestClass).GetMethod("TestName"), new NullReferenceException("Exception test."));
             Assert.IsFalse(report.Equals(unequal), "An object shouldn't be equal to an object with different attributes.");
             AssertEx.That(report.GetHashCode(), Is.Not(unequal.GetHashCode()), "Unequal objects shouldn't have equal hashcodes.");
-
-            unequal = new MethodReport(typeof(TestClass).GetMethod("TestName"), new AssertException("Unequal exception."));
-            Assert.IsFalse(report.Equals(unequal), "An object shouldn't be equal to an object with different attributes.");
-            AssertEx.That(report.GetHashCode(), Is.Not(unequal.GetHashCode()), "Unequal objects shouldn't have equal hashcodes.");
         }
 
         private class TestClass {
