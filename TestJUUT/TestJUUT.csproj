@@ -66,6 +66,7 @@
     <Compile Include="AttributeTests\TestClassSetUpAttribute.cs" />
     <Compile Include="AttributeTests\TestJUUTAttribute.cs" />
     <Compile Include="AttributeTests\TestJUUTTestClass.cs" />
+    <Compile Include="ReporterTests\TestConsoleReporter.cs" />
     <Compile Include="TestCore\TestAssert.cs" />
     <Compile Include="TestCore\TestAssertException.cs" />
     <Compile Include="TestReports\TestClassReport.cs" />
@@ -77,7 +78,7 @@
     <Compile Include="Util\NotAttributedMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestTestClassScanner.cs" />
-    <Compile Include="TestAbstractTestReporter.cs" />
+    <Compile Include="ReporterTests\TestAbstractTestReporter.cs" />
     <Compile Include="TestSimpleTestClassRunner.cs" />
     <Compile Include="Util\TestClassWithNonStaticClassOrganizeMethods.cs" />
     <Compile Include="Util\TestClassWithMethodsWithParameters.cs" />

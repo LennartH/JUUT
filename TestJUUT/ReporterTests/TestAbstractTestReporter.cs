@@ -4,13 +4,14 @@ using JUUT.Core.Reporters;
 using JUUT.Core.Reports;
 
 using Moq;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using NHamcrest.Core;
 
 using TestJUUT.Util;
 
-namespace TestJUUT {
+namespace TestJUUT.ReporterTests {
 
     [TestClass]
     public class TestAbstractTestReporter {
