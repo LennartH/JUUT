@@ -58,6 +58,8 @@
     <Compile Include="Core\Runners\SimpleTestRunner.cs" />
     <Compile Include="Core\Runners\TestRunner.cs" />
     <Compile Include="Core\Scanners\TestClassScanner.cs" />
+    <Compile Include="Core\Suites\AbstractTestSuite.cs" />
+    <Compile Include="Core\Suites\TestSuite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
