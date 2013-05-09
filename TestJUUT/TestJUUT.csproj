@@ -84,9 +84,9 @@
     <Compile Include="Util\TestClassWithMethodsWithParameters.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JUUT\JUUT.csproj">
+    <ProjectReference Include="..\JUUT\JUUT_Core.csproj">
       <Project>{6a2fd2d8-1d16-44d3-b861-90503bd2d569}</Project>
-      <Name>JUUT</Name>
+      <Name>JUUT_Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

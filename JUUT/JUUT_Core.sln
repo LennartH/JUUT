@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JUUT", "JUUT.csproj", "{6A2FD2D8-1D16-44D3-B861-90503BD2D569}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JUUT_Core", "JUUT_Core.csproj", "{6A2FD2D8-1D16-44D3-B861-90503BD2D569}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestJUUT", "..\TestJUUT\TestJUUT.csproj", "{6199E90A-4399-49E2-A7C8-F998A33AE40F}"
 EndProject
