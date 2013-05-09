@@ -1,6 +1,6 @@
 using System.Text;
 
-using JUUT.Core;
+using JUUT_Core;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

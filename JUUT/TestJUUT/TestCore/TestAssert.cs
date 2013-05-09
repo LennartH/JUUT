@@ -1,4 +1,4 @@
-using JUUT.Core;
+using JUUT_Core;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -6,7 +6,7 @@ using NHamcrest.Core;
 
 using TestJUUT.Util;
 
-using Assert = JUUT.Core.Assert;
+using Assert = JUUT_Core.Assert;
 
 namespace TestJUUT.TestCore {
 

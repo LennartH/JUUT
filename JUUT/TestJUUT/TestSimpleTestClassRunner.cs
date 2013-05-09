@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Collections.Generic;
 
-using JUUT.Core.Attributes;
-using JUUT.Core.Attributes.Methods;
-using JUUT.Core.Reports;
-using JUUT.Core.Runners;
+using JUUT_Core.Attributes;
+using JUUT_Core.Attributes.Methods;
+using JUUT_Core.Reports;
+using JUUT_Core.Runners;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHamcrest.Core;

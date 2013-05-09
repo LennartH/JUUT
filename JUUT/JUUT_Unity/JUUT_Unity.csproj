@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6A2FD2D8-1D16-44D3-B861-90503BD2D569}</ProjectGuid>
+    <ProjectGuid>{CB61CBE2-A27D-4131-80CF-6FE531633BCA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JUUT_Core</RootNamespace>
-    <AssemblyName>JUUT_Core</AssemblyName>
+    <RootNamespace>JUUT_Unity</RootNamespace>
+    <AssemblyName>JUUT_Unity</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,42 +30,26 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NHamcrest, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31c3ea0b6fcf8c4a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\NHamcrest.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssertException.cs" />
-    <Compile Include="Attributes\JUUTAttribute.cs" />
-    <Compile Include="Attributes\JUUTMethodAttribute.cs" />
-    <Compile Include="Attributes\JUUTTestClassAttribute.cs" />
-    <Compile Include="Attributes\Methods\ClassSetUpAttribute.cs" />
-    <Compile Include="Attributes\Methods\ClassTearDownAttribute.cs" />
-    <Compile Include="Attributes\Methods\SimpleTestMethodAttribute.cs" />
-    <Compile Include="Attributes\Methods\TestSetUpAttribute.cs" />
-    <Compile Include="Attributes\Methods\TestTearDownAttribute.cs" />
-    <Compile Include="Assert.cs" />
-    <Compile Include="Reporters\AbstractTestReporter.cs" />
-    <Compile Include="Reporters\ConsoleReporter.cs" />
-    <Compile Include="Reporters\TestReporter.cs" />
-    <Compile Include="Reports\ClassReport.cs" />
-    <Compile Include="Reports\SimpleClassReport.cs" />
-    <Compile Include="Reports\Report.cs" />
-    <Compile Include="Reports\ReportStatus.cs" />
-    <Compile Include="Reports\MethodReport.cs" />
-    <Compile Include="Runners\SimpleTestRunner.cs" />
-    <Compile Include="Runners\TestRunner.cs" />
-    <Compile Include="Scanners\TestClassScanner.cs" />
-    <Compile Include="Suites\AbstractTestSuite.cs" />
-    <Compile Include="Suites\TestSuite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnityTestReporter.cs" />
+    <Compile Include="UnityTestSuite.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\JUUT_Core\JUUT_Core.csproj">
+      <Project>{6a2fd2d8-1d16-44d3-b861-90503bd2d569}</Project>
+      <Name>JUUT_Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

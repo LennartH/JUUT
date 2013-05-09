@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
 
-using JUUT.Core.Attributes;
-using JUUT.Core.Attributes.Methods;
+using JUUT_Core.Attributes;
+using JUUT_Core.Attributes.Methods;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

@@ -1,15 +1,15 @@
 ﻿using System;
 
-using JUUT.Core.Attributes;
-using JUUT.Core.Attributes.Methods;
-using JUUT.Core.Reporters;
-using JUUT.Core.Runners;
+using JUUT_Core.Attributes;
+using JUUT_Core.Attributes.Methods;
+using JUUT_Core.Reporters;
+using JUUT_Core.Runners;
 
 using NHamcrest.Core;
 
 using TestJUUT.Util;
 
-using Assert = JUUT.Core.Assert;
+using Assert = JUUT_Core.Assert;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

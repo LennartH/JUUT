@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Collections.Generic;
 
-using JUUT.Core.Attributes;
+using JUUT_Core.Attributes;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

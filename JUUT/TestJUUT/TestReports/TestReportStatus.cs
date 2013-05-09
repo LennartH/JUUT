@@ -1,7 +1,7 @@
 ﻿using System;
 
-using JUUT.Core;
-using JUUT.Core.Reports;
+using JUUT_Core;
+using JUUT_Core.Reports;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

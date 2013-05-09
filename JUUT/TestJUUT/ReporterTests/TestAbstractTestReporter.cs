@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
-using JUUT.Core.Reporters;
-using JUUT.Core.Reports;
+using JUUT_Core.Reporters;
+using JUUT_Core.Reports;
 
 using Moq;
 

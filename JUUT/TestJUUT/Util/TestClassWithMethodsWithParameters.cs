@@ -1,5 +1,5 @@
-﻿using JUUT.Core.Attributes;
-using JUUT.Core.Attributes.Methods;
+﻿using JUUT_Core.Attributes;
+using JUUT_Core.Attributes.Methods;
 
 namespace TestJUUT.Util {
 
