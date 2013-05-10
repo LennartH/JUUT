@@ -27,7 +27,7 @@ namespace JUUT_Core.Reports {
         /// </summary>
         internal MethodInfo Method { get; private set; }
 
-        private readonly Exception RaisedException;
+        public Exception RaisedException { get; private set; }
 
         /// <summary>
         /// Creates a new report for the <code>method</code>, which passed successfully.

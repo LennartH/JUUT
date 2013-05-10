@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="NHamcrest, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31c3ea0b6fcf8c4a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -52,7 +55,6 @@
     <Compile Include="Attributes\Methods\TestTearDownAttribute.cs" />
     <Compile Include="Assert.cs" />
     <Compile Include="Reporters\AbstractTestReporter.cs" />
-    <Compile Include="Reporters\ConsoleReporter.cs" />
     <Compile Include="Reporters\TestReporter.cs" />
     <Compile Include="Reports\ClassReport.cs" />
     <Compile Include="Reports\SimpleClassReport.cs" />
