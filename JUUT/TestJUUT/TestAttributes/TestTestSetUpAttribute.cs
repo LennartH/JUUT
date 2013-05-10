@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 using JUUT_Core.Attributes;
@@ -11,7 +10,7 @@ using NHamcrest.Core;
 
 using TestJUUT.Util;
 
-namespace TestJUUT.AttributeTests {
+namespace TestJUUT.TestAttributes {
 
     [TestClass]
     public class TestTestSetUpAttribute {

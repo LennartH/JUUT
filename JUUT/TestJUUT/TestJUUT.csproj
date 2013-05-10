@@ -59,26 +59,27 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AttributeTests\TestSimpleTestMethodAttribute.cs" />
-    <Compile Include="AttributeTests\TestTestTearDownAttribute.cs" />
-    <Compile Include="AttributeTests\TestTestSetUpAttribute.cs" />
-    <Compile Include="AttributeTests\TestClassTearDownAttribute.cs" />
-    <Compile Include="AttributeTests\TestClassSetUpAttribute.cs" />
-    <Compile Include="AttributeTests\TestJUUTAttribute.cs" />
-    <Compile Include="AttributeTests\TestJUUTTestClass.cs" />
-    <Compile Include="ReporterTests\TestConsoleReporter.cs" />
+    <Compile Include="TestAttributes\TestSimpleTestMethodAttribute.cs" />
+    <Compile Include="TestAttributes\TestTestTearDownAttribute.cs" />
+    <Compile Include="TestAttributes\TestTestSetUpAttribute.cs" />
+    <Compile Include="TestAttributes\TestClassTearDownAttribute.cs" />
+    <Compile Include="TestAttributes\TestClassSetUpAttribute.cs" />
+    <Compile Include="TestAttributes\TestJUUTAttribute.cs" />
+    <Compile Include="TestAttributes\TestJUUTTestClass.cs" />
+    <Compile Include="TestReporters\TestConsoleReporter.cs" />
     <Compile Include="TestCore\TestAssert.cs" />
     <Compile Include="TestCore\TestAssertException.cs" />
     <Compile Include="TestReports\TestClassReport.cs" />
     <Compile Include="TestReports\TestMethodReport.cs" />
     <Compile Include="TestReports\TestReportStatus.cs" />
     <Compile Include="TestAbstractTestSuite.cs" />
+    <Compile Include="TestSessions\TestTestClassSession.cs" />
     <Compile Include="Util\AssertEx.cs" />
     <Compile Include="Util\TestClassMock.cs" />
     <Compile Include="Util\NotAttributedMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestTestClassScanner.cs" />
-    <Compile Include="ReporterTests\TestAbstractTestReporter.cs" />
+    <Compile Include="TestReporters\TestAbstractTestReporter.cs" />
     <Compile Include="TestSimpleTestClassRunner.cs" />
     <Compile Include="Util\TestClassWithNonStaticClassOrganizeMethods.cs" />
     <Compile Include="Util\TestClassWithMethodsWithParameters.cs" />

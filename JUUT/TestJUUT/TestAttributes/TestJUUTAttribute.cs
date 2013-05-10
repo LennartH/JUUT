@@ -9,7 +9,7 @@ using NHamcrest.Core;
 
 using TestJUUT.Util;
 
-namespace TestJUUT.AttributeTests {
+namespace TestJUUT.TestAttributes {
 
     [TestClass]
     public class TestJUUTAttribute {

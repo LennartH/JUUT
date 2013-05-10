@@ -11,7 +11,7 @@ using NHamcrest.Core;
 
 using TestJUUT.Util;
 
-namespace TestJUUT.ReporterTests {
+namespace TestJUUT.TestReporters {
 
     [TestClass]
     public class TestAbstractTestReporter {

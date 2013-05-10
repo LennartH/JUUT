@@ -52,6 +52,7 @@ namespace TestJUUT {
             reporterMock.Verify(rep => rep.PresentReports(), Times.Once());
         }
 
+        #region Helpers
         private void AssertThatTheMethodsAreCalledCorrectly() {
             List<string> possibleOrder1 = new List<string> {"Foo", "Bar", "Blub"};
             List<string> possibleOrder2 = new List<string> {"Blub", "Foo", "Bar"};
@@ -103,6 +104,7 @@ namespace TestJUUT {
             }
 
         }
+        #endregion
 
     }
 

@@ -4,16 +4,17 @@ using JUUT_Core.Attributes;
 using JUUT_Core.Attributes.Methods;
 using JUUT_Core.Reporters;
 using JUUT_Core.Runners;
+using JUUT_Core.Sessions;
 
 using NHamcrest.Core;
 
 using TestJUUT.Util;
 
-using Assert = JUUT_Core.Assert;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestJUUT.ReporterTests {
+using Assert = JUUT_Core.Assert;
+
+namespace TestJUUT.TestReporters {
 
     [TestClass]
     public class TestConsoleReporter {
@@ -23,16 +24,15 @@ namespace TestJUUT.ReporterTests {
         [TestMethod]
         public void TextCreation() {
             TestReporter reporter = new ConsoleReporterMock();
+            TestRunner runner = new SimpleTestRunner();
 
-            TestRunner runner = new SimpleTestRunner(typeof(TestMock));
-            runner.AddAll();
-            runner.Run();
-            reporter.AddReport(runner.Report);
+            TestClassSession session = new TestClassSession(typeof(TestMock));
+            session.AddAll();
+            reporter.AddReport(runner.Run(session));
 
-            runner = new SimpleTestRunner(typeof(AnotherTestMock));
-            runner.AddAll();
-            runner.Run();
-            reporter.AddReport(runner.Report);
+            session = new TestClassSession(typeof(AnotherTestMock));
+            session.AddAll();
+            reporter.AddReport(runner.Run(session));
 
             reporter.PresentReports();
             AssertEx.That(Text, Is.EqualTo(

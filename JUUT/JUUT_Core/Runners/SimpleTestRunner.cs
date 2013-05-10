@@ -6,145 +6,121 @@ using JUUT_Core.Attributes;
 using JUUT_Core.Attributes.Methods;
 using JUUT_Core.Reports;
 using JUUT_Core.Scanners;
+using JUUT_Core.Sessions;
 
 namespace JUUT_Core.Runners {
 
     public class SimpleTestRunner : TestRunner {
 
-        public Type TestClass { get; private set; }
-        public ClassReport Report { get; private set; }
-        private readonly HashSet<MethodInfo> TestsToRun;
-
-        private object TestInstance;
-
-        public SimpleTestRunner(Type testClass) {
-            if (testClass == null) {
-                throw new ArgumentException("The test class of a TestRunner mustn't be null.");
-            }
-            if (testClass.GetCustomAttribute<JUUTTestClassAttribute>() == null) {
-                throw new ArgumentException("The test class of a TestRunner needs the JUUTTestClass-Attribute.");
-            }
-
-            TestClass = testClass;
-            Report = new SimpleClassReport(TestClass);
-            TestsToRun = new HashSet<MethodInfo>();
-        }
-
-        public void AddAll() {
-            foreach (MethodInfo test in TestClassScanner.GetSimpleTestMethodsOfClass(TestClass)) {
-                TestsToRun.Add(test);
-            }
-        }
-
-        public void Add(MethodInfo test) {
-            if (test.GetCustomAttribute<SimpleTestMethodAttribute>() == null) {
-                throw new ArgumentException("Tests to be added to a TestRunner needs a TestMethod-Attribute.");
-            }
-            if (test.DeclaringType != TestClass) {
-                throw new ArgumentException("The given method isn't a member of the test class.");
-            }
-            TestsToRun.Add(test);
-        }
-
         /// <summary>
         /// Runs all tests and returns the reports of the runned tests.
         /// </summary>
-        public void Run() {
-            try {
-                RunClassSetUp();
-            } catch (Exception) {
-                return;
+        /// <param name="session"></param>
+        public ClassReport Run(TestClassSession session) {
+            Type testClass = session.TestClass;
+            ClassReport report = new SimpleClassReport(testClass);
+
+            MethodReport methodReport = RunClassSetUp(testClass);
+            if (methodReport != null) {
+                report.Add(methodReport);
+                return report;
             }
 
-            TestInstance = Activator.CreateInstance(TestClass);
-            foreach (MethodInfo test in TestsToRun) {
-                try {
-                    Run(test);
-                } catch (Exception) {
-                    return;
+            object testInstance = Activator.CreateInstance(testClass);
+            foreach (MethodInfo test in session.TestsToRun) {
+                methodReport = RunTestSetUp(testInstance, testClass);
+                if (methodReport != null) {
+                    report.Add(methodReport);
+                    return report;
+                }
+
+                report.Add(RunTest(testInstance, test));
+
+                methodReport = RunTestTearDown(testInstance, testClass);
+                if (methodReport != null) {
+                    report.Add(methodReport);
+                    return report;
                 }
             }
 
-            RunClassTearDown();
-            TestInstance = null;
-        }
-
-        private void Run(MethodInfo testMethod) {
-            RunTestSetUp(TestInstance);
-            RunTest(TestInstance, testMethod);
-            RunTestTearDown(TestInstance);
+            methodReport = RunClassTearDown(testClass);
+            if (methodReport != null) {
+                report.Add(methodReport);
+            }
+            return report;
         }
 
         #region Helper Methods
-
         /// <summary>
         /// Runs the class set up method of the test class and adjusts the report, if an exception is thrown.
         /// </summary>
-        private void RunClassSetUp() {
-            MethodInfo classSetUp = TestClassScanner.GetClassSetUpOfTestClass(TestClass);
+        /// <param name="testClass"></param>
+        private static MethodReport RunClassSetUp(Type testClass) {
+            MethodInfo classSetUp = TestClassScanner.GetClassSetUpOfTestClass(testClass);
             if (classSetUp == null) {
-                return;
+                return null;
             }
 
-            RunStaticOrganizeMethod(classSetUp);
+            return RunStaticOrganizeMethod(classSetUp);
         }
 
         /// <summary>
         /// Runs the test set up method for the given test class instance and adjusts the report, if an exception is thrown.
         /// </summary>
-        private void RunTestSetUp(object testInstance) {
-            MethodInfo testSetUp = TestClassScanner.GetTestSetUpOfTestClass(TestClass);
+        private static MethodReport RunTestSetUp(object instance, Type testClass) {
+            MethodInfo testSetUp = TestClassScanner.GetTestSetUpOfTestClass(testClass);
             if (testSetUp == null) {
-                return;
+                return null;
             }
 
-            RunInstanceMethod(testInstance, testSetUp, false);
+            return RunInstanceMethod(instance, testSetUp, false);
         }
 
         /// <summary>
         /// Runs the test method for the given test class instance and adjusts the report.
         /// </summary>
-        private void RunTest(object testInstance, MethodInfo testMethod) {
-            RunInstanceMethod(testInstance, testMethod, true);
+        private MethodReport RunTest(object instance, MethodInfo testMethod) {
+            return RunInstanceMethod(instance, testMethod, true);
         }
 
         /// <summary>
         /// Runs the test tear down method for the given test class instance and adjusts the report, if an exception is thrown.
         /// </summary>
-        private void RunTestTearDown(object testInstance) {
-            MethodInfo testTearDown = TestClassScanner.GetTestTearDownOfTestClass(TestClass);
+        private static MethodReport RunTestTearDown(object instance, Type testClass) {
+            MethodInfo testTearDown = TestClassScanner.GetTestTearDownOfTestClass(testClass);
             if (testTearDown == null) {
-                return;
+                return null;
             }
 
-            RunInstanceMethod(testInstance, testTearDown, false);
+            return RunInstanceMethod(instance, testTearDown, false);
         }
 
         /// <summary>
         /// Runs the class tear down method of the test class and adjusts the report, if an exception is thrown.
         /// </summary>
-        private void RunClassTearDown() {
-            MethodInfo classTearDown = TestClassScanner.GetClassTearDownOfClass(TestClass);
+        /// <param name="testClass"></param>
+        private static MethodReport RunClassTearDown(Type testClass) {
+            MethodInfo classTearDown = TestClassScanner.GetClassTearDownOfClass(testClass);
             if (classTearDown == null) {
-                return;
+                return null;
             }
 
-            RunStaticOrganizeMethod(classTearDown);
+            return RunStaticOrganizeMethod(classTearDown);
         }
 
         /// <summary>
         /// Runs the given static organize method and adjusts the report, if an exception is thrown.
         /// </summary>
         /// <param name="staticOrganizeMethod"></param>
-        private void RunStaticOrganizeMethod(MethodInfo staticOrganizeMethod) {
+        private static MethodReport RunStaticOrganizeMethod(MethodInfo staticOrganizeMethod) {
             try {
                 staticOrganizeMethod.Invoke(null, null);
+                return null;
             } catch (Exception raisedException) {
                 if (raisedException is TargetInvocationException) {
                     raisedException = raisedException.InnerException;
                 }
-                Report.Add(new MethodReport(staticOrganizeMethod, raisedException));
-                throw;
+                return new MethodReport(staticOrganizeMethod, raisedException);
             }
         }
 
@@ -152,22 +128,20 @@ namespace JUUT_Core.Runners {
         /// Runs the method (test, test set up or test tear down) for the given test class instance and
         /// adjusts the report, if an exception is thrown or allwaysReport is true.
         /// </summary>
-        private void RunInstanceMethod(object testInstance, MethodInfo method, bool allwaysReport) {
+        private static MethodReport RunInstanceMethod(object testInstance, MethodInfo method, bool allwaysReport) {
             try {
                 method.Invoke(testInstance, null);
                 if (allwaysReport) {
-                    Report.Add(new MethodReport(method));
+                    return new MethodReport(method);
                 }
+                return null;
             } catch (Exception raisedException) {
                 if (raisedException is TargetInvocationException) {
                     raisedException = raisedException.InnerException;
                 }
-                Report.Add(new MethodReport(method, raisedException));
-                throw;
+                return new MethodReport(method, raisedException);
             }
-
         }
-
         #endregion
 
     }

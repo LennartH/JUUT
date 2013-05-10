@@ -4,13 +4,14 @@ using System.Reflection;
 
 using JUUT_Core.Reporters;
 using JUUT_Core.Runners;
+using JUUT_Core.Sessions;
 
 namespace JUUT_Core.Suites {
 
     public abstract class AbstractTestSuite : TestSuite {
 
         private readonly TestReporter Reporter;
-        private readonly Dictionary<Type, TestRunner> Runners; 
+        private readonly Dictionary<Type, TestClassSession> Runners; 
 
         protected AbstractTestSuite(TestReporter reporter) {
             if (reporter == null) {
@@ -18,12 +19,12 @@ namespace JUUT_Core.Suites {
             }
 
             Reporter = reporter;
-            Runners = new Dictionary<Type, TestRunner>();
+            Runners = new Dictionary<Type, TestClassSession>();
         }
 
         public void AddAll(Type testClass) {
             if (!Runners.ContainsKey(testClass)) {
-                Runners.Add(testClass, new SimpleTestRunner(testClass));
+                Runners.Add(testClass, new TestClassSession(testClass));
             }
             Runners[testClass].AddAll();
         }
@@ -34,15 +35,15 @@ namespace JUUT_Core.Suites {
             }
 
             if (!Runners.ContainsKey(test.DeclaringType)) {
-                Runners.Add(test.DeclaringType, new SimpleTestRunner(test.DeclaringType));
+                Runners.Add(test.DeclaringType, new TestClassSession(test.DeclaringType));
             }
             Runners[test.DeclaringType].Add(test);
         }
 
         public void Run() {
-            foreach (TestRunner runner in Runners.Values) {
-                runner.Run();
-                Reporter.AddReport(runner.Report);
+            TestRunner runner = new SimpleTestRunner();
+            foreach (TestClassSession session in Runners.Values) {
+                Reporter.AddReport(runner.Run(session));
             }
             Reporter.PresentReports();
         }
