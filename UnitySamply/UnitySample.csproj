@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\StandardAssets\Editor\JUUTUnityMenu.cs" />
     <Compile Include="Assets\Tests\JUUT\TestStarter.cs" />
     <Compile Include="Assets\Tests\TestSample.cs" />
   </ItemGroup>
