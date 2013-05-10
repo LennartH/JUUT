@@ -100,7 +100,7 @@ namespace JUUT_Core.Scanners {
             foreach (MethodInfo method in testClass.GetMethods()) {
                 if (JUUTAttribute.IsMemberValidFor(organizeAttribute, method)) {
                     if (organizeMethod != null) {
-                        JUUTAttribute attribute = (JUUTAttribute) method.GetCustomAttribute(organizeAttribute);
+                        JUUTAttribute attribute = (JUUTAttribute) Activator.CreateInstance(organizeAttribute);
                         throw new ArgumentException("The class " + testClass.Name + " has more than one " + attribute.Name + "-Methods.");
                     }
 

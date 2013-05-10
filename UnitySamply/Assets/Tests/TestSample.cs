@@ -7,6 +7,8 @@ using JUUT_Core;
 using JUUT_Core.Attributes;
 using JUUT_Core.Attributes.Methods;
 
+using NHamcrest.Core;
+
 namespace Assets.Tests {
 
     [JUUTTestClass]
@@ -14,7 +16,7 @@ namespace Assets.Tests {
 
         [SimpleTestMethod]
         public void TestMethod() {
-            Assert.That(12, Is.EqualtTo(10));
+            Assert.That(12, Is.EqualTo(10));
         }
 
     }

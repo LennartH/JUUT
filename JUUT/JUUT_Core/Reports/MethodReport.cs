@@ -45,7 +45,7 @@ namespace JUUT_Core.Reports {
                 throw new ArgumentException("The method of a report can't be null.");
             }
 
-            if (method.GetCustomAttribute(typeof(JUUTMethodAttribute)) == null) {
+            if (method.GetCustomAttribute<JUUTMethodAttribute>() == null) {
                 throw new ArgumentException("Methods of a MethodReport have to have an attribute of type JUUTMethodAttribute.");
             }
 

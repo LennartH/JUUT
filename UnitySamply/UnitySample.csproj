@@ -34,6 +34,9 @@
     <NoWarn>0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NHamcrest">
+      <HintPath>lib\NHamcrest.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.XML" />
     <Reference Include="System.Core" />
@@ -45,7 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\TestStarter.cs" />
+    <Compile Include="Assets\JUUT\TestStarter.cs" />
     <Compile Include="Assets\Tests\TestSample.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +60,9 @@
       <Project>{cb61cbe2-a27d-4131-80cf-6fe531633bca}</Project>
       <Name>JUUT_Unity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
