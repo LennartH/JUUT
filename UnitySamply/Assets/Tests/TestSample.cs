@@ -15,8 +15,18 @@ namespace Assets.Tests {
     public class TestSample {
 
         [SimpleTestMethod]
-        public void TestMethod() {
+        public void TestMethod1() {
             Assert.That(12, Is.EqualTo(10));
+        }
+
+        [SimpleTestMethod]
+        public void TestMethod2() {
+            throw new NullReferenceException("Error");
+        }
+
+        [SimpleTestMethod]
+        public void TestMethod3() {
+            Assert.That(10, Is.EqualTo(10));
         }
 
     }

@@ -48,7 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\JUUT\TestStarter.cs" />
+    <Compile Include="Assets\Tests\JUUT\TestStarter.cs" />
     <Compile Include="Assets\Tests\TestSample.cs" />
   </ItemGroup>
   <ItemGroup>

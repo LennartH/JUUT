@@ -16,6 +16,7 @@ using NHamcrest.Core;
 using TestJUUT.Util;
 
 namespace TestJUUT {
+
     [TestClass]
     public class TestAbstractTestSuite {
 
@@ -52,15 +53,17 @@ namespace TestJUUT {
         }
 
         private void AssertThatTheMethodsAreCalledCorrectly() {
-            List<string> possibleOrder1 = new List<string> { "Foo", "Bar", "Blub" };
-            List<string> possibleOrder2 = new List<string> { "Blub", "Foo", "Bar" };
-            AssertEx.That(MethodCallOrder.SequenceEqual(possibleOrder1) || MethodCallOrder.SequenceEqual(possibleOrder2),
+            List<string> possibleOrder1 = new List<string> {"Foo", "Bar", "Blub"};
+            List<string> possibleOrder2 = new List<string> {"Blub", "Foo", "Bar"};
+            AssertEx.That(
+                MethodCallOrder.SequenceEqual(possibleOrder1) || MethodCallOrder.SequenceEqual(possibleOrder2),
                 Is.True());
         }
 
         private class TestSuiteMock : AbstractTestSuite {
 
-            public TestSuiteMock(TestReporter reporter) : base(reporter) { }
+            public TestSuiteMock(TestReporter reporter) : base(reporter) {
+            }
 
         }
 
@@ -71,6 +74,7 @@ namespace TestJUUT {
             public void Foo() {
                 MethodCallOrder.Add("Foo");
             }
+
             [SimpleTestMethod]
             public void Bar() {
                 MethodCallOrder.Add("Bar");
@@ -85,6 +89,7 @@ namespace TestJUUT {
             public void Blub() {
                 MethodCallOrder.Add("Blub");
             }
+
             [SimpleTestMethod]
             public void Bla() {
                 MethodCallOrder.Add("Bla");
@@ -93,8 +98,12 @@ namespace TestJUUT {
         }
 
         private class NotATestClass {
-            public void NotATest() { }
+
+            public void NotATest() {
+            }
+
         }
 
     }
+
 }
