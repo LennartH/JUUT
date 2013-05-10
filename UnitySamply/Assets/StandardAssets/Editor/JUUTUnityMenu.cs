@@ -27,7 +27,7 @@ namespace Assets.StandardAssets.Editor {
 
             UnityTestSuite suite = new UnityTestSuite();
             //FindAndAddAllTestCases(suite);
-            suite.Run();
+            //suite.Run(TODO);
         }
 
     }

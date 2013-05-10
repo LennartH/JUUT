@@ -64,6 +64,7 @@
     <Compile Include="Runners\SimpleTestRunner.cs" />
     <Compile Include="Runners\TestRunner.cs" />
     <Compile Include="Scanners\TestClassScanner.cs" />
+    <Compile Include="Sessions\Session.cs" />
     <Compile Include="Sessions\TestClassSession.cs" />
     <Compile Include="Suites\AbstractTestSuite.cs" />
     <Compile Include="Suites\TestSuite.cs" />

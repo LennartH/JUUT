@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 using JUUT_Core.Reporters;
 using JUUT_Core.Runners;
@@ -11,7 +9,6 @@ namespace JUUT_Core.Suites {
     public abstract class AbstractTestSuite : TestSuite {
 
         private readonly TestReporter Reporter;
-        private readonly Dictionary<Type, TestClassSession> Runners; 
 
         protected AbstractTestSuite(TestReporter reporter) {
             if (reporter == null) {
@@ -19,31 +16,12 @@ namespace JUUT_Core.Suites {
             }
 
             Reporter = reporter;
-            Runners = new Dictionary<Type, TestClassSession>();
         }
 
-        public void AddAll(Type testClass) {
-            if (!Runners.ContainsKey(testClass)) {
-                Runners.Add(testClass, new TestClassSession(testClass));
-            }
-            Runners[testClass].AddAll();
-        }
-
-        public void Add(MethodInfo test) {
-            if (test.DeclaringType == null) {
-                return;
-            }
-
-            if (!Runners.ContainsKey(test.DeclaringType)) {
-                Runners.Add(test.DeclaringType, new TestClassSession(test.DeclaringType));
-            }
-            Runners[test.DeclaringType].Add(test);
-        }
-
-        public void Run() {
+        public void Run(Session session) {
             TestRunner runner = new SimpleTestRunner();
-            foreach (TestClassSession session in Runners.Values) {
-                Reporter.AddReport(runner.Run(session));
+            foreach (TestClassSession testClassSession in session.TestClassSessions) {
+                Reporter.AddReport(runner.Run(testClassSession));
             }
             Reporter.PresentReports();
         }

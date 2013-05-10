@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using JUUT_Core.Attributes;
 using JUUT_Core.Attributes.Methods;
 using JUUT_Core.Reporters;
+using JUUT_Core.Sessions;
 using JUUT_Core.Suites;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,21 +34,14 @@ namespace TestJUUT {
         }
 
         [TestMethod]
-        public void AddingTests() {
-            TestReporter reporter = new Mock<AbstractTestReporter>().Object;
-            TestSuite suite = new TestSuiteMock(reporter);
-            AssertEx.That(() => suite.AddAll(typeof(NotATestClass)), Throws.An<ArgumentException>());
-            AssertEx.That(() => suite.Add(typeof(NotATestClass).GetMethod("NotATest")), Throws.An<ArgumentException>());
-        }
-
-        [TestMethod]
         public void RunningTheSuite() {
             Mock<AbstractTestReporter> reporterMock = new Mock<AbstractTestReporter>();
             TestSuite suite = new TestSuiteMock(reporterMock.Object);
 
-            suite.AddAll(typeof(TestClass));
-            suite.Add(typeof(AnotherTestClass).GetMethod("Blub"));
-            suite.Run();
+            Session session = new Session();
+            session.AddAll(typeof(TestClass));
+            session.Add(typeof(AnotherTestClass).GetMethod("Blub"));
+            suite.Run(session);
             AssertThatTheMethodsAreCalledCorrectly();
             reporterMock.Verify(rep => rep.PresentReports(), Times.Once());
         }

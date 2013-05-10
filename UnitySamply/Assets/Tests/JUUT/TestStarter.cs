@@ -1,3 +1,5 @@
+using JUUT_Core.Sessions;
+
 using JUUT_Unity;
 
 using UnityEngine;
@@ -8,9 +10,11 @@ namespace Assets.Tests.JUUT {
 
         // Use this to set up the test suite
         void Start () {
+            Session session = new Session();
+            session.AddAll(typeof(TestSample));
+
             UnityTestSuite suite = new UnityTestSuite();
-            suite.AddAll(typeof(TestSample));
-            suite.Run();
+            suite.Run(session);
         }
 
     }
