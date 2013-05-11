@@ -12,7 +12,7 @@ using NHamcrest.Core;
 
 using TestJUUT.Util;
 
-namespace TestJUUT {
+namespace TestJUUT.TestScanners {
 
     [TestClass]
     public class TestTestClassScanner {

@@ -72,13 +72,14 @@
     <Compile Include="TestReports\TestMethodReport.cs" />
     <Compile Include="TestReports\TestReportStatus.cs" />
     <Compile Include="TestAbstractTestSuite.cs" />
+    <Compile Include="TestScanners\TestAssemblyScanner.cs" />
     <Compile Include="TestSessions\TestTestClassSession.cs" />
     <Compile Include="TestSessions\TestSession.cs" />
     <Compile Include="Util\AssertEx.cs" />
     <Compile Include="Util\TestClassMock.cs" />
     <Compile Include="Util\NotAttributedMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestTestClassScanner.cs" />
+    <Compile Include="TestScanners\TestTestClassScanner.cs" />
     <Compile Include="TestReporters\TestAbstractTestReporter.cs" />
     <Compile Include="TestSimpleTestClassRunner.cs" />
     <Compile Include="Util\TestClassWithNonStaticClassOrganizeMethods.cs" />
@@ -88,6 +89,10 @@
     <ProjectReference Include="..\JUUT_Core\JUUT_Core.csproj">
       <Project>{6a2fd2d8-1d16-44d3-b861-90503bd2d569}</Project>
       <Name>JUUT_Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="AssemblyScannerTestProject\AssemblyScannerTestProject.csproj">
+      <Project>{E7595384-C180-4DF0-B345-B24C906D049A}</Project>
+      <Name>AssemblyScannerTestProject</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
