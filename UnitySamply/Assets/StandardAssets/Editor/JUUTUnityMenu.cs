@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
+using JUUT_Core.Scanners;
+
 using JUUT_Unity;
 
 using UnityEditor;
@@ -26,8 +28,7 @@ namespace Assets.StandardAssets.Editor {
             ClearDebugLog();
 
             UnityTestSuite suite = new UnityTestSuite();
-            //FindAndAddAllTestCases(suite);
-            //suite.Run(TODO);
+            suite.Run(AssemblyScanner.CreateSessionFor(AppDomain.CurrentDomain.GetAssemblies()));
         }
 
     }

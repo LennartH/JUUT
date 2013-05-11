@@ -29,6 +29,16 @@ namespace JUUT_Core.Scanners {
             return session;
         }
 
+        public static Session CreateSessionFor(IEnumerable<Assembly> assemblies) {
+            Session session = new Session();
+            foreach (Assembly assembly in assemblies) {
+                foreach (Type testClass in GetTestClassesIn(assembly)) {
+                    session.AddAll(testClass);
+                } 
+            }
+            return session;
+        }
+
     }
 
 }
