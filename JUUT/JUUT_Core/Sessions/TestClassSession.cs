@@ -47,6 +47,35 @@ namespace JUUT_Core.Sessions {
             TestsToRun.Add(test);
         }
 
+        #region HashCode and Equals
+        private bool Equals(TestClassSession other) {
+            return TestClass.Equals(other.TestClass) && TestsToRun.SetEquals(other.TestsToRun);
+        }
+
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) {
+                return false;
+            }
+            if (ReferenceEquals(this, obj)) {
+                return true;
+            }
+            if (obj.GetType() != GetType()) {
+                return false;
+            }
+            return Equals((TestClassSession) obj);
+        }
+
+        public override int GetHashCode() {
+            unchecked {
+                int hashCode = TestClass.GetHashCode();
+                foreach (MethodInfo methodInfo in TestsToRun) {
+                    hashCode = (hashCode * 397) ^ methodInfo.GetHashCode();
+                }
+                return hashCode;
+            }
+        }
+        #endregion
+
     }
 
 }
