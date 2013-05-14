@@ -1,6 +1,9 @@
 using System;
 using System.Reflection;
 
+using JUUT_Core.Runners;
+using JUUT_Core.Scanners;
+
 namespace JUUT_Core.Attributes {
     /// <summary>
     /// Attribute to identify test classes of JUUT. Can't be inherated. 
@@ -28,6 +31,13 @@ namespace JUUT_Core.Attributes {
                 return true;
             }
             throw new ArgumentException("The class " + member.Name + " doesn't have the JUUTTestClass-Attribute.");
+        }
+
+        public static TestRunner CreateRunner(Type target) {
+            if (TestClassScanner.ClassContainsOnlySimpleTests(target)) {
+                return new SimpleTestRunner();
+            }
+            return new CollectingTestRunner();
         }
 
     }

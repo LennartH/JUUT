@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
 using JUUT_Core.Scanners;
 
 using JUUT_Unity;
 
 using UnityEditor;
-
-using UnityEngine;
 
 namespace Assets.StandardAssets.Editor {
 
@@ -23,12 +18,12 @@ namespace Assets.StandardAssets.Editor {
             method.Invoke(new object(), null);
         }
 
-        [MenuItem("JUUT/Run All Tests %#t")]
+        [MenuItem("JUUT/Run all simple tests %#t")]
         private static void RunAllTests() {
             ClearDebugLog();
 
             UnityTestSuite suite = new UnityTestSuite();
-            suite.Run(AssemblyScanner.CreateSessionFor(AppDomain.CurrentDomain.GetAssemblies()));
+            suite.RunSimpleTests(AssemblyScanner.CreateSessionFor(AppDomain.CurrentDomain.GetAssemblies()));
         }
 
     }

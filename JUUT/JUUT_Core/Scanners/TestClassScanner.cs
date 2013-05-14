@@ -67,6 +67,21 @@ namespace JUUT_Core.Scanners {
             return GetTestMethodsOfTestClass(typeof(SimpleTestMethodAttribute), testClass);
         }
 
+        //TODO
+        public static List<MethodInfo> GetTestMethodsOfClass(Type testClass) {
+            return GetTestMethodsOfTestClass(typeof(TestAfterAttribute), testClass);
+        }
+
+        //TODO 
+        public static bool ClassContainsOnlySimpleTests(Type testClass) {
+            foreach (MethodInfo test in GetTestMethodsOfClass(testClass)) {
+                if (test.GetCustomAttribute<JUUTTestMethodAttribute>() is TestAfterAttribute) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         /// <summary>
         /// Scans the given class for a method with the given test method attribute.<para />
         /// Throws exceptions if the class or there methods aren't valid.

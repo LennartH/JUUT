@@ -14,7 +14,7 @@ namespace Assets.Tests.JUUT {
             session.AddAll(typeof(TestSample));
 
             UnityTestSuite suite = new UnityTestSuite();
-            suite.Run(session);
+            suite.RunSimpleTests(session);
         }
 
     }

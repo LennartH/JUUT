@@ -38,7 +38,7 @@ namespace JUUT_Core.Sessions {
         /// Adds the given test to the session. This test has to be a member of the test class and needs a TestMethod Attribute.
         /// </summary>
         public void Add(MethodInfo test) {
-            if (test.GetCustomAttribute<SimpleTestMethodAttribute>() == null) {
+            if (test.GetCustomAttribute<JUUTTestMethodAttribute>() == null) {
                 throw new ArgumentException("Tests to be added to a TestRunner needs a TestMethod-Attribute.");
             }
             if (test.DeclaringType != TestClass) {

@@ -34,20 +34,29 @@ namespace TestJUUT {
         }
 
         [TestMethod]
-        public void RunningTheSuite() {
+        public void RunningSimpleTests() {
             Mock<AbstractTestReporter> reporterMock = new Mock<AbstractTestReporter>();
             TestSuite suite = new TestSuiteMock(reporterMock.Object);
 
             Session session = new Session();
             session.AddAll(typeof(TestClass));
             session.Add(typeof(AnotherTestClass).GetMethod("Blub"));
-            suite.Run(session);
-            AssertThatTheMethodsAreCalledCorrectly();
+            suite.RunSimpleTests(session);
+            AssertThatTheMethodsAreCalledCorrectlyAfterRunningAllSimpleTests();
             reporterMock.Verify(rep => rep.PresentReports(), Times.Once());
         }
 
+        [TestMethod]
+        public void RunTillAllTestsHaveBeenRunned() {
+            Mock<TestReporter> reporterMock = new Mock<TestReporter>();
+            TestSuite suite = new TestSuiteMock(reporterMock.Object);
+
+            Session session = new Session();
+            //TODO First test the test runner.
+        }
+
         #region Helpers
-        private void AssertThatTheMethodsAreCalledCorrectly() {
+        private void AssertThatTheMethodsAreCalledCorrectlyAfterRunningAllSimpleTests() {
             List<string> possibleOrder1 = new List<string> {"Foo", "Bar", "Blub"};
             List<string> possibleOrder2 = new List<string> {"Blub", "Foo", "Bar"};
             AssertEx.That(
@@ -89,6 +98,13 @@ namespace TestJUUT {
             public void Bla() {
                 MethodCallOrder.Add("Bla");
             }
+
+        }
+
+        [JUUTTestClass]
+        private class TestClassWithTestAfterMethod {
+
+            //TODO Attribute is needed
 
         }
 

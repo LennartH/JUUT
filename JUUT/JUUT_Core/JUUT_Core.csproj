@@ -48,9 +48,11 @@
     <Compile Include="Attributes\JUUTAttribute.cs" />
     <Compile Include="Attributes\JUUTMethodAttribute.cs" />
     <Compile Include="Attributes\JUUTTestClassAttribute.cs" />
+    <Compile Include="Attributes\JUUTTestMethodAttribute.cs" />
     <Compile Include="Attributes\Methods\ClassSetUpAttribute.cs" />
     <Compile Include="Attributes\Methods\ClassTearDownAttribute.cs" />
     <Compile Include="Attributes\Methods\SimpleTestMethodAttribute.cs" />
+    <Compile Include="Attributes\Methods\TestAfterAttribute.cs" />
     <Compile Include="Attributes\Methods\TestSetUpAttribute.cs" />
     <Compile Include="Attributes\Methods\TestTearDownAttribute.cs" />
     <Compile Include="Assert.cs" />
@@ -61,6 +63,7 @@
     <Compile Include="Reports\Report.cs" />
     <Compile Include="Reports\ReportStatus.cs" />
     <Compile Include="Reports\MethodReport.cs" />
+    <Compile Include="Runners\CollectingTestRunner.cs" />
     <Compile Include="Runners\SimpleTestRunner.cs" />
     <Compile Include="Runners\TestRunner.cs" />
     <Compile Include="Scanners\AssemblyScanner.cs" />

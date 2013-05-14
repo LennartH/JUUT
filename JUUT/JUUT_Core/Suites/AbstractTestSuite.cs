@@ -18,7 +18,7 @@ namespace JUUT_Core.Suites {
             Reporter = reporter;
         }
 
-        public void Run(Session session) {
+        public void RunSimpleTests(Session session) {
             TestRunner runner = new SimpleTestRunner();
             foreach (TestClassSession testClassSession in session.TestClassSessions) {
                 Reporter.AddReport(runner.Run(testClassSession));

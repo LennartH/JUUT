@@ -138,6 +138,17 @@ namespace TestJUUT {
             Assert.IsTrue(expectedReports.SequenceEqual(reports));
         }
 
+        [TestMethod]
+        public void RunTestAfterMethodCall() {
+            TestClassSession session = new TestClassSession(typeof(TestClassWithTestAfterMethod));
+            session.AddAll();
+
+            TestRunner runner = new SimpleTestRunner();
+            AssertEx.That(runner.Run(session), Is.Null());
+
+            //TODO Other runner is needed
+        }
+
         #region HelperMethods
         private static void AssertThatTheMethodsAreCalledInTheCorrectOrderAfterRunningAllTests() {
             List<string> expectedMethodCallOrder = new List<string> { "ClassSetUp", "SetUp", "Foo", "TearDown", "SetUp", "Bar", "TearDown", "ClassTearDown" };
@@ -265,6 +276,13 @@ namespace TestJUUT {
             public void WorkingTest() {
                 MethodCallOrder.Add("Working");
             }
+
+        }
+
+        [JUUTTestClass]
+        private class TestClassWithTestAfterMethod {
+
+            //TODO Attribute is needed
 
         }
         #endregion

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Reflection;
 
 using JUUT_Core.Attributes;
+using JUUT_Core.Attributes.Methods;
+using JUUT_Core.Runners;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -27,6 +30,30 @@ namespace TestJUUT.TestAttributes {
 
             AssertEx.That(() => JUUTAttribute.IsMemberValidFor(testClassAttribute, typeof(NotAttributedMock)), Throws.An<ArgumentException>());
             AssertEx.That(() => JUUTAttribute.IsMemberValidFor(testClassAttribute, typeof(NotAttributedMock).GetMethod("Foo")), Throws.An<ArgumentException>());
+        }
+
+        [TestMethod]
+        public void RunnerCreation() {
+            AssertEx.That(JUUTTestClassAttribute.CreateRunner(typeof(TestClassWithOnlySimpleTests)), Is.InstanceOf(typeof(SimpleTestRunner)));
+            AssertEx.That(JUUTTestClassAttribute.CreateRunner(typeof(TestClassWithTestAfterMethod)), Is.InstanceOf(typeof(CollectingTestRunner)));
+        }
+
+        [JUUTTestClass]
+        private class TestClassWithOnlySimpleTests {
+
+            [SimpleTestMethod]
+            public void TestMethod() { }
+
+        }
+
+        [JUUTTestClass]
+        private class TestClassWithTestAfterMethod {
+
+            [SimpleTestMethod]
+            public void TestMethod() { }
+            [TestAfter]
+            public void TestAfterMethod() { }
+
         }
 
     }
