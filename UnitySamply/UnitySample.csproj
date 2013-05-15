@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\SphereScript.cs" />
     <Compile Include="Assets\StandardAssets\Editor\JUUTUnityMenu.cs" />
     <Compile Include="Assets\Tests\JUUT\TestStarter.cs" />
     <Compile Include="Assets\Tests\TestSample.cs" />
@@ -62,9 +63,7 @@
       <Name>JUUT_Unity</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
 	   Other similar extension points exist, see Microsoft.Common.targets.
