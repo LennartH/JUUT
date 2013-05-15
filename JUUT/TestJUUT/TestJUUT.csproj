@@ -59,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestAttributes\TestTestAfterAttribute.cs" />
     <Compile Include="TestAttributes\TestSimpleTestMethodAttribute.cs" />
     <Compile Include="TestAttributes\TestTestTearDownAttribute.cs" />
     <Compile Include="TestAttributes\TestTestSetUpAttribute.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="TestSimpleTestClassRunner.cs" />
     <Compile Include="Util\TestClassWithNonStaticClassOrganizeMethods.cs" />
     <Compile Include="Util\TestClassWithMethodsWithParameters.cs" />
+    <Compile Include="Util\TestClassWithTestAfterMethod.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JUUT_Core\JUUT_Core.csproj">

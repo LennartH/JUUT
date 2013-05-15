@@ -13,6 +13,8 @@ namespace TestJUUT.Util {
 
         [SimpleTestMethod]
         public static void TestMethod(object parameter) { }
+        [TestAfter]
+        public static void TestAfterMethod(object parameter) { }
 
         [TestTearDown]
         public static void TearDown(object parameter) { }

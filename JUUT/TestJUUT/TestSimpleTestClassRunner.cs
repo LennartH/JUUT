@@ -278,13 +278,6 @@ namespace TestJUUT {
             }
 
         }
-
-        [JUUTTestClass]
-        private class TestClassWithTestAfterMethod {
-
-            //TODO Attribute is needed
-
-        }
         #endregion
 
     }
