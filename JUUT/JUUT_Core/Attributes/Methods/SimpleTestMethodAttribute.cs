@@ -17,6 +17,10 @@ namespace JUUT_Core.Attributes.Methods {
             get { return false; }
         }
 
+        public override bool IsTestReadyToRun {
+            get { return true; }
+        }
+
         protected override bool Validate(MemberInfo member) {
             MethodInfo method = (MethodInfo) member;
             if (method.GetCustomAttribute<SimpleTestMethodAttribute>() != null) {

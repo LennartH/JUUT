@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
+using Spring.Aop.Framework;
+
 namespace JUUT_Core.Attributes.Methods {
 
     /// <summary>
@@ -12,12 +14,26 @@ namespace JUUT_Core.Attributes.Methods {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class TestAfterAttribute : JUUTTestMethodAttribute {
 
+        private bool ReadyToRun;
+
+        public override bool IsTestReadyToRun {
+            get { return ReadyToRun; }
+        }
+
         public override string Name {
             get { return "TestAfter"; }
         }
 
         public override bool IsSetUpOrTearDown {
             get { return false; }
+        }
+
+        //TODO Delete when time! Currently needed for member validation
+        public TestAfterAttribute() {
+        }
+
+        public TestAfterAttribute(Type targetClass, string targetMethod) {
+            ReadyToRun = false;
         }
 
         protected override bool Validate(MemberInfo member) {

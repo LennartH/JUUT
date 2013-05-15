@@ -9,11 +9,12 @@ using JUUT_Core.Runners;
 using JUUT_Core.Sessions;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using NHamcrest.Core;
 
 using TestJUUT.Util;
 
-namespace TestJUUT {
+namespace TestJUUT.TestRunners {
 
     [TestClass]
     public class TestSimpleTestClassRunner {
@@ -136,17 +137,6 @@ namespace TestJUUT {
 
             AssertEx.That(reports.Count, Is.EqualTo(2));
             Assert.IsTrue(expectedReports.SequenceEqual(reports));
-        }
-
-        [TestMethod]
-        public void RunTestAfterMethodCall() {
-            TestClassSession session = new TestClassSession(typeof(TestClassWithTestAfterMethod));
-            session.AddAll();
-
-            TestRunner runner = new SimpleTestRunner();
-            AssertEx.That(runner.Run(session), Is.Null());
-
-            //TODO Other runner is needed
         }
 
         #region HelperMethods

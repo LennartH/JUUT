@@ -17,9 +17,10 @@ namespace TestJUUT.TestAttributes {
 
         [TestMethod]
         public void Creation() {
-            JUUTAttribute testTearDown = new TestAfterAttribute();
-            AssertEx.That(testTearDown.Name, Is.EqualTo("TestAfter"));
-            AssertEx.That(testTearDown.IsSetUpOrTearDown, Is.False());
+            JUUTTestMethodAttribute testAfter = new TestAfterAttribute(typeof(TestClassTarget), "TargetMethod");
+            AssertEx.That(testAfter.Name, Is.EqualTo("TestAfter"));
+            AssertEx.That(testAfter.IsSetUpOrTearDown, Is.False());
+            AssertEx.That(testAfter.IsTestReadyToRun, Is.False());
         }
 
         [TestMethod]
@@ -34,6 +35,14 @@ namespace TestJUUT.TestAttributes {
             AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(TestAfterAttribute), classType), Throws.An<InvalidCastException>());
             simpleTestMethod = typeof(TestClassWithMethodsWithParameters).GetMethod("TestAfterMethod");
             AssertEx.That(() => JUUTAttribute.IsMemberValidFor(typeof(TestAfterAttribute), simpleTestMethod), Throws.An<ArgumentException>());
+        }
+
+        [TestMethod]
+        public void ReadyToRunAfterTargetHasBeenCalled() {
+            JUUTTestMethodAttribute testAfter = new TestAfterAttribute(typeof(TestClassTarget), "TargetMethod");
+            TestClassTarget target = new TestClassTarget();
+            target.TargetMethod();
+            AssertEx.That(testAfter.IsTestReadyToRun, Is.True());
         }
 
     }

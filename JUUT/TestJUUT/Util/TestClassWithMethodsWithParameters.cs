@@ -13,7 +13,7 @@ namespace TestJUUT.Util {
 
         [SimpleTestMethod]
         public static void TestMethod(object parameter) { }
-        [TestAfter]
+        [TestAfter(typeof(TestClassTarget), "TargetMethod")]
         public static void TestAfterMethod(object parameter) { }
 
         [TestTearDown]

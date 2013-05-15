@@ -17,9 +17,10 @@ namespace TestJUUT.TestAttributes {
 
         [TestMethod]
         public void Creation() {
-            JUUTAttribute testTearDown = new SimpleTestMethodAttribute();
-            AssertEx.That(testTearDown.Name, Is.EqualTo("SimpleTestMethod"));
-            AssertEx.That(testTearDown.IsSetUpOrTearDown, Is.False());
+            JUUTTestMethodAttribute simpleTest = new SimpleTestMethodAttribute();
+            AssertEx.That(simpleTest.Name, Is.EqualTo("SimpleTestMethod"));
+            AssertEx.That(simpleTest.IsSetUpOrTearDown, Is.False());
+            AssertEx.That(simpleTest.IsTestReadyToRun, Is.True());
         }
 
         [TestMethod]

@@ -51,7 +51,7 @@ namespace TestJUUT.TestAttributes {
 
             [SimpleTestMethod]
             public void TestMethod() { }
-            [TestAfter]
+            [TestAfter(typeof(TestClassTarget), "TargetMethod")]
             public void TestAfterMethod() { }
 
         }
