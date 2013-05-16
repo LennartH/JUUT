@@ -1,0 +1,101 @@
+%%**************************************************************
+%% Vorlage fuer Bachelorarbeiten (o.ä.) der DHBW
+%%
+%% Autor: Tobias Dreher, Yves Fischer
+%% Datum: 06.07.2011
+%%**************************************************************
+
+\newcommand{\pdftitel}{Test Framework für Unity}
+\newcommand{\autor}{Lennart Hensler}
+\newcommand{\arbeit}{Studienarbeit}
+
+\input{header} 
+
+% Ab jetzt können auch Umlaute verwendet werden
+\newcommand{\titel}{Test Framework für Unity}
+\newcommand{\martrikelnr}{3581041}
+\newcommand{\kurs}{TAI10B1}
+\newcommand{\datumAbgabe}{27. Mai 2013}
+\newcommand{\firma}{}
+\newcommand{\firmenort}{}
+\newcommand{\abgabeort}{Karlsruhe}
+\newcommand{\abschluss}{Bachelor of Science}
+\newcommand{\studiengang}{Studienganges Angewandte Informatik}
+\newcommand{\dhbw}{Karlsruhe}
+\newcommand{\betreuer}{Daniel Lindner}
+\newcommand{\gutachter}{}
+\newcommand{\zeitraum}{}
+
+\makeglossaries
+\input{glossary}
+
+\begin{document}
+
+	% Deckblatt
+	\begin{spacing}{1}
+		\input{deckblatt}
+	\end{spacing}
+	\newpage
+
+	\renewcommand{\thepage}{\Roman{page}}
+	\setcounter{page}{1}
+
+	% Erklärung
+	\input{erklaerung}
+	\newpage
+
+	% Abstract
+	\input{abstract}
+	\newpage
+
+	\pagestyle{plain}
+
+	% Inhaltsverzeichnis
+	\begin{spacing}{1.1}
+		\setcounter{tocdepth}{1}
+		\tableofcontents
+	\end{spacing}
+	\newpage
+
+	\renewcommand{\thepage}{\arabic{page}}
+	\setcounter{page}{1}
+	
+	% Inhalt
+	\input{content/Einleitung}
+	\input{content/Unit_Tests_mit_Unity}
+	\input{content/Konzept_Prototyp}
+	\input{content/Umsetzung}
+	\input{content/Ergebnis}
+	\input{content/Fazit}
+	
+	% Anhang
+	\clearpage
+	\pagenumbering{roman}
+
+	% Abbildungsverzeichnis
+	\cleardoublepage
+	\phantomsection \label{listoffig}
+	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+	\listoffigures
+
+	% Quellcodeverzeichnis
+	\cleardoublepage
+	\phantomsection \label{listoflist}
+	\addcontentsline{toc}{chapter}{Listings}
+	\lstlistoflistings
+
+	% Literaturverzeichnis
+	\cleardoublepage
+	\phantomsection \label{listoflit}
+	\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+	\input{literatur}
+
+	% Abkürzungsverzeichnis
+	% vorher in Konsole folgendes aufrufen: 
+	%	makeglossaries makeglossaries dokumentation.acn && makeglossaries dokumentation.glo
+	\printglossary[type=\acronymtype]
+	
+	% Glossar
+	\printglossary[style=altlist,title=Glossar]
+\end{document}
+

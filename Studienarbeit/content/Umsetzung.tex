@@ -1,0 +1,122 @@
+\chapter{Umsetzung}
+Im Folgenden wollen wir darstellen, wie der Prototyp umgesetzt wurde und welche Besonderheiten dabei aufgetreten sind.
+
+Bei den heutigen Engines mit einer integrierten 3D-Entwicklungsumgebung ist es üblich, dass ein Entwickler nicht die Spielwelt im Programmcode nachbildet. Die Welt ist bereits in 3D-Form vorhanden und die Objekte sind meist in einer Baumstruktur angeordnet. Das was ein Entwickler in dieser vorhandenen 3D-Welt macht, ist den Objekten in der Welt Eigenschaften und Verhalten zu geben, indem er Skripte schreibt, die diesen Objekten zugeordnet werden. Hier stoßen wir mit Unit-Tests allerdings an unsere Grenzen, da diese Skripte stark in die Mechanik der Engine eingebunden werden.\\
+Wie weiter oben beschrieben gibt es bereits Testframeworks, die ein Testen direkt in der Engine ermöglichen, allerdings taugen diese durch die unflexible Handhabung nicht für eine Testgetriebene Entwicklung. Siehe dazu mehr in \autoref{sec:Vergleich_und_Entscheidung} über die Entscheidung für ein Test-Framework.\\
+Wir haben uns für eine weitere Möglichkeit entschieden, und zwar die Trennung der Spiellogik. Das heißt, dass wir unsere Spielwelt selber in einer Programmlogik abbilden und für die Skripte verfügbar machen. Dadurch bekommen wir die Möglichkeit, die Logik getrennt von der Engine zu testen. Unsere Tests sehen die Logikelemente aus der Sicht der Skripte, bzw. eines Skriptentwicklers.\\
+Dies hat noch weitere Vorteile. Zum Einen wird Code so wirklich nur einmal verwendet, da jegliche Berechnungen in der Logik vorhanden sind und nicht mehrfach in Skripts vorkommen. Außerdem lässt sich der Aufruf so gestalten, dass Skripte einfach zu lesen sind und sich einfach ändern lassen.
+\pagebreak
+
+\begin{lstlisting}[caption={[Script für ein Projektilobjekt]Script für ein Projektilobjekt}]
+public class ProjectileScript : MonoBehaviour {
+
+    public Projectile projectile;
+
+    private void Update() {
+        projectile.Update(Time.deltaTime);
+        transform.position = projectile.Position;
+    }
+}
+\end{lstlisting}
+Wie man sieht, fällt dieses Script schlank aus, da die Berechnung der neuen Position in unsere Spielelogik ausgelagert wurde. In der \textit{Update}-Methode wird zuerst das \textit{Projectile}-Objekt aktualisiert, indem ihm die Zeit seit dem letzten Aufruf übergeben wird. Danach wird die Position des \textit{GameObjects} auf die in der Logik berechneten neuen Position gesetzt.\\
+Nachteil könnte die Performance sein, was allerdings auf aktuellen Rechnern keine große Rolle spielt, da der größte Teil des Rechenaufwandes für die 3D-Darstellung verwendet wird.\\
+Ein weiterer Grund, weshalb wir uns für die Trennung der Logik entschieden haben, ist die Möglichkeit auch komplexere Spielvorgänge komfortabel abzubilden. Dazu gehören Bewegungsabläufe, die Zielerfassung der Türme, später auch die Berechnung von Punkten und Erfolgen im Spiel, sowie künstliche Intelligenz.
+\pagebreak
+
+\section{Struktur des Prototyps}
+Im Folgenden beschreiben wir, wie die Struktur des Prototyps umgesetzt wurde. Wir gehen dabei auf die Umgebung in Unity und das testgetrieben Entwickelte C\#-Projekt ein.
+
+\subsection{Szene in Unity}
+Im Bereich des Unity-Projekts besteht unser Prototyp aus einer einzelnen Szene, in der sich ein paar einfache Objekte befinden. Dazu gehört ein Boden, ein Turm, unser Haus und ein Gegner, sowie ein Licht zur Beleuchtung. Diese sind als \textit{GameObjects} in der Szene nach unserer Vorlage angeordnet und haben rudimentäre 3D-Modelle. Ebenso braucht der Turm ein Projektil, das er auf den Gegner schießen kann. Dafür kann man ein sogenanntes \textit{Prefab} anlegen, das schon die Eigenschaften eines \textit{GameObjects} hat, jedoch erst bei Bedarf an einer bestimmten Stelle in der Spielwelt erscheint.\\
+Der Turm und der Gegner sollen ein gewisses Verhalten haben. Aus diesem Grund müssen ihnen Skripte zugeordnet werden, was in unserem Fall \textit{TowerScript} und \textit{UnitScript} sind, welche von \textit{MonoBehaviour} erben.\\
+Diese Skripte besitzen eine Referenz auf das zugehörige Objekt in unserer Spielelogik, auf das sie bei jedem Aufruf der Update-Methode zugreifen, es aktualisieren bzw. den neuen Status abfragen und das \textit{GameObject} dementsprechend anpassen. 
+
+\subsection{Struktur des C\#-Projekts}
+Unity legt für die Skripte ein Projekt-File an, in welchem wir unsere Spielelogik integrieren. Allerdings muss man beim Arbeiten mit Visual Studio beachten, dass Unity ab und zu versucht diese Dateien zu überschreiben, was zum Verschwinden von Referenzen und Dateien führen kann.\\
+Da wir zusätzlich noch Unit-Tests schreiben wollen, haben wir dieses Projekt in eine neue Solution integriert, die zusätzlich ein Test-Projekt beinhaltet. In diesem Projekt werden die Testklassen erstellt, wodurch sich eine logische und räumliche Trennung von Produktivcode und Testcode ergibt.\\
+Im C\#-Code der ausgelagerten Spielelogik muss darauf geachtet werden, dass aus den Bibliotheken von Unity nur die Funktionen benutzt werden, die ohne laufende Engine verfügbar sind. Das sind zum Beispiel statische Hilfsobjekte, wie ein \textit{Vector3}, was einen Vektor im dreidimensionalen Raum beschreibt und Funktionen zur Berechnung damit anbietet. Objekte aus einem laufenden System, wie zum Beispiel die \textit{MainCamera} dürfen nicht benutzt werden. Alle Abfragen oder Befehle, die solche Funktionen oder Objekte benötigen, müssen in den Skripten ausgeführt werden und sind deshalb nicht in der testgetriebenen Entwicklung verwendbar. 
+
+\section{Beispiel eines Tests}
+Wir haben uns so gut es geht an die Vorgehensweise der testgetriebenen Entwicklung gehalten, bei der zuerst der Test geschrieben wird, ohne dass die eigentlichen Klassen vorhanden sind. Dabei schlägt der Test fehl, bzw. das Projekt übersetzt nicht. Dies wird im Nachfolgenden anhand eines Beispiels weiter erläutert.\\
+
+\begin{lstlisting}[caption={[Erster Test der Klasse Damage]Erster Test der Klasse Damage}]
+[TestClass]
+public class TestDamage {
+
+	[TestMethod]
+	public void DamageCreation() {
+		Damage damage = new Damage(DamageType.Pierce, 15, 0);
+		Assert.AreEqual<DamageType>(DamageType.Pierce, damage.Type);
+		Assert.AreEqual<int>(15, damage.Amount);
+		Assert.AreEqual<double>(0, damage.Area);
+	}
+}
+\end{lstlisting}
+Der Erstentwurf des Tests kümmert sich um die Erstellung eines \textit{Damage}-Objekts. Dabei soll das Objekt mit einem Schadenstypen, der Schadensmenge und der Angabe eines Schadensradius initialisiert werden. In den nachfolgenden Zeilen wird über \textit{Assert} abgefragt, ob die Attribute richtig gesetzt wurden.\\
+Beim ersten Durchlauf dieses Tests wird nicht einmal das Projekt übersetzt, da die Klasse samt Konstruktor fehlt. Als Lösung des Problems muss die Klasse \textit{Damage} erstellt werden, welche die zu initialisierenden Attribute besitzt. Zusätzlich braucht diese Klasse einen entsprechenden Konstruktor.
+
+Im nächsten Schritt sollten fehlerhafte Eingaben, die nicht den Vorgaben entsprechen, abgefangen werden. Dazu wird der Test erweitert.\\
+
+\begin{lstlisting}[caption={[Erweiterter Test der Klasse Damage]Erweiterter Test der Klasse Damage}]
+[TestClass]
+public class TestDamage {
+
+	[TestMethod]
+	public void DamageCreation() {
+		Damage damage = new Damage(DamageType.Pierce, 15, 0);
+		Assert.AreEqual<DamageType>(DamageType.Pierce, damage.Type);
+		Assert.AreEqual<int>(15, damage.Amount);
+		Assert.AreEqual<double>(0, damage.Area);
+
+		try {
+			damage = new Damage(DamageType.Pierce, -10, 0);
+            Assert.Fail("Damages with a negative amount aren't allowed");
+        } catch (ArgumentException) {
+            //Do nothing here
+        }
+
+        try {
+            damage = new Damage(DamageType.Pierce, 10, -10);
+            Assert.Fail("Damages with a negative area aren't allowed");
+        } catch (ArgumentException) {
+            //Do nothing here
+        }
+	}
+}
+\end{lstlisting}
+
+Mit den \textit{Try-Catch}-Konstrukten können wir angeben, dass eine bestimmte Exception erwartet wird. Es soll eine Exception geworfen werden, wenn entweder die Schadensmenge oder der Schadensbereich negativ ist. Beim ersten Aufruf des Tests wird keine Exception geworfen, sondern der Test schlägt durch den Aufruf von \textit{Assert.Fail} fehl. Nach der Implementierung der Exception wird diese Programmstelle nicht mehr erreicht. 
+
+\section{Weitere Tests}
+
+Als weiteres Beispiel haben wir die Testmethode \textit{KillKillable} aus der Klasse \textit{Health}, in der wir ein Mock-Objekt zur Simulation eines \textit{Killable} verwenden. Der Test beschreibt die Situation, in der ein zerstörbares Objekt genau den Schaden bekommt, den es als Lebenspunkte hat und dabei zerstört wird. Der zerstörte Zustand wird über das Feld \textit{alive} abgefragt, dass in dem Fall \textit{false} sein muss.\\
+
+\begin{lstlisting}[caption={[Beispiel KillKillable Testmethode]Beispiel der \textit{KillKillable}-Testmethode aus der Klasse \textit{TestHealth}}]
+[TestMethod]
+public void KillKillable() {
+    KillableMock killableMock = new KillableMock();
+    Health health = new Health(100, killableMock, null);
+
+    health.DoDamage(new Damage(DamageType.Chaos, health.Amount, 0));
+    Assert.IsFalse(killableMock.alive);
+}
+\end{lstlisting}
+
+Das folgende Listing zeigt die Implementierung des zugehörigen Mock-Objekts.\\
+
+\begin{lstlisting}[caption={[\textit{Killable}-Mock für den KillKillable-Test]\textit{Killable}-Mock für den KillKillable-Test}]
+private class KillableMock : Killable {
+
+     public bool alive { get; private set; }
+
+     public KillableMock() {
+          alive = true;
+     }
+
+     public void Kill() {
+          alive = false;
+     }
+}
+\end{lstlisting}
+
+Des Weiteren haben wir für jede Klasse die \textit{Equals}- und \textit{HashCode}-Methoden getestet. Die restlichen Klassen des Prototyps wurden in ähnlicher Weise testgetrieben entwickelt.

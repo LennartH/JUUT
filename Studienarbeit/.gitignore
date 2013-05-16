@@ -1,0 +1,20 @@
+# TeXstudio files
+*.acn
+*.aux
+*.glo
+*.ist
+*.lof
+*.log
+*.lol
+*.lot
+*.out
+*.gz
+*.toc
+*.acr
+*.alg
+*.glg
+*.gls
+
+# Compiled files
+*.pdf
+*.dvi

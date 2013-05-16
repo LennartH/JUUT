@@ -1,0 +1,153 @@
+%
+% Nahezu alle Einstellungen koennen hier getaetigt werden
+%
+
+\documentclass[%
+	pdftex,
+	oneside,		% Einseitiger Druck.
+	12pt,			% Schriftgroesse
+	parskip=half,	% Halbe Zeile Abstand zwischen Absätzen.
+	headsepline,	% Linie nach Kopfzeile.
+	footsepline,	% Linie vor Fusszeile.
+	abstracton,	    % Abstract Überschriften
+	ngerman,		% Translator
+]{scrreprt}
+
+%Seitengroesse
+\usepackage{fullpage}
+
+%Zeilenumbruch und mehr
+\usepackage[activate]{microtype}
+
+% Zeichencodierung
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Zeilenabstand
+\usepackage[onehalfspacing]{setspace}
+
+% Index-Erstellung
+\usepackage{makeidx}
+
+% Lokalisierung (neue deutsche Rechtschreibung)
+\usepackage[ngerman]{babel}
+
+% Anführungszeichen 
+\usepackage[babel,german=quotes]{csquotes}
+%\usepackage[style=swiss]{csquotes}
+
+
+% Spezielle Tabellenform fuer Deckblatt
+\usepackage{longtable}
+\setlength{\tabcolsep}{10pt} %Abstand zwischen Spalten
+\renewcommand{\arraystretch}{1.5} %Zeilenabstand
+
+% Grafiken
+\usepackage{graphicx}
+
+% Mathematische Textsaetze
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+
+% Pakete um Textteile drehen zu können, oder eine Seite Querformat anzeigen kann.
+%\usepackage{rotating}
+%\usepackage{lscape}
+
+% Farben
+\usepackage{color}
+\definecolor{LinkColor}{rgb}{0,0,0.2}
+\definecolor{ListingBackground}{rgb}{0.92,0.92,0.92}
+\definecolor{ListingKeyword}{RGB}{57, 135, 214}
+\definecolor{ListingString}{RGB}{214, 136, 82}
+\definecolor{ListingComment}{RGB}{84, 139, 61}
+\definecolor{ScriptClass}{RGB}{192, 0, 192}
+\definecolor{ScriptLogicInterface}{RGB}{0, 128, 128}
+\definecolor{LogicClass}{RGB}{255, 128, 0}
+\definecolor{HealthClass}{RGB}{0, 128, 0}
+\definecolor{MovementClass}{RGB}{0, 0, 128}
+\definecolor{AttackClass}{RGB}{192, 0, 0}
+
+% PDF Einstellungen
+%\usepackage[%
+%	pdftitle={\pdftitel},
+%	pdfauthor={\autor},
+%	pdfsubject={\arbeit},
+%	pdfcreator={pdflatex, LaTeX with KOMA-Script},
+%	pdfpagemode=UseOutlines, % Beim Oeffnen Inhaltsverzeichnis anzeigen
+%	pdfdisplaydoctitle=true, % Dokumenttitel statt Dateiname anzeigen.
+%	pdflang=de % Sprache des Dokuments.
+%]{hyperref}
+
+% (Farb-)einstellungen für die Links im PDF
+%\hypersetup{%
+%	colorlinks=false, % Aktivieren von farbigen Links im Dokument
+%	linkcolor=LinkColor, % Farbe festlegen
+%	citecolor=LinkColor,
+%	filecolor=LinkColor,
+%	menucolor=LinkColor,
+%	urlcolor=LinkColor,
+%	bookmarksnumbered=true % Überschriftsnummerierung im PDF Inhalt anzeigen.
+%}
+\usepackage{hyperref}
+
+% Verschiedene Schriftarten
+%\usepackage{goudysans}
+%\usepackage{lmodern}
+%\usepackage{libertine}
+\usepackage{palatino} 
+
+% Hurenkinder und Schusterjungen verhindern
+% http://projekte.dante.de/DanteFAQ/Silbentrennung
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% Quellcode
+\usepackage{listings}
+\renewcommand{\lstlistingname}{Code} %Changing the label of listings
+\renewcommand{\lstlistlistingname}{Codeverzeichnis} %Changing the name of the listings list
+\lstloadlanguages{[Sharp]C}
+\lstset{%
+	language=[Sharp]C,		 % Sprache des Quellcodes
+	numbers=left,            % Zelennummern links
+	stepnumber=1,            % Jede Zeile nummerieren.
+	numbersep=5pt,           % 5pt Abstand zum Quellcode
+	numberstyle=\scriptsize, % Zeichengrösse 'tiny' für die Nummern.
+	frame=lines,			 % Linie oben und unten als Rahmen
+	breaklines=true,         % Zeilen umbrechen wenn notwendig.
+	breakautoindent=true,    % Nach dem Zeilenumbruch Zeile einrücken.
+	postbreak=\space,        % Bei Leerzeichen umbrechen.
+	tabsize=2,               % Tabulatorgrösse 2
+	showspaces=false,        % Leerzeichen nicht anzeigen.
+	showstringspaces=false,  % Leerzeichen auch in Strings ('') nicht anzeigen.
+	extendedchars=true,      % Alle Zeichen vom Latin1 Zeichensatz anzeigen.
+	captionpos=b,            % sets the caption-position to bottom
+	backgroundcolor=\color{ListingBackground}, % Hintergrundfarbe des Quellcodes setzen.
+	basicstyle=\ttfamily\footnotesize,			  % Nichtproportionale Schrift, klein für den Quellcode
+	keywordstyle=\bfseries\color{ListingKeyword}, % Keywords fett und blau
+	commentstyle=\color{ListingComment},		  % Kommentare grün
+	stringstyle=\color{ListingString}			  % Strings orange
+}
+
+% Glossar
+\usepackage[
+	nonumberlist, %keine Seitenzahlen anzeigen
+	acronym,      %ein Abkürzungsverzeichnis erstellen
+	%section,     %im Inhaltsverzeichnis auf section-Ebene erscheinen
+	toc,          %Einträge im Inhaltsverzeichnis
+]{glossaries}
+
+% Fussnoten
+\usepackage[perpage, hang, multiple, stable]{footmisc}
+
+% Captions von Bildern
+\usepackage[margin=10pt,format=hang,indention=-1.5cm,singlelinecheck=false,font=small,labelfont=bf]{caption}
+\usepackage{subcaption}
+
+% Titel, Autor und Datum
+\title{\titel}
+\author{\autor}
+\date{\datum}
+
+%Weitere Kommandos
+\newcommand{\TODO}[1]{\textcolor{red}{\textbf{TODO:} #1}}
