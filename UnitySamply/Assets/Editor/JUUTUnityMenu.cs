@@ -7,7 +7,7 @@ using JUUT_Unity;
 
 using UnityEditor;
 
-namespace Assets.StandardAssets.Editor {
+namespace Assets.Editor {
 
     public class JUUTUnityMenu {
 

@@ -8,7 +8,7 @@ namespace JUUT_Core.Suites {
 
     public abstract class AbstractTestSuite : TestSuite {
 
-        private readonly TestReporter Reporter;
+        protected readonly TestReporter Reporter;
 
         protected AbstractTestSuite(TestReporter reporter) {
             if (reporter == null) {

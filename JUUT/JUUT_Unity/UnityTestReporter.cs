@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 
 using JUUT_Core.Reporters;
 using JUUT_Core.Reports;
@@ -9,6 +10,12 @@ namespace JUUT_Unity {
 
     public class UnityTestReporter : AbstractTestReporter {
 
+        public ICollection<MethodReport> FailedReports { get; private set; }
+
+        public UnityTestReporter() {
+            FailedReports = new HashSet<MethodReport>();
+        }
+
         public override void PresentReports() {
             Debug.Log(CreateSummaryText() + "\n\n");
 
@@ -16,6 +23,7 @@ namespace JUUT_Unity {
                 foreach (MethodReport report in classReport.MethodReports) {
                     if (report.Status.IsWorseThan(new ReportStatus.Success())) {
                         Debug.LogError(CreateReportText(report) + "\n\n");
+                        FailedReports.Add(report);
                     }
                 }
             }
