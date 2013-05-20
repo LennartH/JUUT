@@ -21,6 +21,7 @@ namespace Assets.Scripts {
 
         public void OnMouseDown() {
             Clicked = true;
+            Debug.Log("Click");
         }
 
     }

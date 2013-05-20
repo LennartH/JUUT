@@ -9,8 +9,8 @@ namespace JUUT_Unity {
 
         public UnityTestSuite() : base(new UnityTestReporter()) { }
 
-        public ICollection<MethodReport> GetFailedTests() {
-            return ((UnityTestReporter) Reporter).FailedReports;
+        public ICollection<MethodReport> FailedTests {
+            get { return ((UnityTestReporter) Reporter).FailedReports; }
         }
 
     }

@@ -17,18 +17,27 @@ namespace Assets.Tests.JUUT {
     public class TestStarter : MonoBehaviour {
 
         private UnityTestSuite Suite;
+        private Session Session;
+        private bool TestsRunned;
 
         // Use this to set up the test suite
         public void Start () {
-            Session session = new Session();
-            session.AddAll(typeof(TestSample));
+            Session = new Session();
+            Session.AddAll(typeof(TestSample));
 
             Suite = new UnityTestSuite();
-            Suite.RunSimpleTests(session);
+            TestsRunned = false;
+        }
+
+        private void Update() {
+            if (!TestsRunned) {
+                Suite.RunSimpleTests(Session);
+                TestsRunned = true;
+            }
         }
 
         public void OnGUI() {
-            ICollection<MethodReport> failedTests = Suite.GetFailedTests();
+            ICollection<MethodReport> failedTests = Suite.FailedTests;
             if (failedTests.Count != 0) {
                 int i = 0;
                 foreach (MethodReport failedTest in failedTests) {
