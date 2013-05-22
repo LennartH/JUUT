@@ -1,16 +1,19 @@
 \chapter{Einleitung}
 
+In der Software-Entwicklung wird immer mehr Wert auf automatisierte Tests, um die Korrektheit des Programms zu gewährleisten und für die klassische Entwicklung gibt es schon mächtige Werkzeuge, die einen dabei unterstützen. Angefangen mit Test-Frameworks, welche es einem ermöglichen atomare Teile des Codes, bis zu dessen Gesamtheit automatisch zu testen, wodurch man schnelles Feedback erhält und Fehlverhalten leicht aufdecken kann. Darüber hinaus lässt sich mit Code Coverage Analysen feststellen, welche Teile des Codes durch Tests abgedeckt sind. Die Verwendung von Mocking-Frameworks ermöglicht es Mocks\footnote{Mocks sind Hüllen von Klassen, die stark mit dem zu testenden Teil verbunden sind und wenig bis gar keine Funktionalität implementieren.} dynamisch zu erzeugen und deren Verhalten zur Laufzeit zu definieren. Dadurch lassen sich ohne viel Aufwand Teile des Codes komplett isoliert testen. Die testgetriebene Entwicklung stützt sich vollständig auf Tests, indem man zuerst den Test für die neue Funktionalität schreibt, diesen zum Durchlaufen bringen und anschließend refactored. Dadurch erhält man nahezu vollständig durch Tests abgedeckten Code, der offen für Änderungen und robust gegen Fehler ist. Mehr über TDD findet sich in \cite{FRE10}.
 
+Für die Spiele-Entwicklung (mit Unity) gibt es noch keine oder nur sehr einfache Werkzeuge, um seinen Code effektiv zu testen. Deswegen möchte ich in dieser Studienarbeit ein eigenes Framework entwickeln, mit dem sich die verhaltenssteuernden Komponenten eines Spiels testen lassen. Dabei stütze ich mich auf die Erkenntnisse die ich mit einem Kommilitonen in einer vorherigen Studienarbeit \cite{TDGD13} gewonnen habe. Vor allem die Kapitel über die unterschiedlichen Arten von Tests, die Funktionsweise von Unity und die vorhandenen Test-Frameworks für Unity sind inhaltlich sehr ähnlich zu der vorangegangenen Arbeit, möchte ich allerdings auf Grund der Nähe zum Thema dieser Arbeit nochmals aufführen.\\
+Obwohl es bereits Frameworks für Unity gibt, habe ich mich dazu entschieden von Grund auf ein neues zu entwickeln. Zum einen, um zu erfahren wie schwer es ist ein Test-Framework (für Unity) selbst zu schreiben und zum anderen, um dessen Struktur besser auf meine Bedürfnisse anzupassen. Ein existierendes Framework so zu erweitern, dass es die mir vorschwebenden Neuerungen enthält dürfte schwierig sein.
 
-\section{Test Driven Development}
+Im nachfolgenden werde ich zunächst die unterschiedlichen Arten von Tests beschreiben und auf die Funktionsweise von Unity eingehen. Anschließend gebe ich einen Einblick in meine Entwicklungsumgebung.
 
-Die testgetriebene Entwicklung (im englischen \textit{test-driven development} oder kurz TDD, wird auch \textit{test first development} genannt) ist ein Teil der agilen Softwareentwicklung und basiert darauf, dass die Tests vor dem Produktivcode geschrieben werden. Da Diese dabei eine zentrale Rolle spielen, geben wir zunächst einen Überblick über die unterschiedlichen Arten. Im Anschluss gehen wir detaillierter auf die testgetriebene Entwicklung ein.
-
-\subsection{Arten von Tests}
+\section{Testarten}
 
 Tests sollen einen bestimmten Teil des Programms auf seine Korrektheit überprüfen und dabei möglichst schnell und automatisiert ablaufen. Je nachdem wie umfangreich der getestete Bereich ist und welche Kenntnisse der Test/Entwickler von der inneren Umsetzung des Programms hat, kann man die Tests kategorisieren.
 
-\paragraph{White- und Black-Box-Tests} Die gröbste Einteilung ist die Unterscheidung zwischen White- und Black-Box-Tests. Dabei wird nicht der Umfang des getesteten Bereichs berücksichtigt, sondern lediglich ob der Entwickler des Tests Kenntnisse über die Implementierung der zu testenden Funktionen hat.\\
+\subsection{White- und Black-Box-Tests}
+
+Die gröbste Einteilung ist die Unterscheidung zwischen White- und Black-Box-Tests. Dabei wird nicht der Umfang des getesteten Bereichs berücksichtigt, sondern lediglich ob der Entwickler des Tests Kenntnisse über die Implementierung der zu testenden Funktionen hat.\\
 Bei White-Box-Tests ist dies der Fall. Idealerweise, sollte der Entwickler der den Produktivcode geschrieben hat auch den dazugehörigen Test implementieren. Mit dieser Art von Test werden die inneren Strukturen eines Programms überprüft. Also zum Beispiel, dass eine Methode nicht mit Parametern aufgerufen werden kann, die Fehler verursachen könnten. Hierbei wird nur getestet ob das Programm fehlerfrei abläuft und nicht ob die einzelnen Methoden das gewünschte Verhalten aufweisen.
 
 Im Gegensatz dazu stehen die Black-Box-Tests, deren Entwickler keinerlei Kenntnisse über die Umsetzung haben sollte. Ansonsten könnten beim Schreiben der Tests Dinge implizit als erfüllt angesehen werden, die allerdings getestet werden müssen. Dadurch wäre es möglich, dass bei nachträglichen Änderungen Fehler auftreten, ohne dass ein Test fehlschlägt.\\
@@ -19,13 +22,17 @@ Black-Box-Tests sollen verifizieren, dass das Programm die Spezifikationen des K
 Diese beiden Testarten ergänzen sich gegenseitig und es sollten immer sowohl White-Box, als auch Black-Box-Tests erstellt werden, um das Produkt zu überprüfen und robust gegen Fehler bei nachträgliche Änderungen zu machen.\\
 Schematische Darstellungen dieser Testarten sieht man in \autoref{fig:White_Box_Test} und \autoref{fig:Black_Box_Test} auf den nächsten Seiten.
 
-\paragraph{Unit-Tests} sind die kleinsten Einheiten unter den Tests. Sie sollen die einzelnen Methoden einer Klasse auf einen fehlerfreien Ablauf und ein korrektes Verhalten hin testen. Dadurch kann man im Verlauf der Entwicklung Änderungen am Programm vornehmen, ohne dass die Funktionalitäten der Module unbemerkt zerstört werden (insofern die Tests eine ausreichende Abdeckung erreichen).\\
+\subsection{Unit-Tests} 
+
+\TODO{Diese sind die ...} sind die kleinsten Einheiten unter den Tests. Sie sollen die einzelnen Methoden einer Klasse auf einen fehlerfreien Ablauf und ein korrektes Verhalten hin testen. Dadurch kann man im Verlauf der Entwicklung Änderungen am Programm vornehmen, ohne dass die Funktionalitäten der Module unbemerkt zerstört werden (insofern die Tests eine ausreichende Abdeckung erreichen).\\
 Die einzelnen Tests sollten unabhängig voneinander und auch von den anderen Komponenten sein. Falls Verbindungen zwischen den Komponenten bestehen, sollten diese durch \textit{Mock}-Objekte entkoppelt werden. Diese erben von der entsprechenden Klasse und überschreiben deren Methoden auf eine geeignete Art. Zum Beispiel könnten sie einfach leer gelassen werden, was man als \textit{Stub} bezeichnet. Oder sie geben einen festen Wert zurück. \textit{Mock}-Klassen können selbst erstellt werden und sind meistens innere Klassen der Testklasse, allerdings gibt es auch \textit{Mock}-Frameworks, welche generisch \textit{Mocks} für beliebige Klassen oder Interfaces erzeugen können. Das Verhalten der Methoden eines Mocks, lässt sich mit diesen zur Laufzeit festlegen. Zum Beispiel dass ein fester Wert zurückgeliefert wird, oder eine Exception geworfen werden soll.\\ Beispiele sind \textit{JMock} für Java oder \textit{Moq} für C\#.\\
 Außerdem sollten Unit-Tests sehr schnell ablaufen (im Millisekunden-Bereich), um nach jeder Änderung durchgeführt werden zu können, ohne die Entwicklung aufzuhalten.
 
 Eine schematische Darstellung von Unit-Tests sieht man in \autoref{fig:Unit_Test}.
 
-\paragraph{Integrationstests} Die nächsthöhere Stufe von Tests sind Integrationstests. Diese testen das Zusammenspiel mehrere Komponenten, eventuell auch mit Systemressourcen, auf ihre Korrektheit. Einen Unit-Test kann man zu einem Integrationstest machen, indem man die \textit{Mock}-Objekte durch die im Produktivbetrieb verwendet Klassen ersetzt und die Bedingungen entsprechend anpasst.
+\subsection{Integrationstests}
+
+Die nächsthöhere Stufe von Tests sind Integrationstests. Diese testen das Zusammenspiel mehrere Komponenten, eventuell auch mit Systemressourcen, auf ihre Korrektheit. Einen Unit-Test kann man zu einem Integrationstest machen, indem man die \textit{Mock}-Objekte durch die im Produktivbetrieb verwendet Klassen ersetzt und die Bedingungen entsprechend anpasst.
 
 Integrationstests dürfen länger dauern als Unit-Tests, sollten dennoch schnell durchgeführt werden können.
 
@@ -47,7 +54,9 @@ Eine schematische Darstellung von Integrationstests sieht man in \autoref{fig:In
 
 \clearpage
 
-\paragraph{Akzeptanztests} sollen die Korrektheit des Verhaltens eines ganzen Systems prüfen. Dabei soll er sowohl die Benutzerschnittstelle, als auch die einzelnen Komponenten und die Systemressourcen abdecken. Allerdings testen diese nicht die innere Struktur des Systems (sind also Black-Box-Tests), sondern sollen gewährleisten, dass ein System sich so verhält, wie es der Kunde im Lastenheft definiert hat. Idealerweise verwendet der Test dabei nur die Schnittstellen, die ein Kunde auch verwenden würde (z.B. über Eingaben auf der GUI), um möglichst nahe an ein natürliches Verhalten zu kommen.\\
+\subsection{Akzeptanztests} 
+
+\TODO{la} sollen die Korrektheit des Verhaltens eines ganzen Systems prüfen. Dabei soll er sowohl die Benutzerschnittstelle, als auch die einzelnen Komponenten und die Systemressourcen abdecken. Allerdings testen diese nicht die innere Struktur des Systems (sind also Black-Box-Tests), sondern sollen gewährleisten, dass ein System sich so verhält, wie es der Kunde im Lastenheft definiert hat. Idealerweise verwendet der Test dabei nur die Schnittstellen, die ein Kunde auch verwenden würde (z.B. über Eingaben auf der GUI), um möglichst nahe an ein natürliches Verhalten zu kommen.\\
 Akzeptanztests können durchaus länger dauern, da sie das gesamte Verhalten eines Systems repräsentieren, welches nur nach größeren Veränderungen getestet werden muss.
 
 \begin{figure}[h]
@@ -79,65 +88,7 @@ Quelle: \url{http://schneide.wordpress.com/2011/09/05/a-shot-at-definitions-beyo
 \end{figure}
 \clearpage
 
-\subsection{Grundsätze und Funktionsweise von TDD}
-
-Die testgetriebene Entwicklung arbeitet nach dem an und für sich einfachen Prinzip, die Tests \textbf{vor} dem Produktivcode zu schreiben. Um TDD richtig anzuwenden, sollten ein paar Dinge beachtet werden. Dennoch überwiegen die daraus resultierenden Vorteile diesen Mehraufwand. In diesem Abschnitt erläutern wir welche das sind, wie der Ablauf von TDD ist und was es dabei zu beachten gilt. Dabei orientieren wir uns an dem Buch \textit{Growing Object-Oriented Software, Guided by Tests} \cite{FRE10}.
-
-Bei der testgetriebenen Entwicklung schreibt man zunächst einen Unit-Test, der das Verhalten der zu testenden Komponente definiert. Da deren innere Struktur unbekannt ist, wird dieser automatisch als ein Black-Box-Test implementiert. Dieser muss anfangs fehlschlagen, da die Komponente noch nicht implementiert, beziehungsweise nicht vorhanden ist. Danach sollte man diese auf möglichst einfache Art und Weise implementieren, damit der Test erfolgreich ausgeführt wird. Dadurch vermeidet man überflüssigen Code. Anschließend sollte der Test erweitert werden um die Kontrolle über potentielle Fehler zu behalten (White-Box-Test). Das Resultat hat Eigenschaften beider Testarten und wird deswegen auch als \textit{Grey-Box-Test}\footnote{\url{http://de.wikipedia.org/wiki/Grey-Box-Test}} bezeichnet. Abschließend refactored man seinen Produktivcode, falls dies nötig sein sollte. Wann und wie man refactoren sollte wird später angesprochen. Für detailliertere Informationen verweisen wir auf \cite{FOW99}.\\
-Dieser Vorgang wird solange wiederholt, bis alle benötigten Komponenten und Funktionen implementiert sind. Diesen Zyklus kann man mit identischen Zyklen für Integrations- und Akzeptanztests umschließt, sodass eine größere und realitätsnähere Testabdeckung entsteht.
-
-Ein großer Vorteil von TDD ist, dass man automatisch jede Komponente mit Tests überwacht. Dies ist nicht der Fall, wenn man die Tests nach dem Produktivcode schreiben würde. Das liegt daran, dass die Tests meistens gegen Ende der Entwicklung geschrieben werden. Zu diesem Zeitpunkt ist der Druck auf die Entwickler allerdings am größten, weswegen im Zweifelsfall auf Tests verzichtet wird, da diese keine weiteren Funktionalitäten hervorbringen. Außerdem könnten die Komponenten zu einem so späten Zeitpunkt sehr stark miteinander verbunden sein, wodurch die einzelnen Tests groß und unübersichtlich werden. Sollten trotz alldem Tests entwickelt werden, müssen alle Funktionalitäten auf einmal getestet werden, was eine undankbare Aufgabe darstellt. TDD hat hier den Vorteil, dass Tests und Produktivcode abwechselnd Stück für Stück implementiert werden.\\
-Ein weiterer positiver Aspekt von TDD ist, dass die Entwickler wesentlich schneller und öfter Feedback über ihr Programm erhalten. Dies ermöglicht einem die Qualität seines Produkts erheblich zu steigern, da man auf Fehler und Unstimmigkeiten mit den Kundenwünschen aufmerksam gemacht wird. Dies ist bei Spielen besonders wichtig, da es mit der Kundenzufriedenheit steht und fällt (besonders wenn man noch keine große Fangemeinde etablieren konnte).\\
-TDD ermöglicht es einem, leichter wartbare und erweiterbare Systeme zu schreiben. Denn dadurch, dass die Funktionen eine nach der anderen implementiert werden, ist es modularer und es entstehen weniger Abhängigkeiten zwischen den einzelnen Komponenten (vor allem, wenn man konsequent Mock-Objekte verwendet). Wenn man zusätzlich noch viele Interfaces einsetzt, können neue Funktionalitäten leichter nachträglich hinzugefügt werden. Durch die breite Testabdeckung ist das System zudem robuster gegenüber Fehler durch Änderungen, wodurch man leichter refactoren und sorgenfreier entwickeln kann, da daraus resultierende Defekte sofort erkannt werden.\\
-Dadurch, dass die Tests geschrieben werden ohne dass man Kenntnis darüber hat wie die innere Struktur aussieht, entsteht besser lesbarer Code. Man hat nur die Vorgabe was der Zweck der aktuellen Komponente sein soll und kann die Methoden entsprechend benennen. Es hilft einem auch, zu entscheiden, welche Methoden von außen sichtbar sein sollen und welche nur der konkreten Implementierung bekannt sein müssen. Dadurch erhält man wesentlich schlankere und übersichtlichere Schnittstellen.\\
-Ließen sich diese Vorteile für die Spielentwicklung einsetzen, würde dies einen erheblichen Fortschritt darstellen.
-
-Um die oben aufgeführten Vorteile zu erhalten, sollte - außer dass man die Tests vor dem Produktivcode schreibt - noch einiges beachtet werden. Steve Freeman und Nat Pryce haben in \cite[Seite 6]{FRE10} eine goldene Regel des TDD aufgestellt:
-
-\begin{quotation}
-\textbf{\textit{\grqq Never write new functionality without a failing test.\grqq}}
-\end{quotation}
-
-Dies soll verhindern, dass der TDD-Zyklus nicht unterbrochen wird und dadurch manche Codeabschnitte ungetestet bleiben. Außerdem hilft es einem keine unnötigen Funktionen einzubauen, die vom Kunden nicht gewünscht sind. Denn die Tests orientieren sich an den Vorgaben des Kunden und solange man die Tests immer zuerst schreibt, wird auch nur diese Funktionalität entwickelt.\\
-Als äußerst wichtig werden auch Akzeptanztests angesehen, die das Verhalten eines realen Anwenders möglichst genau simulieren. Sie sollen nur über die definierten Schnittstellen mit dem System kommunizieren, ohne die interne Implementierung direkt aufzurufen. Solche Tests bezeichnen sie als \textit{End-To-End-Tests} und sollen das System so testen, wie es an den Kunden ausgeliefert werden soll. Dazu gehört, dass die Unit-Tests durchlaufen werden, die benötigten Pakete eingebunden werden, das System in einer produktiv-ähnlichen Umgebung gebaut wird und die Akzeptanztests ausgeführt werden. Diese Art des Testens stellt einen erheblichen Aufwand dar, allerdings kann man erst dadurch sagen, dass das System auch beim Kunden fehlerfrei funktioniert.
-
-Bevor man mit der testgetriebenen Entwicklung produktiv werden kann, muss man ein Grundgerüst für das Projekt bauen. Dieses wird als \textit{laufendes Skelette} \cite[orig. \textit{walking Skeleton}, Seite 32]{FRE10} bezeichnet und stellt die kleinste mögliche Implementierung einer Funktionalität dar, welche sich automatisch bauen lässt und worüber man einen End-To-End-Test schreiben kann \cite{COC04}. Für das Grundgerüst benötigt man einen kleinen Erstentwurf der Programmstruktur. Dieser soll noch keine konkreten Methoden oder Attribute enthalten, sondern nur darstellen welche Komponenten voraussichtlich gebraucht werden und wie diese miteinander kommunizieren. Hierbei orientiert man sich am besten an den Kundenanforderungen.\\
-Dadurch, dass zu Beginn die konkrete Struktur unklar ist, ist das Schreiben von Tests am Anfang aufwendiger und chaotisch. Des weiteren kann es zu vielen nachträglichen Änderungen kommen, da man während der Entwicklung neue Erkenntnisse gewinnt. Allerdings ist das Ende des Projekts wesentlich kontrollierter, da man bereits eine solide Testbasis hat, welche einem Gewissheit gibt, dass das System so funktioniert wie es soll. Schreibt man die Tests am Ende, hat man das Problem sowohl diese, als auch die auf der Strecke gebliebenen Funktionen zu implementieren. Die testgetriebene Entwicklung verlagert den stressigen Teil des Projekts an den Anfang, wobei man zu diesem Zeitpunkt besser auf die auftretenden Probleme eingehen kann, anstatt kurze Zeit vor dem Veröffentlichungstermin.
-
-Um den Zyklus der testgetriebenen Entwicklung am Laufen zu halten, gilt es weitere Dinge zu beachten, welche in \cite{FRE10} ab Seite 39 ausführlich beschrieben werden. Die wichtigsten Verhaltensregeln stellen wir hier nun kurz vor:
-
-\begin{description}
-\item[\small Jede neue Funktionalität soll mit einem Black-Box-Test beginnen]~\\
-	Dadurch definiert man das Verhalten, ohne die innere Struktur zu berücksichtigen und erhält schlanke Schnittstellen. Die konkrete Implementierung kann sich nun laufend ändern und man hat dennoch einen Test der sicherstellt, dass das Verhalten korrekt ist.
-\item[\small Unterscheiden zwischen fortschrittsmessenden und Rückschritt erkennenenden Tests]
-	Neue Akzeptanztests stellen eine noch nicht implementierte Funktion dar. Sobald sie fehlerfrei ausgeführt werden, ist die Funktion fertig. Sie messen demnach den Fortschritt des Projekts.\\
-	Sobald ein Akzeptanztest implementiert wurd,e misst er keinen Fortschritt mehr, sondern stellt sicher dass die Funktion fehlerfrei bleibt. Schlägt ein Test fehl, hat er einen Rückschritt erkannt.
-\item[\small Tests sollen wohlformuliert sein]~\\
-	Die Tests sollen das Verhalten, welches sie testen, möglichst genau beschreiben, sodass man auch bei späterem Betrachten weiß, was getestet wird. Schlägt der Test fehl, sollte eine aussagekräftige Fehlermeldung ausgegeben werden.
-\item[\small Tests zuerst fehlschlagen lassen]~\\
-	Nachdem man einen Test geschrieben hat, soll man diesen immer zuerst fehlschlagen lassen, bevor man den Produktivcode dazu schreibt. Dadurch erkennt man, ob einen die Fehlermeldung an die richtige Stelle leitet. Dadurch lässt sich ein später auftretender Fehler leichter beheben. Außerdem erkennt man Design-Fehler, falls der Test in einer anderen Weise als erwartet fehlschlägt.
-\item[\small Teste das Verhalten, nicht die Methoden]~\\
-	Es ist wichtiger ein korrektes Verhalten zu testen und nicht die einzelnen Zeilen jeder Methode. Auch eine hundertprozentige Testabdeckung garantiert kein fehlerfreies System. Tests sollten so formuliert werden, dass sie aussagen was sie testen und nicht welche Methode.
-\item[\small Man soll auf seine Tests hören]~\\
-	Wenn man auf eine schwierig zu testende Stelle trifft, sollte man sich nicht fragen, wie man diese testen kann, sondern warum es schwer ist sie zu testen. Dies ist meistens ein Anzeichen dafür, dass die Struktur refactored werden muss. Denn wenn etwas schwierig zu testen ist, ist es meist auch schwer zu ändern oder zu erweitern. Dies fällt allerdings meist erst später auf, weswegen man das Problem lösen sollte, solange es noch \grqq frisch\grqq~ist.
-\end{description}
-
-Da Refactoring ein wesentlicher Bestandteil der testgetriebenen Entwicklung ist, steht in \cite{FRE10} wann man refactoren sollte und wie man am besten mit den Tests verfährt. Wichtig ist, dass Refactoring keinen Geschwindigkeits- oder Funktionsvorteil bringt, sondern nur besser Wartbarkeit und Lesbarkeit. Die Hinweise beziehen sich meist darauf, dass nur die benötigten Teile einer Komponente nach außen sichtbar sein sollen und der Rest geheim bleibt. Außerdem helfen sie die einzelnen Komponenten richtig zu strukturieren, indem große gespalten werden und häufig auftretende Gruppen von Merkmalen zu einer neuen Komponente zusammengefasst werden. Auch hier wollen wir die wichtigsten Tipps vorstellen:
-
-\begin{description}
-\item[\small Teilen großer Komponenten]~\\
-	Wenn eine Komponente während der Entwicklung sehr groß wird, kann man sie meistens in kleinere Komponenten unterteilen, welche anschließend separat getestet werden. Dadurch erhält man eine modulare Struktur und kleinere, übersichtlichere Tests. Außerdem werden einem die Abhängigkeiten seines Programms vor Augen geführt.
-\item[\small Definieren eines neuen Services]~\\
-	Wenn man den einzelnen Komponenten immer weitere Verhalten zuweist, kann es sein, dass diese nicht in die Komponente gehören. In diesem Fall sollten die Verhalten in einen neuen Service ausgelagert werden.\\
-	Dafür wird dieser zunächst (zum Beispiel in Form eines Interfaces) definiert und im Unit-Test der Komponente gemocked. Anschließend werden Tests für diese Komponenten geschrieben.
-\item[\small Bündelung von Komponenten]~\\
-	Falls man eine Menge zusammenhängender Komponenten findet, kann man diese zu einer neuen Komponente vereinen. Diese verringert die Komplexität, da nur die relevanten Teile nach außen sichtbar sind. Dadurch wird die Domain besser verständlich und die Tests werden übersichtlicher, da man die neue Komponente separat testen kann.
-\end{description}
-
-Hält man sich an alle genannten Verhaltensregeln, bekommt man ein leichter wartbares und verständliches System mit den oben aufgeführten Vorteilen. Allerdings muss man sich an die Art der testgetriebenen Entwicklung erst gewöhnen, sollte diszipliniert sein und seine Erfahrung damit machen, bevor man damit souverän entwickeln kann.
-\pagebreak
-
-\section{Unity 3D}
+\section{Unity}
 
 \textit{Unity 3D} (mittlerweile nur noch \textit{Unity}) ist eine Spiele-Engine, welche für viele verschiedene Anwendungen, wie Spiele, Lernsoftware, sowie 3D-Animationsfilme verwendet wird. Der Hersteller bezeichnet die Software selber als \textit{Spieleentwicklungs-Ökosystem}\footnote{Zu lesen unter \url{http://unity3d.com/unity/}}, da sie neben der Engine selber eine komplette Entwicklungsumgebung für Spiele bietet.\\
 Die Umgebung erlaubt es einem, die Spiele auch auf andere Plattformen zu portieren, wie zum Beispiel für Android auf Smartphones oder für Webanwendungen. Dies macht die Engine sehr flexibel und ist auch ein Grund für die weite Verbreitung. Der Spielecode für das Spiel lässt sich in verschiedenen Sprachen programmieren, die beim Übersetzen alle von der Unity-Umgebung in die Common Intermediate Language überführt werden, eine Assemblersprache, die erst beim Ausführen in einer Laufzeitumgebung (.NET oder Mono) in nativen Maschinencode übersetzt wird. Die verfügbaren Scriptsprachen sind JavaScript, C\# und Boo\footnote{Weitere Infos zu Boo unter \url{http://boo.codehaus.org/}}.
