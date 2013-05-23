@@ -1,15 +1,12 @@
-\chapter{Unit Tests mit Unity}
-\label{chap:Unit Tests mit Unity}
+\chapter{Tests mit Unity}
+\label{sec:Tests mit Unity}
 
-Da Tests ein essentieller Teil der testgetriebenen Entwicklung sind, ist das Test-Framework ein wichtiger Bestandteil für ein Projekt. Für Unity gibt es keine offizielle Testumgebung, allerdings wurden von der Community welche entwickelt.
-
-Im nachfolgenden Kapitel werden die in Frage kommenden Frameworks vorgestellt und verglichen. Anschließend erläutern wir unsere Entscheidung für das gewählte Framework.
+In diesem Kapitel möchte ich untersuchen, welche Möglichkeiten es zur Zeit gibt, um seine Skripte automatisiert zu testen. Dabei zeige ich zunächst kurz, wie man sein Spiel mit dem Test-Framework der Entwicklungsumgebung testen kann. Anschließend stelle ich die Frameworks der Unity-Fangemeinde und abschließend vergleiche ich die Möglichkeiten.
 
 \section{Unit Test Framework der Entwicklungsumgebung (MSTest)}
 
-Das Nächstliegende ist es, das Framework der Entwicklungsumgebung zu verwenden. Dies wäre in diesem Fall MSTest, welches in Visual Studio integriert ist.\\
-Hierbei ist es üblich, dass man neben dem Projekt mit dem Produktivcode ein weiteres für die Tests hat. Dadurch sind diese und das Produkt sowohl räumlich, als auch logisch voneinander getrennt. Am einfachsten erstellt man dieses Testprojekt mit Hilfe einer Vorlage von Visual Studio, in dem die benötigten Referenzen - die Bibliothek des Test Frameworks - schon vorhanden sind. Die Vorlage befindet sich im Reiter \textit{Test} und heißt \textit{Komponententestprojekt} beziehungsweise \textit{Unit Test Project}.\\
-Alternativ kann man die benötigte Bibliothek auch manuell als Referenz hinzufügen. Diese findet man in \textit{Assemblies -> Extension} unter dem Namen \textit{Microsoft.VisualStudio. QualityTools.UnitTestFramework}. Als weitere Referenz muss man das Projekt des zu testenden Produkts hinzufügen, um Zugriff auf die darin enthaltenen Klassen zu bekommen.
+Eine Möglichkeit ist es, das Framework der Entwicklungsumgebung zu verwenden. Dies wäre in diesem Fall MSTest, welches in \textit{Visual Studio} integriert ist.\\
+Hierbei ist es üblich, dass man neben dem Projekt mit dem Produktivcode ein weiteres für die Tests hat. Dadurch sind diese und das Produkt sowohl räumlich, als auch logisch voneinander getrennt. Dies ermöglicht einem die Verwendung etablierter Techniken im Bereich des Testens, welche schon zu Beginn von \textit{\ref{sec:Einleitung}. \nameref{sec:Einleitung}} vorgestellt wurden.
 
 Im Nachfolgenden wird gezeigt, wie man einen Unit-Test mit MSTest aufbaut und welche Möglichkeiten es dabei gibt.
 
@@ -58,25 +55,24 @@ Um dem Framework zu signalisieren, dass in einer Klasse Tests vorhanden sind, br
 Außerdem können bestimmte Methoden vor den einzelnen Tests ausgeführt werden, um zum Beispiel benötigte Objekte zu initialisieren. Dabei unterscheidet man zwischen einem Klasseninitialisierer, der genau einmal vor dem Aufruf der ersten Testmethoden ausgeführt wird und dem Testinitialisierer, der vor jedem Aufruf einer Testmethode durchgeführt wird. Der Klasseninitialisierer muss statisch sein und wird durch das Attribut \textit{ClassInitialize} markiert. Er kann zum Beispiel genutzt werden, um eine Verbindung zu einer Datenbank aufzubauen, die von mehreren Testmethoden der Testklasse verwendet wird. Der Testinitialisierer muss mit \textit{TestInitialize} gekennzeichnet werden und könnte zum Beispiel Objekte initialisieren, die von mehreren Tests gebraucht und verändert werden. Da diese dadurch vor jedem Test neu initialisiert werden, bleiben die Tests unabhängig voneinander.\\
 Entsprechend zu den Initialisierern kann man auch spezielle Methoden definieren, die nach den Tests ausgeführt werden sollen. Der Klassenbereiniger könnte die zuvor geöffnete Verbindung mit der Datenbank schließen und diese von etwaigen Testdaten befreien. Der Testbereiniger kann zum Beispiel verwendet werden, um eine Singleton-Klasse auf ihren Ursprungszustand zurückzusetzen, falls dies notwendig sein sollte.
 
-Um die Tests auszuführen geht man in der Menüleiste von Visual Studio 2012 auf \textit{Test} und wählt \textit{Run -> All Tests}. Daraufhin sucht Visual Studio alle Testklassen in der Solution, führt diese aus und listet das Ergebnis auf. Dies kann man in \autoref{fig:VisualStudioTestExplorer} sehen.
-
 Detailliertere Informationen über das Unit Test Framework von Microsoft erhält man auf deren MSDN-Bibliotheksseite unter \url{http://msdn.microsoft.com/de-de/library/dd264975.aspx}.
 
-Allerdings gibt es schwerwiegende Probleme, wenn man mit MSTest ein Unity-Skript testen möchte, worauf in \textit{\autoref{sec:Vergleich_und_Entscheidung} \nameref{sec:Vergleich_und_Entscheidung}} näher eingegangen wird.
+Allerdings gibt es schwerwiegende Probleme, wenn man bestimmte Unity-Klassen testen möchte. Diese werden im Vergleich weiter unter näher erläutert. 
+
+\TODO{Vllt im Vergleich oder Motivation}
+Wenn man zum Beispiel versucht ein Skript in einem Test zu erzeugen, tritt eine \textit{SecurityException} auf, die den Test fehlschlagen lässt. Dies liegt daran, dass die Klasse \textit{MonoBehaviour} (von der alle Skripte erben müssen) nur in einer laufenden Unity-Umgebung intialisiert werden kann. Diese lässt sich nicht in einem Test initialisieren oder simulieren. Um dennoch eine großflächige Abdeckung durch Tests zu erreichen, muss man die Struktur seines Projekts stark anpassen, sodass die Skripte möglichst wenig Logik enthält. Diese muss man in eigene Klassen auslagern, wodurch sie unabhängig von Unity testbar sind. Detaillierter Informationen dazu finden sich in \cite{TDGD13}. Diese Anpassung lohnt sich nur bei neuen Projekten und auch nur wenn sich das Verhalten der Objekte sinnvoll auslagern lässt. Bei einem Shooter, dessen Spielgefühl stark von einer guten Reaktion auf Benutzereingaben abhängt, ist das zum Beispiel nur schlecht möglich, da sich diese Reaktionen nicht wirklich durch einen fest definierten Test bestimmen lassen. Und auch einem speziell für diesen Fall entwickelten Spiel (dessen Prototypen im Rahmen von \cite{TDGD13} entwickelt wurde) beträgt die Abdeckung durch die Tests lediglich 45\%. Die ausgelagerte Logik hingegen hat eine Abdeckung von 85\%, was zeigt, dass auch bei einem Projekt bei dem sich die Logik gut auslagern lässt viel Arbeit durch die Skripte geleistet werden muss.
 
 \section{UUnit}
 
 UUnit\footnote{Weitere Informationen unter \url{http://wiki.unity3d.com/index.php?title=UUnit}} ist ein Projekt der Fangemeinde für ein rudimentäres Unit Test Framework, welches in Unity Projekten verwendet werden kann. Es wurde zunächst in \textit{Boo} geschrieben, wodurch es auch Tests in \textit{Boo} erwartet. In der neusten Version (Veröffentlicht am 21.08.2012) wurde es allerdings nach C\# portiert.
 Um mit UUnit Tests ausführen zu können, muss man das Framework in sein Projekt einbinden. Da UUnit Open-Source ist kann man das gesamte Framework innerhalb des \textit{Assets}-Ordners ablegen. Alternativ könnte man das Framework auch zu einer Bibliothek kompilieren und diese als Referenz einbinden.
 
-Testklassen von UUnit müssen von der Klasse \textit{UUnitTestCase} erben, welche die beiden virtuellen Methoden \textit{SetUp} und \textit{TearDown} zur Verfügung stellt. Diese werden vor beziehungsweise nach jeder Testmethode durchgeführt und können von den expliziten Tests überschrieben werden.\\
-Die Testmethoden werden durch das Attribut \textit{UUnitTest} gekennzeichnet und mit der Klasse \textit{UUnitAssert} können Bedingungen definiert werden, die den Test fehlschlagen lassen, sollten sie nicht erfüllt sein. Allerdings bietet diese nur sechs Arten von Bedingungen, wozu \textit{Fail}, \textit{True} und \textit{Equals} gehören. Eine \textit{NotEquals}-Bedingung gibt es zum Beispiel nicht.
+Testklassen von UUnit müssen von der Klasse \textit{UUnitTestCase} erben, welche die beiden virtuellen Methoden \textit{SetUp} und \textit{TearDown} zur Verfügung stellt. Diese werden vor beziehungsweise nach jeder Testmethode durchgeführt und können von den expliziten Tests überschrieben werden. Die Testmethoden werden durch das Attribut \textit{UUnitTest} gekennzeichnet und mit der Klasse \textit{UUnitAssert} können Bedingungen definiert werden, die den Test fehlschlagen lassen, sollten sie nicht erfüllt sein. Allerdings bietet diese nur sechs Arten von Bedingungen, wozu \textit{Fail}, \textit{True} und \textit{Equals} gehören. Eine \textit{NotEquals}-Bedingung gibt es zum Beispiel nicht.
 
 Innerhalb von UUnit gibt es die Klasse \textit{UUnitTestRunner}, welche alle Tests innerhalb des Projekts ausführt und das Ergebnis ausgibt. Kopiert man die Quelldatei dieser Klasse in den Ordner \textit{Assets/Standard Assets/Editor} des Unity-Proejkt, wird sogar ein neuer Knopf in die Menüleiste der Unity SDK hinzugefügt, mit dem man alle Tests ausführen lassen kann. Möchte man die Datei nicht zu seinem Projekt hinzufügen, kann man auch folgendes Skript schreiben und einem beliebigen \textit{GameObject} anfügen.
-\pagebreak
 
 \begin{lstlisting}[caption={[Beispiel um alle UUnit-Tests auszuführen]Beispiel um alle UUnit-Tests auszuführen\\
-Muss an ein \textit{GameObject} angehängt werden. Beim Start des Spiels werden alle Tests ausgeführt.}, label=code:UUnitTestRunner]
+Muss an ein \textit{GameObject} angehängt werden, wodurch beim Start des Spiels alle Tests ausgeführt werden.}, label=code:UUnitTestRunner]
 public class TestRunner : MonoBehaviour {
 	public void Start() {
 		UUnitTestRunner runner = new UUnitTestRunner();
@@ -98,7 +94,7 @@ Die Ergebnisse des Testdurchlaufs werden auf der Konsole von Unity ausgegeben, w
 \section{SharpUnit}\label{sec:SharpUnit}
 
 SharpUnit\footnote{Weitere Informationen unter \url{http://wiki.unity3d.com/index.php?title=SharpUnit}} ist auch ein Projekt der Fangemeinde und ist in C\# implementiert. Es wurde entwickelt, da UUnit zunächst nur in \textit{Boo} zur Verfügung stand. Es orientiert sich an UUnit und hat einige Gemeinsamkeiten damit.\\
-Um Tests ausführen zu können, muss man SharpUnit in sein Unity-Projekt einbinden, was wie mit UUnit funktioniert.
+Um Tests ausführen zu können, muss man SharpUnit in sein Unity-Projekt einbinden, was wie bei UUnit funktioniert.
 
 Testklassen müssen bei SharpUnit von der Klasse \textit{TestCase} erben, welche es ermöglicht die Methoden \textit{SetUp} und \textit{TearDown} zu überschreiben. Testmethoden werden durch das Attribut \textit{UnitTest} gekennzeichnet. Auch SharpUnit stellt einem eine Klasse zur Definition von Bedingungen zur Verfügung, wobei diese in etwa denen von UUnit entsprechen. Allerdings fehlt \textit{Fail} mit dem man einen Test geziehlt fehlschlagen lassen kann. Dafür gibt es die Möglichkeit, eine erwartete Exception zu definieren. Dies beschränkt sich allerdings auf eine pro Test, das heißt man kann keine zwei Exceptions innerhalb einer Testmethode erwarten.
  
