@@ -97,75 +97,76 @@ Quelle: \url{http://schneide.wordpress.com/2011/09/05/a-shot-at-definitions-beyo
 \textit{Unity} ist eine Spiele-Engine, welche für viele verschiedene Anwendungen, wie Spiele, Lernsoftware, sowie 3D-Animationsfilme verwendet wird. Der Hersteller bezeichnet die Software selber als \textit{Spieleentwicklungs-Ökosystem}\footnote{Zu lesen unter \url{http://unity3d.com/unity/}}, da sie neben der Engine selber eine komplette Entwicklungsumgebung für Spiele bietet.\\
 Die Umgebung erlaubt es einem, die Spiele auch auf andere Plattformen zu portieren, wie zum Beispiel für Android auf Smartphones oder für Webanwendungen. Dies macht die Engine sehr flexibel und ist auch ein Grund für die weite Verbreitung. Der Spielecode für das Spiel lässt sich in verschiedenen Sprachen programmieren, die beim Übersetzen alle von der Unity-Umgebung in die Common Intermediate Language überführt werden, eine Assemblersprache, die erst beim Ausführen in einer Laufzeitumgebung (.NET oder Mono) in nativen Maschinencode übersetzt wird. Die verfügbaren Scriptsprachen sind JavaScript, C\# und Boo\footnote{Weitere Infos zu Boo unter \url{http://boo.codehaus.org/}}.
 
+\subsection{Unity als Entwicklungsumgebung} 
 
-\paragraph{Unity als Entwicklungsumgebung} Im Mittelpunkt steht ein Szeneneditor, der es ermöglicht die einzelnen Spielszenen zu gestalten, indem die Spielelemente in einem 3D-Editor so angeordnet werden, wie sie im späteren Spiel zu sehen sind. 
-Ein Element in einer Szene wird dabei \textit{GameObject} genannt, die Elemente, die zum Einbau bereit stehen, nennt man \textit{Assets}. Ein \textit{Asset} kann dabei vieles sein: Zum Beispiel 3D-Models (\textit{Meshes}), Skripte, Texturen oder Audio-Dateien. \textit{GameObjects} lassen sich beliebig hierarchisch anordnen, um sie so zu gruppieren, oder logisch zu strukturieren. Ihnen können sogenannte \textit{Components} zugeordnet werden, welche die Eigenschaften und das Verhalten dieses Objektes beschreiben. So muss immer ein \textit{Transform}-Komponente vorhanden sein, das die Position in der Welt, sowie die Rotation und die Skalierung beschreibt. Komponenten können auch Skripte sein, die bei jedem Frame für dieses \textit{GameObject} ausgeführt werden und auf Spielereingaben oder Events reagieren. Ein Event könnte zum Beispiel eine Kollision mit einem anderen \textit{GameObject} sein oder ein
+Im Mittelpunkt steht ein Szeneneditor, der es ermöglicht die einzelnen Spielszenen zu gestalten, indem die Spielelemente in einem 3D-Editor so angeordnet werden, wie sie im späteren Spiel zu sehen sind. 
+Ein Element in einer Szene wird dabei \textit{GameObject} genannt, die Elemente, die zum Einbau bereit stehen, nennt man \textit{Assets}. Ein \textit{Asset} kann dabei vieles sein: Zum Beispiel 3D-Models (\textit{Meshes}), Skripte, Texturen oder Audio-Dateien. \textit{GameObjects} lassen sich beliebig hierarchisch anordnen, um sie so zu gruppieren, oder logisch zu strukturieren. Ihnen können sogenannte \textit{Components} zugeordnet werden, welche die Eigenschaften und das Verhalten dieses Objektes beschreiben. So muss immer ein \textit{Transform}-Komponente vorhanden sein, das die Position in der Welt, sowie die Rotation und die Skalierung beschreibt. Komponenten können auch Skripte sein, die bei jedem Frame für dieses \textit{GameObject} ausgeführt werden und auf Spielereingaben oder Events reagieren. Ein Event könnte zum Beispiel eine Kollision mit einem anderen \textit{GameObject} sein, ein Mausklick und vieles andere sein. Wie dies technisch umgesetzt ist, wird später erläutert.
 
-Es gibt auch Komponenten, die ein \textit{GameObject} zu einem physikalischen Objekt machen, zum Beispiel um ihm eine Gravitationskraft zu geben, oder um Kollisionen zu erkennen. Der Mechanismus zur Kollisionserkennung ist mit Events implementiert. Das heißt, dass in den Skripten eines \textit{GameObjects} zum Beispiel eine \textit{OnCollisionEnter}-Methode vorhanden sein kann, die aufgerufen wird, wenn es mit einem anderen \textit{GameObject} kollidiert. Dies muss nicht unbedingt heißen, dass zwei 3D-Models in der Spielwelt aufeinandertreffen, wenn zum Beispiel ein Projektil einen Gegner trifft. Man kann auch spezielle Kollisions-Boxen für ein Objekt bestimmen, damit zum Beispiel erkannt wird, wenn ein \textit{GameObject} in einen bestimmten Bereich der Spielwelt kommt. Komponenten können auch Texturen, 3D-Modelle, oder Geräuschquellen sein.\\
-3D-Modelle können theoretisch auch in einem eigenen 3D-Modellierungstool bearbeitet werden, dies ist allerdings noch nicht ausgereift und wenig komfortabel. Für diese Aufgabe gibt es auch bessere Tools, wie zum Beispiel Blender, welches auch kostenlos verfügbar ist.\\
-Mit integriert in die Unity-Umgebung ist Mono-Develop, eine alternative Entwicklungsumgebung für .NET-Sprachen, welche man direkt aus Unity aufrufen kann. Unity bietet die Möglichkeit, das Spiel direkt aus dem Editor übersetzen zu lassen. Dies kann mit einem richtig Build geschehen, allerdings auch für Testzwecke direkt im Editor. Dabei wird aus dem 3D-Viewport einfach die Spieleansicht. Das eignet sich gut für ein schnelles Ausprobieren der Szene, ist allerdings durch eine auf Debugging ausgelegte Kompilierung nicht so schnell, wie der endgültige Build. Am Ende sind die Skripte in einer eigenen .NET-Programmbibliothek vorkompiliert und werden so von der Engine eingebunden.
+Mit integriert in die Unity-Umgebung ist Mono-Develop, eine alternative Entwicklungsumgebung für .NET-Sprachen, welche man direkt aus Unity aufrufen kann. Die Engine bietet die Möglichkeit, das Spiel direkt aus dem Editor übersetzen zu lassen. Dies kann mit einem richtig Build geschehen, allerdings auch für Testzwecke direkt im Editor. Dabei wird aus dem 3D-Viewport einfach die Spieleansicht. Das eignet sich gut für ein schnelles Ausprobieren der Szene, ist allerdings durch eine auf Debugging ausgelegte Kompilierung nicht so schnell, wie der endgültige Build. Am Ende sind die Skripte in einer eigenen .NET-Programmbibliothek vorkompiliert und werden so von der Engine eingebunden.
 
-\paragraph{Unity als Engine} Unity bietet als Spiele-Engine verschiedene Mechanismen, die man bei einem Spiel benötigt. Dies ist in erster Linie eine Grafik-Engine, die die gegebenen Modelle und Texturen in ein Bild auf dem Bildschirm verwandelt. Dazu kommen Engines, die Physikberechnungen durchführen, Audio abspielen, sowie Netzwerkverbindungen für Multiplayer-Spiele bieten.\\
-Diese ganzen Engines bilden den Rahmen um das entwickelte Spiel, also die eigenen Skripte, bzw. sonstige eigene Logik. Man muss keine eigene Hauptschleife entwickeln, denn Unity bindet die Skripte ein und führt diese zu entsprechenden Zeitpunkte aus. In jedem Spiel gibt es eine Hauptschleife, die für jeden Frame, der auf dem Monitor angezeigt wird, ausgeführt wird und die Berechnungen durchführt. Dazu wird bei jedem Durchlauf der aktuelle Zustand, sowie Eingaben, wie zum Beispiel Tastendrücke, registriert und daraus der Folgezustand berechnet und auf dem Monitor ausgegeben. Diese Hauptschleife bildet den Kern jedes Spiels.\\
-Die Skripte, die nun programmiert werden und das Verhalten der einzelnen Elemente im Spiel beschreiben, müssen von der Unity-Engine interpretierbar sein. Dafür können verschiedene Methoden implementiert werden. \\
-Für die folgenden Codebeispiel wurde C\# als Skriptingsprache gewählt, da sie auch unsere verwendete Sprache bei der Entwicklung des Prototypen ist, was später detaillierter betrachtet wird. Bei C\# (und auch bei Boo) gibt es eine Besonderheit, die bei JavaScript nicht beachtet werden muss. Jede Skriptklasse muss hier von \textit{MonoBehaviour} erben. Damit deklariert man diese Klasse als Skript eines \textit{GameObjects} und wird automatisch bei der Engine registriert.\\
+\subsection{Unity als Engine}
+
+Unity bietet als Spiele-Engine verschiedene Mechanismen, die man bei einem Spiel benötigt. Dies ist in erster Linie eine Grafik-Engine, die die gegebenen Modelle und Texturen in ein Bild auf dem Bildschirm verwandelt. Dazu kommen Engines, die Physikberechnungen durchführen, Audio abspielen, sowie Netzwerkverbindungen für Multiplayer-Spiele bieten.\\
+Diese ganzen Engines bilden den Rahmen um das entwickelte Spiel, also die eigenen Skripte, welche das Verhalten des \textit{GameObjects} bestimmen. Dafür kann man in den Skripten bestimmte Methoden implementieren, die zu unterschiedlichen Zeitpunkten von der Engine ausgeführt werden. Die genaue Reihenfolge der Abarbeitung befindet sich in einer \hyperlink{MainLoopOrder}{Liste} weiter unten. Welche Methode welchen Zweck erfüllen soll, erkennt Unity an deren Name. 
+
+Eine Methode die nahezu als erste ausgeführt wird, ist die \textit{Start}-Methode. Diese wird genutzt um das Skript zu initialisieren und wird einmalig nach der Erzeugung des konkreten Skript-Objekts ausgeführt.
+
 Die wichtigste Methode ist \textit{Update()}, welche von der Engine bei jedem Frame aufgerufen wird. Hier müssen alle notwendigen Berechnungen für dieses Objekt und die Änderungen der Spielwelt ausgeführt werden.
 Ein sehr einfaches Beispiel für ein Objekt, das sich um die y-Achse drehen soll sieht wie folgt aus.\\
 
 \begin{lstlisting}[caption={[Einfache Skript-Klasse mit Update-Methode]Einfache Skript-Klasse mit Update-Methode}]
-using UnityEngine;
-
-public class Beispiel : MonoBehaviour{
-	void Update(){
+public class Example : MonoBehaviour{
+	public void Update(){
 		transform.Rotate(0,5,0);
 	}
 }
 \end{lstlisting}
 
-Die Membervariable \textit{transform} wird von \textit{MonoBehaviour} geerbt und ist eine Referenz auf die zwingend vorhandene \textit{Transform}-Komponente. Diese Komponente lässt sich über verschiedene Methoden beeinflussen, womit man das Objekt drehen, verschieben, oder skalieren kann.\\
-Wie man in diesem Beispiel sieht, wird das Objekt bei jedem Frame um den gleichen Winkel gedreht. Dies würde mit einer gleichbleibenden Framerate funktionieren, allerdings kommt das in der Praxis nicht vor. Dafür gibt es in der Engine einen Zeitmechanismus, die Klasse \textit{Time}, die einem Zugriff auf unterschiedliche Zeitinformationen liefert. Dazu gehört \textit{deltaTime}, welche die Zeit in Sekunden beinhaltet, die die Berechnung des letzten Frames gebraucht hat. Damit lässt sich die Methode von oben folgendermaßen schreiben.
-\pagebreak
+In C\# müssen alle als Skript verwendete Klassen von \textit{MonoBehaviour} erben, um von der Engine als solche erkannt zu werden und um Zugriff auf Attribute wie \textit{transform} zu erlangen. Dieses ist eine Referenz auf die zwingend vorhandene \textit{Transform}-Komponente und lässt sich über verschiedene Methoden beeinflussen, womit man das Objekt drehen, verschieben, oder skalieren kann. Wie man in diesem Beispiel sieht, wird das Objekt bei jedem Frame um den gleichen Winkel gedreht.
 
-\begin{lstlisting}[caption={[Einfache Update-Methode mit deltaTime]Einfache Update-Methode mit deltaTime}]
-	void Update(){
-		transform.Rotate(0,5*Time.deltaTime,0);
+Weitere Methoden behandeln die Reaktion auf Events (\textit{OnTriggerEnter/Exit/Stay}) und Kollisionen (\textit{OnCollisionEnter/Exit/Stay}) mit anderen Objekten, sowie auf bestimmte Spielereingaben (z.B. \textit{OnMouseEnter} oder \textit{OnMouseOver}). Tastatureingaben müssen in der \textit{Update}-Methode behandelt werden.\\
+
+\begin{lstlisting}[caption={[Behandlung von Tastatureingaben]Behandlung von Tastatureingaben}]
+public class Example : MonoBehaviour{
+	public void Update(){
+		if (Input.GetKeyDown(KeyCode.Space)) {
+			//Reaction when space is pressed
+		}
 	}
+}
 \end{lstlisting}
 
-Hiermit wird das Objekt nur um 5 Einheiten pro Sekunde verschoben, was die Berechnung unabhängig von der Framerate macht.
+\textit{GetKeyDown} liefert während des Bildes wahr, in dem der Spieler angefangen hat die entsprechende Taste zu drücken. Neben den Werten für normalen Tasten, gibt es auch Werte für Sondertasten wie zum Beispiel \textit{Windows}, sowie Maus- und Joystick-Tasten.
 
-Eine weitere wichtige Methode ist \textit{OnGUI()}, in der Dinge implementiert werden, die in der GUI ablaufen sollen. Als GUI bezeichnet man in einem Spiel die Ebene, die über der 3D-Darstellung liegt, wo Menüs, Lebensanzeigen, oder auch Munitions-Stände oder sonstige Status-Elemente platziert werden. \textit{OnGUI} wird bei jedem GUI-Event aufgerufen, wenn zum Beispiel auf ein GUI-Element geklickt wird. Dies kann auch häufiger als der Aufruf von \textit{Update} stattfinden, weshalb diese Aktionen in \textit{OnGUI} verarbeitet werden müssen.
-
-Ein weitere Methode ist \textit{OnCollisionEnter(Collision c)}, welche in einem \textit{GameObject}-Skript aufgerufen wird, wenn ein anderes Objekt in den Kollisionsbereich eintritt. Damit dieser Event-Handler aufgerufen wird, müssen beide Spielobjekte eine sogenannte \textit{Rigidbody}-Komponente haben, welche physikalische Eigenschaften für das Objekt festlegt. Der Methode wird beim Aufruf ein \textit{Collision}-Objekt übergeben, in dem die Daten des kollidierenden Objektes stehen.
+Eine weitere wichtige Methode ist \textit{OnGUI()}, in der Dinge implementiert werden, die in der zweidimensionalen Schicht über der 3D-Darstellung ablaufen sollen. Hier können zum Beispiel Menüs, Lebensanzeigen oder auch Munitions-Stände und sonstige Status-Elemente angezeigt werden. \textit{OnGUI} wird bei jedem GUI-Event aufgerufen, wenn zum Beispiel auf ein GUI-Element geklickt wird. Dies kann auch häufiger als der Aufruf von \textit{Update} stattfinden, weshalb diese Aktionen in \textit{OnGUI} verarbeitet werden müssen. Alle möglichen Methoden für Skripte findet man in der Sektion \textit{Overridable Functions} der offiziellen Unity-Referenz\footnote{\url{http://docs.unity3d.com/Documentation/ScriptReference/MonoBehaviour.html}}.
 \pagebreak
+
+\paragraph{Reihenfolge der in der Hauptschleife ausgeführten Befehle}\hypertarget{MainLoopOrder}{~}\\
+{\small Quelle: \url{http://docs.unity3d.com/Documentation/Manual/ExecutionOrder.html}}
+\begin{enumerate}
+\item Alle \textit{Awake}-Methoden
+\item Alle \textit{Start}-Methoden
+\item while (Schrittweite variabel zur Renderzeit des vorangegangene Bildes)
+	\begin{enumerate}
+	\item[3.1] Alle \textit{FixedUpdate}-Methoden
+	\item[3.2] Physik-Simulation
+	\item[3.3] Ausgelöste \textit{OnTriggetEnter/Exit/Stay}-Methoden
+	\item[3.4] Ausgelöste \textit{OnCollisionEnter/Exit/Stay}-Methoden
+	\end{enumerate}
+\item Transformation und Rotation der Models
+\item Ausgelöste \textit{OnMouseDown/OnMouseUp}-Methoden
+\item Alle \textit{Update}-Methoden
+\item Animationen werden fortgesetzt
+\item Alle \textit{LateUpdate}-Methoden
+\item Rendern des Bildes
+\end{enumerate}
+\clearpage
 
 \section{Entwicklungsumgebung}
 
-Wie oben beschrieben, bietet die Unity SDK die Möglichkeit mit mehreren Programmiersprachen zu entwickeln. Um alle Möglichkeiten der objektorientierten Entwicklung nutzen zu können, haben wir uns dazu entschieden den Prototypen in C\# zu schreiben. Dementsprechend nutzen wir neben der Unity SDK noch \textit{Visual Studio 2012} zum programmieren der Logik. Um effizienter entwickeln zu können und aufgrund der besseren Refactoring-Möglichkeiten haben wir \textit{Resharper}\footnote{Für nähere Informationen zu Resharper siehe \url{http://www.jetbrains.com/resharper/}.} installiert. Zusätzlich dazu bietet es einen wesentlich übersichtlicheren Test-Explorer, wie man in der Abbildung auf der nächsten Seite sehen kann.
+Das Test-Framework wird in der Sprache C\# geschrieben, wobei ich \textit{Visual Studio 2012} mit dem Plugin \textit{Resharper}\footnote{Für nähere Informationen zu Resharper siehe \url{http://www.jetbrains.com/resharper/}.} als IDE verwende. \textit{Resharper} bietet einem stark erweiterte Möglichkeiten seinen Code zu refaktorisieren, also die Struktur zu verbessern, ohne die nach außen sichtbare Funktionalität zu verändern. Außerdem ist der Test Explorer wesentlich übersichtlicher, als der von \textit{Visual Studio}. Dies ist besonders wichtig, da ich testgetrieben entwickeln werde und dadurch effizienter arbeiten kann.\\
+Dazu wird die Unity SDK verwendet, mit der ich ein Beispiel-Projekt, welches mein Framework verwendet, erstelle.
 
-Zur Verteilung der Aufgaben haben wir Bugzilla\footnote{Für nähere Informationen zu Bugzilla siehe \url{http://www.bugzilla.org/about/}} verwendet. Um die Bugs zu editieren und übersichtlich darzustellen wurde die Lite Version von Deskzilla genutzt.
-
-Damit wir parallel an dem Prototypen arbeiten können, musste das Projekt in einem Git-Repository gespeichert werden, wobei man beim Aufsetzen des Repositories einiges beachten sollte, damit die Verwaltung auch funktioniert. Dies liegt daran, dass manche Dateien in einem Unity-Projekt nur relevant für die SDK des aktuellen Benutzers sind und die Entwicklungsumgebung des Anderen stören würden, falls sie im Repository gespeichert werden. Andererseits befinden sich unter diesen Dateien auch benötigte Information, damit das Projekt korrekt funktioniert, wie zum Beispiel welche Skripte an einem Spielobjekt hängen. Deswegen gibt es die Möglichkeit (seit Version 3.5 auch für die kostenlose Variante von Unity) diese Informationen in Meta-Files abzuspeichern, die sich am selben Ort wie die eigentliche Dateien befinden. Danach muss man noch den Ordner \textit{Library} in das Gitignore-File aufnehmen. Sollte man mehrere Unity-Projekte in einem Repository haben, empfiehlt es sich in jedem Projektordner ein separates Ignore-File anzulegen, um nicht die vollständigen Pfade zu den \textit{Library}-Ordnern angeben zu müssen. Dadurch lassen sich die Ignore-Files für die einzelnen Projekte einfach kopieren.
+Als Versionierungs-Tool wird git verwendet, wobei man bei der Versionierung von Unity-Projekten ein paar Dinge beachten muss. "Dies liegt daran, dass manche Dateien in einem Unity-Projekt nur relevant für die SDK des aktuellen Benutzers sind und die Entwicklungsumgebung des Anderen stören würden, falls sie im Repository gespeichert werden. Andererseits befinden sich unter diesen Dateien auch benötigte Information, damit das Projekt korrekt funktioniert, wie zum Beispiel welche Skripte an einem Spielobjekt angehängt sind. Deswegen gibt es die Möglichkeit (seit Version 3.5 auch für die kostenlose Variante von Unity) diese Informationen in Meta-Files abzuspeichern, die sich am selben Ort wie die eigentlichen Dateien befinden. Danach muss man noch den Ordner \textit{Library} in das Gitignore-File aufnehmen. Sollte man mehrere Unity-Projekte in einem Repository haben, empfiehlt es sich in jedem Projektordner ein separates Ignore-File anzulegen, um nicht die vollständigen Pfade zu den \textit{Library}-Ordnern angeben zu müssen. Dadurch lassen sich die Ignore-Files für die einzelnen Projekte einfach kopieren" \cite[Kapitel Entwicklungsumgebung]{TDGD13}.
 
 Eine detaillierte Anleitung zum Verwalten eines Unity-Projekts mit externen Versionierungstools findet man unter \url{http://docs.unity3d.com/Documentation/Manual/ExternalVersionControlSystemSupport.html}.
-
-
-\begin{figure}[t]
-\centering
-	\begin{subfigure}[b]{0.45\textwidth}
-	\centering
-	\captionsetup{justification=centering}
-	\includegraphics[width=\textwidth]{./images/Kapitel_Einleitung/VisualStudioTestExplorer}
-	\caption{Visual Studio 2012}
-	\label{fig:VisualStudioTestExplorer}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.8\textwidth}
-	\centering
-	\captionsetup{justification=centering}
-	\includegraphics[width=\textwidth]{./images/Kapitel_Einleitung/ResharperTestExplorer}
-	\caption{Resharper}
-	\label{fig:ResharperTestExplorer}
-	\end{subfigure}
-\caption[Test Explorer von Visual Studio 2012 und Resharper im Vergleich]{Test Explorer von Visual Studio 2012 und Resharper im Vergleich.}
-\label{fig:TestExplorerComparison}
-\end{figure}
