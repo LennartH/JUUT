@@ -1,15 +1,16 @@
 \chapter{Einleitung}
 
-In der Software-Entwicklung wird immer mehr Wert auf automatisierte Tests, um die Korrektheit des Programms zu gewährleisten und für die klassische Entwicklung gibt es schon mächtige Werkzeuge, die einen dabei unterstützen. Angefangen mit Test-Frameworks, welche es einem ermöglichen atomare Teile des Codes, bis zu dessen Gesamtheit automatisch zu testen, wodurch man schnelles Feedback erhält und Fehlverhalten leicht aufdecken kann. Darüber hinaus lässt sich mit Code Coverage Analysen feststellen, welche Teile des Codes durch Tests abgedeckt sind. Die Verwendung von Mocking-Frameworks ermöglicht es Mocks\footnote{Mocks sind Hüllen von Klassen, die stark mit dem zu testenden Teil verbunden sind und wenig bis gar keine Funktionalität implementieren.} dynamisch zu erzeugen und deren Verhalten zur Laufzeit zu definieren. Dadurch lassen sich ohne viel Aufwand Teile des Codes komplett isoliert testen. Die testgetriebene Entwicklung stützt sich vollständig auf Tests, indem man zuerst den Test für die neue Funktionalität schreibt, diesen zum Durchlaufen bringen und anschließend refactored. Dadurch erhält man nahezu vollständig durch Tests abgedeckten Code, der offen für Änderungen und robust gegen Fehler ist. Mehr über TDD findet sich in \cite{FRE10}.
+In der Software-Entwicklung wird immer mehr Wert auf automatisierte Tests, um die Korrektheit des Programms zu gewährleisten und für die klassische Entwicklung gibt es schon mächtige Werkzeuge, die einen dabei unterstützen. Angefangen mit Test-Frameworks, welche es einem ermöglichen atomare Teile des Codes, bis zu dessen Gesamtheit automatisch zu testen, wodurch man schnelles Feedback erhält und Fehlverhalten leicht aufdecken kann. Darüber hinaus lässt sich mit Code Coverage Analysen feststellen, welche Teile des Codes durch Tests abgedeckt sind. Die Verwendung von Mocking-Frameworks ermöglicht es \textit{Mocks} (\hyperlink{DefinitionMock}{s. Unit-Tests weiter unten}) dynamisch zu erzeugen und deren Verhalten zur Laufzeit zu definieren. Dadurch lassen sich ohne viel Aufwand Teile des Codes komplett isoliert testen. Die testgetriebene Entwicklung stützt sich vollständig auf Tests, indem man zuerst den Test für die neue Funktionalität schreibt, diesen zum Durchlaufen bringen und anschließend refactored. Dadurch erhält man nahezu vollständig durch Tests abgedeckten Code, der offen für Änderungen und robust gegen Fehler ist. Mehr über TDD findet sich in \cite{FRE10}.
 
-Für die Spiele-Entwicklung (mit Unity) gibt es noch keine oder nur sehr einfache Werkzeuge, um seinen Code effektiv zu testen. Deswegen möchte ich in dieser Studienarbeit ein eigenes Framework entwickeln, mit dem sich die verhaltenssteuernden Komponenten eines Spiels testen lassen. Dabei stütze ich mich auf die Erkenntnisse die ich mit einem Kommilitonen in einer vorherigen Studienarbeit \cite{TDGD13} gewonnen habe. Vor allem die Kapitel über die unterschiedlichen Arten von Tests, die Funktionsweise von Unity und die vorhandenen Test-Frameworks für Unity sind inhaltlich sehr ähnlich zu der vorangegangenen Arbeit, möchte ich allerdings auf Grund der Nähe zum Thema dieser Arbeit nochmals aufführen.\\
-Obwohl es bereits Frameworks für Unity gibt, habe ich mich dazu entschieden von Grund auf ein neues zu entwickeln. Zum einen, um zu erfahren wie schwer es ist ein Test-Framework (für Unity) selbst zu schreiben und zum anderen, um dessen Struktur besser auf meine Bedürfnisse anzupassen. Ein existierendes Framework so zu erweitern, dass es die mir vorschwebenden Neuerungen enthält dürfte schwierig sein.
+Für die Spiele-Entwicklung (mit Unity) gibt es noch keine oder nur sehr einfache Werkzeuge, um seinen Code effektiv zu testen. Deswegen möchte ich in dieser Studienarbeit ein eigenes Framework entwickeln, mit dem sich die verhaltenssteuernden Komponenten eines Spiels testen lassen. Dabei stütze ich mich auf die Erkenntnisse die ich mit einem Kommilitonen in einer vorherigen Studienarbeit \cite{TDGD13} gewonnen habe. Vor allem die Kapitel über die unterschiedlichen \nameref{sec:Testarten}, die Funktionsweise von \nameref{sec:Unity} und wie man aktuell \nameref{chap:Unit Tests mit Unity} mit den vorhandenen Test-Frameworks durchführen kann, sind inhaltlich sehr ähnlich zu der vorangegangenen Arbeit. Dennoch möchte ich diese auf Grund der Nähe zum Thema dieser Arbeit nochmals aufführen.\\
+Obwohl es bereits Frameworks für Unity gibt, habe ich mich dazu entschieden von Grund auf ein neues zu entwickeln. Zum einen, um zu erfahren wie schwer es ist ein Test-Framework (für Unity) selbst zu schreiben und zum anderen, um dessen Struktur besser auf meine Bedürfnisse anzupassen.
 
 Im nachfolgenden werde ich zunächst die unterschiedlichen Arten von Tests beschreiben und auf die Funktionsweise von Unity eingehen. Anschließend gebe ich einen Einblick in meine Entwicklungsumgebung.
 
 \section{Testarten}
+\label{sec:Testarten}
 
-Tests sollen einen bestimmten Teil des Programms auf seine Korrektheit überprüfen und dabei möglichst schnell und automatisiert ablaufen. Je nachdem wie umfangreich der getestete Bereich ist und welche Kenntnisse der Test/Entwickler von der inneren Umsetzung des Programms hat, kann man die Tests kategorisieren.
+Tests sollen einen bestimmten Teil des Programms auf seine Korrektheit überprüfen und dabei möglichst schnell und automatisiert ablaufen. Je nachdem wie umfangreich der getestete Bereich ist und welche Kenntnisse der Test/Entwickler von der inneren Umsetzung des Programms hat, kann man diese kategorisieren.
 
 \subsection{White- und Black-Box-Tests}
 
@@ -20,12 +21,30 @@ Im Gegensatz dazu stehen die Black-Box-Tests, deren Entwickler keinerlei Kenntni
 Black-Box-Tests sollen verifizieren, dass das Programm die Spezifikationen des Kunden erfüllt.
 
 Diese beiden Testarten ergänzen sich gegenseitig und es sollten immer sowohl White-Box, als auch Black-Box-Tests erstellt werden, um das Produkt zu überprüfen und robust gegen Fehler bei nachträgliche Änderungen zu machen.\\
-Schematische Darstellungen dieser Testarten sieht man in \autoref{fig:White_Box_Test} und \autoref{fig:Black_Box_Test} auf den nächsten Seiten.
+Schematische Darstellungen dieser Testarten sieht man in \autoref{fig:White_Box_Test} und \autoref{fig:Black_Box_Test} auf der nächsten Seite.
+
+\paragraph{Grey-Box-Tests} stellen eine Mischung aus beiden Varianten dar und vereinen die Eigenschaften beider Arten. Diese erhält man zum Beispiel durch testgetriebene Entwicklung, da man den Test schreibt bevor man den Code implementiert. Dadurch kann man keinerlei Kenntnisse über dessen innere Struktur haben, sondern definiert per Test das erwartete Verhalten. Nachdem dieser erfolgreich ausgeführt wird, erweitert man ihn im Sinne von White-Box-Tests. Dadurch wird sowohl das nach außen sichtbare Verhalten, als auch die innere Struktur des Codes getestet und man benötigt nur einen Entwickler für die Tests.
+
+\clearpage
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\linewidth]{./images/Kapitel_Einleitung/White_Box_Test.pdf}
+\caption[Schematische Darstellung eines White-Box-Tests]{Schematische Darstellung eines White-Box-Tests\\Der Entwickler sollte sich gut mit dem zu testenden Code auskennen. Der Test verifiziert, dass die Methode korrekt ausgeführt wird.}
+\label{fig:White_Box_Test}
+\end{figure}
+
+\begin{figure}[b]
+\centering
+\includegraphics[width=0.8\linewidth]{./images/Kapitel_Einleitung/Black_Box_Test.pdf}
+\caption[Schematische Darstellung eines Black-Box-Tests]{Schematische Darstellung eines Black-Box-Tests\\Öffentliche Klassen und Methoden, sowie deren Beschreibungen sind dem Entwickler bekannt. Die konkrete Implementierung allerdings ist nicht einsehbar. Der Test verifiziert das Verhalten der zu testenden Klasse.}
+\label{fig:Black_Box_Test}
+\end{figure}
+\clearpage
 
 \subsection{Unit-Tests} 
 
-\TODO{Diese sind die ...} sind die kleinsten Einheiten unter den Tests. Sie sollen die einzelnen Methoden einer Klasse auf einen fehlerfreien Ablauf und ein korrektes Verhalten hin testen. Dadurch kann man im Verlauf der Entwicklung Änderungen am Programm vornehmen, ohne dass die Funktionalitäten der Module unbemerkt zerstört werden (insofern die Tests eine ausreichende Abdeckung erreichen).\\
-Die einzelnen Tests sollten unabhängig voneinander und auch von den anderen Komponenten sein. Falls Verbindungen zwischen den Komponenten bestehen, sollten diese durch \textit{Mock}-Objekte entkoppelt werden. Diese erben von der entsprechenden Klasse und überschreiben deren Methoden auf eine geeignete Art. Zum Beispiel könnten sie einfach leer gelassen werden, was man als \textit{Stub} bezeichnet. Oder sie geben einen festen Wert zurück. \textit{Mock}-Klassen können selbst erstellt werden und sind meistens innere Klassen der Testklasse, allerdings gibt es auch \textit{Mock}-Frameworks, welche generisch \textit{Mocks} für beliebige Klassen oder Interfaces erzeugen können. Das Verhalten der Methoden eines Mocks, lässt sich mit diesen zur Laufzeit festlegen. Zum Beispiel dass ein fester Wert zurückgeliefert wird, oder eine Exception geworfen werden soll.\\ Beispiele sind \textit{JMock} für Java oder \textit{Moq} für C\#.\\
+Diese sind die kleinsten Einheiten unter den Tests. Sie sollen die einzelnen Methoden einer Klasse auf einen fehlerfreien Ablauf und ein korrektes Verhalten hin testen. Dadurch kann man im Verlauf der Entwicklung Änderungen am Programm vornehmen, ohne dass die Funktionalitäten der Module unbemerkt zerstört werden, insofern die Tests eine ausreichende Abdeckung erreichen (sowohl semantisch, als auch von den Zeilen her).\\
+Die einzelnen Tests sollten unabhängig voneinander und auch von den anderen Komponenten sein. Falls Verbindungen zwischen den Komponenten bestehen, sollten diese durch \hypertarget{DefinitionMock}{\textit{Mock}}-Objekte entkoppelt werden. Diese erben von der entsprechenden Klasse und überschreiben deren Methoden auf eine geeignete Art. Zum Beispiel könnten sie einfach leer gelassen werden, was man als \textit{Stub} bezeichnet. Oder sie geben einen festen Wert zurück. \textit{Mock}-Klassen können selbst erstellt werden und sind meistens innere Klassen der Testklasse, allerdings gibt es auch \textit{Mock}-Frameworks, welche generisch \textit{Mocks} für beliebige Klassen oder Interfaces erzeugen können. Das Verhalten der Methoden eines Mocks, lässt sich mit diesen zur Laufzeit festlegen. Zum Beispiel dass ein fester Wert zurückgeliefert wird, oder eine Exception geworfen werden soll.\\ Beispiele sind \textit{JMock} für Java oder \textit{Moq} für C\#.\\
 Außerdem sollten Unit-Tests sehr schnell ablaufen (im Millisekunden-Bereich), um nach jeder Änderung durchgeführt werden zu können, ohne die Entwicklung aufzuhalten.
 
 Eine schematische Darstellung von Unit-Tests sieht man in \autoref{fig:Unit_Test}.
@@ -36,27 +55,11 @@ Die nächsthöhere Stufe von Tests sind Integrationstests. Diese testen das Zusa
 
 Integrationstests dürfen länger dauern als Unit-Tests, sollten dennoch schnell durchgeführt werden können.
 
-Eine schematische Darstellung von Integrationstests sieht man in \autoref{fig:Integration_Test}.\\\\\\\\\\
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\linewidth]{./images/Kapitel_Einleitung/White_Box_Test.pdf}
-\caption[Schematische Darstellung eines White-Box-Tests]{Schematische Darstellung eines White-Box-Tests\\Der Entwickler sollte sich gut mit dem zu testenden Code auskennen. Der Test verifiziert, dass die Methode korrekt ausgeführt wird.}
-\label{fig:White_Box_Test}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\linewidth]{./images/Kapitel_Einleitung/Black_Box_Test.pdf}
-\caption[Schematische Darstellung eines Black-Box-Tests]{Schematische Darstellung eines Black-Box-Tests\\Öffentliche Klassen und Methoden, sowie deren Beschreibungen sind dem Entwickler bekannt. Die konkrete Implementierung allerdings ist nicht einsehbar. Der Test verifiziert das Verhalten der zu testenden Klasse.}
-\label{fig:Black_Box_Test}
-\end{figure}
-
-\clearpage
+Eine schematische Darstellung von Integrationstests sieht man in \autoref{fig:Integration_Test}.
 
 \subsection{Akzeptanztests} 
 
-\TODO{la} sollen die Korrektheit des Verhaltens eines ganzen Systems prüfen. Dabei soll er sowohl die Benutzerschnittstelle, als auch die einzelnen Komponenten und die Systemressourcen abdecken. Allerdings testen diese nicht die innere Struktur des Systems (sind also Black-Box-Tests), sondern sollen gewährleisten, dass ein System sich so verhält, wie es der Kunde im Lastenheft definiert hat. Idealerweise verwendet der Test dabei nur die Schnittstellen, die ein Kunde auch verwenden würde (z.B. über Eingaben auf der GUI), um möglichst nahe an ein natürliches Verhalten zu kommen.\\
+Diese sollen die Korrektheit des Verhaltens eines ganzen Systems prüfen. Dabei soll er sowohl die Benutzerschnittstelle, als auch die einzelnen Komponenten und die Systemressourcen abdecken. Allerdings testen diese nicht die innere Struktur des Systems (und sind dementsprechend Black-Box-Tests), sondern sollen gewährleisten, dass ein System sich so verhält, wie es der Kunde im Lastenheft definiert hat. Idealerweise verwendet der Test dabei nur die Schnittstellen, die ein Kunde auch verwenden würde (z.B. über Eingaben auf der GUI), um möglichst nahe an ein natürliches Verhalten zu kommen.\\
 Akzeptanztests können durchaus länger dauern, da sie das gesamte Verhalten eines Systems repräsentieren, welches nur nach größeren Veränderungen getestet werden muss.
 
 \begin{figure}[h]
@@ -89,8 +92,9 @@ Quelle: \url{http://schneide.wordpress.com/2011/09/05/a-shot-at-definitions-beyo
 \clearpage
 
 \section{Unity}
+\label{sec:Unity}
 
-\textit{Unity 3D} (mittlerweile nur noch \textit{Unity}) ist eine Spiele-Engine, welche für viele verschiedene Anwendungen, wie Spiele, Lernsoftware, sowie 3D-Animationsfilme verwendet wird. Der Hersteller bezeichnet die Software selber als \textit{Spieleentwicklungs-Ökosystem}\footnote{Zu lesen unter \url{http://unity3d.com/unity/}}, da sie neben der Engine selber eine komplette Entwicklungsumgebung für Spiele bietet.\\
+\textit{Unity} ist eine Spiele-Engine, welche für viele verschiedene Anwendungen, wie Spiele, Lernsoftware, sowie 3D-Animationsfilme verwendet wird. Der Hersteller bezeichnet die Software selber als \textit{Spieleentwicklungs-Ökosystem}\footnote{Zu lesen unter \url{http://unity3d.com/unity/}}, da sie neben der Engine selber eine komplette Entwicklungsumgebung für Spiele bietet.\\
 Die Umgebung erlaubt es einem, die Spiele auch auf andere Plattformen zu portieren, wie zum Beispiel für Android auf Smartphones oder für Webanwendungen. Dies macht die Engine sehr flexibel und ist auch ein Grund für die weite Verbreitung. Der Spielecode für das Spiel lässt sich in verschiedenen Sprachen programmieren, die beim Übersetzen alle von der Unity-Umgebung in die Common Intermediate Language überführt werden, eine Assemblersprache, die erst beim Ausführen in einer Laufzeitumgebung (.NET oder Mono) in nativen Maschinencode übersetzt wird. Die verfügbaren Scriptsprachen sind JavaScript, C\# und Boo\footnote{Weitere Infos zu Boo unter \url{http://boo.codehaus.org/}}.
 
 
