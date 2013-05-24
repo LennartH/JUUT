@@ -28,3 +28,23 @@ Ich halte es für unnötig, dass für jede einzelne Testmethode eine Instanz der
 Diese Kritikpunkte und die geringe Größe von UUnit stützen meine Entscheidung bei der Entwicklung eines Frameworks von vorne zu beginnen.
 
 \section{Erstentwurf für JUUT}
+
+In der testgetriebenen Entwicklung ist es üblich vor der Implementierung ein kleines Klassendiagramm zu erstellen, in dem der Kernfunktionalität des Projekts deutlich wird \cite[Seite 32-37]{FRE10}. Mit diesem \textit{"Skelette"} als Basis kann das Programm Stück für Stück erweitert werden. Das entsprechende Diagramm für mein Framework befindet sich auf der nächsten Seite und wird im folgenden erläutert.
+\pagebreak
+
+\begin{figure}
+\centering
+\includegraphics[width=0.9\linewidth]{images/Kapitel_ErstentwurfDesFrameworks/WalkingSkeleton}
+\caption[Erstentwurf von JUUT]{Erstentwurf von JUUT}
+\label{fig:WalkingSkeleton}
+\end{figure}
+\clearpage
+
+Um den Aufwand für eine eigene \textit{Assert}-Klasse möglichst gering zu halten, werde ich die oben erwähnte Bibliothek NHamcrest in mein Projekt einbinden. Dabei bin ich hauptsächlich an den \textit{Matchern} interessiert, mit denen man Bedingungen, wie zum Beispiel (Un)Gleichheit zweier Objekte oder eine erwartete Exception, für die Tests definieren kann. Im Zusammenhang damit steht die \textit{AssertException}, die von \textit{Assert} geworfen wird, wenn eine solche Bedingung nicht erfüllt ist. Diese spezielle Exception soll einen fehlgeschlagenen Test markieren. Wird während des Tests eine andere Exception geworfen wird das als schwerer Fehler interpretiert.
+
+Die Attribute dienen dazu für das Framework relevante Klassen und Methoden zu markieren, wobei ich mich an MSTest orientiert habe. Auch für JUUT sind Attribute für \textit{Class/TestSetUp}, {Class/TestTearDown}, Testmethoden und Testklassen. Das Attribut zur Markierung von Tests heißt hier \textit{SimpleTestMethod}, da für die konkreten Implementierung weitere Test-Attribute geplant sind, welche komplexer sind. Das simple Attribut ist vergleichbar mit den Tests die in UUnit oder SharpUnit möglich sind.
+Neben \textit{Assert} als statische Hilfsklasse gibt es noch den \textit{AttributeScanner}. Dieser soll zum einen dazu dienen bestimmte Methoden einer Testklasse zu finden und zurückzugeben und zum anderen wäre es vorstellbar, dass er die aktuelle Umgebung nach Testklassen durchsucht. Damit ließen sich recht einfach alle Tests des aktuellen Projekts ausführen.
+
+Der funktionale Teil besteht aus den Klassen \textit{TestSuite}, \textit{TestRunner}, \textit{TestReporter} und \textit{TestReport}. Der \textit{TestRunner} soll eine bestimmte Testklasse verwalten, an deren Methoden er mit Hilfe des \textit{AttributeScanner}s gelangt. Wird während der Ausführung eine Exception geworfen, soll diese gefangen werden und ein entsprechender \textit{TestReport} wird erzeugt. Die \textit{TestSuite} ist Zugang für den Anwender, denn hier sollen die auszuführenden Tests hinzugefügt werden. Daraufhin werden die einzelnen \textit{TestRunner} ausgeführt und deren Reports an den \textit{TestReporter} übergeben. Abschließend wird von diesem aus den gesammelten Reports eine entsprechende Ausgabe erzeugt und angezeigt.
+
+Dieses Konzept beseitigt die oben genannten Probleme der Implementierung von UUnit, denn die Verantwortlichkeiten sind sauber verteilt und die Komplexität wird mit Hilfe der Klasse \textit{TestSuite} vor dem Anwender verborgen.
