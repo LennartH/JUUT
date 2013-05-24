@@ -1,0 +1,45 @@
+\chapter{Appendix}
+
+\section{Implementierung von UUnit}
+
+\begin{lstlisting}[caption={[Quellcode der \textit{Run}-Methode von \textit{UUnitTestCase}]Quellcode der \textit{Run}-Methode von \textit{UUnitTestCase}}, label=code:UUnitTestCase_Run]
+public UUnitTestResult Run (UUnitTestResult testResult)
+{
+	if (testResult == null) {
+		testResult = new UUnitTestResult ();
+	}
+	
+	SetUp ();
+	
+	testResult.TestStarted ();
+	try {
+		Type type = this.GetType ();
+		MethodInfo method = type.GetMethod (testMethodName);
+		method.Invoke (this, null);
+	} catch (TargetInvocationException e) {
+		testResult.TestFailed ();
+		Debug.Log (e.InnerException);
+	} finally {
+		TearDown ();
+	}
+	
+	return testResult;
+}
+\end{lstlisting}
+\clearpage
+
+\begin{lstlisting}[caption={[Quellcode der \textit{AddAll}-Methode von \textit{UUnitTestSuite}]Quellcode der \textit{AddAll}-Methode von \textit{UUnitTestSuite}}, label=code:UUnitTestSuite_AddAll]
+public void AddAll (Type testCaseType)
+{
+	foreach (MethodInfo method in testCaseType.GetMethods()) {
+		foreach (Attribute attribute in method.GetCustomAttributes(false)) {
+			if (attribute != null) {
+				ConstructorInfo constructor = testCaseType.GetConstructors () [0];
+				UUnitTestCase newTestCase = (UUnitTestCase)constructor.Invoke (null);
+				newTestCase.SetTest (method.Name);
+				Add (newTestCase);
+			}
+		}
+	}
+}
+\end{lstlisting}

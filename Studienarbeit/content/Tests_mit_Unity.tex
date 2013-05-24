@@ -156,7 +156,7 @@ Dass man die auszuführenden Tests definieren muss ist kein Problem. Allerdings 
 \item \textbf{Fehlender Komfort der Darstellung der Ergebnisse}\\
 Eine Ausgabe auf der Konsole ist nicht sehr übersichtlich und es gibt keine Möglichkeit direkt zum Fehler zu springen. Wünschenswert wäre eine Strukturierung nach Namensraum und Klasse.
 \item \textbf{Geringe Auswahl an Bedingungen (\textit{Assertions})}\\
-Die \textit{Assert}-Klasse bietet nur sehr wenige Methoden, um Bedingungen zu definieren. Dieses Problem lässt sich jedoch relativ leicht durch die Verwendung von \textit{NHamcrest} beheben. Allerdings werden dadurch alle fehlschlagenden Tests als Error und nicht als Fehler eingestuft, da die geworfene Exception nicht der \textit{AssertException} der Frameworks entspricht.
+Die \textit{Assert}-Klasse bietet nur sehr wenige Methoden, um Bedingungen zu definieren. Dieses Problem lässt sich jedoch relativ leicht durch die Verwendung von \textit{NHamcrest}\footnote{\textit{NHamcrest} ist eine Bibliothek, welche einem sehr viele Assertions bietet. Es ist eine .NET-Umsetzung des in Java geschriebenen Projekts \textit{Hamcrest}. Weitere Informationen unter \url{https://github.com/grahamrhay/NHamcrest/wiki}} beheben. Allerdings werden dadurch alle fehlschlagenden Tests als Error und nicht als Fehler eingestuft, da die geworfene Exception nicht der \textit{AssertException} der Frameworks entspricht.
 \item \textbf{Es sind nur simple Tests möglich}\\
 Während die anderen Punkte eher kosmetischer Natur sind, stellt dieser ein echtes Problem dar, da dadurch die möglichen Tests stark eingeschränkt werden. Eine Beseitigung dieses Problems für die gegebenen Frameworks ist nicht trivial.
 \end{itemize}
