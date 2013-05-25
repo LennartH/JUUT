@@ -148,7 +148,41 @@ suite.Run(session);
 
 Nachdem die Tests durchgeführt wurden, müssen die Ergebnisse nur noch dem Benutzer präsentiert werden. Da die Form der Präsentation abhängig von der Spiele-Engine ist, worauf in \autoref{sec:Ergebnis_Unity} näher eingegangen wird, beschäftigt sich dieser Teil mit der Strukturierung und Verwaltung der einzelnen Berichte.
 
+~
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{images/Kapitel_Ergebnis/ReportersAndReports}
+\caption[Für die Präsentation der Testergebnisse verantwortliche Klassen]{Für die Präsentation der Testergebnisse verantwortliche Klassen}
+\label{fig:ReportersAndReports}
+\end{figure}
+\clearpage
+
+Das kleinste Teil der Reporting-Maschinerie ist der \textit{ReportStatus}, der die Art des Berichts festlegt. Es gibt die Status \textit{NotRunned}, \textit{Success}, \textit{Failed} und \textit{Error}, wobei der Unterschied zwischen \textit{Failed} und \textit{Error} darin liegt, dass bei Berichten mit dem Status \textit{Error} eine Exception geworfen wurde, die nicht vom Typ \textit{AssertException} ist. \textit{Create} von \textit{ReportStatus} ist eine Fabrikmethode, welche einen zu einer Exception passenden Status erzeugt.
+
+Alle Berichte implementieren dass \textit{Report}-Interface, welches definiert, dass Berichte einen Text haben der eine Zusammenfassung des Testdurchlaufs darstellt, sowie einem festen Typ zugeordnet sind und einen Status haben. Es gibt zwei unterschiedliche Arten von Berichten. Zum einen \textit{MethodReports}, die den Verlauf einer testspezifischen Methode speichert. Diese haben zusätzlich noch eine Kurzfassung des Verlaufs, eine Referenz auf die geworfene Exception und auf die ausgeführte Methode. Der Text eines \textit{MethodReports} ist abhängig von der geworfenen Exception:
+\begin{itemize}
+\item Keine Exception\\
+\textit{"The Foo-Method passed successfully."}
+\item Eine \textit{AssertException}\\
+\textit{"The Foo-Method failed: Expected is 10, but was 12."}
+\item Keine Exception\\
+\textit{"The Foo-Method threw an unexpected exception: Exception-Message"}
+\end{itemize}
+Bei der Kurzfassung ist die Nachricht der geworfenen Exception nicht vorhanden. Die genaue Erzeugung der Texte sieht man in \autoref{code:MethodReport_InitializeTexts} \nameref{code:MethodReport_InitializeTexts} des Appendix.
+
+Die zweite Art von Berichten (\textit{ClassReport}) sammelt alle \textit{MethodReports} einer Testklasse. Als zusätzliche Informationen bietet sie die Anzahl der durchgeführten, fehlgeschlagenen und erfolgreichen Tests. Der Text besteht aus diesen Zusatzinformationen und der durch Leerzeilen getrennten Kurzfassungen aller enthaltenen \textit{MethodReports}.
+
+Der \textit{TestReporter} wiederum sammelt eine Menge von \textit{ClassReports}. Wie diese dann dem Anwender präsentiert werden, hängt von der konkreten Implementierung ab, welche im nächsten Abschnitt beschrieben wird.
+
 \section{Unity}
 \label{sec:Ergebnis_Unity}
 
+Präsentation
+
+Beispiel-Projekt
+
 \section{Zusammenfassung}
+
+Zeilen source code
+Tests Robustheit, Erweiterbarkeit, Usability

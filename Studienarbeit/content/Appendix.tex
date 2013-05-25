@@ -147,3 +147,13 @@ private static MethodReport RunInstanceMethod(object testInstance, MethodInfo me
     }
 }
 \end{lstlisting}
+
+\subsection{Reporting}
+
+\begin{lstlisting}[caption={[Quellcode der \textit{InitializeTexts}-Methode von \textit{MethodReport}]Quellcode der \textit{InitializeTexts}-Methode von \textit{MethodReport}}, label=code:MethodReport_InitializeTexts]
+private void InitializeTexts(MethodInfo method, ReportStatus status, Exception raisedException) {
+    string commonText = "The " + method.Name + "-Method " + status.DescribingText;
+    ShortText = commonText + ".";
+    Text = commonText + ( raisedException == null ? "." : ": " + raisedException.Message);
+}
+\end{lstlisting}
