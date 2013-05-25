@@ -68,13 +68,13 @@ namespace JUUT_Core.Scanners {
         }
 
         //TODO
-        public static List<MethodInfo> GetTestMethodsOfClass(Type testClass) {
+        public static List<MethodInfo> GetAllTestMethodsOfClass(Type testClass) {
             return GetTestMethodsOfTestClass(typeof(TestAfterAttribute), testClass);
         }
 
         //TODO 
         public static bool ClassContainsOnlySimpleTests(Type testClass) {
-            foreach (MethodInfo test in GetTestMethodsOfClass(testClass)) {
+            foreach (MethodInfo test in GetAllTestMethodsOfClass(testClass)) {
                 if (test.GetCustomAttribute<JUUTTestMethodAttribute>() is TestAfterAttribute) {
                     return false;
                 }

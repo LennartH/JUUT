@@ -43,3 +43,18 @@ public void AddAll (Type testCaseType)
 	}
 }
 \end{lstlisting}
+
+\section{Implementierung von JUUT}
+\begin{lstlisting}[caption={[Quellcode der \textit{Validate}-Methode von \textit{SimpleTestMethodAttribute}]Quellcode der \textit{Validate}-Methode von \textit{SimpleTestMethodAttribute}}, label=code:SimpleTestMethodAttribute_Validate]
+protected override bool Validate(MemberInfo member) {
+    MethodInfo method = (MethodInfo) member;
+    if (method.GetCustomAttribute<SimpleTestMethodAttribute>() != null) {
+        if (method.GetParameters().Count() != 0) {
+            throw new ArgumentException("The method " + method.Name + " has parameters.");
+        }
+
+        return true;
+    }
+    return false;
+}
+\end{lstlisting}
