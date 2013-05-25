@@ -66,17 +66,9 @@ namespace JUUT_Core.Reports {
 
         private void AdjustCounters(MethodReport newReport) {
             if (Reports.ContainsKey(newReport.Method)) {
-                DecrementCountersFor(Reports[newReport.Method]);
+                Reports[newReport.Method].Status.DecrementCounterFor(this);
             }
-            IncrementCountersFor(newReport);
-        }
-
-        private void IncrementCountersFor(MethodReport report) {
-            report.Status.IncrementCounterFor(this);
-        }
-
-        private void DecrementCountersFor(MethodReport report) {
-            report.Status.DecrementCounterFor(this);
+            newReport.Status.IncrementCounterFor(this);
         }
 
         #region HashCode and Equals

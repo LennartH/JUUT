@@ -64,12 +64,12 @@ namespace JUUT_Core.Scanners {
         /// <param name="testClass">The test class that is scanned for SimpleTest-Methods. Can't be null.</param>
         /// <returns>Returns the SimpleTest-Methods or null, if there are none.</returns>
         public static List<MethodInfo> GetSimpleTestMethodsOfClass(Type testClass) {
-            return GetTestMethodsOfTestClass(typeof(SimpleTestMethodAttribute), testClass);
+            return GetTestMethodsOfClass(typeof(SimpleTestMethodAttribute), testClass);
         }
 
         //TODO
         public static List<MethodInfo> GetAllTestMethodsOfClass(Type testClass) {
-            return GetTestMethodsOfTestClass(typeof(TestAfterAttribute), testClass);
+            return GetTestMethodsOfClass(typeof(TestAfterAttribute), testClass);
         }
 
         //TODO 
@@ -89,7 +89,7 @@ namespace JUUT_Core.Scanners {
         /// <param name="testMethodAttribute"></param>
         /// <param name="testClass"></param>
         /// <returns></returns>
-        private static List<MethodInfo> GetTestMethodsOfTestClass(Type testMethodAttribute, Type testClass) {
+        private static List<MethodInfo> GetTestMethodsOfClass(Type testMethodAttribute, Type testClass) {
             JUUTAttribute.IsMemberValidFor(typeof(JUUTTestClassAttribute), testClass);
 
             List<MethodInfo> testMethods = new List<MethodInfo>();

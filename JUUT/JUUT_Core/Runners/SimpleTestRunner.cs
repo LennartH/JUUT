@@ -79,7 +79,7 @@ namespace JUUT_Core.Runners {
         /// <summary>
         /// Runs the test method for the given test class instance and adjusts the report.
         /// </summary>
-        private MethodReport RunTest(object instance, MethodInfo testMethod) {
+        private static MethodReport RunTest(object instance, MethodInfo testMethod) {
             return RunInstanceMethod(instance, testMethod, true);
         }
 

@@ -98,10 +98,57 @@ Als erstes muss der Anwender mit \textit{Session}-Objekten definieren, welche Te
 \label{fig:Sessions}
 \end{figure}
 
-Eine \textit{TestClassSession} repräsentiert eine Testklasse und verwaltet die zu dieser Klasse gehörenden Testmethoden
+Eine \textit{TestClassSession} repräsentiert eine Testklasse und verwaltet die zu dieser Klasse gehörenden Testmethoden. Sie muss einer mit dem \textit{JUUTTestClass}-Attribut versehenen Klasse zugeordnet werden, weswegen sie als Konstruktor-Parameter einen Typ erwartet. Mit den Methoden \textit{AddAll} und \textit{Add} können alle oder einzelne Testmethoden der Testklasse hinzugefügt werden. Beim Aufruf von \textit{AddAll} durchsucht die statische Hilfsklasse \textit{TestClassScanner} den zugeordneten Typ nach Methoden, welche mit einem \textit{JUUTTestMethod}-Attribut markiert wurden, die dann zur \textit{Session} hinzugefügt werden. Wie das Scannen genau implementiert wurde, sieht man in der Sektion \ref{sec:Appendix_Scanners} \nameref{sec:Appendix_Scanners} im Appendix.
+
+\textit{TestClassSession} dient der JUUT-internen Verwaltung. Vom Anwender muss lediglich eine \textit{Session} erzeugt werden, welche wiederum eine Menge von \textit{TestClassSessions} verwaltet. Diese werden in Form einer Hashtabelle gespeichert, wobei der Schlüssel der Typ der Testklasse und das Element die dazugehörige \textit{TestClassSession} ist. Die Methoden \textit{AddAll} und \textit{Add} von \textit{Session} überprüfen nun, ob es schon eine \textit{TestClassSession} für den hinzuzufügenden Test gibt, erstellen gegebenenfalls eine Instanz und delegieren dann an das \textit{TestClassSession}-Objekt. Die Definition einer \textit{Session} könnte wie folgt aussehen:
+\begin{lstlisting}[caption={[Beispiel für die Definition einer \textit{Session}]Beispiel für die Definition einer \textit{Session}}, label=code:Example_SessionCreation]
+Session session = new Session();
+session.AddAll(typeof(TestClass));
+session.Add(typeof(AnotherTestClass).GetMethod("ATestMethod"));
+\end{lstlisting}
+
+Nachdem eine \textit{Session} definiert wurde, müssen die darin enthaltenen Tests ausgeführt werden. Diese Aufgabe übernimmt die \textit{TestSuite} und weitere Klassen, welche im nachfolgenden Klassendiagramm dargestellt sind.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{images/Kapitel_Ergebnis/SuitesAndRunners}
+\caption[Für die Ausführung von Tests verantwortliche Klassen]{Für die Ausführung von Tests verantwortliche Klassen}
+\label{fig:SuitesAndRunners}
+\end{figure}
+
+Eigentlich führen die \textit{TestRunner} die Tests durch, da die \textit{TestSuite} für jede in der \textit{Session} enthaltene \textit{TestClassSession} an einen \textit{TestRunner} delegiert. Der zurückgegebene \textit{ClassReport} wird dem \textit{TestReporter} hinzugefügt und nach Abschluss wird dessen \textit{PresentReports}-Methode aufgerufen um die Ergebnisse darzustellen. Der Ablauf innerhalb des \textit{TestRunners} ist wie folgt:
+\begin{enumerate}
+\item Erzeugung einer \textit{ClassReport}-Instanz
+\item Aufruf der \textit{ClassSetUp}-Methode
+\item Erzeugung einer Instanz der zu testenden Klasse
+\item Für jeden Test der \textit{TestClassSession}
+	\begin{enumerate}[label*=\arabic*.]
+	\item Aufruf der \textit{TestSetUp}-Methode
+	\item Aufruf der Testmethode
+	\item Aufruf der \textit{TestTearDown}-Methode
+	\end{enumerate}
+\item Aufruf der \textit{ClassTearDown}-Methode
+\item Rückgabe des gefüllten \textit{ClassReports}
+\end{enumerate}
+
+Die einzelnen Methodenaufrufe werden mit Hilfe von \textit{Reflection} durchgeführt. Falls dabei eine Exception geworfen wird, wird diese gefangen und daraus ein \textit{MethodReport} erzeugt, welcher der \textit{ClassReport}-Instanz hinzugefügt wird. Tritt ein Fehler in einer der organisierenden Methoden (z.B. \textit{TestSetUp} oder \textit{TestTearDown}) auf, wird der Durchlauf abgebrochen und der Bericht sofort zurückgegeben, da der Fehler bei jeder einzelnen Testmethode auftreten würde. Die konkrete Implementierung findet man in der Sektion \ref{sec:Appendix_Runners} \nameref{sec:Appendix_Runners} im Appendix.
+
+Eine \textit{Session} lässt sich nun mit folgendem Code ausführen:
+\begin{lstlisting}[caption={[Beispiel für die Ausführung einer \textit{Session}]Beispiel für die Ausführung einer \textit{Session}\\\textit{ConcreteTestSuite} ist stellvertretend für eine beliebige Implementierung von \textit{AbstractTestSuite}.}, label=code:Example_SessionCreation]
+Session session = new Session();
+session.AddAll(typeof(TestClass));
+session.Add(typeof(AnotherTestClass).GetMethod("ATestMethod"));
+
+TestSuite suite = new ConcreteTestSuite();
+suite.Run(session);
+\end{lstlisting}
+\clearpage
 
 \subsection{Präsentation der Testergebnisse}
 
+Nachdem die Tests durchgeführt wurden, müssen die Ergebnisse nur noch dem Benutzer präsentiert werden. Da die Form der Präsentation abhängig von der Spiele-Engine ist, worauf in \autoref{sec:Ergebnis_Unity} näher eingegangen wird, beschäftigt sich dieser Teil mit der Strukturierung und Verwaltung der einzelnen Berichte.
+
 \section{Unity}
+\label{sec:Ergebnis_Unity}
 
 \section{Zusammenfassung}
