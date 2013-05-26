@@ -9,7 +9,7 @@ using UnityEditor;
 
 namespace Assets.Editor {
 
-    public class JUUTUnityMenu {
+    public static class JUUTUnityMenu {
 
         private static void ClearDebugLog() {
             Assembly assembly = Assembly.GetAssembly(typeof(SceneView));

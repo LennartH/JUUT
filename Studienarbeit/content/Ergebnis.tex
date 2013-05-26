@@ -1,6 +1,6 @@
 \chapter{Ergebnis}
 
-In diesem Kapitel wird die konkrete Implementierung meines Test-Frameworks JUUT vorgestellt. Wie man in dem Übersichtsdiagramm auf der nächsten Seite sehen kann, besteht es aus einem Kernel (\textit{Core}) und einem Unity spezifischen Teil auf die ich in den nächsten zwei Sektionen eingehen werde. Zuletzt fasse ich das Erreichte kurz zusammen und vergleiche es mit den existierenden Frameworks.
+In diesem Kapitel wird die konkrete Implementierung meines Test-Frameworks JUUT vorgestellt. Wie man in dem Übersichtsdiagramm auf der nächsten Seite sehen kann, besteht es aus einem Kernel (\textit{Core}) und einem Unity spezifischen Teil auf die ich in den nächsten zwei Sektionen eingehen werde.
 
 Im Großen und Ganzen ist die fertige Struktur ähnlich zum \hyperref[fig:WalkingSkeleton]{Erstentwurf} abgesehen davon, dass es einen extra Bereich für die Unity spezifischen Komponenten gibt. Wodurch der Kernel auch für Test-Frameworks andere Spiele-Engines genutzt werden könnte. Das was im Erstentwurf Klassen waren, sind in der fertigen Implementierung meistens eigene Pakete, die die vorgesehene Funktionalität kapseln. Dadurch ist das Projekt offen für Erweiterungen.
 
@@ -43,20 +43,20 @@ Einige der Attributsklassen sind abstrakt und dienen der internen Strukturierung
 \label{fig:Attributes}
 \end{figure}
 
-Das \textit{JUUTTestClass}-Attribut wir zur Markierung von Testklassen benutzt. Zusätzlich zu den geerbten Funktionalitäten, liefert es auch den optimalen \textit{TestRunner} für die markierter Testklasse. Denn je nachdem welche Arten von Tests diese enthält wird ein anderer Typ \textit{Runner} zur fehlerfreien Ausführung benötigt.
+Das \textit{JUUTTestClass}-Attribut wir zur Markierung von Testklassen benutzt. Zusätzlich zu den geerbten Funktionalitäten, kann es auch den optimalen \textit{TestRunner} für die markierter Testklasse liefern. Denn je nachdem welche Arten von Tests diese enthält wird ein anderer Typ \textit{Runner} zur fehlerfreien Ausführung benötigt.
 
-Als abstrakte Superklasse aller Testmethoden dient \textit{JUUTTestMethodAttribute}. Dadurch kann einem der \textit{TestClassScanner} alle Tests einer Testklasse liefern, ohne alle konkreten Test-Attribute zu kennen. Es hat ein öffentlich lesbares Attribut \textit{IsReadyToRun} welches angibt, ob der markiert Test schon ausgeführt werden kann. Dies wird von den \textit{Runnern} berücksichtigt, wodurch komplexere Testmethoden möglich sind. Für konkrete Tests gibt es die Attribute \textit{SimpleTestMethod} und \textit{TestAfter}. Mit Ersterem markiert man einfache Tests, die immer bereit zur Ausführung sind. Diese sind äquivalent zu den Tests die mit UUnit oder SharpUnit möglich sind. Mit \textit{TestAfter} versehene Tests sollen nach der Ausführung einer bestimmten Methode einer Klasse durchgeführt werden (zum Beispiel die \textit{Update}-Methode eines Skripts). Ursprünglich hatte ich vor diese Funktionalität mit Aspektorientierte Programmierung\footnote{Mit AOP lassen sich eigene Funktionalitäten an bestimmte Stellen des Programms einweben. Mehr dazu findet man zum Beispiel in \textit{"`Aspect-oriented programming"} unter anderem von Gregor Kiczales.} zu implementieren. Das Attribut wäre dabei gleichzeitig der \textit{Advice} der nach dem Methodenaufruf eingewoben werden würde und einen \textit{ReadyToRun}-Flag auf wahr setzt, wodurch der \textit{Runner} den Test beim nächsten Durchgang ausführt. Allerdings wird zum Umweben einer nicht statischen Methode einer Klasse ein \textit{Proxy-Objekt} benötigt, welches an Stelle des eigentlichen Objekts verwendet wird. Leider ist es nicht möglich in einer laufenden Unity-Umgebung ein Skript durch ein entsprechendes \textit{Proxy-Objekt} zu ersetzen. Zum Zeitpunkt der Fertigstellung dieser Studienarbeit war es mir nicht möglich dieses Problem zu lösen, sodass diese Funktionalität nur schematisch vorhanden ist.
+Als abstrakte Superklasse aller Testmethoden dient \textit{JUUTTestMethodAttribute}. Dadurch kann einem der \textit{TestClassScanner} alle Tests einer Testklasse liefern, ohne alle konkreten Test-Attribute zu kennen. Es hat ein öffentlich lesbares Attribut \textit{IsReadyToRun} welches angibt, ob der markiert Test schon ausgeführt werden darf. Dies soll von den \textit{Runnern} berücksichtigt werden, wodurch komplexere Testmethoden möglich sind. Für konkrete Tests gibt es die Attribute \textit{SimpleTestMethod} und \textit{TestAfter}. Mit Ersterem markiert man einfache Tests, die immer bereit zur Ausführung sind. Diese sind äquivalent zu den Tests die mit UUnit oder SharpUnit möglich sind. Mit \textit{TestAfter} versehene Tests sollen nach der Ausführung einer bestimmten Methode einer Klasse durchgeführt werden (zum Beispiel die \textit{Update}-Methode eines Skripts). Ursprünglich hatte ich vor diese Funktionalität mit aspektorientierter Programmierung\footnote{Mit AOP lassen sich eigene Funktionalitäten an bestimmte Stellen des Programms einweben. Mehr dazu findet man zum Beispiel in \textit{"`Aspect-oriented programming"} unter anderem von Gregor Kiczales.} zu implementieren. Das Attribut wäre dabei der \textit{Advice} der nach dem Methodenaufruf eingewoben werden würde und einen \textit{ReadyToRun}-Flag auf wahr setzt, wodurch der \textit{Runner} den Test beim nächsten Durchgang ausführt. Allerdings wird zum Umweben einer nicht statischen Methode einer Klasse ein \textit{Proxy-Objekt} benötigt, welches an Stelle des eigentlichen Objekts verwendet wird. Leider ist es nicht möglich in einer laufenden Unity-Umgebung ein Skript durch ein entsprechendes \textit{Proxy-Objekt} zu ersetzen. Zum Zeitpunkt der Fertigstellung dieser Studienarbeit war es mir nicht möglich dieses Problem zu lösen, sodass diese Funktionalität nur schematisch vorhanden ist.
 
-Neben Attributen für Testmethoden, gibt es noch weitere für \textit{SetUp}- und \textit{TearDown}- Methoden. Von der Definition von Tests entspricht JUUT also dem Funktionsumfang von MSTest.
+Neben Attributen für Testmethoden, gibt es noch weitere für \textit{SetUp}- und \textit{TearDown}- Methoden. In Sachen definieren von Tests entspricht JUUT also dem Funktionsumfang von MSTest.
 
-Abgesehen von den Attributen sind für Tests noch die möglichen Assertions wichtig. Diese werden von der Klasse \textit{Assert} zur Verfügung gestellt.
+Abgesehen von den Attributen sind für Tests noch die möglichen Assertions wichtig. Diese werden von der Klasse \textit{Assert} zur Verfügung gestellt. Durch die Verwendung von
 \begin{wrapfigure}{r}{0.5\linewidth}
 \centering
 \includegraphics[width=0.95\linewidth]{images/Kapitel_Ergebnis/Assert}
 \caption[\textit{Assert}-Klasse von JUUT]{\textit{Assert}-Klasse von JUUT}
 \label{fig:Assert}
 \end{wrapfigure}
-Durch die Verwendung von NHamcrest ist diese sehr schlank und bietet dennoch mehr Bedingungen, auf die getestet werden können, als die Standard-\textit{Assert}-Klassen von UUnit, SharpUnit oder MSTest. So werden nur zwei Methoden benötigt. Zum einen die Methode \textit{Fail}, die den Test gezielt fehlschlagen lässt, indem sie eine \textit{AsserException} wirft. Optional lässt sich diese mit einer Nachricht versehen, welche bei der Präsentation angezeigt wird. Dazu kommt noch die Methode \textit{That}. Diese erwartet das zu überprüfende Objekt \textit{actual} und einen \textit{Matcher}, der überprüft ob dieses eine bestimmte Bedingung erfüllt. Bedingungen können sein, dass \textit{actual} nicht Null ist oder dass von einer Anweisung eine Exception geworfen wird.
+NHamcrest ist diese sehr schlank und bietet dennoch mehr Bedingungen, auf die getestet werden können, als die Standard-\textit{Assert}-Klassen von UUnit, SharpUnit oder MSTest. So werden nur zwei Methoden benötigt. Zum einen die Methode \textit{Fail}, die den Test gezielt fehlschlagen lässt, indem sie eine \textit{AsserException} wirft. Optional lässt sich diese mit einer Nachricht versehen, welche bei der Präsentation angezeigt wird. Dazu kommt noch die Methode \textit{That}. Diese erwartet das zu überprüfende Objekt \textit{actual} und einen \textit{Matcher}, der überprüft ob dieses eine bestimmte Bedingung erfüllt. Bedingungen können sein, dass \textit{actual} nicht Null ist oder dass von einer Anweisung eine Exception geworfen wird.
 
 Abschließend wird gezeigt, wie ein Test mit JUUT definiert werden kann:
 \begin{lstlisting}[caption={[Beispiel für einen Test mit JUUT]Beispiel für einen Test mit JUUT\\In diesem Fall sind \textit{Throws.An} und \textit{Is.NotNull} die Matcher, welche den ersten Parameter darauf überprüfen, dass eine Exception geworfen wird beziehungsweise das Objekt nicht Null ist.}, label=code:SimpleTestMethodAttribute_Validate]
@@ -100,7 +100,7 @@ Als erstes muss der Anwender mit \textit{Session}-Objekten definieren, welche Te
 
 Eine \textit{TestClassSession} repräsentiert eine Testklasse und verwaltet die zu dieser Klasse gehörenden Testmethoden. Sie muss einer mit dem \textit{JUUTTestClass}-Attribut versehenen Klasse zugeordnet werden, weswegen sie als Konstruktor-Parameter einen Typ erwartet. Mit den Methoden \textit{AddAll} und \textit{Add} können alle oder einzelne Testmethoden der Testklasse hinzugefügt werden. Beim Aufruf von \textit{AddAll} durchsucht die statische Hilfsklasse \textit{TestClassScanner} den zugeordneten Typ nach Methoden, welche mit einem \textit{JUUTTestMethod}-Attribut markiert wurden, die dann zur \textit{Session} hinzugefügt werden. Wie das Scannen genau implementiert wurde, sieht man in der Sektion \ref{sec:Appendix_Scanners} \nameref{sec:Appendix_Scanners} im Appendix.
 
-\textit{TestClassSession} dient der JUUT-internen Verwaltung. Vom Anwender muss lediglich eine \textit{Session} erzeugt werden, welche wiederum eine Menge von \textit{TestClassSessions} verwaltet. Diese werden in Form einer Hashtabelle gespeichert, wobei der Schlüssel der Typ der Testklasse und das Element die dazugehörige \textit{TestClassSession} ist. Die Methoden \textit{AddAll} und \textit{Add} von \textit{Session} überprüfen nun, ob es schon eine \textit{TestClassSession} für den hinzuzufügenden Test gibt, erstellen gegebenenfalls eine Instanz und delegieren dann an das \textit{TestClassSession}-Objekt. Die Definition einer \textit{Session} könnte wie folgt aussehen:
+\textit{TestClassSession} dient der JUUT-internen Verwaltung. Vom Anwender muss lediglich eine \textit{Session} erzeugt werden, welche wiederum eine Menge von \textit{TestClassSessions} verwaltet. Diese werden in Form einer Hashtabelle gespeichert, wobei der Schlüssel der Typ der Testklasse und das Element die dazugehörige \textit{TestClassSession} ist. Die Methoden \textit{AddAll} und \textit{Add} von \textit{Session} überprüfen nun, ob es schon eine \textit{TestClassSession} für den hinzuzufügenden Test gibt, erstellen gegebenenfalls eine Instanz und delegieren das Hinzufügen des Tests an das \textit{TestClassSession}-Objekt. Die Definition einer \textit{Session} könnte wie folgt aussehen:
 \begin{lstlisting}[caption={[Beispiel für die Definition einer \textit{Session}]Beispiel für die Definition einer \textit{Session}}, label=code:Example_SessionCreation]
 Session session = new Session();
 session.AddAll(typeof(TestClass));
@@ -116,7 +116,7 @@ Nachdem eine \textit{Session} definiert wurde, müssen die darin enthaltenen Tes
 \label{fig:SuitesAndRunners}
 \end{figure}
 
-Eigentlich führen die \textit{TestRunner} die Tests durch, da die \textit{TestSuite} für jede in der \textit{Session} enthaltene \textit{TestClassSession} an einen \textit{TestRunner} delegiert. Der zurückgegebene \textit{ClassReport} wird dem \textit{TestReporter} hinzugefügt und nach Abschluss wird dessen \textit{PresentReports}-Methode aufgerufen um die Ergebnisse darzustellen. Der Ablauf innerhalb des \textit{TestRunners} ist wie folgt:
+Eigentlich führen die \textit{TestRunner} die Tests durch, da die \textit{TestSuite} für jede in der \textit{Session} enthaltene \textit{TestClassSession} an einen \textit{TestRunner} delegiert. Der vom \textit{Runner} zurückgegebene \textit{ClassReport} wird dem \textit{TestReporter} hinzugefügt und nach Abschluss wird dessen \textit{PresentReports}-Methode aufgerufen um die Ergebnisse darzustellen. Der Ablauf innerhalb des \textit{TestRunners} ist wie folgt:
 \begin{enumerate}
 \item Erzeugung einer \textit{ClassReport}-Instanz
 \item Aufruf der \textit{ClassSetUp}-Methode
@@ -160,7 +160,7 @@ Nachdem die Tests durchgeführt wurden, müssen die Ergebnisse nur noch dem Benu
 
 Das kleinste Teil der Reporting-Maschinerie ist der \textit{ReportStatus}, der die Art des Berichts festlegt. Es gibt die Status \textit{NotRunned}, \textit{Success}, \textit{Failed} und \textit{Error}, wobei der Unterschied zwischen \textit{Failed} und \textit{Error} darin liegt, dass bei Berichten mit dem Status \textit{Error} eine Exception geworfen wurde, die nicht vom Typ \textit{AssertException} ist. \textit{Create} von \textit{ReportStatus} ist eine Fabrikmethode, welche einen zu einer Exception passenden Status erzeugt.
 
-Alle Berichte implementieren dass \textit{Report}-Interface, welches definiert, dass Berichte einen Text haben der eine Zusammenfassung des Testdurchlaufs darstellt, sowie einem festen Typ zugeordnet sind und einen Status haben. Es gibt zwei unterschiedliche Arten von Berichten. Zum einen \textit{MethodReports}, die den Verlauf einer testspezifischen Methode speichert. Diese haben zusätzlich noch eine Kurzfassung des Verlaufs, eine Referenz auf die geworfene Exception und auf die ausgeführte Methode. Der Text eines \textit{MethodReports} ist abhängig von der geworfenen Exception:
+Alle Berichte implementieren dass \textit{Report}-Interface, welches definiert, dass Berichte einen Status und einen Text haben der eine Zusammenfassung des Testdurchlaufs darstellt, sowie einem festen Typ zugeordnet sind. Es gibt zwei unterschiedliche Arten von Berichten. Zum einen \textit{MethodReports}, die den Verlauf einer testspezifischen Methode speichert. Diese haben zusätzlich noch eine Kurzfassung des Verlaufs, eine Referenz auf die geworfene Exception und auf die ausgeführte Methode. Der Text eines \textit{MethodReports} ist abhängig von der geworfenen Exception:
 \begin{itemize}
 \item Keine Exception\\
 \textit{"The Foo-Method passed successfully."}
@@ -171,18 +171,45 @@ Alle Berichte implementieren dass \textit{Report}-Interface, welches definiert, 
 \end{itemize}
 Bei der Kurzfassung ist die Nachricht der geworfenen Exception nicht vorhanden. Die genaue Erzeugung der Texte sieht man in \autoref{code:MethodReport_InitializeTexts} \nameref{code:MethodReport_InitializeTexts} des Appendix.
 
-Die zweite Art von Berichten (\textit{ClassReport}) sammelt alle \textit{MethodReports} einer Testklasse. Als zusätzliche Informationen bietet sie die Anzahl der durchgeführten, fehlgeschlagenen und erfolgreichen Tests. Der Text besteht aus diesen Zusatzinformationen und der durch Leerzeilen getrennten Kurzfassungen aller enthaltenen \textit{MethodReports}.
+Die zweite Art von Berichten (\textit{ClassReport}) sammelt alle \textit{MethodReports} einer Testklasse. Als zusätzliche Informationen bietet sie die Anzahl der durchgeführten, fehlgeschlagenen und erfolgreichen Tests. Der Text besteht aus diesen Zusatzinformationen und der durch Leerzeilen getrennten Kurzfassungen aller enthaltenen \textit{MethodReports}. Der Status eines \textit{ClassReports} ist der schlechteste Status der enthaltenen Methoden-Berichte. Dieser wird mit Hilfe der \textit{IsWorseThan}-Methode des \textit{ReportStatus}  bestimmt.
 
 Der \textit{TestReporter} wiederum sammelt eine Menge von \textit{ClassReports}. Wie diese dann dem Anwender präsentiert werden, hängt von der konkreten Implementierung ab, welche im nächsten Abschnitt beschrieben wird.
 
 \section{Unity}
 \label{sec:Ergebnis_Unity}
 
-Präsentation
+Im Unity-spezifischen Teil von JUUT sind die Klassen enthalten, mit denen der Anwender arbeiten wird. Diese sind unterteilt in eine Bibliothek, die unter anderem
+\begin{wrapfigure}{r}{0.5\linewidth}
+\centering
+\includegraphics[width=0.95\linewidth]{images/Kapitel_Ergebnis/Unity}
+\caption[Unity-spezifische Klassen von JUUT]{Unity-spezifische Klassen von JUUT}
+\label{fig:Unity}
+\end{wrapfigure}
+einen \textit{TestReporter} für Unity enthält und in das Projekt eingebunden werden muss, sowie zwei Klassen, welche als Quelltext vorliegen müssen.
 
-Beispiel-Projekt
+\textit{UnityTestSuite} ist eine konkrete Implementierung von \textit{AbstractTestSuite} und verwendet als Reporter eine Instanz von \textit{UnityTestReporter}, um die Ergebnisse zu präsentieren. Deren Präsentation erfolgt wie bei UUnit oder SharpUnit über die Debug-Konsole von Unity, da es aus Zeitgründen nicht möglich war eine besser Darstellung (wie sie im Ausblick beschrieben wird) zu implementieren. Dabei wird zunächst die Anzahl der ausgeführten und fehlgeschlagenen Tests ausgegeben, gefolgt von einer Liste mit detaillierten Informationen der fehlgeschlagenen Tests. Diese enthalten den \textit{Text} des jeweiligen \textit{MethodReports} und den Stacktrace der geworfenen Exception. Die Präsentation der Testergebnisse sieht zum Beispiel wie folgt aus:
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\linewidth]{images/Kapitel_Ergebnis/JUUTTestergebnisse}
+\caption[Präsentation der Testergebnisse in Unity]{Präsentation der Testergebnisse in Unity}
+\label{fig:JUUTTestergebnisse}
+\end{figure}
 
-\section{Zusammenfassung}
+\textit{TestStarter} ist das Skript, welches für die Ausführung der Tests zuständig ist und an eine beliebiges \textit{GameObject} angehängt werden muss. Im Gegensatz zu dem \hyperref[code:SharpUnitTestRunner]{entsprechenden Skript} in SharpUnit ist es sehr schlank, da man nur die Session definieren und ausführen muss.\\
 
-Zeilen source code
-Tests Robustheit, Erweiterbarkeit, Usability
+\begin{lstlisting}[caption={[\textit{TestStarter}-Skript von JUUT]\textit{TestStarter}-Skript von JUUT}, label=code:TestStarter_JUUT]
+public class TestStarter : MonoBehaviour {
+
+	private UnityTestSuite Suite = new UnityTestSuite();
+	private Session Session = new Session();
+	
+	// Use this to set up the test suite
+	public void Start () {
+		Session.AddAll(typeof(TestSample));
+		Suite.Run(Session);
+	}
+	
+}
+\end{lstlisting}
+
+Wird die Klasse \textit{JUUTUnityMenu} im Pfad \textit{Assets/Editor/} eines Projekts eingebunden, wird wie bei UUnit ein Eintrag in der Menüleiste der Unity-SDK erzeugt, mit dem man alle im Projekt definierten Tests ausführen kann. Dabei wird der \textit{AssemblyScanner} zu Hilfe genommen, der aus einem Namensraum eine \textit{Session} erzeugen kann.

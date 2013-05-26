@@ -21,7 +21,7 @@
    stroke-dasharray="none"
    font-weight="normal"
    stroke-width="1"
-   height="597"
+   height="596"
    font-family="'Dialog'"
    font-style="normal"
    stroke-linejoin="miter"
@@ -56,9 +56,9 @@
      inkscape:window-height="480"
      id="namedview601"
      showgrid="false"
-     inkscape:zoom="0.39530988"
+     inkscape:zoom="0.39597315"
      inkscape:cx="262"
-     inkscape:cy="298.5"
+     inkscape:cy="298"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -354,7 +354,7 @@
          clipPathUnits="userSpaceOnUse"
          id="clipPath41">
         <path
-           d="M-100 -51 L200 -51 L200 102 L-100 102 L-100 -51 Z"
+           d="M-100 -50 L200 -50 L200 100 L-100 100 L-100 -50 Z"
            id="path129" />
       </clipPath>
       <clipPath
@@ -382,7 +382,7 @@
       <rect
          x="0"
          width="524"
-         height="597"
+         height="596"
          y="0"
          stroke="none"
          id="rect139" />
@@ -671,10 +671,10 @@
        font-size="11"
        transform="translate(320,422)"
        fill-opacity="1"
-       fill="rgb(210,210,255)"
+       fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
-       stroke="rgb(210,210,255)"
+       stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
        id="g197">
@@ -748,10 +748,10 @@
        font-size="11"
        transform="translate(420,232)"
        fill-opacity="1"
-       fill="rgb(210,210,255)"
+       fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
-       stroke="rgb(210,210,255)"
+       stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
        id="g213">
@@ -825,10 +825,10 @@
        font-size="11"
        transform="translate(320,372)"
        fill-opacity="1"
-       fill="rgb(210,210,255)"
+       fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
-       stroke="rgb(210,210,255)"
+       stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
        id="g229">
@@ -902,10 +902,10 @@
        font-size="11"
        transform="translate(410,372)"
        fill-opacity="1"
-       fill="rgb(210,210,255)"
+       fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
-       stroke="rgb(210,210,255)"
+       stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
        id="g245">
@@ -979,10 +979,10 @@
        font-size="11"
        transform="translate(320,302)"
        fill-opacity="1"
-       fill="rgb(210,210,255)"
+       fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
-       stroke="rgb(210,210,255)"
+       stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
        id="g261">
@@ -1056,10 +1056,10 @@
        font-size="11"
        transform="translate(410,302)"
        fill-opacity="1"
-       fill="rgb(210,210,255)"
+       fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
-       stroke="rgb(210,210,255)"
+       stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
        id="g277">
@@ -2050,21 +2050,21 @@
       <text
          x="23"
          xml:space="preserve"
-         y="15"
+         y="14"
          clip-path="url(#clipPath41)"
          stroke="none"
          id="text493">Verwendet</text>
       <text
          x="21"
          xml:space="preserve"
-         y="30"
+         y="29"
          clip-path="url(#clipPath41)"
          stroke="none"
          id="text495">Matcher für</text>
       <text
          x="23"
          xml:space="preserve"
-         y="45"
+         y="44"
          clip-path="url(#clipPath41)"
          stroke="none"
          id="text497">Assertions</text>

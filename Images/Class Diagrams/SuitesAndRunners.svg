@@ -33,7 +33,7 @@
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="SuitesAndRunners.svg">
   <metadata
-     id="metadata285">
+     id="metadata279">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -54,8 +54,9 @@
      inkscape:pageshadow="2"
      inkscape:window-width="640"
      inkscape:window-height="480"
-     id="namedview283"
+     id="namedview277"
      showgrid="false"
+     inkscape:snap-global="false"
      inkscape:zoom="0.5412844"
      inkscape:cx="256.5"
      inkscape:cy="218"
@@ -179,43 +180,29 @@
          clipPathUnits="userSpaceOnUse"
          id="clipPath16">
         <path
-           d="M-7 -7 L51 -7 L51 51 L-7 51 L-7 -7 Z"
+           d="M0 0 L104 0 L104 139 L0 139 L0 0 Z"
            id="path54" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath17">
         <path
-           d="M0 0 L40 0 L40 40 L0 40 L0 0 Z"
+           d="M0 0 L443 0 L443 424 L0 424 L0 0 Z"
            id="path57" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath18">
         <path
-           d="M0 0 L104 0 L104 139 L0 139 L0 0 Z"
+           d="M0 0 L196 0 L196 128 L0 128 L0 0 Z"
            id="path60" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath19">
         <path
-           d="M0 0 L443 0 L443 424 L0 424 L0 0 Z"
-           id="path63" />
-      </clipPath>
-      <clipPath
-         clipPathUnits="userSpaceOnUse"
-         id="clipPath20">
-        <path
-           d="M0 0 L196 0 L196 128 L0 128 L0 0 Z"
-           id="path66" />
-      </clipPath>
-      <clipPath
-         clipPathUnits="userSpaceOnUse"
-         id="clipPath21">
-        <path
            d="M-260 -100 L520 -100 L520 200 L-260 200 L-260 -100 Z"
-           id="path69" />
+           id="path63" />
       </clipPath>
     </defs>
     <g
@@ -224,14 +211,14 @@
        fill-opacity="1"
        stroke-opacity="1"
        stroke="white"
-       id="g71">
+       id="g65">
       <rect
          x="0"
          width="513"
          height="436"
          y="0"
          stroke="none"
-         id="rect73" />
+         id="rect67" />
     </g>
     <g
        font-size="11"
@@ -243,7 +230,7 @@
        stroke="rgb(192,255,192)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g75">
+       id="g69">
       <rect
          x="0"
          width="245"
@@ -251,7 +238,7 @@
          y="0"
          clip-path="url(#clipPath1)"
          stroke="none"
-         id="rect77" />
+         id="rect71" />
     </g>
     <g
        font-size="11"
@@ -266,7 +253,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g79">
+       id="g73">
       <rect
          fill="none"
          x="0"
@@ -274,7 +261,7 @@
          height="53"
          y="0"
          clip-path="url(#clipPath1)"
-         id="rect81" />
+         id="rect75" />
       <line
          y2="30"
          fill="none"
@@ -282,7 +269,7 @@
          clip-path="url(#clipPath1)"
          x2="245"
          y1="30"
-         id="line83" />
+         id="line77" />
     </g>
     <g
        font-size="11"
@@ -293,14 +280,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g85">
+       id="g79">
       <text
          x="2"
          xml:space="preserve"
          y="14"
          clip-path="url(#clipPath2)"
          stroke="none"
-         id="text87">+Run(session : TestClassSession) : ClassReport</text>
+         id="text81">+Run(session : TestClassSession) : ClassReport</text>
     </g>
     <g
        font-size="11"
@@ -311,14 +298,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g89">
+       id="g83">
       <text
          x="87"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath3)"
          stroke="none"
-         id="text91">&lt;&lt;Interface&gt;&gt;</text>
+         id="text85">&lt;&lt;Interface&gt;&gt;</text>
       <text
          x="90"
          xml:space="preserve"
@@ -326,7 +313,7 @@
          font-weight="bold"
          clip-path="url(#clipPath3)"
          stroke="none"
-         id="text93">TestRunner</text>
+         id="text87">TestRunner</text>
     </g>
     <g
        font-size="11"
@@ -338,7 +325,7 @@
        stroke="rgb(192,255,192)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g95">
+       id="g89">
       <rect
          x="0"
          width="487"
@@ -346,7 +333,7 @@
          y="0"
          clip-path="url(#clipPath4)"
          stroke="none"
-         id="rect97" />
+         id="rect91" />
     </g>
     <g
        font-size="11"
@@ -361,7 +348,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g99">
+       id="g93">
       <rect
          fill="none"
          x="0"
@@ -369,7 +356,7 @@
          height="128"
          y="0"
          clip-path="url(#clipPath4)"
-         id="rect101" />
+         id="rect95" />
       <line
          y2="15"
          fill="none"
@@ -377,7 +364,7 @@
          clip-path="url(#clipPath4)"
          x2="487"
          y1="15"
-         id="line103" />
+         id="line97" />
     </g>
     <g
        font-size="11"
@@ -388,14 +375,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g105">
+       id="g99">
       <text
          x="2"
          xml:space="preserve"
          y="14"
          clip-path="url(#clipPath5)"
          stroke="none"
-         id="text107">-RunClassSetUp(testClass : Type) : MethodReport</text>
+         id="text101">-RunClassSetUp(testClass : Type) : MethodReport</text>
     </g>
     <g
        font-size="11"
@@ -406,49 +393,49 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g109">
+       id="g103">
       <text
          x="2"
          xml:space="preserve"
          y="29"
          clip-path="url(#clipPath5)"
          stroke="none"
-         id="text111">-RunTestSetUp(instance : object, testClass : Type) : MethodReport</text>
+         id="text105">-RunTestSetUp(instance : object, testClass : Type) : MethodReport</text>
       <text
          x="2"
          xml:space="preserve"
          y="44"
          clip-path="url(#clipPath5)"
          stroke="none"
-         id="text113">-RunTest(instance : object, testMethod : MethodInfo) : MethodReport</text>
+         id="text107">-RunTest(instance : object, testMethod : MethodInfo) : MethodReport</text>
       <text
          x="2"
          xml:space="preserve"
          y="59"
          clip-path="url(#clipPath5)"
          stroke="none"
-         id="text115">-RunTestTearDown(instance : object, testClass : Type) : MethodReport</text>
+         id="text109">-RunTestTearDown(instance : object, testClass : Type) : MethodReport</text>
       <text
          x="2"
          xml:space="preserve"
          y="74"
          clip-path="url(#clipPath5)"
          stroke="none"
-         id="text117">-RunClassTearDown(testClass : Type) : MethodReport</text>
+         id="text111">-RunClassTearDown(testClass : Type) : MethodReport</text>
       <text
          x="2"
          xml:space="preserve"
          y="89"
          clip-path="url(#clipPath5)"
          stroke="none"
-         id="text119">-RunStaticOrganizeMethod(organizeMethod : MethodInfo) : MethodReport</text>
+         id="text113">-RunStaticOrganizeMethod(organizeMethod : MethodInfo) : MethodReport</text>
       <text
          x="2"
          xml:space="preserve"
          y="104"
          clip-path="url(#clipPath5)"
          stroke="none"
-         id="text121">-RunInstanceMethod(instance : object, method : MethodInfo, allwaysReport : bool) : MethodReport</text>
+         id="text115">-RunInstanceMethod(instance : object, method : MethodInfo, allwaysReport : bool) : MethodReport</text>
     </g>
     <g
        font-size="11"
@@ -460,14 +447,14 @@
        stroke="black"
        font-weight="bold"
        stroke-opacity="1"
-       id="g123">
+       id="g117">
       <text
          x="194"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath6)"
          stroke="none"
-         id="text125">SimpleTestRunner</text>
+         id="text119">SimpleTestRunner</text>
     </g>
     <g
        font-size="11"
@@ -479,7 +466,7 @@
        stroke="rgb(192,255,192)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g127">
+       id="g121">
       <rect
          x="0"
          width="187"
@@ -487,7 +474,7 @@
          y="0"
          clip-path="url(#clipPath7)"
          stroke="none"
-         id="rect129" />
+         id="rect123" />
     </g>
     <g
        font-size="11"
@@ -502,7 +489,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g131">
+       id="g125">
       <rect
          fill="none"
          x="0"
@@ -510,7 +497,7 @@
          height="53"
          y="0"
          clip-path="url(#clipPath7)"
-         id="rect133" />
+         id="rect127" />
       <line
          y2="30"
          fill="none"
@@ -518,7 +505,7 @@
          clip-path="url(#clipPath7)"
          x2="187"
          y1="30"
-         id="line135" />
+         id="line129" />
     </g>
     <g
        font-size="11"
@@ -529,14 +516,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g137">
+       id="g131">
       <text
          x="2"
          xml:space="preserve"
          y="14"
          clip-path="url(#clipPath8)"
          stroke="none"
-         id="text139">+Run(session : Session)</text>
+         id="text133">+Run(session : Session)</text>
     </g>
     <g
        font-size="11"
@@ -547,14 +534,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g141">
+       id="g135">
       <text
          x="58"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath9)"
          stroke="none"
-         id="text143">&lt;&lt;Interface&gt;&gt;</text>
+         id="text137">&lt;&lt;Interface&gt;&gt;</text>
       <text
          x="68"
          xml:space="preserve"
@@ -562,7 +549,7 @@
          font-weight="bold"
          clip-path="url(#clipPath9)"
          stroke="none"
-         id="text145">TestSuite</text>
+         id="text139">TestSuite</text>
     </g>
     <g
        font-size="11"
@@ -574,7 +561,7 @@
        stroke="rgb(192,255,192)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g147">
+       id="g141">
       <rect
          x="0"
          width="146"
@@ -582,7 +569,7 @@
          y="0"
          clip-path="url(#clipPath10)"
          stroke="none"
-         id="rect149" />
+         id="rect143" />
     </g>
     <g
        font-size="11"
@@ -597,7 +584,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g151">
+       id="g145">
       <rect
          fill="none"
          x="0"
@@ -605,7 +592,7 @@
          height="40"
          y="0"
          clip-path="url(#clipPath10)"
-         id="rect153" />
+         id="rect147" />
       <line
          y2="15"
          fill="none"
@@ -613,7 +600,7 @@
          clip-path="url(#clipPath10)"
          x2="146"
          y1="15"
-         id="line155" />
+         id="line149" />
     </g>
     <g
        font-size="11"
@@ -624,14 +611,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g157">
+       id="g151">
       <text
          x="2"
          xml:space="preserve"
          y="14"
          clip-path="url(#clipPath11)"
          stroke="none"
-         id="text159">+AbstractTestSuite(reporter)</text>
+         id="text153">+AbstractTestSuite(reporter)</text>
     </g>
     <g
        font-size="11"
@@ -644,14 +631,14 @@
        stroke="black"
        font-weight="bold"
        stroke-opacity="1"
-       id="g161">
+       id="g155">
       <text
          x="25"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath12)"
          stroke="none"
-         id="text163">AbstractTestSuite</text>
+         id="text157">AbstractTestSuite</text>
     </g>
     <g
        font-size="11"
@@ -663,7 +650,7 @@
        stroke="rgb(192,255,192)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g165">
+       id="g159">
       <rect
          x="0"
          width="110"
@@ -671,7 +658,7 @@
          y="0"
          clip-path="url(#clipPath13)"
          stroke="none"
-         id="rect167" />
+         id="rect161" />
     </g>
     <g
        font-size="11"
@@ -686,7 +673,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g169">
+       id="g163">
       <rect
          fill="none"
          x="0"
@@ -694,7 +681,7 @@
          height="70"
          y="0"
          clip-path="url(#clipPath13)"
-         id="rect171" />
+         id="rect165" />
       <line
          y2="30"
          fill="none"
@@ -702,7 +689,7 @@
          clip-path="url(#clipPath13)"
          x2="110"
          y1="30"
-         id="line173" />
+         id="line167" />
     </g>
     <g
        font-size="11"
@@ -713,14 +700,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g175">
+       id="g169">
       <text
          x="2"
          xml:space="preserve"
          y="14"
          clip-path="url(#clipPath14)"
          stroke="none"
-         id="text177">+AddReport(report)</text>
+         id="text171">+AddReport(report)</text>
     </g>
     <g
        font-size="11"
@@ -731,14 +718,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g179">
+       id="g173">
       <text
          x="2"
          xml:space="preserve"
          y="29"
          clip-path="url(#clipPath14)"
          stroke="none"
-         id="text181">+PresentReports()</text>
+         id="text175">+PresentReports()</text>
     </g>
     <g
        font-size="11"
@@ -749,14 +736,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g183">
+       id="g177">
       <text
          x="20"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath15)"
          stroke="none"
-         id="text185">&lt;&lt;Interface&gt;&gt;</text>
+         id="text179">&lt;&lt;Interface&gt;&gt;</text>
       <text
          x="20"
          xml:space="preserve"
@@ -764,12 +751,12 @@
          font-weight="bold"
          clip-path="url(#clipPath15)"
          stroke="none"
-         id="text187">TestReporter</text>
+         id="text181">TestReporter</text>
     </g>
     <g
        font-size="11"
        stroke-linecap="butt"
-       transform="translate(82,6)"
+       transform="translate(92,6)"
        stroke-dashoffset="1"
        fill-opacity="1"
        fill="black"
@@ -779,67 +766,67 @@
        stroke-dasharray="5"
        stroke="black"
        stroke-opacity="1"
-       id="g189">
+       id="g183">
       <line
          y2="85"
          fill="none"
          x1="50"
-         clip-path="url(#clipPath18)"
+         clip-path="url(#clipPath16)"
          x2="50"
          y1="50"
-         id="line191" />
+         id="line185" />
     </g>
     <g
        font-size="11"
        stroke-linecap="butt"
-       transform="translate(82,6)"
+       transform="translate(92,6)"
        fill-opacity="1"
        fill="rgb(122,207,245)"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
        stroke-linejoin="round"
        stroke="rgb(122,207,245)"
+       stroke-opacity="1"
+       id="g187">
+      <polygon
+         points=" 50 50 44 62 56 62"
+         clip-path="url(#clipPath16)"
+         stroke="none"
+         id="polygon189" />
+      <polygon
+         fill="none"
+         clip-path="url(#clipPath16)"
+         points=" 50 50 44 62 56 62"
+         stroke="black"
+         id="polygon191" />
+    </g>
+    <g
+       font-size="11"
+       stroke-linecap="butt"
+       transform="translate(372,246)"
+       stroke-dashoffset="1"
+       fill-opacity="1"
+       fill="black"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke-linejoin="round"
+       stroke-dasharray="5"
+       stroke="black"
        stroke-opacity="1"
        id="g193">
-      <polygon
-         points=" 50 50 44 62 56 62"
-         clip-path="url(#clipPath18)"
-         stroke="none"
-         id="polygon195" />
-      <polygon
-         fill="none"
-         clip-path="url(#clipPath18)"
-         points=" 50 50 44 62 56 62"
-         stroke="black"
-         id="polygon197" />
-    </g>
-    <g
-       font-size="11"
-       stroke-linecap="butt"
-       transform="translate(362,246)"
-       stroke-dashoffset="1"
-       fill-opacity="1"
-       fill="black"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke-linejoin="round"
-       stroke-dasharray="5"
-       stroke="black"
-       stroke-opacity="1"
-       id="g199">
       <line
          y2="85"
          fill="none"
          x1="50"
-         clip-path="url(#clipPath18)"
+         clip-path="url(#clipPath16)"
          x2="50"
          y1="50"
-         id="line201" />
+         id="line195" />
     </g>
     <g
        font-size="11"
        stroke-linecap="butt"
-       transform="translate(362,246)"
+       transform="translate(372,246)"
        fill-opacity="1"
        fill="rgb(122,207,245)"
        text-rendering="geometricPrecision"
@@ -847,18 +834,18 @@
        stroke-linejoin="round"
        stroke="rgb(122,207,245)"
        stroke-opacity="1"
-       id="g203">
+       id="g197">
       <polygon
          points=" 50 50 44 62 56 62"
-         clip-path="url(#clipPath18)"
+         clip-path="url(#clipPath16)"
          stroke="none"
-         id="polygon205" />
+         id="polygon199" />
       <polygon
          fill="none"
-         clip-path="url(#clipPath18)"
+         clip-path="url(#clipPath16)"
          points=" 50 50 44 62 56 62"
          stroke="black"
-         id="polygon207" />
+         id="polygon201" />
     </g>
     <g
        font-size="11"
@@ -873,12 +860,12 @@
        stroke-dasharray="5"
        stroke="black"
        stroke-opacity="1"
-       id="g209">
+       id="g203">
       <path
          fill="none"
          d="M389 370 L57 370 C57 370 50 370 50 363 M50 363 L50 57 C50 57 50 50 57 50 M57 50 L69 50"
-         clip-path="url(#clipPath19)"
-         id="path211" />
+         clip-path="url(#clipPath17)"
+         id="path205" />
     </g>
     <g
        font-size="11"
@@ -891,28 +878,28 @@
        stroke-linejoin="round"
        stroke="black"
        stroke-opacity="1"
-       id="g213">
+       id="g207">
       <path
          fill="none"
          d="M142 50 L142 67 C142 67 142 74 135 74 M135 74 L50 74"
-         clip-path="url(#clipPath20)"
-         id="path215" />
+         clip-path="url(#clipPath18)"
+         id="path209" />
       <line
          y2="80"
          fill="none"
          x1="50"
-         clip-path="url(#clipPath20)"
+         clip-path="url(#clipPath18)"
          x2="62"
          y1="74"
-         id="line217" />
+         id="line211" />
       <line
          y2="68"
          fill="none"
          x1="50"
-         clip-path="url(#clipPath20)"
+         clip-path="url(#clipPath18)"
          x2="62"
          y1="74"
-         id="line219" />
+         id="line213" />
     </g>
     <g
        font-size="11"
@@ -923,42 +910,42 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g221">
+       id="g215">
       <text
          x="21"
          xml:space="preserve"
          y="24"
-         clip-path="url(#clipPath21)"
+         clip-path="url(#clipPath19)"
          stroke="none"
-         id="text223">Die TestSuite verwendet TestRunner um die</text>
+         id="text217">Die TestSuite verwendet TestRunner um die</text>
       <text
          x="16"
          xml:space="preserve"
          y="39"
-         clip-path="url(#clipPath21)"
+         clip-path="url(#clipPath19)"
          stroke="none"
-         id="text225">TestClassSessions, die in der auszuführenden</text>
+         id="text219">TestClassSessions, die in der auszuführenden</text>
       <text
          x="26"
          xml:space="preserve"
          y="54"
-         clip-path="url(#clipPath21)"
+         clip-path="url(#clipPath19)"
          stroke="none"
-         id="text227">Session enthalten sind durchzuführen. Der</text>
+         id="text221">Session enthalten sind durchzuführen. Der</text>
       <text
          x="17"
          xml:space="preserve"
          y="69"
-         clip-path="url(#clipPath21)"
+         clip-path="url(#clipPath19)"
          stroke="none"
-         id="text229">erhaltene ClassReport wird dem TestReporter</text>
+         id="text223">erhaltene ClassReport wird dem TestReporter</text>
       <text
          x="100"
          xml:space="preserve"
          y="84"
-         clip-path="url(#clipPath21)"
+         clip-path="url(#clipPath19)"
          stroke="none"
-         id="text231">hinzugefügt.</text>
+         id="text225">hinzugefügt.</text>
     </g>
   </g>
 </svg>

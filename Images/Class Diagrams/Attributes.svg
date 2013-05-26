@@ -21,7 +21,7 @@
    stroke-dasharray="none"
    font-weight="normal"
    stroke-width="1"
-   height="546"
+   height="556"
    font-family="'Dialog'"
    font-style="normal"
    stroke-linejoin="miter"
@@ -33,7 +33,7 @@
    inkscape:version="0.48.2 r9819"
    sodipodi:docname="Attributes.svg">
   <metadata
-     id="metadata462">
+     id="metadata478">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -54,11 +54,11 @@
      inkscape:pageshadow="2"
      inkscape:window-width="640"
      inkscape:window-height="480"
-     id="namedview460"
+     id="namedview476"
      showgrid="false"
-     inkscape:zoom="0.43223443"
+     inkscape:zoom="0.42446043"
      inkscape:cx="267"
-     inkscape:cy="273"
+     inkscape:cy="278"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
@@ -116,35 +116,35 @@
          clipPathUnits="userSpaceOnUse"
          id="clipPath7">
         <path
-           d="M-7 -7 L229 -7 L229 64 L-7 64 L-7 -7 Z"
+           d="M-7 -7 L491 -7 L491 231 L-7 231 L-7 -7 Z"
            id="path27" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath8">
         <path
-           d="M0 0 L0 23 L218 23 L218 0 Z"
+           d="M0 0 L480 0 L480 15 L0 15 L0 0 Z"
            id="path30" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath9">
         <path
-           d="M0 0 L218 0 L218 30 L0 30 L0 0 Z"
+           d="M-7 -7 L229 -7 L229 64 L-7 64 L-7 -7 Z"
            id="path33" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath10">
         <path
-           d="M-7 -7 L481 -7 L481 221 L-7 221 L-7 -7 Z"
+           d="M0 0 L0 23 L218 23 L218 0 Z"
            id="path36" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath11">
         <path
-           d="M0 0 L470 0 L470 15 L0 15 L0 0 Z"
+           d="M0 0 L218 0 L218 30 L0 30 L0 0 Z"
            id="path39" />
       </clipPath>
       <clipPath
@@ -256,57 +256,85 @@
          clipPathUnits="userSpaceOnUse"
          id="clipPath27">
         <path
-           d="M0 0 L169 0 L169 171 L0 171 L0 0 Z"
+           d="M-7 -7 L321 -7 L321 61 L-7 61 L-7 -7 Z"
            id="path87" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath28">
         <path
-           d="M0 0 L234 0 L234 170 L0 170 L0 0 Z"
+           d="M0 0 L0 20 L310 20 L310 0 Z"
            id="path90" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath29">
         <path
-           d="M0 0 L104 0 L104 152 L0 152 L0 0 Z"
+           d="M0 0 L310 0 L310 30 L0 30 L0 0 Z"
            id="path93" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath30">
         <path
-           d="M0 0 L254 0 L254 262 L0 262 L0 0 Z"
+           d="M0 0 L169 0 L169 171 L0 171 L0 0 Z"
            id="path96" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath31">
         <path
-           d="M0 0 L259 0 L259 332 L0 332 L0 0 Z"
+           d="M0 0 L234 0 L234 170 L0 170 L0 0 Z"
            id="path99" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath32">
         <path
-           d="M0 0 L274 0 L274 262 L0 262 L0 0 Z"
+           d="M0 0 L104 0 L104 152 L0 152 L0 0 Z"
            id="path102" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath33">
         <path
-           d="M0 0 L274 0 L274 332 L0 332 L0 0 Z"
+           d="M0 0 L254 0 L254 262 L0 262 L0 0 Z"
            id="path105" />
       </clipPath>
       <clipPath
          clipPathUnits="userSpaceOnUse"
          id="clipPath34">
         <path
-           d="M0 0 L174 0 L174 279 L0 279 L0 0 Z"
+           d="M0 0 L259 0 L259 332 L0 332 L0 0 Z"
            id="path108" />
+      </clipPath>
+      <clipPath
+         clipPathUnits="userSpaceOnUse"
+         id="clipPath35">
+        <path
+           d="M0 0 L284 0 L284 262 L0 262 L0 0 Z"
+           id="path111" />
+      </clipPath>
+      <clipPath
+         clipPathUnits="userSpaceOnUse"
+         id="clipPath36">
+        <path
+           d="M0 0 L284 0 L284 332 L0 332 L0 0 Z"
+           id="path114" />
+      </clipPath>
+      <clipPath
+         clipPathUnits="userSpaceOnUse"
+         id="clipPath37">
+        <path
+           d="M0 0 L174 0 L174 229 L0 229 L0 0 Z"
+           id="path117" />
+      </clipPath>
+      <clipPath
+         clipPathUnits="userSpaceOnUse"
+         id="clipPath38">
+        <path
+           d="M0 0 L174 0 L174 279 L0 279 L0 0 Z"
+           id="path120" />
       </clipPath>
     </defs>
     <g
@@ -315,14 +343,14 @@
        fill-opacity="1"
        stroke-opacity="1"
        stroke="white"
-       id="g110">
+       id="g122">
       <rect
          x="0"
          width="534"
-         height="546"
+         height="556"
          y="0"
          stroke="none"
-         id="rect112" />
+         id="rect124" />
     </g>
     <g
        font-size="11"
@@ -334,7 +362,7 @@
        stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g114">
+       id="g126">
       <rect
          x="0"
          width="372"
@@ -342,7 +370,7 @@
          y="0"
          clip-path="url(#clipPath1)"
          stroke="none"
-         id="rect116" />
+         id="rect128" />
     </g>
     <g
        font-size="11"
@@ -357,7 +385,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g118">
+       id="g130">
       <rect
          fill="none"
          x="0"
@@ -365,7 +393,7 @@
          height="102"
          y="0"
          clip-path="url(#clipPath1)"
-         id="rect120" />
+         id="rect132" />
       <line
          y2="30"
          fill="none"
@@ -373,64 +401,6 @@
          clip-path="url(#clipPath1)"
          x2="372"
          y1="30"
-         id="line122" />
-    </g>
-    <g
-       font-size="11"
-       transform="matrix(1,0,0,1,122,32)"
-       fill-opacity="1"
-       fill="black"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke="black"
-       stroke-opacity="1"
-       id="g124">
-      <text
-         x="2"
-         xml:space="preserve"
-         y="14"
-         clip-path="url(#clipPath2)"
-         stroke="none"
-         id="text126">+Name : string</text>
-    </g>
-    <g
-       font-size="11"
-       transform="matrix(1,0,0,1,122,32)"
-       fill-opacity="1"
-       fill="black"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke="black"
-       stroke-opacity="1"
-       id="g128">
-      <text
-         x="2"
-         xml:space="preserve"
-         y="29"
-         clip-path="url(#clipPath2)"
-         stroke="none"
-         id="text130">+IsSetUpOrTearDown : bool</text>
-    </g>
-    <g
-       font-size="11"
-       stroke-linecap="butt"
-       transform="matrix(1,0,0,1,122,32)"
-       fill-opacity="1"
-       fill="rgb(0,0,192)"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke-linejoin="bevel"
-       stroke="rgb(0,0,192)"
-       stroke-opacity="1"
-       stroke-miterlimit="0"
-       id="g132">
-      <line
-         y2="34"
-         fill="none"
-         x1="0"
-         clip-path="url(#clipPath2)"
-         x2="372"
-         y1="34"
          id="line134" />
     </g>
     <g
@@ -446,10 +416,68 @@
       <text
          x="2"
          xml:space="preserve"
+         y="14"
+         clip-path="url(#clipPath2)"
+         stroke="none"
+         id="text138">+Name : string</text>
+    </g>
+    <g
+       font-size="11"
+       transform="matrix(1,0,0,1,122,32)"
+       fill-opacity="1"
+       fill="black"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke="black"
+       stroke-opacity="1"
+       id="g140">
+      <text
+         x="2"
+         xml:space="preserve"
+         y="29"
+         clip-path="url(#clipPath2)"
+         stroke="none"
+         id="text142">+IsSetUpOrTearDown : bool</text>
+    </g>
+    <g
+       font-size="11"
+       stroke-linecap="butt"
+       transform="matrix(1,0,0,1,122,32)"
+       fill-opacity="1"
+       fill="rgb(0,0,192)"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke-linejoin="bevel"
+       stroke="rgb(0,0,192)"
+       stroke-opacity="1"
+       stroke-miterlimit="0"
+       id="g144">
+      <line
+         y2="34"
+         fill="none"
+         x1="0"
+         clip-path="url(#clipPath2)"
+         x2="372"
+         y1="34"
+         id="line146" />
+    </g>
+    <g
+       font-size="11"
+       transform="matrix(1,0,0,1,122,32)"
+       fill-opacity="1"
+       fill="black"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke="black"
+       stroke-opacity="1"
+       id="g148">
+      <text
+         x="2"
+         xml:space="preserve"
          y="48"
          clip-path="url(#clipPath2)"
          stroke="none"
-         id="text138">+IsMemberValidFor(attribute : Type, memberToCheck : MemberInfo) : bool</text>
+         id="text150">+IsMemberValidFor(attribute : Type, memberToCheck : MemberInfo) : bool</text>
       <line
          y2="50"
          fill="none"
@@ -457,7 +485,7 @@
          clip-path="url(#clipPath2)"
          x2="354"
          y1="50"
-         id="line140" />
+         id="line152" />
       <text
          font-style="italic"
          x="2"
@@ -465,7 +493,7 @@
          y="63"
          clip-path="url(#clipPath2)"
          stroke="none"
-         id="text142">#Validate(member : MemberInfo) : bool</text>
+         id="text154">#Validate(member : MemberInfo) : bool</text>
     </g>
     <g
        font-size="11"
@@ -476,14 +504,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g144">
+       id="g156">
       <text
          x="152"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath3)"
          stroke="none"
-         id="text146">&lt;&lt;Attribute&gt;&gt;</text>
+         id="text158">&lt;&lt;Attribute&gt;&gt;</text>
       <text
          x="148"
          y="27"
@@ -492,7 +520,7 @@
          stroke="none"
          font-weight="bold"
          xml:space="preserve"
-         id="text148">JUUTAttribute</text>
+         id="text160">JUUTAttribute</text>
     </g>
     <g
        font-size="11"
@@ -504,7 +532,7 @@
        stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g150">
+       id="g162">
       <rect
          x="0"
          width="130"
@@ -512,7 +540,7 @@
          y="0"
          clip-path="url(#clipPath4)"
          stroke="none"
-         id="rect152" />
+         id="rect164" />
     </g>
     <g
        font-size="11"
@@ -527,7 +555,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g154">
+       id="g166">
       <rect
          fill="none"
          x="0"
@@ -535,7 +563,7 @@
          height="40"
          y="0"
          clip-path="url(#clipPath4)"
-         id="rect156" />
+         id="rect168" />
       <line
          y2="30"
          fill="none"
@@ -543,7 +571,7 @@
          clip-path="url(#clipPath4)"
          x2="130"
          y1="30"
-         id="line158" />
+         id="line170" />
     </g>
     <g
        font-size="11"
@@ -554,14 +582,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g160">
+       id="g172">
       <text
          x="31"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath6)"
          stroke="none"
-         id="text162">&lt;&lt;Attribute&gt;&gt;</text>
+         id="text174">&lt;&lt;Attribute&gt;&gt;</text>
       <text
          x="8"
          y="27"
@@ -570,121 +598,7 @@
          stroke="none"
          font-weight="bold"
          xml:space="preserve"
-         id="text164">JUUTMethodAttribute</text>
-    </g>
-    <g
-       font-size="11"
-       transform="translate(312,172)"
-       fill-opacity="1"
-       fill="rgb(192,192,255)"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke="rgb(192,192,255)"
-       font-weight="bold"
-       stroke-opacity="1"
-       id="g166">
-      <rect
-         x="0"
-         width="218"
-         height="53"
-         y="0"
-         clip-path="url(#clipPath7)"
-         stroke="none"
-         id="rect168" />
-    </g>
-    <g
-       font-size="11"
-       stroke-linecap="butt"
-       transform="translate(312,172)"
-       fill-opacity="1"
-       fill="rgb(0,0,192)"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke-linejoin="round"
-       stroke="rgb(0,0,192)"
-       font-weight="bold"
-       stroke-opacity="1"
-       stroke-miterlimit="0"
-       id="g170">
-      <rect
-         fill="none"
-         x="0"
-         width="218"
-         height="53"
-         y="0"
-         clip-path="url(#clipPath7)"
-         id="rect172" />
-      <line
-         y2="30"
-         fill="none"
-         x1="0"
-         clip-path="url(#clipPath7)"
-         x2="218"
-         y1="30"
-         id="line174" />
-    </g>
-    <g
-       font-size="11"
-       transform="matrix(1,0,0,1,312,202)"
-       fill-opacity="1"
-       fill="black"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke="black"
-       stroke-opacity="1"
-       id="g176">
-      <text
-         x="2"
-         xml:space="preserve"
-         y="14"
-         clip-path="url(#clipPath8)"
-         stroke="none"
-         id="text178">+CreateRunner(target : Type) : TestRunner</text>
-    </g>
-    <g
-       font-size="11"
-       transform="matrix(1,0,0,1,312,202)"
-       fill-opacity="1"
-       fill="black"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke="black"
-       stroke-opacity="1"
-       id="g180">
-      <line
-         y2="16"
-         fill="none"
-         x1="2"
-         clip-path="url(#clipPath8)"
-         x2="209"
-         y1="16"
-         id="line182" />
-    </g>
-    <g
-       font-size="11"
-       transform="translate(312,172)"
-       fill-opacity="1"
-       fill="black"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke="black"
-       stroke-opacity="1"
-       id="g184">
-      <text
-         x="75"
-         xml:space="preserve"
-         y="12"
-         clip-path="url(#clipPath9)"
-         stroke="none"
-         id="text186">&lt;&lt;Attribute&gt;&gt;</text>
-      <text
-         x="45"
-         xml:space="preserve"
-         y="27"
-         font-weight="bold"
-         clip-path="url(#clipPath9)"
-         stroke="none"
-         id="text188">JUUTTestClassAttribute</text>
+         id="text176">JUUTMethodAttribute</text>
     </g>
     <g
        font-size="11"
@@ -695,23 +609,23 @@
        font-family="sans-serif"
        stroke="rgb(210,210,255)"
        stroke-opacity="1"
-       id="g190">
+       id="g178">
       <rect
          x="0"
-         width="93"
+         width="95"
          height="20"
          y="0"
-         clip-path="url(#clipPath10)"
+         clip-path="url(#clipPath7)"
          stroke="none"
-         id="rect192" />
+         id="rect180" />
       <rect
          x="0"
-         width="469"
-         height="189"
+         width="479"
+         height="199"
          y="20"
-         clip-path="url(#clipPath10)"
+         clip-path="url(#clipPath7)"
          stroke="none"
-         id="rect194" />
+         id="rect182" />
     </g>
     <g
        font-size="11"
@@ -725,12 +639,12 @@
        stroke="navy"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g196">
+       id="g184">
       <path
          fill="none"
-         d="M0 20 L469 20 L469 209 L0 209 L0 0 L93 0 L93 20"
-         clip-path="url(#clipPath10)"
-         id="path198" />
+         d="M0 20 L479 20 L479 219 L0 219 L0 0 L95 0 L95 20"
+         clip-path="url(#clipPath7)"
+         id="path186" />
     </g>
     <g
        font-size="11"
@@ -741,14 +655,128 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g200">
+       id="g188">
       <text
-         x="214"
+         x="219"
+         xml:space="preserve"
+         y="12"
+         clip-path="url(#clipPath8)"
+         stroke="none"
+         id="text190">Methods</text>
+    </g>
+    <g
+       font-size="11"
+       transform="translate(312,172)"
+       fill-opacity="1"
+       fill="rgb(192,192,255)"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke="rgb(192,192,255)"
+       font-weight="bold"
+       stroke-opacity="1"
+       id="g192">
+      <rect
+         x="0"
+         width="218"
+         height="53"
+         y="0"
+         clip-path="url(#clipPath9)"
+         stroke="none"
+         id="rect194" />
+    </g>
+    <g
+       font-size="11"
+       stroke-linecap="butt"
+       transform="translate(312,172)"
+       fill-opacity="1"
+       fill="rgb(0,0,192)"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke-linejoin="round"
+       stroke="rgb(0,0,192)"
+       font-weight="bold"
+       stroke-opacity="1"
+       stroke-miterlimit="0"
+       id="g196">
+      <rect
+         fill="none"
+         x="0"
+         width="218"
+         height="53"
+         y="0"
+         clip-path="url(#clipPath9)"
+         id="rect198" />
+      <line
+         y2="30"
+         fill="none"
+         x1="0"
+         clip-path="url(#clipPath9)"
+         x2="218"
+         y1="30"
+         id="line200" />
+    </g>
+    <g
+       font-size="11"
+       transform="matrix(1,0,0,1,312,202)"
+       fill-opacity="1"
+       fill="black"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke="black"
+       stroke-opacity="1"
+       id="g202">
+      <text
+         x="2"
+         xml:space="preserve"
+         y="14"
+         clip-path="url(#clipPath10)"
+         stroke="none"
+         id="text204">+CreateRunner(target : Type) : TestRunner</text>
+    </g>
+    <g
+       font-size="11"
+       transform="matrix(1,0,0,1,312,202)"
+       fill-opacity="1"
+       fill="black"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke="black"
+       stroke-opacity="1"
+       id="g206">
+      <line
+         y2="16"
+         fill="none"
+         x1="2"
+         clip-path="url(#clipPath10)"
+         x2="209"
+         y1="16"
+         id="line208" />
+    </g>
+    <g
+       font-size="11"
+       transform="translate(312,172)"
+       fill-opacity="1"
+       fill="black"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke="black"
+       stroke-opacity="1"
+       id="g210">
+      <text
+         x="75"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath11)"
          stroke="none"
-         id="text202">Methods</text>
+         id="text212">&lt;&lt;Attribute&gt;&gt;</text>
+      <text
+         x="45"
+         xml:space="preserve"
+         y="27"
+         font-weight="bold"
+         clip-path="url(#clipPath11)"
+         stroke="none"
+         id="text214">JUUTTestClassAttribute</text>
     </g>
     <g
        font-size="11"
@@ -760,7 +788,7 @@
        stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g204">
+       id="g216">
       <rect
          x="0"
          width="150"
@@ -768,7 +796,7 @@
          y="0"
          clip-path="url(#clipPath12)"
          stroke="none"
-         id="rect206" />
+         id="rect218" />
     </g>
     <g
        font-size="11"
@@ -783,7 +811,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g208">
+       id="g220">
       <rect
          fill="none"
          x="0"
@@ -791,7 +819,7 @@
          height="53"
          y="0"
          clip-path="url(#clipPath12)"
-         id="rect210" />
+         id="rect222" />
       <line
          y2="30"
          fill="none"
@@ -799,7 +827,7 @@
          clip-path="url(#clipPath12)"
          x2="150"
          y1="30"
-         id="line212" />
+         id="line224" />
     </g>
     <g
        font-size="11"
@@ -810,14 +838,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g214">
+       id="g226">
       <text
          x="2"
          xml:space="preserve"
          y="14"
          clip-path="url(#clipPath13)"
          stroke="none"
-         id="text216">-IsTestReadyToRun : bool</text>
+         id="text228">+IsTestReadyToRun : bool</text>
     </g>
     <g
        font-size="11"
@@ -828,14 +856,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g218">
+       id="g230">
       <text
          x="41"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath14)"
          stroke="none"
-         id="text220">&lt;&lt;Attribute&gt;&gt;</text>
+         id="text232">&lt;&lt;Attribute&gt;&gt;</text>
       <text
          x="6"
          y="27"
@@ -844,7 +872,7 @@
          stroke="none"
          font-weight="bold"
          xml:space="preserve"
-         id="text222">JUUTTestMethodAttribute</text>
+         id="text234">JUUTTestMethodAttribute</text>
     </g>
     <g
        font-size="11"
@@ -856,7 +884,7 @@
        stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g224">
+       id="g236">
       <rect
          x="0"
          width="120"
@@ -864,7 +892,7 @@
          y="0"
          clip-path="url(#clipPath15)"
          stroke="none"
-         id="rect226" />
+         id="rect238" />
     </g>
     <g
        font-size="11"
@@ -879,7 +907,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g228">
+       id="g240">
       <rect
          fill="none"
          x="0"
@@ -887,7 +915,7 @@
          height="40"
          y="0"
          clip-path="url(#clipPath15)"
-         id="rect230" />
+         id="rect242" />
       <line
          y2="30"
          fill="none"
@@ -895,7 +923,7 @@
          clip-path="url(#clipPath15)"
          x2="120"
          y1="30"
-         id="line232" />
+         id="line244" />
     </g>
     <g
        font-size="11"
@@ -906,14 +934,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g234">
+       id="g246">
       <text
          x="26"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath17)"
          stroke="none"
-         id="text236">&lt;&lt;Attribute&gt;&gt;</text>
+         id="text248">&lt;&lt;Attribute&gt;&gt;</text>
       <text
          x="6"
          xml:space="preserve"
@@ -921,7 +949,7 @@
          font-weight="bold"
          clip-path="url(#clipPath17)"
          stroke="none"
-         id="text238">ClassSetUpAttribute</text>
+         id="text250">ClassSetUpAttribute</text>
     </g>
     <g
        font-size="11"
@@ -933,7 +961,7 @@
        stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g240">
+       id="g252">
       <rect
          x="0"
          width="110"
@@ -941,7 +969,7 @@
          y="0"
          clip-path="url(#clipPath18)"
          stroke="none"
-         id="rect242" />
+         id="rect254" />
     </g>
     <g
        font-size="11"
@@ -956,7 +984,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g244">
+       id="g256">
       <rect
          fill="none"
          x="0"
@@ -964,7 +992,7 @@
          height="40"
          y="0"
          clip-path="url(#clipPath18)"
-         id="rect246" />
+         id="rect258" />
       <line
          y2="30"
          fill="none"
@@ -972,7 +1000,7 @@
          clip-path="url(#clipPath18)"
          x2="110"
          y1="30"
-         id="line248" />
+         id="line260" />
     </g>
     <g
        font-size="11"
@@ -983,14 +1011,14 @@
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g250">
+       id="g262">
       <text
          x="21"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath20)"
          stroke="none"
-         id="text252">&lt;&lt;Attribute&gt;&gt;</text>
+         id="text264">&lt;&lt;Attribute&gt;&gt;</text>
       <text
          x="4"
          xml:space="preserve"
@@ -998,11 +1026,11 @@
          font-weight="bold"
          clip-path="url(#clipPath20)"
          stroke="none"
-         id="text254">TestSetUpAttribute</text>
+         id="text266">TestSetUpAttribute</text>
     </g>
     <g
        font-size="11"
-       transform="translate(322,372)"
+       transform="translate(332,372)"
        fill-opacity="1"
        fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
@@ -1010,7 +1038,7 @@
        stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g256">
+       id="g268">
       <rect
          x="0"
          width="140"
@@ -1018,12 +1046,12 @@
          y="0"
          clip-path="url(#clipPath21)"
          stroke="none"
-         id="rect258" />
+         id="rect270" />
     </g>
     <g
        font-size="11"
        stroke-linecap="butt"
-       transform="translate(322,372)"
+       transform="translate(332,372)"
        fill-opacity="1"
        fill="rgb(0,0,192)"
        text-rendering="geometricPrecision"
@@ -1033,7 +1061,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g260">
+       id="g272">
       <rect
          fill="none"
          x="0"
@@ -1041,7 +1069,7 @@
          height="40"
          y="0"
          clip-path="url(#clipPath21)"
-         id="rect262" />
+         id="rect274" />
       <line
          y2="30"
          fill="none"
@@ -1049,25 +1077,25 @@
          clip-path="url(#clipPath21)"
          x2="140"
          y1="30"
-         id="line264" />
+         id="line276" />
     </g>
     <g
        font-size="11"
-       transform="translate(322,372)"
+       transform="translate(332,372)"
        fill-opacity="1"
        fill="black"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g266">
+       id="g278">
       <text
          x="36"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath23)"
          stroke="none"
-         id="text268">&lt;&lt;Attribute&gt;&gt;</text>
+         id="text280">&lt;&lt;Attribute&gt;&gt;</text>
       <text
          x="5"
          xml:space="preserve"
@@ -1075,11 +1103,11 @@
          font-weight="bold"
          clip-path="url(#clipPath23)"
          stroke="none"
-         id="text270">ClassTearDownAttribute</text>
+         id="text282">ClassTearDownAttribute</text>
     </g>
     <g
        font-size="11"
-       transform="translate(322,442)"
+       transform="translate(332,442)"
        fill-opacity="1"
        fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
@@ -1087,7 +1115,7 @@
        stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g272">
+       id="g284">
       <rect
          x="0"
          width="140"
@@ -1095,12 +1123,12 @@
          y="0"
          clip-path="url(#clipPath21)"
          stroke="none"
-         id="rect274" />
+         id="rect286" />
     </g>
     <g
        font-size="11"
        stroke-linecap="butt"
-       transform="translate(322,442)"
+       transform="translate(332,442)"
        fill-opacity="1"
        fill="rgb(0,0,192)"
        text-rendering="geometricPrecision"
@@ -1110,7 +1138,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g276">
+       id="g288">
       <rect
          fill="none"
          x="0"
@@ -1118,7 +1146,7 @@
          height="40"
          y="0"
          clip-path="url(#clipPath21)"
-         id="rect278" />
+         id="rect290" />
       <line
          y2="30"
          fill="none"
@@ -1126,25 +1154,25 @@
          clip-path="url(#clipPath21)"
          x2="140"
          y1="30"
-         id="line280" />
+         id="line292" />
     </g>
     <g
        font-size="11"
-       transform="translate(322,442)"
+       transform="translate(332,442)"
        fill-opacity="1"
        fill="black"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g282">
+       id="g294">
       <text
          x="36"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath23)"
          stroke="none"
-         id="text284">&lt;&lt;Attribute&gt;&gt;</text>
+         id="text296">&lt;&lt;Attribute&gt;&gt;</text>
       <text
          x="9"
          xml:space="preserve"
@@ -1152,11 +1180,11 @@
          font-weight="bold"
          clip-path="url(#clipPath23)"
          stroke="none"
-         id="text286">TestTearDownAttribute</text>
+         id="text298">TestTearDownAttribute</text>
     </g>
     <g
        font-size="11"
-       transform="translate(222,492)"
+       transform="translate(162,442)"
        fill-opacity="1"
        fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
@@ -1164,7 +1192,7 @@
        stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g288">
+       id="g300">
       <rect
          x="0"
          width="160"
@@ -1172,12 +1200,12 @@
          y="0"
          clip-path="url(#clipPath24)"
          stroke="none"
-         id="rect290" />
+         id="rect302" />
     </g>
     <g
        font-size="11"
        stroke-linecap="butt"
-       transform="translate(222,492)"
+       transform="translate(162,442)"
        fill-opacity="1"
        fill="rgb(0,0,192)"
        text-rendering="geometricPrecision"
@@ -1187,7 +1215,7 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g292">
+       id="g304">
       <rect
          fill="none"
          x="0"
@@ -1195,7 +1223,7 @@
          height="40"
          y="0"
          clip-path="url(#clipPath24)"
-         id="rect294" />
+         id="rect306" />
       <line
          y2="30"
          fill="none"
@@ -1203,25 +1231,25 @@
          clip-path="url(#clipPath24)"
          x2="160"
          y1="30"
-         id="line296" />
+         id="line308" />
     </g>
     <g
        font-size="11"
-       transform="translate(222,492)"
+       transform="translate(162,442)"
        fill-opacity="1"
        fill="black"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g298">
+       id="g310">
       <text
          x="46"
          xml:space="preserve"
          y="12"
          clip-path="url(#clipPath26)"
          stroke="none"
-         id="text300">&lt;&lt;Attribute&gt;&gt;</text>
+         id="text312">&lt;&lt;Attribute&gt;&gt;</text>
       <text
          x="8"
          xml:space="preserve"
@@ -1229,11 +1257,11 @@
          font-weight="bold"
          clip-path="url(#clipPath26)"
          stroke="none"
-         id="text302">SimpleTestMethodAttribute</text>
+         id="text314">SimpleTestMethodAttribute</text>
     </g>
     <g
        font-size="11"
-       transform="translate(92,492)"
+       transform="translate(82,492)"
        fill-opacity="1"
        fill="rgb(192,192,255)"
        text-rendering="geometricPrecision"
@@ -1241,20 +1269,20 @@
        stroke="rgb(192,192,255)"
        font-weight="bold"
        stroke-opacity="1"
-       id="g304">
+       id="g316">
       <rect
          x="0"
-         width="110"
-         height="40"
+         width="310"
+         height="50"
          y="0"
-         clip-path="url(#clipPath18)"
+         clip-path="url(#clipPath27)"
          stroke="none"
-         id="rect306" />
+         id="rect318" />
     </g>
     <g
        font-size="11"
        stroke-linecap="butt"
-       transform="translate(92,492)"
+       transform="translate(82,492)"
        fill-opacity="1"
        fill="rgb(0,0,192)"
        text-rendering="geometricPrecision"
@@ -1264,49 +1292,67 @@
        font-weight="bold"
        stroke-opacity="1"
        stroke-miterlimit="0"
-       id="g308">
+       id="g320">
       <rect
          fill="none"
          x="0"
-         width="110"
-         height="40"
+         width="310"
+         height="50"
          y="0"
-         clip-path="url(#clipPath18)"
-         id="rect310" />
+         clip-path="url(#clipPath27)"
+         id="rect322" />
       <line
          y2="30"
          fill="none"
          x1="0"
-         clip-path="url(#clipPath18)"
-         x2="110"
+         clip-path="url(#clipPath27)"
+         x2="310"
          y1="30"
-         id="line312" />
+         id="line324" />
     </g>
     <g
        font-size="11"
-       transform="translate(92,492)"
+       transform="matrix(1,0,0,1,82,522)"
        fill-opacity="1"
        fill="black"
        text-rendering="geometricPrecision"
        font-family="sans-serif"
        stroke="black"
        stroke-opacity="1"
-       id="g314">
+       id="g326">
       <text
-         x="21"
+         x="2"
+         xml:space="preserve"
+         y="14"
+         clip-path="url(#clipPath28)"
+         stroke="none"
+         id="text328">+TestAfterAttribute(targetClass : Type, targetMethod : string)</text>
+    </g>
+    <g
+       font-size="11"
+       transform="translate(82,492)"
+       fill-opacity="1"
+       fill="black"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke="black"
+       stroke-opacity="1"
+       id="g330">
+      <text
+         x="121"
          xml:space="preserve"
          y="12"
-         clip-path="url(#clipPath20)"
+         clip-path="url(#clipPath29)"
          stroke="none"
-         id="text316">&lt;&lt;Attribute&gt;&gt;</text>
+         id="text332">&lt;&lt;Attribute&gt;&gt;</text>
       <text
-         x="7"
+         x="107"
          xml:space="preserve"
          y="27"
          font-weight="bold"
-         clip-path="url(#clipPath20)"
+         clip-path="url(#clipPath29)"
          stroke="none"
-         id="text318">TestAfterAttribute</text>
+         id="text334">TestAfterAttribute</text>
     </g>
     <g
        font-size="11"
@@ -1319,23 +1365,23 @@
        stroke-linejoin="round"
        stroke="black"
        stroke-opacity="1"
-       id="g320">
+       id="g336">
       <path
          fill="none"
          d="M115 50 L115 90 C115 90 115 97 108 97 M108 97 L57 97 C57 97 50 97 50 104 M50 104 L50 117"
-         clip-path="url(#clipPath27)"
-         id="path322" />
+         clip-path="url(#clipPath30)"
+         id="path338" />
       <polygon
          fill="white"
-         clip-path="url(#clipPath27)"
+         clip-path="url(#clipPath30)"
          points=" 115 50 109 62 121 62"
          stroke="none"
-         id="polygon324" />
+         id="polygon340" />
       <polygon
          fill="none"
          points=" 115 50 109 62 121 62"
-         clip-path="url(#clipPath27)"
-         id="polygon326" />
+         clip-path="url(#clipPath30)"
+         id="polygon342" />
     </g>
     <g
        font-size="11"
@@ -1348,23 +1394,23 @@
        stroke-linejoin="round"
        stroke="black"
        stroke-opacity="1"
-       id="g328">
+       id="g344">
       <path
          fill="none"
          d="M50 50 L50 90 C50 90 50 97 57 97 M57 97 L173 97 C173 97 180 97 180 104 M180 104 L180 116"
-         clip-path="url(#clipPath28)"
-         id="path330" />
+         clip-path="url(#clipPath31)"
+         id="path346" />
       <polygon
          fill="white"
-         clip-path="url(#clipPath28)"
+         clip-path="url(#clipPath31)"
          points=" 50 50 44 62 56 62"
          stroke="none"
-         id="polygon332" />
+         id="polygon348" />
       <polygon
          fill="none"
          points=" 50 50 44 62 56 62"
-         clip-path="url(#clipPath28)"
-         id="polygon334" />
+         clip-path="url(#clipPath31)"
+         id="polygon350" />
     </g>
     <g
        font-size="11"
@@ -1377,26 +1423,26 @@
        stroke-linejoin="round"
        stroke="black"
        stroke-opacity="1"
-       id="g336">
+       id="g352">
       <line
          y2="98"
          fill="none"
          x1="50"
-         clip-path="url(#clipPath29)"
+         clip-path="url(#clipPath32)"
          x2="50"
          y1="50"
-         id="line338" />
+         id="line354" />
       <polygon
          fill="white"
-         clip-path="url(#clipPath29)"
+         clip-path="url(#clipPath32)"
          points=" 50 50 44 62 56 62"
          stroke="none"
-         id="polygon340" />
+         id="polygon356" />
       <polygon
          fill="none"
          points=" 50 50 44 62 56 62"
-         clip-path="url(#clipPath29)"
-         id="polygon342" />
+         clip-path="url(#clipPath32)"
+         id="polygon358" />
     </g>
     <g
        font-size="11"
@@ -1409,23 +1455,23 @@
        stroke-linejoin="round"
        stroke="black"
        stroke-opacity="1"
-       id="g344">
+       id="g360">
       <path
          fill="none"
          d="M200 50 L200 72 C200 72 200 79 193 79 M193 79 L57 79 C57 79 50 79 50 86 M50 86 L50 208"
-         clip-path="url(#clipPath30)"
-         id="path346" />
+         clip-path="url(#clipPath33)"
+         id="path362" />
       <polygon
          fill="white"
-         clip-path="url(#clipPath30)"
+         clip-path="url(#clipPath33)"
          points=" 200 50 194 62 206 62"
          stroke="none"
-         id="polygon348" />
+         id="polygon364" />
       <polygon
          fill="none"
          points=" 200 50 194 62 206 62"
-         clip-path="url(#clipPath30)"
-         id="polygon350" />
+         clip-path="url(#clipPath33)"
+         id="polygon366" />
     </g>
     <g
        font-size="11"
@@ -1438,81 +1484,81 @@
        stroke-linejoin="round"
        stroke="black"
        stroke-opacity="1"
-       id="g352">
-      <path
-         fill="none"
-         d="M205 50 L205 72 C205 72 205 79 198 79 M198 79 L132 79 C132 79 125 79 125 86 M125 86 L125 252 C125 252 125 259 118 259 M118 259 L57 259 C57 259 50 259 50 266 M50 266 L50 278"
-         clip-path="url(#clipPath31)"
-         id="path354" />
-      <polygon
-         fill="white"
-         clip-path="url(#clipPath31)"
-         points=" 205 50 199 62 211 62"
-         stroke="none"
-         id="polygon356" />
-      <polygon
-         fill="none"
-         points=" 205 50 199 62 211 62"
-         clip-path="url(#clipPath31)"
-         id="polygon358" />
-    </g>
-    <g
-       font-size="11"
-       stroke-linecap="butt"
-       transform="translate(172,163)"
-       fill-opacity="1"
-       fill="black"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke-linejoin="round"
-       stroke="black"
-       stroke-opacity="1"
-       id="g360">
-      <path
-         fill="none"
-         d="M50 50 L50 72 C50 72 50 79 57 79 M57 79 L213 79 C213 79 220 79 220 86 M220 86 L220 208"
-         clip-path="url(#clipPath32)"
-         id="path362" />
-      <polygon
-         fill="white"
-         clip-path="url(#clipPath32)"
-         points=" 50 50 44 62 56 62"
-         stroke="none"
-         id="polygon364" />
-      <polygon
-         fill="none"
-         points=" 50 50 44 62 56 62"
-         clip-path="url(#clipPath32)"
-         id="polygon366" />
-    </g>
-    <g
-       font-size="11"
-       stroke-linecap="butt"
-       transform="translate(172,163)"
-       fill-opacity="1"
-       fill="black"
-       text-rendering="geometricPrecision"
-       font-family="sans-serif"
-       stroke-linejoin="round"
-       stroke="black"
-       stroke-opacity="1"
        id="g368">
       <path
          fill="none"
-         d="M50 50 L50 72 C50 72 50 79 57 79 M57 79 L133 79 C133 79 140 79 140 86 M140 86 L140 252 C140 252 140 259 147 259 M147 259 L213 259 C213 259 220 259 220 266 M220 266 L220 278"
-         clip-path="url(#clipPath33)"
+         d="M205 50 L205 72 C205 72 205 79 198 79 M198 79 L132 79 C132 79 125 79 125 86 M125 86 L125 252 C125 252 125 259 118 259 M118 259 L57 259 C57 259 50 259 50 266 M50 266 L50 278"
+         clip-path="url(#clipPath34)"
          id="path370" />
       <polygon
          fill="white"
-         clip-path="url(#clipPath33)"
-         points=" 50 50 44 62 56 62"
+         clip-path="url(#clipPath34)"
+         points=" 205 50 199 62 211 62"
          stroke="none"
          id="polygon372" />
       <polygon
          fill="none"
-         points=" 50 50 44 62 56 62"
-         clip-path="url(#clipPath33)"
+         points=" 205 50 199 62 211 62"
+         clip-path="url(#clipPath34)"
          id="polygon374" />
+    </g>
+    <g
+       font-size="11"
+       stroke-linecap="butt"
+       transform="translate(172,163)"
+       fill-opacity="1"
+       fill="black"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke-linejoin="round"
+       stroke="black"
+       stroke-opacity="1"
+       id="g376">
+      <path
+         fill="none"
+         d="M50 50 L50 72 C50 72 50 79 57 79 M57 79 L223 79 C223 79 230 79 230 86 M230 86 L230 208"
+         clip-path="url(#clipPath35)"
+         id="path378" />
+      <polygon
+         fill="white"
+         clip-path="url(#clipPath35)"
+         points=" 50 50 44 62 56 62"
+         stroke="none"
+         id="polygon380" />
+      <polygon
+         fill="none"
+         points=" 50 50 44 62 56 62"
+         clip-path="url(#clipPath35)"
+         id="polygon382" />
+    </g>
+    <g
+       font-size="11"
+       stroke-linecap="butt"
+       transform="translate(172,163)"
+       fill-opacity="1"
+       fill="black"
+       text-rendering="geometricPrecision"
+       font-family="sans-serif"
+       stroke-linejoin="round"
+       stroke="black"
+       stroke-opacity="1"
+       id="g384">
+      <path
+         fill="none"
+         d="M50 50 L50 72 C50 72 50 79 57 79 M57 79 L133 79 C133 79 140 79 140 86 M140 86 L140 252 C140 252 140 259 147 259 M147 259 L223 259 C223 259 230 259 230 266 M230 266 L230 278"
+         clip-path="url(#clipPath36)"
+         id="path386" />
+      <polygon
+         fill="white"
+         clip-path="url(#clipPath36)"
+         points=" 50 50 44 62 56 62"
+         stroke="none"
+         id="polygon388" />
+      <polygon
+         fill="none"
+         points=" 50 50 44 62 56 62"
+         clip-path="url(#clipPath36)"
+         id="polygon390" />
     </g>
     <g
        font-size="11"
@@ -1525,23 +1571,23 @@
        stroke-linejoin="round"
        stroke="black"
        stroke-opacity="1"
-       id="g376">
+       id="g392">
       <path
          fill="none"
-         d="M50 50 L50 69 C50 69 50 76 57 76 M57 76 L113 76 C113 76 120 76 120 83 M120 83 L120 225"
-         clip-path="url(#clipPath34)"
-         id="path378" />
+         d="M50 50 L50 69 C50 69 50 76 57 76 M57 76 L113 76 C113 76 120 76 120 83 M120 83 L120 175"
+         clip-path="url(#clipPath37)"
+         id="path394" />
       <polygon
          fill="white"
-         clip-path="url(#clipPath34)"
+         clip-path="url(#clipPath37)"
          points=" 50 50 44 62 56 62"
          stroke="none"
-         id="polygon380" />
+         id="polygon396" />
       <polygon
          fill="none"
          points=" 50 50 44 62 56 62"
-         clip-path="url(#clipPath34)"
-         id="polygon382" />
+         clip-path="url(#clipPath37)"
+         id="polygon398" />
     </g>
     <g
        font-size="11"
@@ -1554,23 +1600,23 @@
        stroke-linejoin="round"
        stroke="black"
        stroke-opacity="1"
-       id="g384">
+       id="g400">
       <path
          fill="none"
          d="M120 50 L120 69 C120 69 120 76 113 76 M113 76 L57 76 C57 76 50 76 50 83 M50 83 L50 225"
-         clip-path="url(#clipPath34)"
-         id="path386" />
+         clip-path="url(#clipPath38)"
+         id="path402" />
       <polygon
          fill="white"
-         clip-path="url(#clipPath34)"
+         clip-path="url(#clipPath38)"
          points=" 120 50 114 62 126 62"
          stroke="none"
-         id="polygon388" />
+         id="polygon404" />
       <polygon
          fill="none"
          points=" 120 50 114 62 126 62"
-         clip-path="url(#clipPath34)"
-         id="polygon390" />
+         clip-path="url(#clipPath38)"
+         id="polygon406" />
     </g>
   </g>
 </svg>

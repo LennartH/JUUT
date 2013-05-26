@@ -1,12 +1,12 @@
 \chapter{Tests mit Unity}
 \label{sec:Tests mit Unity}
 
-In diesem Kapitel möchte ich untersuchen, welche Möglichkeiten es zur Zeit gibt, um seine Skripte automatisiert zu testen. Dabei zeige ich zunächst kurz, wie man sein Spiel mit dem Test-Framework der Entwicklungsumgebung testen kann. Anschließend stelle ich die Frameworks der Unity-Fangemeinde und abschließend analysiere ich die Möglichkeiten und erläutere deren Probleme.
+In diesem Kapitel möchte ich untersuchen, welche Möglichkeiten es zur Zeit gibt, um seine Skripte automatisiert zu testen. Dabei zeige ich zunächst kurz, wie sich ein Spiel mit dem Test-Framework der Entwicklungsumgebung testen lässt. Anschließend stelle ich die Frameworks der Unity-Fangemeinde vor und abschließend analysiere ich die Möglichkeiten und erläutere deren Probleme.
 
 \section{Unit Test Framework der Entwicklungsumgebung (MSTest)}
 
 Eine Möglichkeit ist es, das Framework der Entwicklungsumgebung zu verwenden. Dies wäre in diesem Fall MSTest, welches in \textit{Visual Studio} integriert ist.\\
-Hierbei ist es üblich, dass man neben dem Projekt mit dem Produktivcode ein weiteres für die Tests hat. Dadurch sind diese und das Produkt sowohl räumlich, als auch logisch voneinander getrennt.
+Hierbei ist es üblich, dass man neben dem Projekt mit dem Produktivcode ein Weiteres für die Tests hat. Dadurch sind diese und das Produkt sowohl räumlich, als auch logisch voneinander getrennt.
 
 Im Nachfolgenden wird gezeigt, wie man einen Unit-Test mit MSTest aufbaut und welche Möglichkeiten es dabei gibt.
 
@@ -94,7 +94,7 @@ Um Tests ausführen zu können, muss man SharpUnit in sein Unity-Projekt einbind
 
 Testklassen müssen bei SharpUnit von der Klasse \textit{TestCase} erben, welche es ermöglicht die Methoden \textit{SetUp} und \textit{TearDown} zu überschreiben. Testmethoden werden durch das Attribut \textit{UnitTest} gekennzeichnet. Auch SharpUnit stellt einem eine Klasse zur Definition von Bedingungen zur Verfügung, wobei diese in etwa denen von UUnit entsprechen. Allerdings fehlt \textit{Fail} mit dem man einen Test geziehlt fehlschlagen lassen kann. Dafür gibt es die Möglichkeit, eine erwartete Exception zu definieren. Dies beschränkt sich allerdings auf eine pro Test, das heißt man kann keine zwei Exceptions innerhalb einer Testmethode erwarten.
  
-Im Gegensatz zu UUnit können die Tests von SharpUnit nur zu Beginn des Spiels ausgeführt werden. Dafür benötigt man ein Skript, welches in der \textit{Start}-Methode bestimmte Aktionen ausführt und an ein \textit{GameObject} angehängt wird. Der nachfolgende Code ist das Beispiel von SharpUnit für so ein Skript.
+Im Gegensatz zu UUnit können die Tests von SharpUnit nur mit Hilfe eines Skripts durchgeführt werden, welches in der \textit{Start}-Methode bestimmte Aktionen ausführt und an ein \textit{GameObject} angehängt wird. Der nachfolgende Code ist das Beispiel von SharpUnit für so ein Skript.
 
 \begin{lstlisting}[caption={[Einbindung der Tests mit SharpUnit]Einbindung der Tests mit SharpUnit\\
 Quelle: Demo von SharpUnit, erhältlich unter \url{https://github.com/mgants4/SharpUnit}.}, label=code:SharpUnitTestRunner]
@@ -125,11 +125,11 @@ In diesem Abschnitt werden die oben vorgestellten Frameworks bezüglich ihres Fu
 
 \subsection{MSTest}
 
-Die Vorteile des von Microsoft mitgelieferten Test-Frameworks sind zahlreich. Es hat die beste \textit{Assert}-Klasse um die Bedingungen der Tests zu formulieren, da sie viele Methoden bietet. Außerdem stellt es einem als einziges die Möglichkeit zur Verfügung, einen Klasseninitialisierer/reiniger zu definieren.\\
+Die Vorteile des von Microsoft mitgelieferten Test-Frameworks sind zahlreich. Es hat die beste \textit{Assert}-Klasse um die Bedingungen der Tests zu formulieren, da sie viele Methoden bietet. Außerdem stellt es einem als einziges die Möglichkeit zur Verfügung, einen Klasseninitialisierer/bereiniger zu definieren.\\
 Die Tests müssen von keiner anderen Klasse erben, sondern werden lediglich durch ein Attribut markiert. Außerdem hat man nur wenig Aufwand, um die Tests auszuführen. Das Ergebnis des Durchgangs wird nicht in der Konsole ausgegeben, sondern als Liste der einzelnen Testmethoden. Diese Liste wird in erfolgreiche, fehlgeschlagene und nicht ausgeführte Tests unterteilt. Verwendet man das Plugin \textit{Resharper} werden die Ergebnisse mit einem Baum angezeigt, was noch übersichtlicher ist.\\
 Dadurch, dass MSTest unabhängig von Unity ist, sind auch die Tests unabhängig von dem Projekt. Im Gegensatz zu den anderen Frameworks, müssen sich die Tests nicht innerhalb des Unity-Projekts befinden, sondern liegen in einem separaten Projekt. Außerdem ermöglicht dies einem die Verwendung etablierter Techniken im Bereich des Testens, welche schon zu Beginn von \textit{\ref{sec:Einleitung}. \nameref{sec:Einleitung}} vorgestellt wurden.
 
-Allerdings hat die Verwendung von MSTest auch Nachteile. Der größte ist, dass man keine Skripte - genauer gesagt keine Klassen die von \textit{MonoBehaviour} erben - testen kann, da bei deren Erzeugung eine \textit{SecurityException} auftritt, die den Test fehlschlagen lässt. Dies liegt daran, dass die \textit{MonoBehaviour} nur in einer laufenden Unity-Umgebung intialisiert werden kann. Diese lässt sich in einem Test nicht simulieren oder mocken. Um dennoch eine großflächige Abdeckung durch Tests zu erreichen, muss man die Struktur seines Projekts stark anpassen, sodass die Skripte möglichst wenig Logik enthalten. Sie müsste in eigene Klassen ausgelagert werden, wodurch sie unabhängig von Unity testbar sind. Diese Anpassung lohnt sich nur bei neuen Projekten und auch nur wenn sich das Verhalten der Objekte sinnvoll auslagern lässt. Bei einem Shooter, dessen Spielgefühl stark von einer guten Reaktion auf Benutzereingaben abhängt, ist das zum Beispiel nur schlecht möglich, da sich diese Reaktionen nicht wirklich durch einen fest definierten Test bestimmen lassen. Und auch einem speziell für diesen Fall entwickelten Projekt (dessen Prototyp im Rahmen von \cite{TDGD13} entwickelt wurde) beträgt die Abdeckung durch die Tests lediglich 45\%. Die ausgelagerte Logik hingegen erreicht eine Abdeckung von 85\%, was zeigt, dass auch bei einem Projekt bei dem sich die Logik gut auslagern lässt viel Arbeit durch die Skripte geleistet werden muss.
+Allerdings hat die Verwendung von MSTest auch Nachteile. Der größte ist, dass man keine Skripte - genauer gesagt keine Klassen die von \textit{MonoBehaviour} erben - testen kann, da bei deren Erzeugung eine \textit{SecurityException} auftritt, die den Test fehlschlagen lässt. Dies liegt daran, dass die \textit{MonoBehaviour} nur in einer laufenden Unity-Umgebung intialisiert werden kann. Diese lässt sich in einem Test nicht simulieren oder mocken. Um dennoch eine großflächige Abdeckung durch Tests zu erreichen, muss man die Struktur seines Projekts stark anpassen, sodass die Skripte möglichst wenig Logik enthalten. Diese müsste in eigene Klassen ausgelagert werden, wodurch sie unabhängig von Unity testbar sind. Diese Anpassung lohnt sich nur bei neuen Projekten und auch nur wenn sich das Verhalten der Objekte sinnvoll auslagern lässt. Bei einem Shooter, dessen Spielgefühl stark von einer guten Reaktion auf Benutzereingaben abhängt, ist das zum Beispiel nur schlecht möglich, da sich diese Reaktionen nicht wirklich durch einen fest definierten Test bestimmen lassen. Und auch bei einem speziell für diesen Fall entwickelten Projekt (dessen Prototyp im Rahmen von \cite{TDGD13} entwickelt wurde) beträgt die Abdeckung durch die Tests lediglich 45\%. Die ausgelagerte Logik hingegen erreicht eine Abdeckung von 85\%, was zeigt, dass auch bei einem Projekt bei dem sich die Logik gut auslagern lässt viel Arbeit durch die Skripte geleistet werden muss.
 
 Was man beim Testen eines Unity-Projekts mit MSTest beachten sollte und welche Erkenntnisse dabei gewonnen wurden lässt sich in \cite{TDGD13} nachlesen.
 
@@ -150,7 +150,7 @@ MSTest bietet von allen Frameworks die meisten Funktionalitäten und hat selbstv
 UUnit und SharpUnit stellen einen Ansatz dar, um Skripte zu testen, aber auch nicht mehr. Die Hauptkritikpunkte sind meiner Meinung nach:
 \begin{itemize}
 \item \textbf{Der Aufwand zum Ausführen der Tests}\\
-Dass man die auszuführenden Tests definieren muss ist kein Problem. Allerdings finde ich es unnötig, dass der Anwender die Testergebnisse selbst ausgeben muss. Ideal wäre es, wenn man nicht einmal mehr ein Skript und \textit{GameObject} zum testen benötigen würde.
+Dass die auszuführenden Tests zunächst definiert werden müssen ist unvermeidlich, da eine Steuerung über eine grafische Oberfläche nicht vorhanden ist. Allerdings ist der organisatorische Overhead innerhalb des Skripts zu groß und könnte durch das Framework verborgen werden. Ideal wäre es, wenn man nicht einmal mehr ein Skript und \textit{GameObject} zum Testen benötigen würde.
 \item \textbf{Fehlender Komfort der Darstellung der Ergebnisse}\\
 Eine Ausgabe auf der Konsole ist nicht sehr übersichtlich und es gibt keine Möglichkeit direkt zum Fehler zu springen. Wünschenswert wäre eine Strukturierung nach Namensraum und Klasse.
 \item \textbf{Geringe Auswahl an Bedingungen (\textit{Assertions})}\\
