@@ -26,21 +26,22 @@ Schematische Darstellungen dieser Testarten sieht man in \autoref{fig:White_Box_
 
 \paragraph{Grey-Box-Tests} stellen eine Mischung aus beiden Varianten dar und vereinen die Eigenschaften beider Arten. Diese erhält man zum Beispiel durch testgetriebene Entwicklung, da man den Test schreibt bevor man den Code implementiert. Dadurch kann man keinerlei Kenntnisse über dessen innere Struktur haben, sondern definiert per Test das erwartete Verhalten. Nachdem dieser erfolgreich ausgeführt wird, erweitert man ihn im Sinne von White-Box-Tests. Dadurch wird sowohl das nach außen sichtbare Verhalten, als auch die innere Struktur des Codes getestet und man benötigt nur einen Entwickler für die Tests.
 
-\clearpage
-\begin{figure}[t]
+~\\\\
+
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.8\linewidth]{./images/Kapitel_Einleitung/White_Box_Test.pdf}
 \caption[Schematische Darstellung eines White-Box-Tests]{Schematische Darstellung eines White-Box-Tests\\Der Entwickler sollte sich gut mit dem zu testenden Code auskennen. Der Test verifiziert, dass die Methode korrekt ausgeführt wird.}
 \label{fig:White_Box_Test}
 \end{figure}
 
-\begin{figure}[b]
+\clearpage
+\begin{figure}[t]
 \centering
 \includegraphics[width=0.8\linewidth]{./images/Kapitel_Einleitung/Black_Box_Test.pdf}
 \caption[Schematische Darstellung eines Black-Box-Tests]{Schematische Darstellung eines Black-Box-Tests\\Öffentliche Klassen und Methoden, sowie deren Beschreibungen sind dem Entwickler bekannt. Die konkrete Implementierung allerdings ist nicht einsehbar. Der Test verifiziert das Verhalten der zu testenden Klasse.}
 \label{fig:Black_Box_Test}
 \end{figure}
-\clearpage
 
 \subsection{Unit-Tests} 
 

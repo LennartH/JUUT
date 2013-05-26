@@ -1,12 +1,40 @@
 \chapter{Ausblick}
 
-Attribute:\\
-Test nach x Sekunden\\
-Test nach einem Unity-Event
+Da ich aufgrund des Zeitmangels praktisch keine Funktionalitäten entwickeln konnte, die über denen der existierenden Frameworks liegen, möchte ich hier einen Ausblick geben, wie man JUUT erweitern könnte.
 
-Anpassung der Suite zum ausführen nicht simple tests
+Ein Hauptaspekt dieser Arbeit sollte sein, herauszufinden wie man mehr von seinen Skripten testen kann als deren Erzeugung. Man hat zwar auch mit einfachen Tests die Möglichkeit die Methoden eines Skriptes und deren Auswirkungen zu testen, indem man zum Beispiel die \textit{Update}-Methode aufruft. Allerdings würden dabei wichtige Teile der Unity-Umgebung nicht berücksichtigt werden. Ein Beispiel hierfür wäre die \textit{deltaTime} (speichert die Zeit, die zum Rendern des Bildes benötigt wurde), welche von vielen Skripten verwendet wird, um unabhängig von der Geschwindigkeit des Rechners zu bleiben.
 
-Simulation von Spielereingaben
+Das größte Problem dabei sehe ich darin, dass die Tests nur zu Beginn des Spiels durchgeführt werden können. Man muss also eine Möglichkeit finden, diese ins Spielgeschehen zu integrieren und erst zu einem bestimmten Zeitpunkt auszuführen. Einen ersten Schritt in diese Richtung gibt es in Form des \textit{IsReadyToRun}-Attributs von \textit{JUUTTestMethodAttribute}. Die Frage ist nun, wann dieser Wert auf wahr gesetzt wird. Einen ersten Ansatz habe ich mit dem \textit{TestAfter}-Attribut versucht, welcher allerdings fehlgeschlagen ist, da ich keine Möglichkeit gefunden habe von der Ausführung einer Methode benachrichtigt zu werden, ohne die Skripte speziell darauf anzupassen. Eventuell wäre es möglich eine eigene \textit{MonoBehaviour}-Klasse zu schreiben, die zum Testen anstelle der Ursprünglichen in den Code eingebunden wird und den Kernel über Methodenaufrufe informiert. Diese Vorgehensweise entspricht dem in \cite{FEA04} beschriebenen \textit{Link Seam}. Dadurch müsste beim Release nur diese Bindung geändert werden und andere Änderungen würden wegfallen.
 
-Bessere Präsentation als durch Konsole (Overlay von GUI-Elementen)
-Von Bericht direkt zum Source-Code -> Optimierung der Texte (StackTrace-Frames)
+Eine weitere - aber weniger mächtige - Möglichkeit wäre die Tests erst nach einer bestimmten Zeit durchzuführen. In diesem Fall müssten den Attributen die \textit{deltaTime} mitgeteilt werden und nach überschreiten eines internen Grenzwertes wird \textit{IsReadyToRun} auf wahr gesetzt. Das wäre zwar recht leicht zu implementieren, allerdings dürfte das exakte Timing der Ausführung sehr schwierig werden und sich im Laufe der Entwicklung mehrfach ändern.
+
+Um die Tests ins Spielgeschehen einzubinden müssten auch \textit{TestSuite} und \textit{TestRunner} angepasst werden, da die Ausführung nicht mehr in der \textit{Start}-Methode des \textit{TestStarters} geschehen würde, sondern in der \textit{Update}-Methode. Dabei wäre es wenig sinnvoll, wenn mit der Berechnung jedes Bildes alle bereiten Tests ausgeführt werden und die Ergebnisse präsentiert werden würden. Dementsprechend müssten sich die \textit{Runner} merken welche Tests und die \textit{Suite} welche \textit{Runner} schon vollständig durchgeführt wurden. Erst nachdem die Session komplettiert wurde sollen dann die Ergebnisse präsentiert werden.
+
+An der Präsentation der Ergebnisse hatte ich bei UUnit und SharpUnit kritisiert, dass sie über die Debug-Konsole von Unity geschieht und musste es aus Zeitgründen genauso machen. Dies ließe sich mit den GUI-Elementen von Unity lösen, wobei man einige Zeit damit verbringen würde, da die GUI-Entwicklung in Unity ganz anders als in Java oder C\# funktioniert. Zum Beispiel gibt es keine native Komponente zur Darstellung von Baumstrukturen, was ideal für die Präsentation der Ergebnisse wäre. Allerdings habe ich eine Möglichkeit gefunden, um nach dem Testen direkt zu den Fehlerstellen im Quellcode zu springen, welche ich prototypisch implementiert habe. Dabei habe ich mir zu Nutze gemacht, dass alle Quellcode-Dateien als \textit{Asset} gelten und dadurch von der Unity-SDK verwaltet werden. Diese bietet einem die Möglichkeit ein \textit{Asset} mit dem entsprechenden Programm, an einer bestimmten Stelle zu öffnen.
+\begin{lstlisting}[caption={[Code zum Öffnen einer Quelldatei]Code zum Öffnen einer Quelldatei}, label=code:JUUTUnityUtil_OpenTestFile]
+public static void OpenTestFile(string testFilePath, int lineNumber) {
+    AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath(testFilePath, typeof(MonoScript)), lineNumber);
+}
+\end{lstlisting}
+
+Nun verwende ich die Exception der \textit{MethodReports}, um an den Pfad und die Zeilennummer der Datei des fehlgeschlagenen Tests zu gelangen. Dabei muss ich zunächst die Schicht im Stacktrace der Exception finden, die zu der Testklasse gehört. Dies geht leicht, da diese ja mit einem Attribut markiert sind.
+
+~
+
+\begin{lstlisting}[caption={[Algorithmus zum finden der Fehlgeschlagenen Testklasse]Algorithmus zum finden der Fehlgeschlagenen Testklasse}, label=code:FindFailedTestFile]
+StackTrace trace = new StackTrace(failedTest.RaisedException, true);
+foreach (StackFrame frame in trace.GetFrames()) {
+    if (frame.GetMethod().DeclaringType.GetCustomAttribute<JUUTTestClassAttribute>() != null) {
+        string fullPath = frame.GetFileName();
+        if (fullPath != null) {
+            filePath = fullPath.Substring(fullPath.IndexOf("Assets", System.StringComparison.Ordinal));
+            lineNumber = frame.GetFileLineNumber();
+        }
+        break;
+    }
+}
+\end{lstlisting}
+
+Für jeden gefundenen Dateipfad wird nach Ablauf der Tests ein Knopf erzeugt, der mit Hilfe der oben aufgeführten Funktion die Datei an der entsprechenden Zeile öffnet.
+
+Neben einer Präsentation der Testergebnisse mit der Unity-GUI wäre es vorstellbar das Zusammenstellen der auszuführenden \textit{Session} über die Oberfläche zu steuern. Dies könnte so ablaufen, dass das \textit{TestStarter}-Skript zu Beginn das Spiel einfriert, mit Hilfe des \textit{AssemblyScanners} und des \textit{TestClassScanners} die Testklassen und Testmethoden des Projekts sucht und darstellt. Nun stellt sich der Nutzer seine \textit{Session} zusammen und startet die Tests (wobei das Spiel wieder fortgesetzt wird).

@@ -116,7 +116,9 @@ Nachdem eine \textit{Session} definiert wurde, müssen die darin enthaltenen Tes
 \label{fig:SuitesAndRunners}
 \end{figure}
 
-Eigentlich führen die \textit{TestRunner} die Tests durch, da die \textit{TestSuite} für jede in der \textit{Session} enthaltene \textit{TestClassSession} an einen \textit{TestRunner} delegiert. Der vom \textit{Runner} zurückgegebene \textit{ClassReport} wird dem \textit{TestReporter} hinzugefügt und nach Abschluss wird dessen \textit{PresentReports}-Methode aufgerufen um die Ergebnisse darzustellen. Der Ablauf innerhalb des \textit{TestRunners} ist wie folgt:
+Eigentlich führen die \textit{TestRunner} die Tests durch, da die \textit{TestSuite} für jede in der \textit{Session} enthaltene \textit{TestClassSession} an einen \textit{TestRunner} delegiert. Der vom \textit{Runner} zurückgegebene \textit{ClassReport} wird dem \textit{TestReporter} hinzugefügt und nach Abschluss wird dessen \textit{PresentReports}-Methode aufgerufen um die Ergebnisse darzustellen.
+
+Der Ablauf innerhalb des \textit{TestRunners} ist wie folgt:
 \begin{enumerate}
 \item Erzeugung einer \textit{ClassReport}-Instanz
 \item Aufruf der \textit{ClassSetUp}-Methode
